@@ -5,110 +5,66 @@
    Full Dark and Light Theme Support with Persistent State.
    ========================================================================== */
 
-:root, [data-theme="dark"] {
-  /* Unified Design Tokens (Dark Glass Luxury Theme) */
-  --bg-primary: #080F1A;
-  --bg-elevated: #0F1726;
-  --glass-bg: rgba(15, 23, 38, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --text-primary: #FFFFFF;
-  --text-secondary: #CBD5E1;
-  --accent-primary: #38BDF8;
-  --accent-secondary: #DFB76C;
+:root, [data-theme="light"] {
+  /* Bright & Vibrant Sunlit Luxury Travel Palette (Default) */
+  --bg-page: #f6faff;
+  --bg-band-alt: #edf5ff;
+  --surface-card: #ffffff;
+  --surface-card-subtle: #f8fafc;
+
+  --ink-primary: #0b1d33;
+  --ink-secondary: #364b63;
+  --ink-muted: #5b718a;
+
+  --accent-primary: #0284c7;  /* Cerulean sky */
+  --accent-warm: #ea580c;     /* Sunlit coral-amber */
+  --accent-teal: #0d9488;     /* Lagoon teal */
+
+  /* Unified Design Tokens */
+  --bg-primary: var(--bg-page);
+  --bg-elevated: var(--surface-card);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(11, 29, 51, 0.12);
+  --glass-border-subtle: rgba(11, 29, 51, 0.08);
+  --text-primary: var(--ink-primary);
+  --text-secondary: var(--ink-secondary);
+  --text-muted: var(--ink-muted);
+  --accent-secondary: var(--accent-warm);
 
   /* Aliased Iceland Theme Tokens */
-  --ice-bg: var(--bg-primary);
-  --ice-surface: var(--bg-elevated);
-  --ice-surface-card: var(--glass-bg);
-  --ice-canvas-light: #F7F9FC;
-  --ice-glass-dark: rgba(8, 15, 26, 0.78);
-  --ice-glass-card: rgba(15, 23, 38, 0.65);
-  --ice-glass-light: rgba(255, 255, 255, 0.12);
-  --ice-glass-hover: rgba(255, 255, 255, 0.22);
-  --ice-glass-dock: rgba(8, 15, 26, 0.88);
-
-  /* Translucent Borders */
-  --border-hairline: 1px solid var(--glass-border);
-  --border-hairline-subtle: 1px solid rgba(255, 255, 255, 0.1);
-  --border-hairline-gold: 1px solid rgba(223, 183, 108, 0.45);
-  --border-dark-subtle: 1px solid rgba(13, 27, 47, 0.1);
-
-  /* Typography */
-  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-  /* Accent Colors (Luminous cyan & gold in dark) */
-  --ice-cyan: var(--accent-primary);
-  --ice-aurora: #34D399;
-  --ice-gold: var(--accent-secondary);
-  --ice-gold-glow: rgba(223, 183, 108, 0.35);
-  --ice-volcanic: #FB7185;
-
-  /* Text Tones */
-  --text-pure: var(--text-primary);
-  --text-snow: #F1F5F9;
-  --text-frost: var(--text-secondary);
-  --text-slate: #94A3B8;
-  --text-dark-body: #1E293B;
-
-  /* Radius & Shadows */
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
-  --radius-full: 9999px;
-  --shadow-glass: 0 20px 50px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  --shadow-ambient: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.25);
-  --shadow-dock: 0 -10px 35px rgba(0, 0, 0, 0.5);
-}
-
-[data-theme="light"] {
-  /* Unified Design Tokens (Light Frosted Luxury Theme) */
-  --bg-primary: #F7F9FC;
-  --bg-elevated: #FFFFFF;
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(15, 23, 42, 0.12);
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --accent-primary: #0284C7;
-  --accent-secondary: #B45309;
-
-  /* Aliased Iceland Theme Tokens */
-  --ice-bg: var(--bg-primary);
-  --ice-surface: var(--bg-elevated);
-  --ice-surface-card: var(--glass-bg);
-  --ice-canvas-light: #FFFFFF;
-  --ice-glass-dark: rgba(255, 255, 255, 0.88);
-  --ice-glass-card: rgba(255, 255, 255, 0.82);
-  --ice-glass-light: rgba(15, 23, 42, 0.06);
-  --ice-glass-hover: rgba(15, 23, 42, 0.1);
+  --ice-bg: var(--bg-page);
+  --ice-surface: var(--surface-card);
+  --ice-surface-card: var(--surface-card);
+  --ice-canvas-light: #ffffff;
+  --ice-glass-dark: rgba(255, 255, 255, 0.92);
+  --ice-glass-card: rgba(255, 255, 255, 0.88);
+  --ice-glass-light: rgba(255, 255, 255, 0.65);
+  --ice-glass-hover: rgba(255, 255, 255, 0.95);
   --ice-glass-dock: rgba(255, 255, 255, 0.92);
 
   /* Translucent Borders */
   --border-hairline: 1px solid var(--glass-border);
-  --border-hairline-subtle: 1px solid rgba(15, 23, 42, 0.08);
-  --border-hairline-gold: 1px solid rgba(180, 83, 9, 0.45);
-  --border-dark-subtle: 1px solid rgba(15, 23, 42, 0.08);
+  --border-hairline-subtle: 1px solid var(--glass-border-subtle);
+  --border-hairline-gold: 1px solid rgba(234, 88, 12, 0.35);
+  --border-dark-subtle: 1px solid rgba(11, 29, 51, 0.08);
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Accent Colors (Rich ocean-teal & warm-amber in light) */
+  /* Accent Colors */
   --ice-cyan: var(--accent-primary);
-  --ice-aurora: #059669;
-  --ice-gold: var(--accent-secondary);
-  --ice-gold-glow: rgba(180, 83, 9, 0.25);
-  --ice-volcanic: #E11D48;
+  --ice-aurora: var(--accent-teal);
+  --ice-gold: var(--accent-warm);
+  --ice-gold-glow: rgba(234, 88, 12, 0.25);
+  --ice-volcanic: #e11d48;
 
-  /* Text Tones (Deep slate & charcoal in light) */
-  --text-pure: var(--text-primary);
-  --text-snow: #1E293B;
-  --text-frost: var(--text-secondary);
-  --text-slate: #64748B;
-  --text-dark-body: #0F172A;
+  /* Text Tones */
+  --text-pure: var(--ink-primary);
+  --text-snow: #0b1d33;
+  --text-frost: var(--ink-secondary);
+  --text-slate: var(--ink-muted);
+  --text-dark-body: var(--ink-secondary);
 
   /* Radius & Shadows */
   --radius-xs: 6px;
@@ -117,10 +73,74 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-full: 9999px;
-  --shadow-glass: 0 16px 36px -8px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.06) inset;
-  --shadow-ambient: 0 24px 48px -12px rgba(15, 23, 42, 0.12);
-  --shadow-glow: 0 0 24px rgba(2, 132, 199, 0.2);
-  --shadow-dock: 0 -10px 30px rgba(15, 23, 42, 0.12);
+  --shadow-glass: 0 16px 40px -8px rgba(11, 29, 51, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  --shadow-ambient: 0 24px 50px -12px rgba(11, 29, 51, 0.12);
+  --shadow-glow: 0 0 30px rgba(2, 132, 199, 0.25);
+  --shadow-dock: 0 -10px 35px rgba(11, 29, 51, 0.08);
+}
+
+[data-theme="dark"] {
+  /* Ocean Midnight Dark Theme */
+  --bg-page: #071322;
+  --bg-band-alt: #0c1d33;
+  --surface-card: #0f243e;
+  --surface-card-subtle: #132a48;
+
+  --ink-primary: #ffffff;
+  --ink-secondary: #cbd5e1;
+  --ink-muted: #94a3b8;
+
+  --accent-primary: #38bdf8;  /* Luminous sky */
+  --accent-warm: #fb923c;     /* Luminous warm amber */
+  --accent-teal: #2dd4bf;     /* Luminous lagoon teal */
+
+  /* Unified Design Tokens */
+  --bg-primary: var(--bg-page);
+  --bg-elevated: var(--surface-card);
+  --glass-bg: rgba(12, 29, 51, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-border-subtle: rgba(255, 255, 255, 0.1);
+  --text-primary: var(--ink-primary);
+  --text-secondary: var(--ink-secondary);
+  --text-muted: var(--ink-muted);
+  --accent-secondary: var(--accent-warm);
+
+  /* Aliased Iceland Theme Tokens */
+  --ice-bg: var(--bg-page);
+  --ice-surface: var(--surface-card);
+  --ice-surface-card: var(--glass-bg);
+  --ice-canvas-light: #0c1d33;
+  --ice-glass-dark: rgba(7, 19, 34, 0.85);
+  --ice-glass-card: rgba(12, 29, 51, 0.75);
+  --ice-glass-light: rgba(255, 255, 255, 0.12);
+  --ice-glass-hover: rgba(255, 255, 255, 0.22);
+  --ice-glass-dock: rgba(7, 19, 34, 0.92);
+
+  /* Translucent Borders */
+  --border-hairline: 1px solid var(--glass-border);
+  --border-hairline-subtle: 1px solid var(--glass-border-subtle);
+  --border-hairline-gold: 1px solid rgba(251, 146, 60, 0.45);
+  --border-dark-subtle: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Accent Colors */
+  --ice-cyan: var(--accent-primary);
+  --ice-aurora: var(--accent-teal);
+  --ice-gold: var(--accent-warm);
+  --ice-gold-glow: rgba(251, 146, 60, 0.35);
+  --ice-volcanic: #fb7185;
+
+  /* Text Tones */
+  --text-pure: var(--ink-primary);
+  --text-snow: #f1f5f9;
+  --text-frost: var(--ink-secondary);
+  --text-slate: var(--ink-muted);
+  --text-dark-body: #1e293b;
+
+  /* Shadows */
+  --shadow-glass: 0 20px 50px -10px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  --shadow-ambient: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.25);
+  --shadow-dock: 0 -10px 35px rgba(0, 0, 0, 0.5);
 }
 
 /* Base Reset & Tabular Numerals */
@@ -911,6 +931,45 @@ header.iceland-nav-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--border-hairline-subtle);
+  color: var(--text-pure);
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+[data-theme="light"] .drawer-nav-item {
+  background: rgba(11, 29, 51, 0.04);
+  border-color: rgba(11, 29, 51, 0.08);
+  color: var(--ink-primary);
+}
+
+.drawer-nav-item:hover,
+.drawer-nav-item.active {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+[data-theme="dark"] .drawer-nav-item {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .drawer-nav-item:hover,
+[data-theme="dark"] .drawer-nav-item.active {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 12px 16px;
   border-radius: var(--radius-md);
   font-size: 1rem;
@@ -930,117 +989,265 @@ header.iceland-nav-bar {
 }
 
 /* ==========================================================================
-   LIGHT THEME PRECISION OVERRIDES
+   LOGO CHIP CONTAINER (.wsh-logo-chip)
+   Ensures White Swan logo has crisp contrast & proportions across both themes
    ========================================================================== */
-[data-theme="light"] body {
-  background-color: var(--ice-bg);
-  color: var(--text-pure);
-}
-
-[data-theme="light"] .glass-panel,
-[data-theme="light"] .glass-card,
-[data-theme="light"] .expedition-card,
-[data-theme="light"] .fare-card,
-[data-theme="light"] .itin-card,
-[data-theme="light"] .story-card {
-  background: var(--ice-surface-card);
-  border-color: var(--border-hairline);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
-}
-
-[data-theme="light"] .dest-filter-bar,
-[data-theme="light"] .flight-search-island,
-[data-theme="light"] .telemetry-strip {
-  background: var(--ice-glass-dark);
-  border-color: var(--border-hairline);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
-}
-
-[data-theme="light"] .nav-island {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-}
-
-[data-theme="light"] .nav-brand-mark {
-  background: rgba(8, 15, 26, 0.88);
-  padding: 4px 14px;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+.wsh-logo-chip {
   display: inline-flex;
   align-items: center;
-}
-
-[data-theme="light"] .drawer-content .nav-brand-mark {
-  background: rgba(8, 15, 26, 0.92);
-  padding: 6px 16px;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 5px 14px;
   border-radius: var(--radius-full);
+  border: 1px solid rgba(11, 29, 51, 0.12);
+  box-shadow: 0 4px 16px rgba(11, 29, 51, 0.08);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+  user-select: none;
 }
 
-[data-theme="light"] .nav-routes a {
-  color: var(--text-frost);
+.wsh-logo-chip img {
+  height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
-[data-theme="light"] .nav-routes a:hover,
-[data-theme="light"] .nav-routes a.active {
-  color: var(--ice-cyan);
+.wsh-logo-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(11, 29, 51, 0.14);
+}
+
+[data-theme="dark"] .wsh-logo-chip {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   SUNLIT BRIGHT THEME BASE STYLES & BAND SURFACES
+   ========================================================================== */
+body {
+  background-color: var(--bg-page);
+  color: var(--ink-primary);
+}
+
+/* Sky-Tinted Alternate Section Bands */
+.bg-band-alt,
+section.bg-band-alt,
+.expedition-grid-section.bg-band-alt {
+  background-color: var(--bg-band-alt);
+}
+
+/* Bright Frosted Navigation Island */
+.nav-island {
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(11, 29, 51, 0.12);
+  box-shadow: 0 12px 32px rgba(11, 29, 51, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav-routes a {
+  color: var(--ink-secondary);
+}
+
+.nav-routes a:hover,
+.nav-routes a.active {
+  color: var(--accent-primary);
   background: rgba(2, 132, 199, 0.1);
 }
 
-[data-theme="light"] .dest-pill-btn,
-[data-theme="light"] .route-preset-pill,
-[data-theme="light"] .inclusion-pill {
-  background: rgba(15, 23, 42, 0.05);
-  border-color: rgba(15, 23, 42, 0.12);
-  color: var(--text-frost);
+/* Clean Elevated Cards */
+.glass-panel,
+.glass-card,
+.expedition-card,
+.fare-card,
+.itin-card,
+.story-card {
+  background: var(--surface-card);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 32px rgba(11, 29, 51, 0.06);
 }
 
-[data-theme="light"] .dest-pill-btn.active,
-[data-theme="light"] .dest-pill-btn:hover {
+.dest-filter-bar,
+.flight-search-island,
+.telemetry-strip {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(11, 29, 51, 0.12);
+  box-shadow: 0 14px 34px rgba(11, 29, 51, 0.08);
+}
+
+/* Quote Estimator Form & Receipt */
+.calc-panel {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 16px 40px rgba(11, 29, 51, 0.08) !important;
+}
+
+.calc-receipt {
+  background: rgba(237, 245, 255, 0.94) !important;
+  border: 1.5px solid rgba(2, 132, 199, 0.22) !important;
+  box-shadow: 0 16px 36px rgba(11, 29, 51, 0.08) !important;
+  color: var(--ink-primary) !important;
+}
+
+.dest-pill-btn,
+.route-preset-pill,
+.inclusion-pill {
+  background: rgba(11, 29, 51, 0.05);
+  border: 1px solid rgba(11, 29, 51, 0.12);
+  color: var(--ink-secondary);
+}
+
+.dest-pill-btn.active,
+.dest-pill-btn:hover {
   background: rgba(2, 132, 199, 0.12);
-  border-color: var(--ice-cyan);
-  color: var(--ice-cyan);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
 }
 
-[data-theme="light"] input,
-[data-theme="light"] select,
-[data-theme="light"] textarea {
+input,
+select,
+textarea {
   background: #FFFFFF !important;
-  color: var(--text-pure) !important;
-  border-color: rgba(15, 23, 42, 0.18) !important;
+  color: var(--ink-primary) !important;
+  border-color: rgba(11, 29, 51, 0.18) !important;
 }
 
-[data-theme="light"] .calc-panel {
+.modal-lux-card {
   background: #FFFFFF !important;
-  border-color: rgba(15, 23, 42, 0.12) !important;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08) !important;
+  color: var(--ink-primary) !important;
+  border: 1px solid rgba(11, 29, 51, 0.15) !important;
+  box-shadow: 0 24px 60px rgba(11, 29, 51, 0.2) !important;
 }
 
-[data-theme="light"] .calc-receipt {
-  background: #F1F5F9 !important;
-  border-color: rgba(15, 23, 42, 0.15) !important;
+.btn-glass {
+  background: rgba(11, 29, 51, 0.06);
+  border: 1px solid rgba(11, 29, 51, 0.14);
+  color: var(--ink-primary) !important;
 }
 
-[data-theme="light"] .modal-lux-card {
-  background: #FFFFFF !important;
-  color: var(--text-pure) !important;
-  border-color: rgba(15, 23, 42, 0.15) !important;
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2) !important;
+.btn-glass:hover {
+  background: rgba(11, 29, 51, 0.12);
+  border-color: var(--accent-primary);
 }
 
-[data-theme="light"] .btn-glass {
-  background: rgba(15, 23, 42, 0.06);
-  border-color: rgba(15, 23, 42, 0.14);
-  color: var(--text-pure) !important;
+/* Scenic Hero & Destination Scrims */
+.hero-scenic-viewport .atmospheric-fog,
+.dest-header-banner .atmospheric-fog {
+  background: radial-gradient(circle at 75% 20%, rgba(2, 132, 199, 0.15), transparent 45%),
+              linear-gradient(180deg, rgba(7, 19, 34, 0.35) 0%, rgba(7, 19, 34, 0.65) 60%, rgba(7, 19, 34, 0.88) 100%);
 }
 
-[data-theme="light"] .btn-glass:hover {
-  background: rgba(15, 23, 42, 0.12);
-  border-color: var(--ice-cyan);
+.hero-overlay-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 19, 34, 0.2) 0%, rgba(7, 19, 34, 0.75) 100%);
+  pointer-events: none;
 }
 
-[data-theme="light"] .hero-scenic-viewport .atmospheric-fog {
-  background: radial-gradient(circle at 75% 20%, rgba(2, 132, 199, 0.12), transparent 45%),
-              linear-gradient(180deg, rgba(8, 15, 26, 0.5) 0%, rgba(8, 15, 26, 0.8) 75%, var(--ice-bg) 100%);
+/* ==========================================================================
+   DEEP OCEAN-MIDNIGHT DARK THEME OVERRIDES ([data-theme="dark"])
+   ========================================================================== */
+[data-theme="dark"] body {
+  background-color: var(--bg-page);
+  color: var(--ink-primary);
+}
+
+[data-theme="dark"] .bg-band-alt,
+[data-theme="dark"] section.bg-band-alt,
+[data-theme="dark"] .expedition-grid-section.bg-band-alt {
+  background-color: var(--bg-band-alt);
+}
+
+[data-theme="dark"] .nav-island {
+  background: rgba(7, 19, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .nav-routes a {
+  color: var(--ink-secondary);
+}
+
+[data-theme="dark"] .nav-routes a:hover,
+[data-theme="dark"] .nav-routes a.active {
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.15);
+}
+
+[data-theme="dark"] .glass-panel,
+[data-theme="dark"] .glass-card,
+[data-theme="dark"] .expedition-card,
+[data-theme="dark"] .fare-card,
+[data-theme="dark"] .itin-card,
+[data-theme="dark"] .story-card {
+  background: var(--surface-card);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .dest-filter-bar,
+[data-theme="dark"] .flight-search-island,
+[data-theme="dark"] .telemetry-strip {
+  background: rgba(7, 19, 34, 0.85);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .calc-panel {
+  background: #0C1D33 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="dark"] .calc-receipt {
+  background: #0F243E !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .dest-pill-btn,
+[data-theme="dark"] .route-preset-pill,
+[data-theme="dark"] .inclusion-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--ink-secondary);
+}
+
+[data-theme="dark"] .dest-pill-btn.active,
+[data-theme="dark"] .dest-pill-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #071322 !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .modal-lux-card {
+  background: #071322 !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .btn-glass {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .btn-glass:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--accent-primary);
 }

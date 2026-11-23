@@ -71,9 +71,15 @@
     state.staffAuthenticated = false;
   }
 
-  // Helper: Format INR currency
+  // Helper: Format INR currency strictly with Intl.NumberFormat en-IN
+  const inrFormatter = new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  });
+
   function formatINR(amount) {
-    return '₹' + Math.round(amount).toLocaleString('en-IN');
+    return inrFormatter.format(Math.round(amount));
   }
 
   // Calculate dynamic profit per person strictly clamped in [500, 1500]

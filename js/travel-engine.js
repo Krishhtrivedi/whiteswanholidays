@@ -263,12 +263,18 @@
     }
   ];
 
-  // Helper: Format INR currency
+  // Helper: Format INR currency strictly with Intl.NumberFormat en-IN
+  const inrFormatter = new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  });
+
   function formatINR(val) {
-    return '₹' + Math.round(val).toLocaleString('en-IN');
+    return inrFormatter.format(Math.round(val));
   }
 
-  // Theme System (Dark / Light with System Preference Detection & Persistence)
+  // Theme System (Bright Sunlit Default + Dark Ocean-Midnight with Persistence)
   const THEME_STORAGE_KEY = 'wsh_theme';
 
   function getPreferredTheme() {
@@ -276,18 +282,18 @@
       const stored = localStorage.getItem(THEME_STORAGE_KEY);
       if (stored === 'dark' || stored === 'light') return stored;
     } catch (e) {}
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light';
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
     }
-    return 'dark';
+    return 'light';
   }
 
   function updateThemeToggleButtons(theme) {
     const btns = document.querySelectorAll('.btn-theme-toggle');
     const isDark = theme === 'dark';
     btns.forEach(btn => {
-      btn.setAttribute('aria-label', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
-      btn.title = isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme';
+      btn.setAttribute('aria-label', isDark ? 'Switch to Sunlit Bright Theme' : 'Switch to Ocean Dark Theme');
+      btn.title = isDark ? 'Switch to Sunlit Bright Theme' : 'Switch to Ocean Dark Theme';
       btn.innerHTML = isDark
         ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`
         : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
@@ -295,7 +301,7 @@
   }
 
   function setTheme(theme) {
-    const validTheme = (theme === 'light') ? 'light' : 'dark';
+    const validTheme = (theme === 'dark') ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', validTheme);
     try {
       localStorage.setItem(THEME_STORAGE_KEY, validTheme);
@@ -304,7 +310,7 @@
   }
 
   function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
     setTheme(current === 'dark' ? 'light' : 'dark');
   }
 
