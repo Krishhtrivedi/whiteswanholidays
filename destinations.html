@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Destinations &amp; Glacial Expeditions | White Swan Holidays</title>
+<meta name="description" content="Explore bespoke glacial, alpine, and volcanic travel expeditions. Curated private routes across Iceland, the Swiss Alps, Kashmir, Ladakh, Bali, and Dubai.">
+<link rel="canonical" href="https://whiteswanholidays.com/destinations.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Destinations & Expeditions | White Swan Holidays">
+<meta property="og:description" content="Cinematic journeys, arctic glaciers, alpine fjords, and bespoke flight itineraries.">
+<meta property="og:image" content="https://whiteswanholidays.com/img/banner-2.jpg">
+<meta name="theme-color" content="#050B14">
+<link rel="icon" href="img/white_swan_logo.png">
+
+<!-- Google Fonts: Cormorant Garamond & Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/iceland-aesthetic.css">
+<style>
+/* Page-Specific Styles for Destinations */
+.dest-header-banner {
+  position: relative;
+  min-height: 52vh;
+  display: flex;
+  align-items: center;
+  padding: 130px 0 60px;
+  overflow: hidden;
+  background: #050B14;
+}
+
+.dest-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: 2.8rem;
+  padding: 1.2rem 1.6rem;
+  border-radius: var(--radius-lg);
+  background: var(--ice-glass-dark);
+  border: var(--border-hairline);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.dest-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dest-pill-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: var(--text-frost);
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dest-pill-btn:hover, .dest-pill-btn.active {
+  background: rgba(255,255,255,0.2);
+  border-color: var(--ice-cyan);
+  color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(56,189,248,0.25);
+}
+
+.dest-search-input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #FFFFFF;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  min-width: 260px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.dest-search-input:focus {
+  border-color: var(--ice-cyan);
+  background: rgba(255,255,255,0.14);
+  box-shadow: 0 0 16px rgba(56,189,248,0.25);
+}
+
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+}
+
+@media (max-width: 1024px) {
+  .dest-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .dest-grid { grid-template-columns: 1fr; }
+  .dest-filter-bar { flex-direction: column; align-items: stretch; }
+  .dest-search-input { min-width: 100%; }
+}
+
+.expedition-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Frosted Island Navigation Bar -->
+<header class="iceland-nav-bar" id="icelandNav">
+  <div class="wrap">
+    <nav class="nav-island">
+      
+      <a class="nav-brand-mark" href="index.html" aria-label="White Swan Holidays">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+      </a>
+
+      <ul class="nav-routes">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html" class="active">Destinations</a></li>
+        <li><a href="flights.html">Flights &amp; Routes</a></li>
+        <li><a href="itineraries.html">Itineraries</a></li>
+        <li><a href="quote.html">Quote Estimator</a></li>
+        <li><a href="journal.html">Journal</a></li>
+      </ul>
+
+      <!-- Circular Glass Flight Trigger in Navigation -->
+      <div style="display:flex;align-items:center;gap:0.9rem">
+        <a class="btn-circle-flight" href="flights.html" aria-label="Book Flights" title="Search Flights & Routes" style="width:48px;height:48px">
+          <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </a>
+        
+        <button type="button" id="mobileNavToggle" class="btn-circle-swap" aria-label="Toggle menu" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+
+<!-- Header Banner -->
+<section class="dest-header-banner">
+  <img class="hero-media-backdrop" src="img/banner-2.jpg" alt="Expedition Panorama" width="2000" height="1000">
+  <div class="atmospheric-fog"></div>
+
+  <div class="wrap" style="position:relative;z-index:4">
+    <div class="coord-tag" style="margin-bottom:1.2rem">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+      EXPEDITION CATALOG &middot; 64&deg;08'N 21&deg;56'W TO 25&deg;12'N 55&deg;16'E
+    </div>
+    
+    <h1 style="max-width:850px;margin-bottom:1rem">
+      Curated Expeditions Across <br>
+      <span style="color:var(--ice-cyan);font-style:italic">Glaciers, Alps &amp; Volcanic Ridges</span>
+    </h1>
+    
+    <p style="font-size:1.15rem;color:var(--text-frost);max-width:680px;line-height:1.6">
+      Each journey is engineered with private chauffeurs, high-elevation acclimatization pacing, boutique cliffside lodges, and dedicated flight connections.
+    </p>
+  </div>
+</section>
+
+<!-- Destination Catalog Section -->
+<section style="padding:60px 0 100px;background:linear-gradient(180deg, #050B14 0%, #091322 100%)">
+  <div class="wrap">
+    
+    <!-- Filter and Search Toolbar -->
+    <div class="dest-filter-bar reveal-init">
+      <div class="dest-filter-pills" id="categoryFilters">
+        <button type="button" class="dest-pill-btn active" data-cat="all">All Expeditions (6)</button>
+        <button type="button" class="dest-pill-btn" data-cat="glacial">Glacial &amp; Arctic</button>
+        <button type="button" class="dest-pill-btn" data-cat="alpine">Alpine Peaks</button>
+        <button type="button" class="dest-pill-btn" data-cat="highlands">Highland Plateaus</button>
+        <button type="button" class="dest-pill-btn" data-cat="volcanic">Volcanic Islands &amp; Dunes</button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <input type="text" id="destSearchInput" class="dest-search-input" placeholder="Search coordinates, title, country..." aria-label="Search destinations">
+      </div>
+    </div>
+
+    <!-- Destinations Grid -->
+    <div class="dest-grid" id="destinationsGrid">
+      
+      <!-- Iceland Glaciers -->
+      <article class="glass-card expedition-card reveal-init" data-category="glacial" data-keywords="iceland glaciers northern lights reykjavik arctic kef">
+        <div style="position:relative;height:240px;overflow:hidden;border-radius:var(--radius-md) var(--radius-md) 0 0">
+          <img src="img/banner-1.jpg" alt="Iceland Glaciers" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
+          <div style="position:absolute;top:14px;left:14px">
+            <span class="coord-tag">64&deg;08'N 21&deg;56'W</span>
+          </div>
+          <div style="position:absolute;top:14px;right:14px">
+            <span style="background:rgba(5,11,20,0.7);backdrop-filter:blur(8px);color:var(--ice-cyan);border-radius:var(--radius-full);padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:600;border:1px solid rgba(56,189,248,0.3)">
+              Arctic Marine
+            </span>
+          </div>
+        </div>
+
+        <div style="padding:1.6rem;display:flex;flex-direction:column;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.4rem">
+            <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ice-gold);font-weight:600">Nordic Arctic</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">7 Days / 6 Nights</span>
+          </div>
+
+          <h3 style="font-size:1.45rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=iceland-glaciers" style="color:#FFFFFF;text-decoration:none">Iceland Glaciers &amp; Aurora</a>
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.55;margin-bottom:1.2rem;flex:1">
+            Black volcanic beaches, blue sapphire caverns beneath Vatnajökull ice cap, and celestial Northern Lights alerts.
+          </p>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.1);padding-top:1.1rem;margin-top:auto">
+            <div>
+              <span style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block">Starting from</span>
+              <span class="tabular-nums" style="font-size:1.25rem;font-weight:700;color:var(--ice-cyan)">&dollar;1,25,000</span>
+              <span style="font-size:0.72rem;color:var(--text-slate)"> / person</span>
+            </div>
+
+            <a class="btn-circle-flight" href="destination-detail.html?slug=iceland-glaciers" aria-label="Explore Iceland" title="View Full Itinerary" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Kashmir Alpine -->
+      <article class="glass-card expedition-card reveal-init" data-category="glacial" data-keywords="kashmir alpine srinagar gulmarg pahalgam himalayas sxr">
+        <div style="position:relative;height:240px;overflow:hidden;border-radius:var(--radius-md) var(--radius-md) 0 0">
+          <img src="img/domestic-tour/kashmir.jpg" alt="Kashmir Alpine" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
+          <div style="position:absolute;top:14px;left:14px">
+            <span class="coord-tag">34&deg;05'N 74&deg;47'E</span>
+          </div>
+          <div style="position:absolute;top:14px;right:14px">
+            <span style="background:rgba(5,11,20,0.7);backdrop-filter:blur(8px);color:var(--ice-cyan);border-radius:var(--radius-full);padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:600;border:1px solid rgba(56,189,248,0.3)">
+              Montane Alpine
+            </span>
+          </div>
+        </div>
+
+        <div style="padding:1.6rem;display:flex;flex-direction:column;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.4rem">
+            <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ice-gold);font-weight:600">Western Himalayas</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">6 Days / 5 Nights</span>
+          </div>
+
+          <h3 style="font-size:1.45rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=kashmir-alpine" style="color:#FFFFFF;text-decoration:none">Kashmir Alpine &amp; High Passes</a>
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.55;margin-bottom:1.2rem;flex:1">
+            Handcrafted walnut cedar houseboats on mirror-still Dal Lake, Apharwat 4,000m gondola snow bowl, and Lidder river pines.
+          </p>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.1);padding-top:1.1rem;margin-top:auto">
+            <div>
+              <span style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block">Starting from</span>
+              <span class="tabular-nums" style="font-size:1.25rem;font-weight:700;color:var(--ice-cyan)">&dollar;28,500</span>
+              <span style="font-size:0.72rem;color:var(--text-slate)"> / person</span>
+            </div>
+
+            <a class="btn-circle-flight" href="destination-detail.html?slug=kashmir-alpine" aria-label="Explore Kashmir" title="View Full Itinerary" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Swiss Alps -->
+      <article class="glass-card expedition-card reveal-init" data-category="alpine" data-keywords="swiss alps switzerland zurich lucerne zermatt matterhorn jungfrau zrh">
+        <div style="position:relative;height:240px;overflow:hidden;border-radius:var(--radius-md) var(--radius-md) 0 0">
+          <img src="img/international/canada.jpg" alt="Swiss Alps" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
+          <div style="position:absolute;top:14px;left:14px">
+            <span class="coord-tag">46&deg;35'N 8&deg;02'E</span>
+          </div>
+          <div style="position:absolute;top:14px;right:14px">
+            <span style="background:rgba(5,11,20,0.7);backdrop-filter:blur(8px);color:var(--ice-cyan);border-radius:var(--radius-full);padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:600;border:1px solid rgba(56,189,248,0.3)">
+              High Alpine
+            </span>
+          </div>
+        </div>
+
+        <div style="padding:1.6rem;display:flex;flex-direction:column;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.4rem">
+            <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ice-gold);font-weight:600">Central Europe</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">8 Days / 7 Nights</span>
+          </div>
+
+          <h3 style="font-size:1.45rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=swiss-alps" style="color:#FFFFFF;text-decoration:none">Swiss Alps &amp; Glacial Lakes</a>
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.55;margin-bottom:1.2rem;flex:1">
+            Jungfraujoch Top of Europe cogwheel railway, Belle &Eacute;poque lake steamers, and car-free Matterhorn chalet vistas.
+          </p>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.1);padding-top:1.1rem;margin-top:auto">
+            <div>
+              <span style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block">Starting from</span>
+              <span class="tabular-nums" style="font-size:1.25rem;font-weight:700;color:var(--ice-cyan)">&dollar;1,65,000</span>
+              <span style="font-size:0.72rem;color:var(--text-slate)"> / person</span>
+            </div>
+
+            <a class="btn-circle-flight" href="destination-detail.html?slug=swiss-alps" aria-label="Explore Swiss Alps" title="View Full Itinerary" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Leh Ladakh -->
+      <article class="glass-card expedition-card reveal-init" data-category="highlands" data-keywords="ladakh pangong lake nubra valley leh khardung la himalayas ixl">
+        <div style="position:relative;height:240px;overflow:hidden;border-radius:var(--radius-md) var(--radius-md) 0 0">
+          <img src="img/domestic-tour/leh-ladakh.jpg" alt="Leh Ladakh" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
+          <div style="position:absolute;top:14px;left:14px">
+            <span class="coord-tag">34&deg;09'N 77&deg;34'E</span>
+          </div>
+          <div style="position:absolute;top:14px;right:14px">
+            <span style="background:rgba(5,11,20,0.7);backdrop-filter:blur(8px);color:var(--ice-cyan);border-radius:var(--radius-full);padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:600;border:1px solid rgba(56,189,248,0.3)">
+              Cold Desert
+            </span>
+          </div>
+        </div>
+
+        <div style="padding:1.6rem;display:flex;flex-direction:column;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.4rem">
+            <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ice-gold);font-weight:600">Trans-Himalayan Plateau</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">7 Days / 6 Nights</span>
+          </div>
+
+          <h3 style="font-size:1.45rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=leh-ladakh" style="color:#FFFFFF;text-decoration:none">Ladakh Moonscape &amp; Pangong Tso</a>
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.55;margin-bottom:1.2rem;flex:1">
+            Khardung La 17,582ft crossing, double-humped camel safari in Hunder dunes, and heated luxury geodesic domes at Pangong Lake.
+          </p>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.1);padding-top:1.1rem;margin-top:auto">
+            <div>
+              <span style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block">Starting from</span>
+              <span class="tabular-nums" style="font-size:1.25rem;font-weight:700;color:var(--ice-cyan)">&dollar;38,000</span>
+              <span style="font-size:0.72rem;color:var(--text-slate)"> / person</span>
+            </div>
+
+            <a class="btn-circle-flight" href="destination-detail.html?slug=leh-ladakh" aria-label="Explore Ladakh" title="View Full Itinerary" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Bali Volcanic -->
+      <article class="glass-card expedition-card reveal-init" data-category="volcanic" data-keywords="bali ubud batur nusa penida uluwatu indonesia dps">
+        <div style="position:relative;height:240px;overflow:hidden;border-radius:var(--radius-md) var(--radius-md) 0 0">
+          <img src="img/international/indonesia.jpg" alt="Bali Volcanic" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
+          <div style="position:absolute;top:14px;left:14px">
+            <span class="coord-tag">8&deg;20'S 115&deg;13'E</span>
+          </div>
+          <div style="position:absolute;top:14px;right:14px">
+            <span style="background:rgba(5,11,20,0.7);backdrop-filter:blur(8px);color:var(--ice-cyan);border-radius:var(--radius-full);padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:600;border:1px solid rgba(56,189,248,0.3)">
+              Tropical Maritime
+            </span>
+          </div>
+        </div>
+
+        <div style="padding:1.6rem;display:flex;flex-direction:column;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.4rem">
+            <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ice-gold);font-weight:600">Southeast Asia</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">7 Days / 6 Nights</span>
+          </div>
+
+          <h3 style="font-size:1.45rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=bali-volcanic" style="color:#FFFFFF;text-decoration:none">Bali Volcanic Ridges &amp; Nusa Fjords</a>
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.55;margin-bottom:1.2rem;flex:1">
+            Mount Batur sunrise 4x4 lava jeep traversal, private Nusa Penida T-Rex cliff speedboat charter, and rainforest plunge villas.
+          </p>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.1);padding-top:1.1rem;margin-top:auto">
+            <div>
+              <span style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block">Starting from</span>
+              <span class="tabular-nums" style="font-size:1.25rem;font-weight:700;color:var(--ice-cyan)">&dollar;42,000</span>
+              <span style="font-size:0.72rem;color:var(--text-slate)"> / person</span>
+            </div>
+
+            <a class="btn-circle-flight" href="destination-detail.html?slug=bali-volcanic" aria-label="Explore Bali" title="View Full Itinerary" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dubai Skylines -->
+      <article class="glass-card expedition-card reveal-init" data-category="volcanic" data-keywords="dubai burj khalifa desert safari marina yacht uae dxb">
+        <div style="position:relative;height:240px;overflow:hidden;border-radius:var(--radius-md) var(--radius-md) 0 0">
+          <img src="img/tours/dubai.jpg" alt="Dubai Skylines" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
+          <div style="position:absolute;top:14px;left:14px">
+            <span class="coord-tag">25&deg;12'N 55&deg;16'E</span>
+          </div>
+          <div style="position:absolute;top:14px;right:14px">
+            <span style="background:rgba(5,11,20,0.7);backdrop-filter:blur(8px);color:var(--ice-cyan);border-radius:var(--radius-full);padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:600;border:1px solid rgba(56,189,248,0.3)">
+              Desert Maritime
+            </span>
+          </div>
+        </div>
+
+        <div style="padding:1.6rem;display:flex;flex-direction:column;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.4rem">
+            <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ice-gold);font-weight:600">Middle East</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">6 Days / 5 Nights</span>
+          </div>
+
+          <h3 style="font-size:1.45rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=dubai-skylines" style="color:#FFFFFF;text-decoration:none">Dubai &amp; Arabian Dunes</a>
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.55;margin-bottom:1.2rem;flex:1">
+            Private 52ft yacht cruise across Dubai Marina, Burj Khalifa Level 148 Sky Lounge, and royal vintage Land Rover desert safaris.
+          </p>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.1);padding-top:1.1rem;margin-top:auto">
+            <div>
+              <span style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block">Starting from</span>
+              <span class="tabular-nums" style="font-size:1.25rem;font-weight:700;color:var(--ice-cyan)">&dollar;48,000</span>
+              <span style="font-size:0.72rem;color:var(--text-slate)"> / person</span>
+            </div>
+
+            <a class="btn-circle-flight" href="destination-detail.html?slug=dubai-skylines" aria-label="Explore Dubai" title="View Full Itinerary" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Quick Link Bar to Domestic & International Catalog -->
+    <div style="margin-top:4rem;padding:2.2rem;border-radius:var(--radius-lg);background:var(--ice-glass-dark);border:var(--border-hairline);backdrop-filter:blur(20px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem">
+      <div>
+        <h4 style="margin-bottom:0.4rem;color:#FFFFFF">Seeking Standard Leisure or Corporate Itineraries?</h4>
+        <p style="font-size:0.9rem;color:var(--text-frost);margin:0;max-width:620px">
+          Browse our extensive 50+ classic domestic holiday packages, international visas, and corporate MICE retreats.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:0.9rem;flex-wrap:wrap">
+        <a class="btn-glass" href="domestic.html" style="font-size:0.85rem">Domestic Tours</a>
+        <a class="btn-glass" href="international.html" style="font-size:0.85rem">International Tours</a>
+        <a class="btn-glass" href="mice.html" style="font-size:0.85rem">MICE &amp; Corporate</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section style="padding:90px 0;background:#050B14;border-top:1px solid rgba(255,255,255,0.08);text-align:center">
+  <div class="wrap">
+    <div class="coord-tag" style="margin-bottom:1.2rem">PRIVATE EXPEDITION CURATION</div>
+    <h2 style="margin-bottom:1rem">Have a Custom Coordinate in Mind?</h2>
+    <p style="font-size:1.1rem;color:var(--text-frost);max-width:600px;margin:0 auto 2.2rem">
+      Whether chartering a private seaplane or organizing an alpine corporate retreat, our concierges craft your custom journey within 4 hours.
+    </p>
+
+    <div style="display:inline-flex;gap:1.2rem;align-items:center;flex-wrap:wrap;justify-content:center">
+      <a class="btn-gold-glow" href="quote.html">Launch Quote Estimator</a>
+      <a class="btn-glass" href="https://wa.me/919099041625" target="_blank" rel="noopener">Chat with Concierge</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Obsidian Nordic Footer with Route Matrix -->
+<footer style="background:#03070E;color:var(--text-slate);border-top:1px solid rgba(255,255,255,0.12);padding:75px 0 35px">
+  <div class="wrap">
+    
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:3rem;margin-bottom:3.5rem">
+      <div>
+        <div style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:var(--radius-sm);padding:0.6rem 1rem;display:inline-block;margin-bottom:1.2rem;border:var(--border-hairline-subtle)">
+          <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+        </div>
+        <p style="font-size:0.9rem;line-height:1.65;max-width:360px;color:var(--text-frost)">
+          White Swan Holidays Pvt Ltd &mdash; Tailor-made luxury travel, glacial expeditions, private flights, and bespoke corporate travel from Ahmedabad and Gurugram since 2017.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Dedicated Routes</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="destinations.html" style="color:var(--ice-cyan);font-weight:600">Destinations</a></li>
+          <li><a href="flights.html" style="color:var(--text-slate)">Flights &amp; Routes</a></li>
+          <li><a href="itineraries.html" style="color:var(--text-slate)">Itineraries</a></li>
+          <li><a href="quote.html" style="color:var(--text-slate)">Quote Estimator</a></li>
+          <li><a href="journal.html" style="color:var(--text-slate)">Field Journal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Special Services</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="visa-air-ticket.html" style="color:var(--text-slate)">Visa &amp; Flight Desk</a></li>
+          <li><a href="mice.html" style="color:var(--text-slate)">Corporate MICE</a></li>
+          <li><a href="medical-tourism.html" style="color:var(--text-slate)">Medical Facilitation</a></li>
+          <li><a href="corporate-gifting.html" style="color:var(--text-slate)">Corporate Gifting</a></li>
+          <li><a href="gallery.html" style="color:var(--text-slate)">Photo Gallery</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Concierge Desk</h4>
+        <p style="font-size:0.88rem;line-height:1.6;color:var(--text-frost)">
+          Ahmedabad: 501, Sun Square, Off CG Road<br>
+          Gurugram: South City II, Sector 49<br>
+          Direct: <a href="tel:+919099041625" style="color:var(--ice-cyan)">+91 90990 41625</a>
+        </p>
+        <div style="margin-top:1.1rem">
+          <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="font-size:0.82rem;padding:0.4rem 1.2rem;min-height:38px">
+            WhatsApp Concierge
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
+      <span>&copy; <span id="yr">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
+      <span>Coordinates: 23&deg;01'N 72&deg;33'E (AMD HQ) &middot; 28&deg;24'N 77&deg;03'E (GGN)</span>
+      <a href="quote.html#staffAuthModal" style="color:#64748B;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Staff Portal</span>
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/travel-engine.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Category and Search Filtering
+(function() {
+  const cards = document.querySelectorAll('.expedition-card');
+  const buttons = document.querySelectorAll('.dest-pill-btn');
+  const searchInput = document.getElementById('destSearchInput');
+
+  let currentCategory = 'all';
+  let searchQuery = '';
+
+  function filterCards() {
+    cards.forEach(card => {
+      const cat = card.dataset.category;
+      const kw = (card.dataset.keywords || '').toLowerCase();
+      const matchCat = currentCategory === 'all' || cat === currentCategory;
+      const matchQuery = !searchQuery || kw.includes(searchQuery);
+
+      if (matchCat && matchQuery) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = btn.dataset.cat;
+      filterCards();
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', e => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      filterCards();
+    });
+  }
+})();
+</script>
+</body>
+</html>

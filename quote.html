@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamic Trip &amp; Package Quote Calculator | White Swan Holidays</title>
+<meta name="description" content="Instant luxury trip and holiday package quote calculator. Dynamic hotel tiers, flight fare inputs, curated itinerary tiers, 5% GST, and instant WhatsApp booking.">
+<link rel="canonical" href="https://whiteswanholidays.com/quote.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Instant Trip Quote Calculator | White Swan Holidays">
+<meta property="og:description" content="Calculate custom holiday quotes instantly with live pricing, hotel categories, flights, and 5% GST.">
+<meta property="og:image" content="https://whiteswanholidays.com/img/banner-1.jpg">
+<meta name="theme-color" content="#050B14">
+<link rel="icon" href="img/white_swan_logo.png">
+
+<!-- Google Fonts: Cormorant Garamond & Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/luxury-theme.css">
+<link rel="stylesheet" href="css/iceland-aesthetic.css">
+<style>
+/* Page-Specific Styles for Standalone Calculator */
+.quote-hero-banner {
+  position: relative;
+  min-height: 48vh;
+  display: flex;
+  align-items: center;
+  padding: 135px 0 50px;
+  overflow: hidden;
+  background: #050B14;
+}
+
+.calc-section-wrapper {
+  background: #050B14;
+  padding: 40px 0 100px;
+}
+
+/* Ensure luxury-theme calculator works seamlessly inside dark nordic backdrop */
+.calc-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.calc-panel {
+  background: #091322;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.calc-step-heading h3 {
+  color: #FFFFFF;
+}
+
+.input-lux-grp label {
+  color: var(--text-frost);
+}
+
+.input-lux-field {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+.input-lux-field:focus {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--ice-cyan);
+}
+
+.stepper-wrap {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stepper-btn {
+  color: #FFFFFF;
+}
+
+.stepper-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.stepper-input {
+  color: #FFFFFF;
+}
+
+.route-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-frost);
+}
+
+.route-pill:hover, .route-pill.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--ice-cyan);
+  color: #FFFFFF;
+}
+
+.hotel-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.hotel-card:hover, .hotel-card.selected {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--ice-cyan);
+}
+
+.hotel-card-title {
+  color: #FFFFFF;
+}
+
+.hotel-card-desc {
+  color: var(--text-slate);
+}
+
+.itinerary-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.itinerary-card:hover, .itinerary-card.selected {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--ice-cyan);
+}
+
+.itinerary-tier-name {
+  color: #FFFFFF;
+}
+
+.itinerary-tier-desc {
+  color: var(--text-slate);
+}
+
+.client-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.client-pill:hover, .client-pill.selected {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--ice-cyan);
+}
+
+.calc-receipt {
+  background: #0D1B2F;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.receipt-head h4 {
+  color: #FFFFFF;
+}
+
+.receipt-line-title {
+  color: #FFFFFF;
+}
+
+.receipt-line-sub {
+  color: var(--text-slate);
+}
+
+.receipt-line-val {
+  color: #FFFFFF;
+}
+
+.receipt-total-row {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.receipt-total-label {
+  color: #FFFFFF;
+}
+
+.receipt-total-val {
+  color: var(--ice-cyan);
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Frosted Island Navigation Bar -->
+<header class="iceland-nav-bar" id="icelandNav">
+  <div class="wrap">
+    <nav class="nav-island">
+      
+      <a class="nav-brand-mark" href="index.html" aria-label="White Swan Holidays">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+      </a>
+
+      <ul class="nav-routes">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="flights.html">Flights &amp; Routes</a></li>
+        <li><a href="itineraries.html">Itineraries</a></li>
+        <li><a href="quote.html" class="active">Quote Estimator</a></li>
+        <li><a href="journal.html">Journal</a></li>
+      </ul>
+
+      <!-- Circular Glass Flight Trigger in Navigation -->
+      <div style="display:flex;align-items:center;gap:0.9rem">
+        <a class="btn-circle-flight" href="flights.html" aria-label="Book Flights" title="Search Flights & Routes" style="width:48px;height:48px">
+          <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </a>
+        
+        <button type="button" id="mobileNavToggle" class="btn-circle-swap" aria-label="Toggle menu" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+
+<!-- Hero Banner -->
+<section class="quote-hero-banner">
+  <img class="hero-media-backdrop" src="img/banner-1.jpg" alt="Pricing Engine Panorama" width="2000" height="1000">
+  <div class="atmospheric-fog"></div>
+
+  <div class="wrap" style="position:relative;z-index:4">
+    <div class="coord-tag" style="margin-bottom:1.1rem">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      LIVE ESTIMATION ENGINE &middot; JAVA PRICING PARITY
+    </div>
+    
+    <h1 style="max-width:880px;margin-bottom:0.8rem">
+      Instant Trip &amp; Package <br>
+      <span style="color:var(--ice-cyan);font-style:italic">Quote Estimator</span>
+    </h1>
+    
+    <p style="font-size:1.15rem;color:var(--text-frost);max-width:680px;line-height:1.6">
+      Real-time calculation combining flights, hotel categories, room allocation, and curated itinerary tiers with live 5% GST computation.
+    </p>
+  </div>
+</section>
+
+<!-- Calculator Interactive Workspace -->
+<section class="calc-section-wrapper" id="calculator">
+  <div class="wrap">
+    
+    <div class="calc-container">
+      
+      <!-- LEFT: Dynamic Input Controls -->
+      <div class="calc-panel reveal-init">
+        
+        <div class="calc-step-heading">
+          <h3 style="margin:0">Trip Parameters &amp; Preferences</h3>
+          <div class="calc-badge-live">
+            <span class="calc-pulse-dot"></span>
+            <span>Live Auto-Calculated</span>
+          </div>
+        </div>
+
+        <!-- Route & Quick Presets -->
+        <div class="route-presets-wrap">
+          <div class="route-presets-lbl" style="color:var(--text-slate)">Quick Itinerary Presets</div>
+          <div class="route-presets-grid">
+            <button type="button" class="route-pill active" data-preset="1">Metro / Long Domestic (Kashmir, Kerala) ~&dollar;7.5k air</button>
+            <button type="button" class="route-pill" data-preset="0">Short Domestic (Goa, Udaipur) ~&dollar;4.5k air</button>
+            <button type="button" class="route-pill" data-preset="2">International / MICE (Dubai, Bali) ~&dollar;18k air</button>
+            <button type="button" class="route-pill" data-preset="3">Luxury Long-Haul (Europe, Iceland) ~&dollar;45k air</button>
+          </div>
+        </div>
+
+        <!-- Destination & Dates -->
+        <div class="calc-grid-2">
+          <div class="input-lux-grp">
+            <label for="calcDestination">Destination / Route</label>
+            <input type="text" id="calcDestination" class="input-lux-field" value="Kashmir (Srinagar, Gulmarg, Pahalgam)" placeholder="e.g. Dubai, Kashmir, Switzerland">
+          </div>
+          <div class="input-lux-grp">
+            <label for="calcTravelDates">Travel Window / Dates</label>
+            <input type="text" id="calcTravelDates" class="input-lux-field" placeholder="e.g. 15 Oct - 20 Oct 2026">
+          </div>
+        </div>
+
+        <!-- Guests, Nights & Rooms Grid -->
+        <div class="calc-grid-3">
+          
+          <!-- Guests -->
+          <div class="input-lux-grp">
+            <label for="calcGuests">Guests (Travelers)</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn" id="calcGuestsMinus" aria-label="Decrease guests">&minus;</button>
+              <input type="number" id="calcGuests" class="stepper-input tabular-nums" min="1" max="200" value="2">
+              <button type="button" class="stepper-btn" id="calcGuestsPlus" aria-label="Increase guests">&plus;</button>
+            </div>
+          </div>
+
+          <!-- Duration (Nights) -->
+          <div class="input-lux-grp">
+            <label for="calcNights">Stay Duration (Nights)</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn" id="calcNightsMinus" aria-label="Decrease nights">&minus;</button>
+              <input type="number" id="calcNights" class="stepper-input tabular-nums" min="1" max="90" value="5">
+              <button type="button" class="stepper-btn" id="calcNightsPlus" aria-label="Increase nights">&plus;</button>
+            </div>
+          </div>
+
+          <!-- Rooms (Auto Suggested with Manual Override) -->
+          <div class="input-lux-grp">
+            <label for="calcRooms">Rooms</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn" id="calcRoomsMinus" aria-label="Decrease rooms">&minus;</button>
+              <input type="number" id="calcRooms" class="stepper-input tabular-nums" min="1" max="100" value="1">
+              <button type="button" class="stepper-btn" id="calcRoomsPlus" aria-label="Increase rooms">&plus;</button>
+            </div>
+            <span id="roomsSuggestedNote" style="font-size:0.74rem;color:var(--text-slate);margin-top:0.25rem">Auto-suggested (1 room for 2 guests)</span>
+          </div>
+
+        </div>
+
+        <!-- Flight Fare Per Person -->
+        <div class="input-lux-grp" style="margin-bottom:1.6rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+            <label for="calcFlightFare">Flight Fare per Person (INR)</label>
+            <span style="font-size:0.8rem;color:var(--text-slate)">Enter 0 if booking own flights</span>
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center">
+            <div style="position:relative;flex:1">
+              <span style="position:absolute;left:12px;top:11px;font-weight:600;color:var(--text-slate)">&dollar;</span>
+              <input type="number" id="calcFlightFare" class="input-lux-field tabular-nums" style="padding-left:26px" min="0" step="500" value="7500">
+            </div>
+            <button type="button" class="dest-pill-btn" id="flightPresetShort" style="font-size:0.78rem">&dollar;4.5k Short</button>
+            <button type="button" class="dest-pill-btn" id="flightPresetMetro" style="font-size:0.78rem">&dollar;7.5k Metro</button>
+            <button type="button" class="dest-pill-btn" id="flightPresetInt" style="font-size:0.78rem">&dollar;18k Int'l</button>
+          </div>
+        </div>
+
+        <!-- Hotel Category & Rate Sliders -->
+        <div class="input-lux-grp" style="margin-bottom:1.6rem">
+          <label>Hotel Category &amp; Room Rate (Per Room / Night)</label>
+          <div class="hotel-cards-grid">
+            
+            <div class="hotel-card" data-star="3">
+              <div class="hotel-card-stars">&#9733;&#9733;&#9733;</div>
+              <div class="hotel-card-title">3-Star Boutique</div>
+              <div class="hotel-card-desc">Comfortable rooms, verified hospitality, daily breakfast.</div>
+              <div class="hotel-card-range tabular-nums">&dollar;3,000 &ndash; &dollar;4,000</div>
+            </div>
+
+            <div class="hotel-card selected" data-star="4">
+              <div class="hotel-card-stars">&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="hotel-card-title">4-Star Premium</div>
+              <div class="hotel-card-desc">Upscale comfort, premier views, pools &amp; curated amenities.</div>
+              <div class="hotel-card-range tabular-nums">&dollar;6,000 &ndash; &dollar;7,000</div>
+            </div>
+
+            <div class="hotel-card" data-star="5">
+              <div class="hotel-card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="hotel-card-title">5-Star Luxury</div>
+              <div class="hotel-card-desc">Bespoke 5-star suites, private plunge pools, butler service.</div>
+              <div class="hotel-card-range tabular-nums">&dollar;9,000 &ndash; &dollar;10,000</div>
+            </div>
+
+          </div>
+
+          <!-- Fine-tune Rate Slider within Category Range -->
+          <div class="slider-lux-wrap" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+            <div class="slider-lux-head">
+              <span style="font-size:0.82rem;font-weight:600;color:var(--text-frost)">Adjust Room Rate within Selected Star Range</span>
+              <span id="hotelSliderVal" class="slider-lux-val tabular-nums">&dollar;6,500 /night</span>
+            </div>
+            <input type="range" id="hotelRateSlider" min="6000" max="7000" step="100" value="6500" class="slider-lux-range">
+            <div class="slider-lux-labels">
+              <span id="hotelMinLbl" class="tabular-nums">&dollar;6,000</span>
+              <span style="font-size:0.75rem;color:var(--text-slate)">Slider bounds automatically update by Star category</span>
+              <span id="hotelMaxLbl" class="tabular-nums">&dollar;7,000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Itinerary Tier -->
+        <div class="input-lux-grp" style="margin-bottom:1.6rem">
+          <label>Itinerary &amp; Sightseeing Tier</label>
+          <div class="itinerary-tiers-grid">
+            
+            <div class="itinerary-card" data-tier="basic">
+              <div class="itinerary-tier-name">Basic Sightseeing &amp; Transfers</div>
+              <div class="itinerary-tier-desc">Private airport transfers, city orientation &amp; key landmark drives.</div>
+              <div class="itinerary-tier-price tabular-nums">&dollar;1,200 / person</div>
+            </div>
+
+            <div class="itinerary-card selected" data-tier="curated">
+              <div class="itinerary-tier-name">Curated Leisure</div>
+              <div class="itinerary-tier-desc">Private guides, curated local experiences, entry monuments &amp; day trips.</div>
+              <div class="itinerary-tier-price tabular-nums">&dollar;2,500 / person</div>
+            </div>
+
+            <div class="itinerary-card" data-tier="premium">
+              <div class="itinerary-tier-name">Premium / Corporate MICE</div>
+              <div class="itinerary-tier-desc">VIP fast-track access, gala banquets, conference logistics &amp; dedicated escort.</div>
+              <div class="itinerary-tier-price tabular-nums">&dollar;4,500 / person</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Client Profile / Relationship -->
+        <div class="input-lux-grp">
+          <label>Client Profile &amp; Relationship</label>
+          <div class="client-profile-grid">
+            <button type="button" class="client-pill" data-client="repeat">
+              <span>Repeat / Referral Client</span>
+              <small style="display:block;font-size:0.72rem;font-weight:400;color:var(--text-slate)">Loyalty discount rate</small>
+            </button>
+            <button type="button" class="client-pill selected" data-client="standard">
+              <span>Standard Client</span>
+              <small style="display:block;font-size:0.72rem;font-weight:400;color:var(--text-slate)">Regular bespoke package</small>
+            </button>
+            <button type="button" class="client-pill" data-client="corporate">
+              <span>Corporate / VIP Client</span>
+              <small style="display:block;font-size:0.72rem;font-weight:400;color:var(--text-slate)">Priority concierge tier</small>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Itemized Cost Breakdown Card (The Dribbble Luxury Receipt) -->
+      <aside class="calc-receipt reveal-init" aria-labelledby="receiptTitle">
+        
+        <div class="receipt-head">
+          <h4 id="receiptTitle">Itemized Quote Summary</h4>
+          <span class="receipt-verified-badge" style="font-size:0.75rem;font-weight:600;color:var(--ice-cyan);background:rgba(56,189,248,0.15);padding:0.25rem 0.65rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:0.35rem;border:1px solid rgba(56,189,248,0.3)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            All-Inclusive Package
+          </span>
+        </div>
+
+        <!-- Confidential Staff Margin Panel (Protected by password; never shown to public clients) -->
+        <div class="staff-margin-panel" id="staffMarginPanel" style="display:none;background:#FFFDF5;border:1.5px solid #DFB76C;border-radius:var(--radius-md);padding:1rem;margin-bottom:1.2rem;box-shadow:0 4px 14px rgba(197,160,89,0.18)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;border-bottom:1px solid rgba(197,160,89,0.3);padding-bottom:0.4rem">
+            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;font-weight:700;color:#996B1E">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>CONFIDENTIAL STAFF MARGIN VIEW</span>
+            </div>
+            <button type="button" id="btnLockStaffMode" style="background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;border-radius:999px;font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;cursor:pointer">
+              Lock &amp; Exit
+            </button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem">
+            <span style="font-size:0.78rem;color:#475569">Net Profit Per Person:</span>
+            <span id="adminPerPersonVal" class="tabular-nums" style="font-weight:800;color:#0A192F;font-size:0.95rem">&dollar;1,100 / person</span>
+          </div>
+          <div id="adminFormulaText" style="font-size:0.75rem;color:#1E293B;line-height:1.45;background:#FFFFFF;border-radius:6px;padding:0.5rem;border:1px solid #E2E8F0">
+            Formula breakdown...
+          </div>
+        </div>
+
+        <!-- Itemized Cost Lines -->
+        <ul class="receipt-lines">
+          
+          <li class="receipt-line">
+            <div class="receipt-line-left">
+              <span class="receipt-line-title">1. Airfare / Flight Travel</span>
+              <span class="receipt-line-sub" id="receiptFlightsSub">&dollar;7,500 &times; 2 travelers</span>
+            </div>
+            <span class="receipt-line-val tabular-nums" id="receiptFlights">&dollar;15,000</span>
+          </li>
+
+          <li class="receipt-line">
+            <div class="receipt-line-left">
+              <span class="receipt-line-title">2. Hotel Accommodation</span>
+              <span class="receipt-line-sub" id="receiptHotelSub">&dollar;6,500 &times; 1 room &times; 5 nights</span>
+            </div>
+            <span class="receipt-line-val tabular-nums" id="receiptHotel">&dollar;32,500</span>
+          </li>
+
+          <li class="receipt-line">
+            <div class="receipt-line-left">
+              <span class="receipt-line-title">3. Curated Itinerary &amp; Sightseeing</span>
+              <span class="receipt-line-sub" id="receiptItinerarySub">&dollar;2,500 &times; 2 travelers</span>
+            </div>
+            <span class="receipt-line-val tabular-nums" id="receiptItinerary">&dollar;5,000</span>
+          </li>
+
+          <!-- Agency Margin Row (Visible ONLY when Staff Auth is active) -->
+          <li class="receipt-line" id="receiptAgencyRow" style="display:none;background:rgba(223,183,108,0.1);padding:0.4rem 0.6rem;border-radius:6px;border:1px dashed var(--ice-gold)">
+            <div class="receipt-line-left">
+              <span class="receipt-line-title" style="color:var(--ice-gold)">4. Agency Package Fee (Staff Only)</span>
+              <span class="receipt-line-sub" id="receiptAgencySub" style="color:var(--ice-gold)">&dollar;1,100 &times; 2 travelers</span>
+            </div>
+            <span class="receipt-line-val tabular-nums" id="receiptAgency" style="color:var(--ice-gold)">&dollar;2,200</span>
+          </li>
+
+          <li class="receipt-line" style="border-top:1px solid rgba(255,255,255,0.12);padding-top:0.75rem;margin-top:0.5rem">
+            <div class="receipt-line-left">
+              <span class="receipt-line-title">Package Net Subtotal</span>
+              <span class="receipt-line-sub">Before statutory tax</span>
+            </div>
+            <span class="receipt-line-val tabular-nums" id="receiptSubtotal" style="font-weight:700">&dollar;54,700</span>
+          </li>
+
+          <li class="receipt-line">
+            <div class="receipt-line-left">
+              <span class="receipt-line-title">Govt. Travel Package GST</span>
+              <span class="receipt-line-sub">Mandatory 5% GST</span>
+            </div>
+            <span class="receipt-line-val tabular-nums" id="receiptGst">&dollar;2,735</span>
+          </li>
+
+        </ul>
+
+        <!-- Grand Total & Per Person Display -->
+        <div class="receipt-total-row">
+          <div>
+            <span class="receipt-total-label">Grand Total (INR)</span>
+            <span style="display:block;font-size:0.75rem;color:var(--text-slate)">All taxes, hotel, flights &amp; transfers</span>
+          </div>
+          <div style="text-align:right">
+            <div class="receipt-total-val tabular-nums" id="receiptGrandTotal">&dollar;57,435</div>
+            <div class="receipt-per-person tabular-nums" id="receiptPerPerson">&dollar;28,718 / person</div>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:1.6rem">
+          <button type="button" class="btn-gold-glow" id="btnBookFormal" style="width:100%;text-align:center;justify-content:center">
+            Book / Request Formal Quotation
+          </button>
+          
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
+            <button type="button" class="btn-glass" id="btnDownloadSummary" style="font-size:0.82rem;padding:0.45rem">
+              Download PDF
+            </button>
+            <button type="button" class="btn-glass" id="btnCopyBreakdown" style="font-size:0.82rem;padding:0.45rem">
+              Copy Summary
+            </button>
+          </div>
+        </div>
+
+        <!-- Security & Guarantee Badges -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.1);font-size:0.75rem;color:var(--text-slate)">
+          <span>&check; 100% Price Lock Guarantee</span>
+          <span>&check; Direct WhatsApp Support</span>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ==========================================================================
+     SECURE STAFF AUTHENTICATION MODAL (PROTECTED PORTAL)
+     ========================================================================== -->
+<div class="modal-backdrop-lux" id="staffAuthModal" role="dialog" aria-modal="true" aria-labelledby="staffModalTitle">
+  <div class="modal-lux-card" style="max-width:440px;background:#091322;border:1px solid rgba(255,255,255,0.2);color:#FFFFFF">
+    
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem">
+      <div style="display:flex;align-items:center;gap:0.55rem">
+        <div style="width:34px;height:34px;border-radius:var(--radius-full);background:rgba(223,183,108,0.2);border:1px solid var(--ice-gold);display:flex;align-items:center;justify-content:center;color:var(--ice-gold)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <div>
+          <h3 id="staffModalTitle" style="font-size:1.25rem;margin:0;color:#FFFFFF">Staff Portal Access</h3>
+          <span style="font-size:0.75rem;color:var(--text-slate)">White Swan Internal Operations</span>
+        </div>
+      </div>
+      <button type="button" id="staffModalClose" aria-label="Close modal" style="background:none;border:none;font-size:1.6rem;line-height:1;cursor:pointer;color:var(--text-slate)">&times;</button>
+    </div>
+
+    <p style="font-size:0.86rem;color:var(--text-frost);line-height:1.55;margin-bottom:1.2rem">
+      Agency profit margins and internal rate markups are confidential. Please enter your authorized staff passkey to reveal margins.
+    </p>
+
+    <form id="staffAuthForm">
+      <div class="input-lux-grp" style="margin-bottom:1rem">
+        <label for="staffPasskey" style="color:var(--text-frost)">Staff Passkey / Password</label>
+        <div style="position:relative">
+          <input type="password" id="staffPasskey" class="input-lux-field" placeholder="Enter staff passkey..." autocomplete="current-password" required style="padding-right:40px">
+          <button type="button" id="togglePassVisibility" aria-label="Toggle password visibility" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-slate)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </div>
+        <div id="staffAuthErr" style="display:none;color:#F87171;font-size:0.78rem;margin-top:0.4rem;font-weight:600">
+          Invalid passkey. Please check with White Swan management.
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0.8rem;justify-content:flex-end">
+        <button type="button" class="btn-glass" onclick="document.getElementById('staffAuthModal').classList.remove('active')">
+          Cancel
+        </button>
+        <button type="submit" class="btn-gold-glow">
+          Authenticate &amp; Unlock
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<!-- ==========================================================================
+     BOOKING / FORMAL QUOTE REQUEST MODAL
+     ========================================================================== -->
+<div class="modal-backdrop-lux" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-lux-card" style="background:#091322;border:1px solid rgba(255,255,255,0.2);color:#FFFFFF">
+    
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem">
+      <div>
+        <span class="coord-tag" style="margin-bottom:0.35rem">FORMAL DISPATCH</span>
+        <h3 id="modalTitle" style="font-size:1.6rem;margin:0;color:#FFFFFF">Request Formal Booking Quotation</h3>
+      </div>
+      <button type="button" id="modalClose" aria-label="Close modal" style="background:none;border:none;font-size:1.8rem;line-height:1;cursor:pointer;color:var(--text-slate)">&times;</button>
+    </div>
+
+    <p style="font-size:0.9rem;color:var(--text-frost);line-height:1.6;margin-bottom:1.6rem">
+      A dedicated White Swan Holidays luxury travel coordinator will review your custom package, secure provisional flight holds, and dispatch a stamped PDF itinerary.
+    </p>
+
+    <form id="modalQuoteForm">
+      <div class="calc-grid-2">
+        <div class="input-lux-grp">
+          <label for="leadName">Full Name *</label>
+          <input type="text" id="leadName" class="input-lux-field" placeholder="e.g. Krish Trivedi" required>
+        </div>
+        <div class="input-lux-grp">
+          <label for="leadPhone">Phone / WhatsApp *</label>
+          <input type="tel" id="leadPhone" class="input-lux-field" placeholder="e.g. +91 99258 11770" required>
+        </div>
+      </div>
+
+      <div class="calc-grid-2">
+        <div class="input-lux-grp">
+          <label for="leadEmail">Email Address</label>
+          <input type="email" id="leadEmail" class="input-lux-field" placeholder="e.g. client@example.com">
+        </div>
+        <div class="input-lux-grp">
+          <label for="leadCity">Departure City</label>
+          <input type="text" id="leadCity" class="input-lux-field" placeholder="e.g. Ahmedabad, Delhi, Mumbai">
+        </div>
+      </div>
+
+      <div class="input-lux-grp" style="margin-bottom:1.6rem">
+        <label for="leadNotes">Special Requests (Optional)</label>
+        <textarea id="leadNotes" class="input-lux-field" rows="2" placeholder="Honeymoon setup, dietary preferences, extra room, wheelchair assistance..."></textarea>
+      </div>
+
+      <div style="display:flex;gap:1rem;justify-content:flex-end">
+        <button type="button" class="btn-glass" onclick="document.getElementById('quoteModal').classList.remove('active')">
+          Cancel
+        </button>
+        <button type="submit" class="btn-gold-glow">
+          Dispatch WhatsApp &amp; Confirm
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-lux" id="luxToast" role="status" aria-live="polite"></div>
+
+<!-- Obsidian Nordic Footer with Route Matrix -->
+<footer style="background:#03070E;color:var(--text-slate);border-top:1px solid rgba(255,255,255,0.12);padding:75px 0 35px">
+  <div class="wrap">
+    
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:3rem;margin-bottom:3.5rem">
+      <div>
+        <div style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:var(--radius-sm);padding:0.6rem 1rem;display:inline-block;margin-bottom:1.2rem;border:var(--border-hairline-subtle)">
+          <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+        </div>
+        <p style="font-size:0.9rem;line-height:1.65;max-width:360px;color:var(--text-frost)">
+          White Swan Holidays Pvt Ltd &mdash; Tailor-made luxury travel, glacial expeditions, private flights, and bespoke corporate travel from Ahmedabad and Gurugram since 2017.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Dedicated Routes</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="destinations.html" style="color:var(--text-slate)">Destinations</a></li>
+          <li><a href="flights.html" style="color:var(--text-slate)">Flights &amp; Routes</a></li>
+          <li><a href="itineraries.html" style="color:var(--text-slate)">Itineraries</a></li>
+          <li><a href="quote.html" style="color:var(--ice-cyan);font-weight:600">Quote Estimator</a></li>
+          <li><a href="journal.html" style="color:var(--text-slate)">Field Journal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Special Services</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="visa-air-ticket.html" style="color:var(--text-slate)">Visa &amp; Flight Desk</a></li>
+          <li><a href="mice.html" style="color:var(--text-slate)">Corporate MICE</a></li>
+          <li><a href="medical-tourism.html" style="color:var(--text-slate)">Medical Facilitation</a></li>
+          <li><a href="corporate-gifting.html" style="color:var(--text-slate)">Corporate Gifting</a></li>
+          <li><a href="gallery.html" style="color:var(--text-slate)">Photo Gallery</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Concierge Desk</h4>
+        <p style="font-size:0.88rem;line-height:1.6;color:var(--text-frost)">
+          Ahmedabad: 501, Sun Square, Off CG Road<br>
+          Gurugram: South City II, Sector 49<br>
+          Direct: <a href="tel:+919099041625" style="color:var(--ice-cyan)">+91 90990 41625</a>
+        </p>
+        <div style="margin-top:1.1rem">
+          <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="font-size:0.82rem;padding:0.4rem 1.2rem;min-height:38px">
+            WhatsApp Concierge
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
+      <span>&copy; <span id="yr">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
+      <span>Coordinates: 23&deg;01'N 72&deg;33'E (AMD HQ) &middot; 28&deg;24'N 77&deg;03'E (GGN)</span>
+      <button type="button" id="footerStaffLogin" style="background:none;border:none;color:#64748B;cursor:pointer;display:inline-flex;align-items:center;gap:0.35rem;font-size:0.82rem">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Staff Portal</span>
+      </button>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/travel-engine.js"></script>
+<script src="js/quote-calculator.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Check if URL passed query params (e.g. ?dest=...&fare=...&guests=...)
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const dest = params.get('dest');
+  const fare = params.get('fare');
+  const guests = params.get('guests');
+
+  if (dest) {
+    const destEl = document.getElementById('calcDestination');
+    if (destEl) destEl.value = dest.replace(/-/g, ' ').toUpperCase();
+  }
+  if (fare) {
+    const fareEl = document.getElementById('calcFlightFare');
+    if (fareEl) {
+      fareEl.value = fare;
+      fareEl.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }
+  if (guests) {
+    const guestsEl = document.getElementById('calcGuests');
+    if (guestsEl) {
+      guestsEl.value = guests;
+      guestsEl.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }
+});
+</script>
+</body>
+</html>

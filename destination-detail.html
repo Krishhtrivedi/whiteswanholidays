@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">Expedition Story &amp; Details | White Swan Holidays</title>
+<meta name="description" id="pageDesc" content="Full expedition story, day-by-day curated journey, weather telemetry, packing notes, and private flight booking.">
+<link rel="canonical" href="https://whiteswanholidays.com/destination-detail.html">
+<meta property="og:type" content="website">
+<meta property="og:title" id="ogTitle" content="Expedition Story | White Swan Holidays">
+<meta property="og:description" id="ogDesc" content="Cinematic journeys, arctic glaciers, alpine fjords, and bespoke flight itineraries.">
+<meta property="og:image" id="ogImage" content="https://whiteswanholidays.com/img/banner-1.jpg">
+<meta name="theme-color" content="#050B14">
+<link rel="icon" href="img/white_swan_logo.png">
+
+<!-- Google Fonts: Cormorant Garamond & Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/iceland-aesthetic.css">
+<style>
+/* Page-Specific Styles for Destination Detail */
+.detail-hero {
+  position: relative;
+  min-height: 82vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 140px 0 70px;
+  overflow: hidden;
+  background: #050B14;
+}
+
+.telemetry-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--ice-glass-dark);
+  border: var(--border-hairline);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@media (max-width: 900px) {
+  .telemetry-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .telemetry-strip { grid-template-columns: 1fr; }
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .detail-layout { grid-template-columns: 1fr; }
+}
+
+.timeline-step {
+  position: relative;
+  padding-left: 2.8rem;
+  padding-bottom: 2.2rem;
+  border-left: 1px solid rgba(255,255,255,0.18);
+}
+
+.timeline-step:last-child {
+  border-left: 1px solid transparent;
+  padding-bottom: 0;
+}
+
+.timeline-step-badge {
+  position: absolute;
+  left: -15px;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  background: #050B14;
+  border: 2px solid var(--ice-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gallery-thumb {
+  height: 160px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.3s ease;
+}
+
+.gallery-thumb:hover {
+  transform: scale(1.03);
+  border-color: var(--ice-cyan);
+  box-shadow: 0 0 15px rgba(56,189,248,0.3);
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.92rem;
+  color: var(--text-frost);
+}
+
+.checklist-item:last-child {
+  border-bottom: none;
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Frosted Island Navigation Bar -->
+<header class="iceland-nav-bar" id="icelandNav">
+  <div class="wrap">
+    <nav class="nav-island">
+      
+      <a class="nav-brand-mark" href="index.html" aria-label="White Swan Holidays">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+      </a>
+
+      <ul class="nav-routes">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html" class="active">Destinations</a></li>
+        <li><a href="flights.html">Flights &amp; Routes</a></li>
+        <li><a href="itineraries.html">Itineraries</a></li>
+        <li><a href="quote.html">Quote Estimator</a></li>
+        <li><a href="journal.html">Journal</a></li>
+      </ul>
+
+      <!-- Circular Glass Flight Trigger in Navigation -->
+      <div style="display:flex;align-items:center;gap:0.9rem">
+        <a class="btn-circle-flight" href="flights.html" aria-label="Book Flights" title="Search Flights & Routes" style="width:48px;height:48px">
+          <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </a>
+        
+        <button type="button" id="mobileNavToggle" class="btn-circle-swap" aria-label="Toggle menu" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+
+<!-- Cinematic Hero Viewport -->
+<section class="detail-hero" id="detailHero">
+  <img class="hero-media-backdrop" id="heroBackdrop" src="img/banner-1.jpg" alt="Expedition Panorama" width="2000" height="1200">
+  <div class="atmospheric-fog"></div>
+
+  <div class="wrap" style="position:relative;z-index:4;width:100%">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.1rem;flex-wrap:wrap">
+      <span class="coord-tag" id="coordsTag">64&deg;08'N 21&deg;56'W</span>
+      <span style="background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:var(--ice-cyan);border-radius:var(--radius-full);padding:0.35rem 0.95rem;font-size:0.78rem;font-weight:600;border:var(--border-hairline-subtle)" id="regionTag">
+        Nordic Arctic
+      </span>
+      <span class="tabular-nums" style="background:rgba(255,255,255,0.08);color:var(--text-frost);border-radius:var(--radius-full);padding:0.35rem 0.95rem;font-size:0.78rem;font-weight:500" id="durationTag">
+        7 Days / 6 Nights
+      </span>
+    </div>
+
+    <h1 style="max-width:920px;margin-bottom:0.8rem" id="destTitle">
+      Iceland Glaciers &amp; Northern Lights
+    </h1>
+
+    <p style="font-size:1.25rem;color:var(--text-snow);max-width:760px;line-height:1.55;font-family:var(--font-serif);font-style:italic" id="destTagline">
+      Black basalt volcanic beaches, blue ice caverns, and celestial aurora ribbons.
+    </p>
+
+    <!-- Telemetry Strip -->
+    <div class="telemetry-strip reveal-init">
+      <div>
+        <div style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);letter-spacing:0.1em">Coordinates &amp; Elev.</div>
+        <div class="tabular-nums" style="font-size:1.05rem;font-weight:600;color:#FFFFFF" id="telemetryElevation">840m ASL</div>
+      </div>
+      <div>
+        <div style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);letter-spacing:0.1em">Climate &amp; Temp</div>
+        <div class="tabular-nums" style="font-size:1.05rem;font-weight:600;color:var(--ice-cyan)" id="telemetryClimate">Arctic Marine (-3&deg;C to 4&deg;C)</div>
+      </div>
+      <div>
+        <div style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);letter-spacing:0.1em">Optimal Season</div>
+        <div style="font-size:1.05rem;font-weight:600;color:var(--ice-gold)" id="telemetrySeason">Oct &ndash; Mar (Peak Aurora)</div>
+      </div>
+      <div>
+        <div style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);letter-spacing:0.1em">Flight Access</div>
+        <div class="tabular-nums" style="font-size:1.05rem;font-weight:600;color:#FFFFFF" id="telemetryFlight">KEF (Reykjavik)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Main Expedition Body -->
+<section style="padding:80px 0 110px;background:#050B14">
+  <div class="wrap">
+    
+    <div class="detail-layout">
+      
+      <!-- Left Column: Story, Highlights, Timeline, Packing -->
+      <div>
+        
+        <!-- Overview Essay -->
+        <div class="reveal-init" style="margin-bottom:3.5rem">
+          <div class="coord-tag" style="margin-bottom:1rem">EXPEDITION ESSAY</div>
+          <h2 style="font-size:2.2rem;margin-bottom:1.2rem">The Raw Majesty of the Land</h2>
+          <p style="font-size:1.05rem;line-height:1.75;color:var(--text-frost)" id="destOverview">
+            Experience the raw geological power of the North Atlantic. From the geothermal mists of the Blue Lagoon to the calving icebergs of Jökulsárlón glacier lagoon, this expedition puts you in private luxury 4x4 super-jeeps with expert glaciologists and aurora trackers.
+          </p>
+
+          <!-- Photo Gallery Strip -->
+          <div style="margin-top:2.2rem">
+            <h4 style="color:#FFFFFF;margin-bottom:0.8rem">Expedition Visuals</h4>
+            <div class="gallery-grid" id="galleryGrid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Curated Highlights -->
+        <div class="reveal-init" style="margin-bottom:3.5rem">
+          <div class="coord-tag" style="margin-bottom:1rem">BESPOKE INCLUSIONS</div>
+          <h2 style="font-size:2.2rem;margin-bottom:1.4rem">Curated Expedition Highlights</h2>
+          
+          <div id="highlightsContainer" style="display:flex;flex-direction:column;gap:1rem">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Day-by-Day Expedition Timeline -->
+        <div class="reveal-init" style="margin-bottom:3.5rem">
+          <div class="coord-tag" style="margin-bottom:1rem">CHRONOLOGY</div>
+          <h2 style="font-size:2.2rem;margin-bottom:1.6rem">Day-by-Day Journey Itinerary</h2>
+          
+          <div id="timelineContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Packing Checklist -->
+        <div class="reveal-init" style="background:var(--ice-glass-dark);border:var(--border-hairline);padding:2.2rem;border-radius:var(--radius-lg);backdrop-filter:blur(18px)">
+          <div class="coord-tag" style="margin-bottom:0.8rem">EXPEDITION READINESS</div>
+          <h3 style="color:#FFFFFF;margin-bottom:1rem">Recommended Gear &amp; Packing List</h3>
+          
+          <div id="packingContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Booking, Route Flight & Instant Quote Card (Sticky) -->
+      <aside style="position:sticky;top:110px">
+        
+        <div class="glass-card reveal-init" style="padding:2.2rem;border-radius:var(--radius-xl)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem">
+            <div>
+              <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-slate)">Starting Quote</span>
+              <div class="tabular-nums" style="font-size:2.2rem;font-weight:700;color:var(--ice-cyan);line-height:1.1" id="cardPriceDisplay">
+                &dollar;1,25,000
+              </div>
+              <span style="font-size:0.78rem;color:var(--text-slate)">per person &middot; includes 5% GST &amp; private stays</span>
+            </div>
+
+            <!-- Circular Glass Flight Trigger -->
+            <a class="btn-circle-flight" id="cardFlightBtn" href="flights.html" aria-label="Book Flights" title="Check Flights for Route">
+              <svg class="flight-plane-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+              </svg>
+            </a>
+          </div>
+
+          <div style="border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);padding:1.2rem 0;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.88rem">
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-slate)">Duration:</span>
+              <span class="tabular-nums" style="color:#FFFFFF;font-weight:600" id="cardDuration">7 Days / 6 Nights</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-slate)">Route Airport:</span>
+              <span class="tabular-nums" style="color:var(--ice-gold);font-weight:600" id="cardAirport">KEF (Reykjavik)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-slate)">Transit Time:</span>
+              <span class="tabular-nums" style="color:#FFFFFF;font-weight:500" id="cardFlightTime">9h 40m via Helsinki/London</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-slate)">Pacing:</span>
+              <span style="color:var(--ice-cyan);font-weight:500">Private Super-Jeep &amp; Guide</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div style="display:flex;flex-direction:column;gap:0.85rem">
+            <a class="btn-gold-glow" id="customizeQuoteBtn" href="quote.html" style="width:100%;text-align:center;justify-content:center">
+              Customize in Quote Estimator
+            </a>
+            
+            <a class="btn-glass" id="bookFlightRouteBtn" href="flights.html" style="width:100%;text-align:center;justify-content:center">
+              Search Route Flights
+            </a>
+
+            <a class="btn-glass" id="whatsappDirectBtn" href="https://wa.me/919099041625" target="_blank" rel="noopener" style="width:100%;text-align:center;justify-content:center;color:var(--ice-aurora)">
+              WhatsApp Private Concierge
+            </a>
+          </div>
+
+          <p style="font-size:0.75rem;color:var(--text-slate);text-align:center;margin-top:1.2rem;line-height:1.5">
+            Zero booking fees. Dedicated private coordinator assigned within 15 minutes of inquiry.
+          </p>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- Obsidian Nordic Footer with Route Matrix -->
+<footer style="background:#03070E;color:var(--text-slate);border-top:1px solid rgba(255,255,255,0.12);padding:75px 0 35px">
+  <div class="wrap">
+    
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:3rem;margin-bottom:3.5rem">
+      <div>
+        <div style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:var(--radius-sm);padding:0.6rem 1rem;display:inline-block;margin-bottom:1.2rem;border:var(--border-hairline-subtle)">
+          <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+        </div>
+        <p style="font-size:0.9rem;line-height:1.65;max-width:360px;color:var(--text-frost)">
+          White Swan Holidays Pvt Ltd &mdash; Tailor-made luxury travel, glacial expeditions, private flights, and bespoke corporate travel from Ahmedabad and Gurugram since 2017.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Dedicated Routes</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="destinations.html" style="color:var(--ice-cyan);font-weight:600">Destinations</a></li>
+          <li><a href="flights.html" style="color:var(--text-slate)">Flights &amp; Routes</a></li>
+          <li><a href="itineraries.html" style="color:var(--text-slate)">Itineraries</a></li>
+          <li><a href="quote.html" style="color:var(--text-slate)">Quote Estimator</a></li>
+          <li><a href="journal.html" style="color:var(--text-slate)">Field Journal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Special Services</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="visa-air-ticket.html" style="color:var(--text-slate)">Visa &amp; Flight Desk</a></li>
+          <li><a href="mice.html" style="color:var(--text-slate)">Corporate MICE</a></li>
+          <li><a href="medical-tourism.html" style="color:var(--text-slate)">Medical Facilitation</a></li>
+          <li><a href="corporate-gifting.html" style="color:var(--text-slate)">Corporate Gifting</a></li>
+          <li><a href="gallery.html" style="color:var(--text-slate)">Photo Gallery</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Concierge Desk</h4>
+        <p style="font-size:0.88rem;line-height:1.6;color:var(--text-frost)">
+          Ahmedabad: 501, Sun Square, Off CG Road<br>
+          Gurugram: South City II, Sector 49<br>
+          Direct: <a href="tel:+919099041625" style="color:var(--ice-cyan)">+91 90990 41625</a>
+        </p>
+        <div style="margin-top:1.1rem">
+          <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="font-size:0.82rem;padding:0.4rem 1.2rem;min-height:38px">
+            WhatsApp Concierge
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
+      <span>&copy; <span id="yr">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
+      <span>Coordinates: 23&deg;01'N 72&deg;33'E (AMD HQ) &middot; 28&deg;24'N 77&deg;03'E (GGN)</span>
+      <a href="quote.html#staffAuthModal" style="color:#64748B;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Staff Portal</span>
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/travel-engine.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Hydrate Page from URL parameter ?slug=
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug') || 'iceland-glaciers';
+  const data = window.WhiteSwanTravelData.getDestinationBySlug(slug);
+
+  if (!data) return;
+
+  // Metadata
+  document.getElementById('pageTitle').textContent = data.title + ' | White Swan Holidays';
+  document.getElementById('pageDesc').content = data.tagline + ' ' + data.overview.slice(0, 120);
+
+  // Hero section
+  const heroImg = document.getElementById('heroBackdrop');
+  if (heroImg && data.heroImage) heroImg.src = data.heroImage;
+
+  document.getElementById('coordsTag').innerHTML = data.coords;
+  document.getElementById('regionTag').textContent = data.region;
+  document.getElementById('durationTag').textContent = data.duration;
+  document.getElementById('destTitle').textContent = data.title;
+  document.getElementById('destTagline').textContent = data.tagline;
+
+  // Telemetry
+  document.getElementById('telemetryElevation').textContent = data.coords + ' &middot; ' + data.elevation;
+  document.getElementById('telemetryClimate').textContent = data.climate + ' (' + data.temp + ')';
+  document.getElementById('telemetrySeason').textContent = data.bestSeason;
+  document.getElementById('telemetryFlight').textContent = data.airportCode;
+
+  // Overview
+  document.getElementById('destOverview').textContent = data.overview;
+
+  // Gallery
+  const galleryGrid = document.getElementById('galleryGrid');
+  if (galleryGrid && data.gallery) {
+    galleryGrid.innerHTML = data.gallery.map(imgSrc => `
+      <div class="gallery-thumb" onclick="document.getElementById('heroBackdrop').src='${imgSrc}'" title="Click to view in hero">
+        <img src="${imgSrc}" alt="${data.title}">
+      </div>
+    `).join('');
+  }
+
+  // Highlights
+  const highlightsCont = document.getElementById('highlightsContainer');
+  if (highlightsCont && data.highlights) {
+    highlightsCont.innerHTML = data.highlights.map(hl => `
+      <div style="display:flex;align-items:flex-start;gap:0.9rem;background:var(--ice-glass-dark);border:var(--border-hairline-subtle);padding:1rem 1.3rem;border-radius:var(--radius-md)">
+        <span style="color:var(--ice-cyan);font-weight:bold;margin-top:2px">&check;</span>
+        <span style="font-size:0.95rem;color:var(--text-snow);line-height:1.5">${hl}</span>
+      </div>
+    `).join('');
+  }
+
+  // Timeline
+  const timelineCont = document.getElementById('timelineContainer');
+  if (timelineCont && data.itineraryDays) {
+    timelineCont.innerHTML = data.itineraryDays.map(item => `
+      <div class="timeline-step">
+        <div class="timeline-step-badge">${item.day}</div>
+        <h4 style="font-size:1.15rem;color:#FFFFFF;margin-bottom:0.4rem">${item.title}</h4>
+        <p style="font-size:0.92rem;color:var(--text-frost);line-height:1.6;margin:0">${item.desc}</p>
+      </div>
+    `).join('');
+  }
+
+  // Packing
+  const packingCont = document.getElementById('packingContainer');
+  if (packingCont && data.packing) {
+    packingCont.innerHTML = data.packing.map(item => `
+      <div class="checklist-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ice-cyan);flex-shrink:0;margin-top:3px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span>${item}</span>
+      </div>
+    `).join('');
+  }
+
+  // Card Price & Meta
+  const priceDisplay = document.getElementById('cardPriceDisplay');
+  if (priceDisplay) priceDisplay.textContent = window.WhiteSwanTravelData.formatINR(data.startingPrice);
+  document.getElementById('cardDuration').textContent = data.duration;
+  document.getElementById('cardAirport').textContent = data.airportCode;
+  document.getElementById('cardFlightTime').textContent = data.flightTime;
+
+  // Button Links
+  const customizeBtn = document.getElementById('customizeQuoteBtn');
+  if (customizeBtn) customizeBtn.href = `quote.html?dest=${data.slug}&fare=${data.startingPrice}`;
+
+  const flightBtn = document.getElementById('bookFlightRouteBtn');
+  if (flightBtn) flightBtn.href = `flights.html?dest=${data.airportCode.split(' ')[0]}`;
+
+  const cardFlightBtn = document.getElementById('cardFlightBtn');
+  if (cardFlightBtn) cardFlightBtn.href = `flights.html?dest=${data.airportCode.split(' ')[0]}`;
+
+  const waBtn = document.getElementById('whatsappDirectBtn');
+  if (waBtn) {
+    const msg = encodeURIComponent(`Hello White Swan Holidays, I would like to inquire about the ${data.title} expedition.`);
+    waBtn.href = `https://wa.me/919099041625?text=${msg}`;
+  }
+})();
+</script>
+</body>
+</html>

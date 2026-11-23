@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flights &amp; Glacial Air Routes | White Swan Holidays</title>
+<meta name="description" content="Dedicated flight and route booking flow with circular glass swap controls, live fare estimates, cabin class selection, and international route planning.">
+<link rel="canonical" href="https://whiteswanholidays.com/flights.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Flights & Routes | White Swan Holidays">
+<meta property="og:description" content="Explore live flight routes from Ahmedabad, Delhi, and Mumbai to Arctic glaciers, Swiss Alps, and world destinations.">
+<meta property="og:image" content="https://whiteswanholidays.com/img/banner-1.jpg">
+<meta name="theme-color" content="#050B14">
+<link rel="icon" href="img/white_swan_logo.png">
+
+<!-- Google Fonts: Cormorant Garamond & Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/iceland-aesthetic.css">
+<style>
+/* Page-Specific Flight Engine Styles */
+.flights-hero {
+  position: relative;
+  min-height: 56vh;
+  display: flex;
+  align-items: center;
+  padding: 135px 0 50px;
+  overflow: hidden;
+  background: #050B14;
+}
+
+.flight-search-island {
+  background: var(--ice-glass-dark);
+  border: var(--border-hairline);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius-xl);
+  padding: 2.2rem;
+  box-shadow: var(--shadow-ambient);
+  margin-top: -60px;
+  position: relative;
+  z-index: 10;
+}
+
+.flight-form-grid {
+  display: grid;
+  grid-template-columns: 1.5fr auto 1.5fr 1.2fr 1.2fr 1.5fr auto;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+@media (max-width: 1100px) {
+  .flight-form-grid {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .flight-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .flight-search-island {
+    padding: 1.5rem;
+    margin-top: -30px;
+  }
+}
+
+.flight-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.flight-field-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-slate);
+  font-weight: 600;
+}
+
+.flight-input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-sm);
+  color: #FFFFFF;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.flight-input:focus {
+  border-color: var(--ice-cyan);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+.fare-card {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 1.2fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.6rem 2rem;
+  border-radius: var(--radius-lg);
+  background: var(--ice-glass-dark);
+  border: var(--border-hairline);
+  backdrop-filter: blur(16px);
+  margin-bottom: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  .fare-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.fare-card:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glass);
+}
+
+.route-preset-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-full);
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-frost);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.route-preset-pill:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  border-color: var(--ice-cyan);
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Frosted Island Navigation Bar -->
+<header class="iceland-nav-bar" id="icelandNav">
+  <div class="wrap">
+    <nav class="nav-island">
+      
+      <a class="nav-brand-mark" href="index.html" aria-label="White Swan Holidays">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+      </a>
+
+      <ul class="nav-routes">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="flights.html" class="active">Flights &amp; Routes</a></li>
+        <li><a href="itineraries.html">Itineraries</a></li>
+        <li><a href="quote.html">Quote Estimator</a></li>
+        <li><a href="journal.html">Journal</a></li>
+      </ul>
+
+      <!-- Circular Glass Flight Trigger in Navigation -->
+      <div style="display:flex;align-items:center;gap:0.9rem">
+        <a class="btn-circle-flight" href="flights.html" aria-label="Book Flights" title="Search Flights & Routes" style="width:48px;height:48px">
+          <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </a>
+        
+        <button type="button" id="mobileNavToggle" class="btn-circle-swap" aria-label="Toggle menu" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+
+<!-- Hero Banner -->
+<section class="flights-hero">
+  <img class="hero-media-backdrop" src="img/banner-1.jpg" alt="Aerial Glacial Flight Panorama" width="2000" height="1000">
+  <div class="atmospheric-fog"></div>
+
+  <div class="wrap" style="position:relative;z-index:4">
+    <div class="coord-tag" style="margin-bottom:1.1rem">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/></svg>
+      AERODROME NETWORK &middot; DIRECT &amp; CONNECTING CHARTERS
+    </div>
+    
+    <h1 style="max-width:860px;margin-bottom:0.8rem">
+      Flight Routes &amp; <br>
+      <span style="color:var(--ice-cyan);font-style:italic">Bespoke Aviation Planning</span>
+    </h1>
+    
+    <p style="font-size:1.15rem;color:var(--text-frost);max-width:680px;line-height:1.6">
+      Direct flight desk services from Ahmedabad and Delhi to global arctic gateways, alpine hubs, and tropical archipelago airstrips.
+    </p>
+  </div>
+</section>
+
+<!-- Search Console Island Section -->
+<section style="background:#050B14;padding-bottom:90px">
+  <div class="wrap">
+    
+    <!-- Floating Glass Search Console -->
+    <div class="flight-search-island reveal-init">
+      
+      <!-- Quick Presets -->
+      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1.6rem;flex-wrap:wrap">
+        <span style="font-size:0.75rem;text-transform:uppercase;color:var(--text-slate);font-weight:600;letter-spacing:0.1em">Quick Air Routes:</span>
+        <button type="button" class="route-preset-pill" onclick="setAirRoute('AMD', 'SXR', 6800)">AMD &rarr; SXR (Kashmir)</button>
+        <button type="button" class="route-preset-pill" onclick="setAirRoute('DEL', 'IXL', 7200)">DEL &rarr; IXL (Ladakh)</button>
+        <button type="button" class="route-preset-pill" onclick="setAirRoute('BOM', 'DXB', 14500)">BOM &rarr; DXB (Dubai)</button>
+        <button type="button" class="route-preset-pill" onclick="setAirRoute('AMD', 'ZRH', 42000)">AMD &rarr; ZRH (Zurich)</button>
+        <button type="button" class="route-preset-pill" onclick="setAirRoute('DEL', 'KEF', 54000)">DEL &rarr; KEF (Reykjavik)</button>
+        <button type="button" class="route-preset-pill" onclick="setAirRoute('BOM', 'DPS', 24000)">BOM &rarr; DPS (Bali)</button>
+      </div>
+
+      <form id="flightSearchForm" onsubmit="event.preventDefault(); searchFlights();">
+        <div class="flight-form-grid">
+          
+          <!-- Origin -->
+          <div class="flight-field-group">
+            <label class="flight-field-label" for="flightOrigin">Origin Airport</label>
+            <select id="flightOrigin" class="flight-input" style="background:#091322">
+              <option value="AMD" selected>Ahmedabad (AMD)</option>
+              <option value="DEL">Delhi Indira Gandhi (DEL)</option>
+              <option value="BOM">Mumbai Chhatrapati (BOM)</option>
+              <option value="BLR">Bangalore Kempegowda (BLR)</option>
+            </select>
+          </div>
+
+          <!-- Circular Route Swap Button -->
+          <div style="display:flex;align-items:flex-end;padding-bottom:4px">
+            <button type="button" id="routeSwapBtn" class="btn-circle-swap" title="Swap Route Direction" aria-label="Swap Route Direction">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 3 4 4-4 4"></path><path d="M20 7H4"></path><path d="m8 21-4-4 4-4"></path><path d="M4 17h16"></path></svg>
+            </button>
+          </div>
+
+          <!-- Destination -->
+          <div class="flight-field-group">
+            <label class="flight-field-label" for="flightDest">Destination</label>
+            <select id="flightDest" class="flight-input" style="background:#091322">
+              <option value="KEF">Reykjavik Keflavik (KEF)</option>
+              <option value="ZRH">Zurich Kloten (ZRH)</option>
+              <option value="SXR" selected>Srinagar Sheikh ul-Alam (SXR)</option>
+              <option value="IXL">Leh Kushok Bakula (IXL)</option>
+              <option value="DPS">Bali Denpasar (DPS)</option>
+              <option value="DXB">Dubai International (DXB)</option>
+            </select>
+          </div>
+
+          <!-- Departure Date -->
+          <div class="flight-field-group">
+            <label class="flight-field-label" for="flightDate">Departure</label>
+            <input type="date" id="flightDate" class="flight-input" value="2026-12-10">
+          </div>
+
+          <!-- Cabin Tier -->
+          <div class="flight-field-group">
+            <label class="flight-field-label" for="flightCabin">Cabin Class</label>
+            <select id="flightCabin" class="flight-input" style="background:#091322">
+              <option value="economy">Nordic Economy</option>
+              <option value="comfort" selected>Premium Glass</option>
+              <option value="first">Executive Sky Suite</option>
+            </select>
+          </div>
+
+          <!-- Passenger Count -->
+          <div class="flight-field-group">
+            <label class="flight-field-label" for="flightGuests">Travelers</label>
+            <select id="flightGuests" class="flight-input" style="background:#091322">
+              <option value="1">1 Passenger</option>
+              <option value="2" selected>2 Passengers</option>
+              <option value="3">3 Passengers</option>
+              <option value="4">4 Passengers</option>
+              <option value="6">6+ (Group / MICE)</option>
+            </select>
+          </div>
+
+          <!-- Submit Trigger: Circular Glass Flight Button -->
+          <div style="display:flex;align-items:flex-end;padding-bottom:4px">
+            <button type="submit" class="btn-circle-flight" aria-label="Search Flights" title="Compute Live Fares" style="width:52px;height:52px">
+              <svg class="flight-plane-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+
+    <!-- Live Available Routes Display -->
+    <div style="margin-top:3.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.5rem">
+        <div>
+          <span class="coord-tag" style="margin-bottom:0.4rem">ACTIVE AIRWAY SCHEDULE</span>
+          <h2 style="font-size:2rem;margin:0" id="routeScheduleHeading">Live Route Estimates: AMD &rarr; SXR</h2>
+        </div>
+        <span style="font-size:0.85rem;color:var(--text-slate)">Real-time GDS airline connectivity</span>
+      </div>
+
+      <div id="fareResultsList">
+        <!-- Live Result Cards populated by JS -->
+      </div>
+    </div>
+
+    <!-- Air Desk Inclusions & Visa Support Banner -->
+    <div class="reveal-init" style="margin-top:3.5rem;padding:2.2rem;border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(13,27,47,0.7) 0%, rgba(5,11,20,0.9) 100%);border:var(--border-hairline);display:grid;grid-template-columns:2fr 1fr;gap:2rem;align-items:center">
+      <div>
+        <div class="coord-tag" style="margin-bottom:0.6rem">IATA ACCREDITED AIR DESK</div>
+        <h3 style="color:#FFFFFF;margin-bottom:0.6rem">Need Multi-City Itineraries or Corporate Group Blocks?</h3>
+        <p style="font-size:0.92rem;color:var(--text-frost);line-height:1.6;margin:0">
+          Our specialized Air Desk handles complex transit routes, polar overflights, private helicopter charters in Kashmir &amp; Ladakh, and fast-track international visa processing.
+        </p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-start">
+        <a class="btn-gold-glow" href="visa-air-ticket.html" style="width:100%;text-align:center;justify-content:center">
+          Open Visa &amp; Air Desk
+        </a>
+        <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="width:100%;text-align:center;justify-content:center">
+          Direct WhatsApp Ticketing
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- Obsidian Nordic Footer with Route Matrix -->
+<footer style="background:#03070E;color:var(--text-slate);border-top:1px solid rgba(255,255,255,0.12);padding:75px 0 35px">
+  <div class="wrap">
+    
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:3rem;margin-bottom:3.5rem">
+      <div>
+        <div style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:var(--radius-sm);padding:0.6rem 1rem;display:inline-block;margin-bottom:1.2rem;border:var(--border-hairline-subtle)">
+          <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+        </div>
+        <p style="font-size:0.9rem;line-height:1.65;max-width:360px;color:var(--text-frost)">
+          White Swan Holidays Pvt Ltd &mdash; Tailor-made luxury travel, glacial expeditions, private flights, and bespoke corporate travel from Ahmedabad and Gurugram since 2017.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Dedicated Routes</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="destinations.html" style="color:var(--text-slate)">Destinations</a></li>
+          <li><a href="flights.html" style="color:var(--ice-cyan);font-weight:600">Flights &amp; Routes</a></li>
+          <li><a href="itineraries.html" style="color:var(--text-slate)">Itineraries</a></li>
+          <li><a href="quote.html" style="color:var(--text-slate)">Quote Estimator</a></li>
+          <li><a href="journal.html" style="color:var(--text-slate)">Field Journal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Special Services</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="visa-air-ticket.html" style="color:var(--text-slate)">Visa &amp; Flight Desk</a></li>
+          <li><a href="mice.html" style="color:var(--text-slate)">Corporate MICE</a></li>
+          <li><a href="medical-tourism.html" style="color:var(--text-slate)">Medical Facilitation</a></li>
+          <li><a href="corporate-gifting.html" style="color:var(--text-slate)">Corporate Gifting</a></li>
+          <li><a href="gallery.html" style="color:var(--text-slate)">Photo Gallery</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Concierge Desk</h4>
+        <p style="font-size:0.88rem;line-height:1.6;color:var(--text-frost)">
+          Ahmedabad: 501, Sun Square, Off CG Road<br>
+          Gurugram: South City II, Sector 49<br>
+          Direct: <a href="tel:+919099041625" style="color:var(--ice-cyan)">+91 90990 41625</a>
+        </p>
+        <div style="margin-top:1.1rem">
+          <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="font-size:0.82rem;padding:0.4rem 1.2rem;min-height:38px">
+            WhatsApp Concierge
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
+      <span>&copy; <span id="yr">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
+      <span>Coordinates: 23&deg;01'N 72&deg;33'E (AMD HQ) &middot; 28&deg;24'N 77&deg;03'E (GGN)</span>
+      <a href="quote.html#staffAuthModal" style="color:#64748B;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Staff Portal</span>
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/travel-engine.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Base Fares Matrix (approximate starting one-way/return)
+const FARE_MAP = {
+  'SXR': { name: 'Srinagar (Kashmir)', duration: '2h 15m', base: 6800, stop: 'Non-stop Direct', airline: 'IndiGo / Air India' },
+  'IXL': { name: 'Leh Ladakh', duration: '1h 35m', base: 7400, stop: 'Non-stop Direct', airline: 'SpiceJet / Air India' },
+  'DXB': { name: 'Dubai International', duration: '3h 30m', base: 14500, stop: 'Non-stop Direct', airline: 'Emirates / FlyDubai' },
+  'ZRH': { name: 'Zurich (Swiss Alps)', duration: '9h 15m', base: 42000, stop: '1 Stop via Gulf', airline: 'SWISS / Qatar Airways' },
+  'KEF': { name: 'Reykjavik (Iceland)', duration: '11h 20m', base: 54000, stop: '1 Stop via London/Helsinki', airline: 'Finnair / British Airways' },
+  'DPS': { name: 'Bali Denpasar', duration: '7h 40m', base: 24000, stop: '1 Stop via Singapore', airline: 'Singapore Airlines / Batik' }
+};
+
+function setAirRoute(origin, dest, fare) {
+  document.getElementById('flightOrigin').value = origin;
+  document.getElementById('flightDest').value = dest;
+  searchFlights();
+}
+
+function searchFlights() {
+  const origin = document.getElementById('flightOrigin').value;
+  const dest = document.getElementById('flightDest').value;
+  const cabin = document.getElementById('flightCabin').value;
+  const guests = parseInt(document.getElementById('flightGuests').value, 10) || 1;
+
+  const routeInfo = FARE_MAP[dest] || { name: dest, duration: '4h 00m', base: 12000, stop: 'Direct / 1 Stop', airline: 'White Swan Aviation Partner' };
+  
+  // Cabin Multipliers
+  let multiplier = 1.0;
+  let cabinLabel = 'Nordic Economy';
+  let baggage = '15kg Check-in + 7kg Cabin';
+  
+  if (cabin === 'comfort') {
+    multiplier = 1.45;
+    cabinLabel = 'Premium Glass Class';
+    baggage = '25kg Check-in + 10kg Cabin + Priority Boarding';
+  } else if (cabin === 'first') {
+    multiplier = 2.6;
+    cabinLabel = 'Executive Sky Suite';
+    baggage = '40kg Check-in + Lounge Access + Lie-Flat Suite';
+  }
+
+  const singleFare = Math.round(routeInfo.base * multiplier);
+  const totalFare = singleFare * guests;
+
+  document.getElementById('routeScheduleHeading').textContent = `Live Route Estimates: ${origin} \u2192 ${dest} (${routeInfo.name})`;
+
+  const list = document.getElementById('fareResultsList');
+  list.innerHTML = `
+    <!-- Primary Airline Option -->
+    <div class="fare-card reveal-init">
+      <div>
+        <span style="font-size:0.75rem;text-transform:uppercase;color:var(--ice-cyan);font-weight:600;display:block;margin-bottom:0.2rem">RECOMMENDED AIRWAY</span>
+        <h4 style="margin:0;color:#FFFFFF;font-size:1.25rem">${routeInfo.airline}</h4>
+        <span style="font-size:0.78rem;color:var(--text-slate)">Aircraft: Boeing 787 / Airbus A321 Neo</span>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:0.4rem">
+          <div>
+            <div class="tabular-nums" style="font-size:1.35rem;font-weight:700;color:#FFFFFF">06:40</div>
+            <div style="font-size:0.75rem;color:var(--text-slate)">${origin}</div>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+            <span class="tabular-nums" style="font-size:0.75rem;color:var(--text-frost)">${routeInfo.duration}</span>
+            <div style="width:100%;height:1px;background:rgba(255,255,255,0.25);position:relative;margin:4px 0">
+              <div style="position:absolute;left:50%;top:-5px;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:var(--ice-cyan)"></div>
+            </div>
+            <span style="font-size:0.72rem;color:var(--ice-aurora)">${routeInfo.stop}</span>
+          </div>
+
+          <div>
+            <div class="tabular-nums" style="font-size:1.35rem;font-weight:700;color:#FFFFFF">14:15</div>
+            <div style="font-size:0.75rem;color:var(--text-slate)">${dest}</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:1rem;font-size:0.75rem;color:var(--text-slate)">
+          <span>&check; ${cabinLabel}</span>
+          <span>&check; ${baggage}</span>
+        </div>
+      </div>
+
+      <div style="text-align:right">
+        <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Estimated Fare</span>
+        <div class="tabular-nums" style="font-size:1.6rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">
+          ${window.WhiteSwanTravelData.formatINR(singleFare)}
+        </div>
+        <span class="tabular-nums" style="font-size:0.75rem;color:var(--text-slate)">${window.WhiteSwanTravelData.formatINR(totalFare)} total for ${guests} traveler${guests > 1 ? 's' : ''}</span>
+      </div>
+
+      <div>
+        <a class="btn-gold-glow" href="quote.html?dest=${dest}&fare=${singleFare}&guests=${guests}" style="font-size:0.85rem;padding:0.6rem 1.4rem">
+          Quote with This Fare
+        </a>
+      </div>
+    </div>
+
+    <!-- Alternative Flight Option -->
+    <div class="fare-card reveal-init">
+      <div>
+        <span style="font-size:0.75rem;text-transform:uppercase;color:var(--ice-gold);font-weight:600;display:block;margin-bottom:0.2rem">ALTERNATIVE TIMING</span>
+        <h4 style="margin:0;color:#FFFFFF;font-size:1.25rem">Evening Polar Connection</h4>
+        <span style="font-size:0.78rem;color:var(--text-slate)">Partner Carrier Network</span>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:0.4rem">
+          <div>
+            <div class="tabular-nums" style="font-size:1.35rem;font-weight:700;color:#FFFFFF">18:20</div>
+            <div style="font-size:0.75rem;color:var(--text-slate)">${origin}</div>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+            <span class="tabular-nums" style="font-size:0.75rem;color:var(--text-frost)">${routeInfo.duration}</span>
+            <div style="width:100%;height:1px;background:rgba(255,255,255,0.25);position:relative;margin:4px 0">
+              <div style="position:absolute;left:50%;top:-5px;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:var(--ice-gold)"></div>
+            </div>
+            <span style="font-size:0.72rem;color:var(--text-slate)">Scheduled Flight</span>
+          </div>
+
+          <div>
+            <div class="tabular-nums" style="font-size:1.35rem;font-weight:700;color:#FFFFFF">02:10 (+1)</div>
+            <div style="font-size:0.75rem;color:var(--text-slate)">${dest}</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:1rem;font-size:0.75rem;color:var(--text-slate)">
+          <span>&check; Flexible Rescheduling</span>
+          <span>&check; In-flight Dining</span>
+        </div>
+      </div>
+
+      <div style="text-align:right">
+        <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Estimated Fare</span>
+        <div class="tabular-nums" style="font-size:1.6rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">
+          ${window.WhiteSwanTravelData.formatINR(Math.round(singleFare * 1.05))}
+        </div>
+        <span class="tabular-nums" style="font-size:0.75rem;color:var(--text-slate)">${window.WhiteSwanTravelData.formatINR(Math.round(totalFare * 1.05))} total</span>
+      </div>
+
+      <div>
+        <a class="btn-glass" href="quote.html?dest=${dest}&fare=${Math.round(singleFare * 1.05)}&guests=${guests}" style="font-size:0.85rem;padding:0.6rem 1.4rem">
+          Quote with This Fare
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+// Initial Run and Query Param check
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const targetDest = params.get('dest');
+  if (targetDest && FARE_MAP[targetDest]) {
+    document.getElementById('flightDest').value = targetDest;
+  }
+  searchFlights();
+});
+</script>
+</body>
+</html>

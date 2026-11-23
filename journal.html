@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field Journal &amp; Expedition Stories | White Swan Holidays</title>
+<meta name="description" content="Read firsthand expedition dispatches, polar glacier field notes, Himalayan high-pass chronicles, and luxury travel essays.">
+<link rel="canonical" href="https://whiteswanholidays.com/journal.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Expedition Field Journal | White Swan Holidays">
+<meta property="og:description" content="Editorial luxury travel essays, glaciology observations, and field notes.">
+<meta property="og:image" content="https://whiteswanholidays.com/img/banner-1.jpg">
+<meta name="theme-color" content="#050B14">
+<link rel="icon" href="img/white_swan_logo.png">
+
+<!-- Google Fonts: Cormorant Garamond & Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/iceland-aesthetic.css">
+<style>
+/* Page-Specific Styles for Field Journal */
+.journal-hero {
+  position: relative;
+  min-height: 52vh;
+  display: flex;
+  align-items: center;
+  padding: 135px 0 55px;
+  overflow: hidden;
+  background: #050B14;
+}
+
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+}
+
+@media (max-width: 1024px) {
+  .journal-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .journal-grid { grid-template-columns: 1fr; }
+}
+
+.story-card {
+  border-radius: var(--radius-lg);
+  background: var(--ice-glass-dark);
+  border: var(--border-hairline);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: var(--shadow-ambient);
+}
+
+.story-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.story-card:hover img {
+  transform: scale(1.05);
+}
+
+.story-content {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Frosted Island Navigation Bar -->
+<header class="iceland-nav-bar" id="icelandNav">
+  <div class="wrap">
+    <nav class="nav-island">
+      
+      <a class="nav-brand-mark" href="index.html" aria-label="White Swan Holidays">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+      </a>
+
+      <ul class="nav-routes">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="flights.html">Flights &amp; Routes</a></li>
+        <li><a href="itineraries.html">Itineraries</a></li>
+        <li><a href="quote.html">Quote Estimator</a></li>
+        <li><a href="journal.html" class="active">Journal</a></li>
+      </ul>
+
+      <!-- Circular Glass Flight Trigger in Navigation -->
+      <div style="display:flex;align-items:center;gap:0.9rem">
+        <a class="btn-circle-flight" href="flights.html" aria-label="Book Flights" title="Search Flights & Routes" style="width:48px;height:48px">
+          <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </a>
+        
+        <button type="button" id="mobileNavToggle" class="btn-circle-swap" aria-label="Toggle menu" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<main id="mainContent">
+
+<!-- Header Banner -->
+<section class="journal-hero">
+  <img class="hero-media-backdrop" src="img/banner-1.jpg" alt="Field Journal Panorama" width="2000" height="1000">
+  <div class="atmospheric-fog"></div>
+
+  <div class="wrap" style="position:relative;z-index:4">
+    <div class="coord-tag" style="margin-bottom:1.1rem">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      EXPEDITION FIELD NOTES &middot; DISPATCH ARCHIVE
+    </div>
+    
+    <h1 style="max-width:880px;margin-bottom:0.8rem">
+      Field Journal &amp; <br>
+      <span style="color:var(--ice-cyan);font-style:italic">Expedition Chronicles</span>
+    </h1>
+    
+    <p style="font-size:1.15rem;color:var(--text-frost);max-width:680px;line-height:1.6">
+      Firsthand observations, glaciology field logs, and high-altitude narratives recorded across the world's most dramatic latitudes.
+    </p>
+  </div>
+</section>
+
+<!-- Stories Grid Section -->
+<section style="background:#050B14;padding:60px 0 100px">
+  <div class="wrap">
+    
+    <!-- Featured Story Spotlight Island -->
+    <div class="glass-card reveal-init" style="margin-bottom:3.5rem;padding:0;overflow:hidden;border-radius:var(--radius-xl);display:grid;grid-template-columns:1.2fr 1fr">
+      <div style="position:relative;min-height:360px">
+        <img src="img/banner-1.jpg" alt="Vatnajökull Ice Caves" style="width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;top:16px;left:16px">
+          <span class="coord-tag">64&deg;08'N 21&deg;56'W &middot; VATNAJ&Ouml;KULL</span>
+        </div>
+      </div>
+
+      <div style="padding:clamp(2rem, 3vw, 3rem);display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ice-gold);margin-bottom:0.6rem;font-weight:600">
+          FEATURED LEAD DISPATCH &middot; 7 MIN READ
+        </div>
+
+        <h2 style="font-size:clamp(1.8rem, 3vw, 2.4rem);margin-bottom:0.8rem;color:#FFFFFF">
+          Under the Sapphire Dome: Entering the Subterranean Ice Caverns
+        </h2>
+
+        <p style="font-size:0.95rem;color:var(--text-frost);line-height:1.7;margin-bottom:1.6rem">
+          Deep within Europe's largest ice cap, glacial meltwaters carve subterranean cathedral arches composed of 1,000-year-old compressed ice. Here, light refracts only in deep electric blues.
+        </p>
+
+        <div style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap">
+          <a class="btn-gold-glow" href="destination-detail.html?slug=iceland-glaciers">
+            Explore Iceland Route
+          </a>
+          <span style="font-size:0.82rem;color:var(--text-slate)">By Dr. Erik Lindqvist, Lead Glaciologist</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 Column Story Grid -->
+    <div class="journal-grid">
+      
+      <!-- Story 1: Kashmir -->
+      <article class="story-card reveal-init">
+        <div style="overflow:hidden">
+          <img src="img/domestic-tour/kashmir.jpg" alt="Kashmir Houseboat" loading="lazy">
+        </div>
+        <div class="story-content">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem">
+            <span style="color:var(--ice-gold);font-weight:600">WESTERN HIMALAYAS</span>
+            <span style="color:var(--text-slate)">5 min read</span>
+          </div>
+
+          <h3 style="font-size:1.35rem;margin-bottom:0.6rem;color:#FFFFFF">
+            The Whispering Pines of Dal: A Cedar Houseboat Reverie
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.6;margin-bottom:1.2rem;flex:1">
+            Hand-carved walnut ceilings, fragrant saffron tea at dawn, and shikara ripples crossing mirror-still mountain waters.
+          </p>
+
+          <a href="destination-detail.html?slug=kashmir-alpine" style="color:var(--ice-cyan);font-weight:600;font-size:0.85rem;margin-top:auto">
+            Read Dispatch &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Story 2: Ladakh -->
+      <article class="story-card reveal-init">
+        <div style="overflow:hidden">
+          <img src="img/domestic-tour/leh-ladakh.jpg" alt="Ladakh Passes" loading="lazy">
+        </div>
+        <div class="story-content">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem">
+            <span style="color:var(--ice-gold);font-weight:600">TRANS-HIMALAYAS</span>
+            <span style="color:var(--text-slate)">6 min read</span>
+          </div>
+
+          <h3 style="font-size:1.35rem;margin-bottom:0.6rem;color:#FFFFFF">
+            At 17,582 Feet: Crossing Khardung La into Nubra
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.6;margin-bottom:1.2rem;flex:1">
+            Navigating the highest motorable mountain pass on earth, descending into the white cold dunes of Hunder with double-humped camels.
+          </p>
+
+          <a href="destination-detail.html?slug=leh-ladakh" style="color:var(--ice-cyan);font-weight:600;font-size:0.85rem;margin-top:auto">
+            Read Dispatch &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Story 3: Swiss Alps -->
+      <article class="story-card reveal-init">
+        <div style="overflow:hidden">
+          <img src="img/international/canada.jpg" alt="Swiss Alps" loading="lazy">
+        </div>
+        <div class="story-content">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem">
+            <span style="color:var(--ice-gold);font-weight:600">CENTRAL EUROPE</span>
+            <span style="color:var(--text-slate)">4 min read</span>
+          </div>
+
+          <h3 style="font-size:1.35rem;margin-bottom:0.6rem;color:#FFFFFF">
+            Top of Europe: The Sphinx Observatory &amp; Glacier Palace
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.6;margin-bottom:1.2rem;flex:1">
+            Ascending the Eiger inside a solid rock tunnel to 3,454m where the eternal ice of the Aletsch Glacier stretches into infinity.
+          </p>
+
+          <a href="destination-detail.html?slug=swiss-alps" style="color:var(--ice-cyan);font-weight:600;font-size:0.85rem;margin-top:auto">
+            Read Dispatch &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Story 4: Bali -->
+      <article class="story-card reveal-init">
+        <div style="overflow:hidden">
+          <img src="img/international/indonesia.jpg" alt="Bali Caldera" loading="lazy">
+        </div>
+        <div class="story-content">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem">
+            <span style="color:var(--ice-gold);font-weight:600">SOUTHEAST ASIA</span>
+            <span style="color:var(--text-slate)">5 min read</span>
+          </div>
+
+          <h3 style="font-size:1.35rem;margin-bottom:0.6rem;color:#FFFFFF">
+            Lava Trails &amp; Sunrise: Dawn on Mount Batur
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.6;margin-bottom:1.2rem;flex:1">
+            Traversing black volcanic ash in open-top 4x4 jeeps before bathing in hot mineral springs bordering Lake Batur.
+          </p>
+
+          <a href="destination-detail.html?slug=bali-volcanic" style="color:var(--ice-cyan);font-weight:600;font-size:0.85rem;margin-top:auto">
+            Read Dispatch &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Story 5: Dubai -->
+      <article class="story-card reveal-init">
+        <div style="overflow:hidden">
+          <img src="img/tours/dubai.jpg" alt="Dubai Desert" loading="lazy">
+        </div>
+        <div class="story-content">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem">
+            <span style="color:var(--ice-gold);font-weight:600">ARABIAN GULF</span>
+            <span style="color:var(--text-slate)">4 min read</span>
+          </div>
+
+          <h3 style="font-size:1.35rem;margin-bottom:0.6rem;color:#FFFFFF">
+            Silent Ocean of Quartz: 1950s Land Rover Safaris
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.6;margin-bottom:1.2rem;flex:1">
+            Tracking Arabian Oryx herds across pristine red dunes, falconry displays, and royal candlelit desert banquets.
+          </p>
+
+          <a href="destination-detail.html?slug=dubai-skylines" style="color:var(--ice-cyan);font-weight:600;font-size:0.85rem;margin-top:auto">
+            Read Dispatch &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Story 6: Aurora Science -->
+      <article class="story-card reveal-init">
+        <div style="overflow:hidden">
+          <img src="img/banner-2.jpg" alt="Aurora Borealis" loading="lazy">
+        </div>
+        <div class="story-content">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem">
+            <span style="color:var(--ice-gold);font-weight:600">SPACE WEATHER</span>
+            <span style="color:var(--text-slate)">6 min read</span>
+          </div>
+
+          <h3 style="font-size:1.35rem;margin-bottom:0.6rem;color:#FFFFFF">
+            The Science of Aurora Chasing: Geomagnetic Kp Index
+          </h3>
+
+          <p style="font-size:0.88rem;color:var(--text-frost);line-height:1.6;margin-bottom:1.2rem;flex:1">
+            How solar wind density, IMF Bz polarity, and cloud satellite telemetry dictate the optimal nights for green ribbons.
+          </p>
+
+          <a href="destination-detail.html?slug=iceland-glaciers" style="color:var(--ice-cyan);font-weight:600;font-size:0.85rem;margin-top:auto">
+            Read Dispatch &rarr;
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Expedition Field Notes Subscription -->
+    <div class="reveal-init" style="margin-top:4.5rem;padding:3rem 2rem;border-radius:var(--radius-xl);background:var(--ice-glass-dark);border:var(--border-hairline);text-align:center;max-width:800px;margin-inline:auto">
+      <div class="coord-tag" style="margin-bottom:0.8rem">DISPATCH SUBSCRIPTION</div>
+      <h3 style="font-size:2rem;color:#FFFFFF;margin-bottom:0.6rem">Subscribe to Expedition Field Notes</h3>
+      <p style="font-size:0.95rem;color:var(--text-frost);max-width:540px;margin:0 auto 1.8rem">
+        Receive our seasonal field dispatches, aurora forecast updates, and priority notifications for limited luxury chalet dates.
+      </p>
+
+      <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to White Swan Expedition Notes.');" style="display:flex;gap:0.75rem;max-width:480px;margin:0 auto;flex-wrap:wrap">
+        <input type="email" placeholder="Enter your email address..." required style="flex:1;min-width:220px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-full);padding:0.7rem 1.4rem;color:#FFFFFF;outline:none">
+        <button type="submit" class="btn-gold-glow" style="padding:0.7rem 1.6rem">Subscribe</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- Obsidian Nordic Footer with Route Matrix -->
+<footer style="background:#03070E;color:var(--text-slate);border-top:1px solid rgba(255,255,255,0.12);padding:75px 0 35px">
+  <div class="wrap">
+    
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:3rem;margin-bottom:3.5rem">
+      <div>
+        <div style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:var(--radius-sm);padding:0.6rem 1rem;display:inline-block;margin-bottom:1.2rem;border:var(--border-hairline-subtle)">
+          <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+        </div>
+        <p style="font-size:0.9rem;line-height:1.65;max-width:360px;color:var(--text-frost)">
+          White Swan Holidays Pvt Ltd &mdash; Tailor-made luxury travel, glacial expeditions, private flights, and bespoke corporate travel from Ahmedabad and Gurugram since 2017.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Dedicated Routes</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="destinations.html" style="color:var(--text-slate)">Destinations</a></li>
+          <li><a href="flights.html" style="color:var(--text-slate)">Flights &amp; Routes</a></li>
+          <li><a href="itineraries.html" style="color:var(--text-slate)">Itineraries</a></li>
+          <li><a href="quote.html" style="color:var(--text-slate)">Quote Estimator</a></li>
+          <li><a href="journal.html" style="color:var(--ice-cyan);font-weight:600">Field Journal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Special Services</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="visa-air-ticket.html" style="color:var(--text-slate)">Visa &amp; Flight Desk</a></li>
+          <li><a href="mice.html" style="color:var(--text-slate)">Corporate MICE</a></li>
+          <li><a href="medical-tourism.html" style="color:var(--text-slate)">Medical Facilitation</a></li>
+          <li><a href="corporate-gifting.html" style="color:var(--text-slate)">Corporate Gifting</a></li>
+          <li><a href="gallery.html" style="color:var(--text-slate)">Photo Gallery</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Concierge Desk</h4>
+        <p style="font-size:0.88rem;line-height:1.6;color:var(--text-frost)">
+          Ahmedabad: 501, Sun Square, Off CG Road<br>
+          Gurugram: South City II, Sector 49<br>
+          Direct: <a href="tel:+919099041625" style="color:var(--ice-cyan)">+91 90990 41625</a>
+        </p>
+        <div style="margin-top:1.1rem">
+          <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="font-size:0.82rem;padding:0.4rem 1.2rem;min-height:38px">
+            WhatsApp Concierge
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
+      <span>&copy; <span id="yr">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
+      <span>Coordinates: 23&deg;01'N 72&deg;33'E (AMD HQ) &middot; 28&deg;24'N 77&deg;03'E (GGN)</span>
+      <a href="quote.html#staffAuthModal" style="color:#64748B;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Staff Portal</span>
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/travel-engine.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
