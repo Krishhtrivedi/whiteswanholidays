@@ -431,25 +431,29 @@
         
         <div class="receipt-head">
           <h4 id="receiptTitle">Itemized Quote Summary</h4>
-          
-          <!-- Admin Margin View Toggle -->
-          <div class="admin-toggle-wrap" title="Toggle internal agency profit breakdown">
-            <span>Admin Margin View</span>
-            <label class="toggle-switch">
-              <input type="checkbox" id="adminMarginToggle">
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
+          <span class="receipt-verified-badge" style="font-size:0.75rem;font-weight:600;color:var(--teal-ocean);background:var(--teal-light);padding:0.25rem 0.65rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:0.35rem">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            All-Inclusive Package
+          </span>
         </div>
 
-        <!-- Admin Margin Breakdown Box (Visible when toggle is ON) -->
-        <div class="admin-margin-box" id="adminMarginBox">
-          <div class="admin-margin-title">
-            <span>⚡ Internal Agency Profit Margin:</span>
-            <span id="adminPerPersonVal" class="tabular-nums">₹1,100 / person</span>
+        <!-- Confidential Staff Margin Panel (Protected by password; never shown to public clients) -->
+        <div class="staff-margin-panel" id="staffMarginPanel" style="display:none;background:#FFFDF5;border:1.5px solid var(--gold-primary);border-radius:var(--radius-md);padding:1rem;margin-bottom:1.2rem;box-shadow:0 4px 14px rgba(197,160,89,0.18)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;border-bottom:1px solid rgba(197,160,89,0.3);padding-bottom:0.4rem">
+            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;font-weight:700;color:#996B1E">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>CONFIDENTIAL STAFF MARGIN VIEW</span>
+            </div>
+            <button type="button" id="btnLockStaffMode" style="background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;border-radius:999px;font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;cursor:pointer">
+              Lock &amp; Exit
+            </button>
           </div>
-          <div class="admin-margin-formula" id="adminFormulaText">
-            Base + Duration bonus + Tier bonus clamped strictly in [₹500, ₹1500].
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem">
+            <span style="font-size:0.78rem;color:var(--text-muted)">Net Profit Per Person:</span>
+            <span id="adminPerPersonVal" class="tabular-nums" style="font-weight:800;color:var(--navy-deep);font-size:0.95rem">₹1,100 / person</span>
+          </div>
+          <div id="adminFormulaText" style="font-size:0.75rem;color:var(--text-body);line-height:1.45;background:#FFFFFF;border-radius:6px;padding:0.5rem;border:1px solid var(--border-subtle)">
+            Formula breakdown...
           </div>
         </div>
 
@@ -524,6 +528,14 @@
             <button type="button" class="btn-lux btn-outline-gold btn-lux-sm" id="btnDownloadSummary">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               Download
+            </button>
+          </div>
+          
+          <!-- Discreet Staff Portal Access -->
+          <div style="text-align:center;margin-top:0.6rem">
+            <button type="button" id="staffPortalBtn" style="background:none;border:none;color:#94A3B8;font-size:0.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:0.35rem;padding:0.25rem 0.6rem;border-radius:4px;transition:color 0.2s">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span id="staffPortalBtnText">Staff Margin Access</span>
             </button>
           </div>
         </div>
@@ -1117,13 +1129,51 @@
       </div>
     </div>
 
-    <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:1.8rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
+    <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
       <span>&copy; <span id="copyYear">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
       <span>Prices subject to seasonal hotel availability & confirmed at reservation.</span>
+      <button type="button" id="footerStaffLogin" style="background:none;border:none;color:#64748B;font-size:0.78rem;cursor:pointer;display:inline-flex;align-items:center;gap:0.35rem;padding:0;transition:color 0.2s">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Staff Portal</span>
+      </button>
     </div>
 
   </div>
 </footer>
+
+<!-- ==========================================================================
+     SECURE STAFF PASSWORD AUTHENTICATION MODAL (CONFIDENTIAL)
+     ========================================================================== -->
+<div class="lux-modal-backdrop" id="staffAuthModal" role="dialog" aria-modal="true" aria-labelledby="staffModalTitle">
+  <div class="lux-modal" style="max-width:440px">
+    <button class="modal-close-btn" id="staffModalClose" aria-label="Close dialog">&times;</button>
+    
+    <div style="width:48px;height:48px;border-radius:50%;background:var(--gold-light);color:var(--gold-hover);display:flex;align-items:center;justify-content:center;margin-bottom:1rem">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+    </div>
+    <span class="eyebrow" style="color:var(--gold-primary)">Confidential Staff Portal</span>
+    <h3 id="staffModalTitle" style="color:var(--navy-deep);margin-bottom:0.4rem">Staff Margin Authentication</h3>
+    <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:1.4rem">
+      Authorized staff only. Enter your passkey to inspect internal agency margins, client discounts, and duration profit calculations.
+    </p>
+
+    <form id="staffAuthForm">
+      <div class="input-lux-grp" style="margin-bottom:1.2rem">
+        <label for="staffPasskey">Staff Passkey</label>
+        <div style="position:relative">
+          <input type="password" id="staffPasskey" class="input-lux-field" placeholder="Enter passkey" autocomplete="current-password" required>
+          <button type="button" id="togglePassVisibility" style="position:absolute;right:10px;top:11px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.82rem">Show</button>
+        </div>
+        <p id="staffAuthErr" style="color:var(--rose-accent);font-size:0.8rem;margin:0.35rem 0 0;display:none"></p>
+        <span style="font-size:0.75rem;color:var(--text-muted);margin-top:0.35rem;display:block">Default Staff Passkey: <code>whiteswan2026</code></span>
+      </div>
+
+      <button type="submit" class="btn-lux btn-navy" style="width:100%">
+        Unlock Margin Analysis &rarr;
+      </button>
+    </form>
+  </div>
+</div>
 
 <!-- ==========================================================================
      BOOKING / REQUEST FORMAL QUOTE MODAL DIALOG

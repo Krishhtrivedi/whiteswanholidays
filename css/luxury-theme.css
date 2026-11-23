@@ -1136,6 +1136,16 @@ header.site-header.scrolled {
   line-height: 1.45;
 }
 
+/* Staff Margin Panel */
+.staff-margin-panel {
+  animation: fadeInStaff 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInStaff {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Subtotal & Taxes */
 .receipt-divider {
   height: 1px;

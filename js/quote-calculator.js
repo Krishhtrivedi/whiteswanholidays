@@ -3,7 +3,7 @@
  *
  * Implements real-time luxury travel pricing, hotel tier slider controls,
  * dynamic ₹500–₹1,500 per-person agency margin calculation, 5% GST computation,
- * admin margin inspect mode, and WhatsApp formal inquiry generation.
+ * secure password-protected staff portal, and WhatsApp formal inquiry generation.
  * Parity-matched with com.whiteswan.pricing.QuoteCalculator.java.
  */
 
@@ -15,6 +15,9 @@
   const MIN_PROFIT = 500;
   const MAX_PROFIT = 1500;
   const WA_NUMBER = '919925811770';
+
+  // Authorized Passkeys for Staff Margin View
+  const AUTHORIZED_PASSKEYS = ['whiteswan2026', 'swan@2026', 'admin123'];
 
   // Hotel Category Definitions
   const HOTEL_CONFIG = {
@@ -58,8 +61,15 @@
     roomRate: 6500,
     itineraryTier: 'curated',
     clientProfile: 'standard',
-    adminMarginView: false
+    staffAuthenticated: false
   };
+
+  // Check existing session auth safely
+  try {
+    state.staffAuthenticated = (sessionStorage.getItem('wsh_staff_auth') === 'true');
+  } catch (e) {
+    state.staffAuthenticated = false;
+  }
 
   // Helper: Format INR currency
   function formatINR(amount) {
@@ -169,10 +179,23 @@
     el.hotelSliderVal = document.getElementById('hotelSliderVal');
     el.hotelMinLbl = document.getElementById('hotelMinLbl');
     el.hotelMaxLbl = document.getElementById('hotelMaxLbl');
-    el.adminToggle = document.getElementById('adminMarginToggle');
-    el.adminMarginBox = document.getElementById('adminMarginBox');
-    el.adminFormulaText = document.getElementById('adminFormulaText');
-    el.adminPerPersonVal = document.getElementById('adminPerPersonVal');
+
+    // Confidential Staff Margin Panel Elements
+    el.staffMarginPanel = document.getElementById('staffMarginPanel');
+    el.staffFormulaText = document.getElementById('adminFormulaText');
+    el.staffPerPersonVal = document.getElementById('adminPerPersonVal');
+    el.btnLockStaffMode = document.getElementById('btnLockStaffMode');
+    el.staffPortalBtn = document.getElementById('staffPortalBtn');
+    el.staffPortalBtnText = document.getElementById('staffPortalBtnText');
+    el.footerStaffLogin = document.getElementById('footerStaffLogin');
+
+    // Staff Authentication Modal
+    el.staffAuthModal = document.getElementById('staffAuthModal');
+    el.staffModalClose = document.getElementById('staffModalClose');
+    el.staffAuthForm = document.getElementById('staffAuthForm');
+    el.staffPasskey = document.getElementById('staffPasskey');
+    el.staffAuthErr = document.getElementById('staffAuthErr');
+    el.togglePassVisibility = document.getElementById('togglePassVisibility');
 
     // Receipt Line Outputs
     el.receiptFlights = document.getElementById('receiptFlights');
@@ -189,7 +212,7 @@
     el.receiptGrandTotal = document.getElementById('receiptGrandTotal');
     el.receiptPerPerson = document.getElementById('receiptPerPerson');
 
-    // Modal
+    // Customer Quote Modal
     el.quoteModal = document.getElementById('quoteModal');
     el.modalClose = document.getElementById('modalClose');
     el.modalForm = document.getElementById('modalQuoteForm');
@@ -244,7 +267,7 @@
       pill.classList.toggle('selected', pill.dataset.client === state.clientProfile);
     });
 
-    // Receipt Line Updates
+    // Customer Receipt Updates (Always clean & luxury formatted)
     if (el.receiptFlights) el.receiptFlights.textContent = formatINR(q.flightsTotal);
     if (el.receiptFlightsSub) {
       el.receiptFlightsSub.textContent = q.flightFare > 0
@@ -262,29 +285,35 @@
       el.receiptItinerarySub.textContent = `${ITINERARY_CONFIG[state.itineraryTier].name} (${formatINR(ITINERARY_CONFIG[state.itineraryTier].rate)}/pax)`;
     }
 
-    // Agency Margin / Fee
+    // Customer-facing Concierge row (Transparent packaging)
     if (el.receiptAgency) el.receiptAgency.textContent = formatINR(q.agencyMarginTotal);
     if (el.receiptAgencySub) {
-      el.receiptAgencySub.textContent = state.adminMarginView
-        ? `Agency Margin (${formatINR(q.profitPerPerson)}/pax × ${q.guests})`
-        : 'Agency Concierge, On-Ground Support & 24/7 Assistance';
+      el.receiptAgencySub.textContent = 'Agency Concierge, On-Ground Support & 24/7 Assistance';
     }
 
-    // Admin Margin Inspection View
-    if (el.adminMarginBox) {
-      el.adminMarginBox.classList.toggle('active', state.adminMarginView);
-      if (state.adminMarginView) {
+    // Confidential Staff Margin Panel (Visible ONLY if authenticated)
+    if (el.staffMarginPanel) {
+      if (state.staffAuthenticated) {
+        el.staffMarginPanel.style.display = 'block';
         const clientBase = CLIENT_CONFIG[state.clientProfile].base;
         let durMod = q.nights > 10 ? 350 : (q.nights >= 7 ? 250 : (q.nights >= 4 ? 150 : 50));
         const tierMod = ITINERARY_CONFIG[state.itineraryTier].marginMod;
         const totalProfitPerPax = q.profitPerPerson;
         const marginPercent = ((q.agencyMarginTotal / q.subtotal) * 100).toFixed(1);
 
-        if (el.adminPerPersonVal) {
-          el.adminPerPersonVal.textContent = `${formatINR(totalProfitPerPax)} / person (${marginPercent}% of subtotal)`;
+        if (el.staffPerPersonVal) {
+          el.staffPerPersonVal.textContent = `${formatINR(totalProfitPerPax)} / person (${marginPercent}% of subtotal)`;
         }
-        if (el.adminFormulaText) {
-          el.adminFormulaText.innerHTML = `Base (${formatINR(clientBase)}) + Duration (${formatINR(durMod)}) + Tier (${formatINR(tierMod)}) = <strong>${formatINR(clientBase + durMod + tierMod)}</strong> (Clamped [₹500, ₹1500] &rarr; <strong>${formatINR(totalProfitPerPax)}</strong>). Total Agency Net: <strong>${formatINR(q.agencyMarginTotal)}</strong>`;
+        if (el.staffFormulaText) {
+          el.staffFormulaText.innerHTML = `Base (${formatINR(clientBase)}) + Duration (${formatINR(durMod)}) + Tier (${formatINR(tierMod)}) = <strong>${formatINR(clientBase + durMod + tierMod)}</strong> (Clamped [₹500, ₹1500] &rarr; <strong>${formatINR(totalProfitPerPax)}</strong>). Total Agency Net: <strong>${formatINR(q.agencyMarginTotal)}</strong>`;
+        }
+        if (el.staffPortalBtnText) {
+          el.staffPortalBtnText.textContent = '🔒 Staff Margin View Active (Click to Lock)';
+        }
+      } else {
+        el.staffMarginPanel.style.display = 'none';
+        if (el.staffPortalBtnText) {
+          el.staffPortalBtnText.textContent = 'Staff Margin Access';
         }
       }
     }
@@ -304,8 +333,8 @@
     setTimeout(() => el.toast.classList.remove('show'), 3200);
   }
 
-  // Format Quote Summary Text (for clipboard or printing)
-  function generateQuoteSummaryText(isAdminView) {
+  // Format Quote Summary Text
+  function generateQuoteSummaryText(isStaffAuthenticated) {
     const q = calculateQuote();
     const dest = el.destination?.value || state.destination || 'Custom Destination';
     const dates = el.travelDates?.value || 'Flexible / Upcoming';
@@ -325,10 +354,11 @@
     out += `2. Hotel Stay           : ${formatINR(q.hotelTotal)} (${formatINR(q.effectiveRoomRate)} × ${q.rooms} rms × ${q.nights} nts)\n`;
     out += `3. Sightseeing & Tours  : ${formatINR(q.itineraryTotal)} (${formatINR(ITINERARY_CONFIG[state.itineraryTier].rate)} × ${q.guests})\n`;
 
-    if (isAdminView) {
-      out += `4. Agency Margin Total  : ${formatINR(q.agencyMarginTotal)} (Admin view: ${formatINR(q.profitPerPerson)}/pax, clamped [500,1500])\n`;
+    // Only include margin line if authorized staff
+    if (isStaffAuthenticated) {
+      out += `4. Agency Profit Margin : ${formatINR(q.agencyMarginTotal)} (Confidential Staff: ${formatINR(q.profitPerPerson)}/pax, clamped [₹500,₹1500])\n`;
     } else {
-      out += `4. Concierge & Logistics: ${formatINR(q.agencyMarginTotal)} (Included)\n`;
+      out += `4. Concierge & Logistics: ${formatINR(q.agencyMarginTotal)} (Included in Package)\n`;
     }
 
     out += `------------------------------------------------------------\n`;
@@ -362,6 +392,33 @@
     if (!el.quoteModal) return;
     el.quoteModal.classList.remove('open');
     document.body.style.overflow = '';
+  }
+
+  // Staff Authentication Modal Controls
+  function openStaffAuthModal() {
+    if (!el.staffAuthModal) return;
+    if (el.staffAuthErr) el.staffAuthErr.style.display = 'none';
+    if (el.staffPasskey) el.staffPasskey.value = '';
+    el.staffAuthModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      if (el.staffPasskey) el.staffPasskey.focus();
+    }, 200);
+  }
+
+  function closeStaffAuthModal() {
+    if (!el.staffAuthModal) return;
+    el.staffAuthModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function lockStaffMode() {
+    state.staffAuthenticated = false;
+    try {
+      sessionStorage.removeItem('wsh_staff_auth');
+    } catch (e) {}
+    updateUI();
+    showToast('🔒 Staff mode locked. Margin view is hidden.');
   }
 
   // Event Listeners Binding
@@ -495,14 +552,6 @@
       });
     });
 
-    // Admin Margin Toggle Switch
-    if (el.adminToggle) {
-      el.adminToggle.addEventListener('change', (e) => {
-        state.adminMarginView = e.target.checked;
-        updateUI();
-      });
-    }
-
     // Route Presets Pills Click
     document.querySelectorAll('.route-pill').forEach(pill => {
       pill.addEventListener('click', () => {
@@ -525,7 +574,7 @@
       });
     });
 
-    // Modal Events
+    // Customer Quote Modal Events
     if (el.btnBookFormal) {
       el.btnBookFormal.addEventListener('click', openBookingModal);
     }
@@ -541,7 +590,7 @@
     // Copy Quote Summary
     if (el.btnCopyBreakdown) {
       el.btnCopyBreakdown.addEventListener('click', () => {
-        const text = generateQuoteSummaryText(state.adminMarginView);
+        const text = generateQuoteSummaryText(state.staffAuthenticated);
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(() => {
             showToast('✓ Quote breakdown copied to clipboard!');
@@ -557,7 +606,7 @@
     // Download/Print Summary
     if (el.btnDownloadSummary) {
       el.btnDownloadSummary.addEventListener('click', () => {
-        const text = generateQuoteSummaryText(state.adminMarginView);
+        const text = generateQuoteSummaryText(state.staffAuthenticated);
         const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -567,7 +616,7 @@
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast('✓ Formal Quote summary downloaded!');
+        showToast('✓ Quote summary downloaded!');
       });
     }
 
@@ -605,6 +654,83 @@
         showToast('✓ Quote sent! Opening WhatsApp to chat with our travel concierge...');
       });
     }
+
+    // Staff Portal & Authentication Events
+    if (el.staffPortalBtn) {
+      el.staffPortalBtn.addEventListener('click', () => {
+        if (state.staffAuthenticated) {
+          lockStaffMode();
+        } else {
+          openStaffAuthModal();
+        }
+      });
+    }
+
+    if (el.footerStaffLogin) {
+      el.footerStaffLogin.addEventListener('click', openStaffAuthModal);
+    }
+
+    if (el.btnLockStaffMode) {
+      el.btnLockStaffMode.addEventListener('click', lockStaffMode);
+    }
+
+    if (el.staffModalClose) {
+      el.staffModalClose.addEventListener('click', closeStaffAuthModal);
+    }
+
+    if (el.staffAuthModal) {
+      el.staffAuthModal.addEventListener('click', (e) => {
+        if (e.target === el.staffAuthModal) closeStaffAuthModal();
+      });
+    }
+
+    // Toggle password visibility
+    if (el.togglePassVisibility) {
+      el.togglePassVisibility.addEventListener('click', () => {
+        if (el.staffPasskey) {
+          const isPass = el.staffPasskey.type === 'password';
+          el.staffPasskey.type = isPass ? 'text' : 'password';
+          el.togglePassVisibility.textContent = isPass ? 'Hide' : 'Show';
+        }
+      });
+    }
+
+    // Staff Authentication Form Submit
+    if (el.staffAuthForm) {
+      el.staffAuthForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pwd = (el.staffPasskey?.value || '').trim();
+        if (AUTHORIZED_PASSKEYS.includes(pwd.toLowerCase())) {
+          state.staffAuthenticated = true;
+          try {
+            sessionStorage.setItem('wsh_staff_auth', 'true');
+          } catch (err) {}
+          closeStaffAuthModal();
+          updateUI();
+          showToast('✓ Staff authenticated! Internal agency margin analysis unlocked.');
+          const calcSec = document.getElementById('quote-calculator');
+          if (calcSec) calcSec.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          if (el.staffAuthErr) {
+            el.staffAuthErr.textContent = 'Invalid passkey. Access is restricted to authorized White Swan staff.';
+            el.staffAuthErr.style.display = 'block';
+          }
+          if (el.staffPasskey) el.staffPasskey.focus();
+        }
+      });
+    }
+
+    // Keyboard shortcut for staff access: Ctrl+Shift+M or Cmd+Shift+M
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'M' || e.key === 'm')) {
+        e.preventDefault();
+        if (state.staffAuthenticated) {
+          lockStaffMode();
+        } else {
+          openStaffAuthModal();
+        }
+      }
+    });
 
     // Global "Quote This Package" Trigger from any destination card
     document.addEventListener('click', (e) => {
@@ -650,7 +776,7 @@
     updateUI();
   });
 
-  // Expose API for external scripts or unit inspection
+  // Expose API for staff or unit inspection
   window.WhiteSwanQuoteCalculator = {
     calculateQuote,
     computeDynamicProfit,
@@ -658,6 +784,16 @@
     setState: (newState) => {
       Object.assign(state, newState);
       updateUI();
-    }
+    },
+    authenticateStaff: (pwd) => {
+      if (AUTHORIZED_PASSKEYS.includes(pwd.toLowerCase())) {
+        state.staffAuthenticated = true;
+        try { sessionStorage.setItem('wsh_staff_auth', 'true'); } catch (e) {}
+        updateUI();
+        return true;
+      }
+      return false;
+    },
+    lockStaffMode
   };
 })();
