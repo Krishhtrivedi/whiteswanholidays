@@ -33,150 +33,304 @@
 }
 
 .calc-section-wrapper {
-  background: #050B14;
+  background: var(--bg-page);
   padding: 40px 0 100px;
 }
 
-/* Ensure luxury-theme calculator works seamlessly inside dark nordic backdrop */
 .calc-container {
   max-width: 1240px;
   margin: 0 auto;
 }
 
+/* Light Theme Defaults */
 .calc-panel {
+  background: var(--surface-card);
+  border: 1px solid var(--glass-border);
+  color: var(--ink-primary);
+  box-shadow: 0 16px 40px rgba(11, 29, 51, 0.08);
+}
+
+.calc-step-heading h3 {
+  color: var(--ink-primary);
+}
+
+.input-lux-grp label {
+  color: var(--ink-secondary);
+  font-weight: 600;
+}
+
+.input-lux-field {
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 29, 51, 0.18);
+  color: var(--ink-primary);
+}
+
+.input-lux-field:focus {
+  background: #FFFFFF;
+  border-color: var(--accent-primary);
+}
+
+.stepper-wrap {
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 29, 51, 0.18);
+}
+
+.stepper-btn {
+  color: var(--ink-primary);
+}
+
+.stepper-btn:hover {
+  background: rgba(11, 29, 51, 0.08);
+}
+
+.stepper-input {
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.route-pill {
+  background: rgba(11, 29, 51, 0.05);
+  border: 1px solid rgba(11, 29, 51, 0.14);
+  color: var(--ink-secondary);
+}
+
+.route-pill:hover, .route-pill.active {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.hotel-card {
+  background: var(--surface-card);
+  border: 1px solid var(--glass-border);
+  color: var(--ink-primary);
+}
+
+.hotel-card:hover, .hotel-card.selected {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: var(--accent-primary);
+}
+
+.hotel-card-title {
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.hotel-card-desc {
+  color: var(--ink-secondary);
+}
+
+.itinerary-card {
+  background: var(--surface-card);
+  border: 1px solid var(--glass-border);
+}
+
+.itinerary-card:hover, .itinerary-card.selected {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: var(--accent-primary);
+}
+
+.itinerary-tier-name {
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.itinerary-tier-desc {
+  color: var(--ink-secondary);
+}
+
+.client-pill {
+  background: rgba(11, 29, 51, 0.05);
+  border: 1px solid rgba(11, 29, 51, 0.14);
+  color: var(--ink-primary);
+}
+
+.client-pill:hover, .client-pill.selected {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.calc-receipt {
+  background: rgba(237, 245, 255, 0.94);
+  border: 1.5px solid rgba(2, 132, 199, 0.22);
+  box-shadow: 0 16px 36px rgba(11, 29, 51, 0.08);
+  color: var(--ink-primary);
+}
+
+.receipt-head h4 {
+  color: var(--ink-primary);
+}
+
+.receipt-line-title {
+  color: var(--ink-primary);
+}
+
+.receipt-line-sub {
+  color: var(--ink-muted);
+}
+
+.receipt-line-val {
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.receipt-total-row {
+  border-top-color: rgba(2, 132, 199, 0.25);
+}
+
+.receipt-total-label {
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.receipt-total-val {
+  color: var(--accent-primary);
+  font-weight: 800;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .calc-section-wrapper {
+  background: #050B14;
+}
+
+[data-theme="dark"] .calc-panel {
   background: #091322;
   border: 1px solid rgba(255, 255, 255, 0.16);
   color: #FFFFFF;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.calc-step-heading h3 {
+[data-theme="dark"] .calc-step-heading h3 {
   color: #FFFFFF;
 }
 
-.input-lux-grp label {
+[data-theme="dark"] .input-lux-grp label {
   color: var(--text-frost);
 }
 
-.input-lux-field {
+[data-theme="dark"] .input-lux-field {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFFFFF;
 }
 
-.input-lux-field:focus {
+[data-theme="dark"] .input-lux-field:focus {
   background: rgba(255, 255, 255, 0.14);
   border-color: var(--ice-cyan);
 }
 
-.stepper-wrap {
+[data-theme="dark"] .stepper-wrap {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.stepper-btn {
+[data-theme="dark"] .stepper-btn {
   color: #FFFFFF;
 }
 
-.stepper-btn:hover {
+[data-theme="dark"] .stepper-btn:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.stepper-input {
+[data-theme="dark"] .stepper-input {
   color: #FFFFFF;
 }
 
-.route-pill {
+[data-theme="dark"] .route-pill {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: var(--text-frost);
 }
 
-.route-pill:hover, .route-pill.active {
+[data-theme="dark"] .route-pill:hover, [data-theme="dark"] .route-pill.active {
   background: rgba(255, 255, 255, 0.2);
   border-color: var(--ice-cyan);
   color: #FFFFFF;
 }
 
-.hotel-card {
+[data-theme="dark"] .hotel-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #FFFFFF;
 }
 
-.hotel-card:hover, .hotel-card.selected {
+[data-theme="dark"] .hotel-card:hover, [data-theme="dark"] .hotel-card.selected {
   background: rgba(255, 255, 255, 0.12);
   border-color: var(--ice-cyan);
 }
 
-.hotel-card-title {
+[data-theme="dark"] .hotel-card-title {
   color: #FFFFFF;
 }
 
-.hotel-card-desc {
+[data-theme="dark"] .hotel-card-desc {
   color: var(--text-slate);
 }
 
-.itinerary-card {
+[data-theme="dark"] .itinerary-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.itinerary-card:hover, .itinerary-card.selected {
+[data-theme="dark"] .itinerary-card:hover, [data-theme="dark"] .itinerary-card.selected {
   background: rgba(255, 255, 255, 0.12);
   border-color: var(--ice-cyan);
 }
 
-.itinerary-tier-name {
+[data-theme="dark"] .itinerary-tier-name {
   color: #FFFFFF;
 }
 
-.itinerary-tier-desc {
+[data-theme="dark"] .itinerary-tier-desc {
   color: var(--text-slate);
 }
 
-.client-pill {
+[data-theme="dark"] .client-pill {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #FFFFFF;
 }
 
-.client-pill:hover, .client-pill.selected {
+[data-theme="dark"] .client-pill:hover, [data-theme="dark"] .client-pill.selected {
   background: rgba(255, 255, 255, 0.12);
   border-color: var(--ice-cyan);
 }
 
-.calc-receipt {
+[data-theme="dark"] .calc-receipt {
   background: #0D1B2F;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-}
-
-.receipt-head h4 {
   color: #FFFFFF;
 }
 
-.receipt-line-title {
+[data-theme="dark"] .receipt-head h4 {
   color: #FFFFFF;
 }
 
-.receipt-line-sub {
+[data-theme="dark"] .receipt-line-title {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .receipt-line-sub {
   color: var(--text-slate);
 }
 
-.receipt-line-val {
+[data-theme="dark"] .receipt-line-val {
   color: #FFFFFF;
 }
 
-.receipt-total-row {
+[data-theme="dark"] .receipt-total-row {
   border-top-color: rgba(255, 255, 255, 0.15);
 }
 
-.receipt-total-label {
+[data-theme="dark"] .receipt-total-label {
   color: #FFFFFF;
 }
 
-.receipt-total-val {
+[data-theme="dark"] .receipt-total-val {
   color: var(--ice-cyan);
 }
 </style>

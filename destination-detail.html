@@ -67,7 +67,7 @@
   position: relative;
   padding-left: 2.8rem;
   padding-bottom: 2.2rem;
-  border-left: 1px solid rgba(255,255,255,0.18);
+  border-left: 1px solid var(--glass-border);
 }
 
 .timeline-step:last-child {
@@ -82,14 +82,14 @@
   width: 30px;
   height: 30px;
   border-radius: var(--radius-full);
-  background: #050B14;
-  border: 2px solid var(--ice-cyan);
+  background: var(--surface-card);
+  border: 2px solid var(--accent-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--accent-primary);
 }
 
 .gallery-grid {
@@ -125,9 +125,9 @@
   align-items: flex-start;
   gap: 0.85rem;
   padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--glass-border);
   font-size: 0.92rem;
-  color: var(--text-frost);
+  color: var(--ink-secondary);
 }
 
 .checklist-item:last-child {
@@ -206,7 +206,7 @@
     <div class="telemetry-strip reveal-init">
       <div>
         <div style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);letter-spacing:0.1em">Coordinates &amp; Elev.</div>
-        <div class="tabular-nums" style="font-size:1.05rem;font-weight:600;color:#FFFFFF" id="telemetryElevation">840m ASL</div>
+        <div class="tabular-nums" style="font-size:1.05rem;font-weight:600;color:var(--ink-primary)" id="telemetryElevation">840m ASL</div>
       </div>
       <div>
         <div style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);letter-spacing:0.1em">Climate &amp; Temp</div>
@@ -218,7 +218,7 @@
       </div>
       <div>
         <div style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);letter-spacing:0.1em">Flight Access</div>
-        <div class="tabular-nums" style="font-size:1.05rem;font-weight:600;color:#FFFFFF" id="telemetryFlight">KEF (Reykjavik)</div>
+        <div class="tabular-nums" style="font-size:1.05rem;font-weight:600;color:var(--ink-primary)" id="telemetryFlight">KEF (Reykjavik)</div>
       </div>
     </div>
 
@@ -226,7 +226,7 @@
 </section>
 
 <!-- Main Expedition Body -->
-<section style="padding:80px 0 110px;background:#050B14">
+<section class="detail-body-section" style="padding:80px 0 110px;background:var(--bg-page)">
   <div class="wrap">
     
     <div class="detail-layout">
@@ -238,13 +238,13 @@
         <div class="reveal-init" style="margin-bottom:3.5rem">
           <div class="coord-tag" style="margin-bottom:1rem">EXPEDITION ESSAY</div>
           <h2 style="font-size:2.2rem;margin-bottom:1.2rem">The Raw Majesty of the Land</h2>
-          <p style="font-size:1.05rem;line-height:1.75;color:var(--text-frost)" id="destOverview">
+          <p style="font-size:1.05rem;line-height:1.75;color:var(--ink-secondary)" id="destOverview">
             Experience the raw geological power of the North Atlantic. From the geothermal mists of the Blue Lagoon to the calving icebergs of Jökulsárlón glacier lagoon, this expedition puts you in private luxury 4x4 super-jeeps with expert glaciologists and aurora trackers.
           </p>
 
           <!-- Photo Gallery Strip -->
           <div style="margin-top:2.2rem">
-            <h4 style="color:#FFFFFF;margin-bottom:0.8rem">Expedition Visuals</h4>
+            <h4 style="margin-bottom:0.8rem">Expedition Visuals</h4>
             <div class="gallery-grid" id="galleryGrid">
               <!-- Dynamically populated -->
             </div>
@@ -274,7 +274,7 @@
         <!-- Packing Checklist -->
         <div class="reveal-init" style="background:var(--ice-glass-dark);border:var(--border-hairline);padding:2.2rem;border-radius:var(--radius-lg);backdrop-filter:blur(18px)">
           <div class="coord-tag" style="margin-bottom:0.8rem">EXPEDITION READINESS</div>
-          <h3 style="color:#FFFFFF;margin-bottom:1rem">Recommended Gear &amp; Packing List</h3>
+          <h3 style="margin-bottom:1rem">Recommended Gear &amp; Packing List</h3>
           
           <div id="packingContainer">
             <!-- Dynamically populated -->
@@ -304,10 +304,10 @@
             </a>
           </div>
 
-          <div style="border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);padding:1.2rem 0;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.88rem">
+          <div style="border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);padding:1.2rem 0;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.88rem">
             <div style="display:flex;justify-content:space-between">
               <span style="color:var(--text-slate)">Duration:</span>
-              <span class="tabular-nums" style="color:#FFFFFF;font-weight:600" id="cardDuration">7 Days / 6 Nights</span>
+              <span class="tabular-nums" style="color:var(--ink-primary);font-weight:600" id="cardDuration">7 Days / 6 Nights</span>
             </div>
             <div style="display:flex;justify-content:space-between">
               <span style="color:var(--text-slate)">Route Airport:</span>
@@ -315,7 +315,7 @@
             </div>
             <div style="display:flex;justify-content:space-between">
               <span style="color:var(--text-slate)">Transit Time:</span>
-              <span class="tabular-nums" style="color:#FFFFFF;font-weight:500" id="cardFlightTime">9h 40m via Helsinki/London</span>
+              <span class="tabular-nums" style="color:var(--ink-primary);font-weight:500" id="cardFlightTime">9h 40m via Helsinki/London</span>
             </div>
             <div style="display:flex;justify-content:space-between">
               <span style="color:var(--text-slate)">Pacing:</span>
@@ -532,9 +532,9 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   const highlightsCont = document.getElementById('highlightsContainer');
   if (highlightsCont && data.highlights) {
     highlightsCont.innerHTML = data.highlights.map(hl => `
-      <div style="display:flex;align-items:flex-start;gap:0.9rem;background:var(--ice-glass-dark);border:var(--border-hairline-subtle);padding:1rem 1.3rem;border-radius:var(--radius-md)">
-        <span style="color:var(--ice-cyan);font-weight:bold;margin-top:2px">&check;</span>
-        <span style="font-size:0.95rem;color:var(--text-snow);line-height:1.5">${hl}</span>
+      <div style="display:flex;align-items:flex-start;gap:0.9rem;background:var(--surface-card);border:1px solid var(--glass-border);padding:1rem 1.3rem;border-radius:var(--radius-md)">
+        <span style="color:var(--accent-primary);font-weight:bold;margin-top:2px">&check;</span>
+        <span style="font-size:0.95rem;color:var(--ink-primary);line-height:1.5">${hl}</span>
       </div>
     `).join('');
   }
@@ -545,8 +545,8 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     timelineCont.innerHTML = data.itineraryDays.map(item => `
       <div class="timeline-step">
         <div class="timeline-step-badge">${item.day}</div>
-        <h4 style="font-size:1.15rem;color:#FFFFFF;margin-bottom:0.4rem">${item.title}</h4>
-        <p style="font-size:0.92rem;color:var(--text-frost);line-height:1.6;margin:0">${item.desc}</p>
+        <h4 style="font-size:1.15rem;margin-bottom:0.4rem">${item.title}</h4>
+        <p style="font-size:0.92rem;color:var(--ink-secondary);line-height:1.6;margin:0">${item.desc}</p>
       </div>
     `).join('');
   }

@@ -151,7 +151,7 @@
 </section>
 
 <!-- Itinerary Listing Section -->
-<section style="background:#050B14;padding:60px 0 100px">
+<section style="background:var(--bg-page);padding:60px 0 100px">
   <div class="wrap">
     
     <!-- Filter Toolbar -->
@@ -164,98 +164,46 @@
       </div>
 
       <div style="font-size:0.85rem;color:var(--text-slate)">
-        Showing 6 Curated Master Itineraries
+        Showing 12 Curated Master Itineraries (Domestic, International & MICE)
       </div>
     </div>
 
     <!-- Itinerary Cards Container -->
     <div id="itineraryCardsContainer">
-      
-      <!-- 1. Iceland -->
-      <article class="itin-card reveal-init" data-pace="expedition">
-        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
-          <img src="img/banner-1.jpg" alt="Iceland Expedition" style="width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;bottom:10px;left:10px">
-            <span class="coord-tag" style="font-size:0.72rem">64&deg;08'N 21&deg;56'W</span>
-          </div>
-        </div>
 
-        <div>
-          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
-            <span class="pace-badge pace-expedition">High-Altitude Expedition</span>
-            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">7 Days / 6 Nights</span>
-          </div>
-
-          <h3 style="font-size:1.6rem;margin-bottom:0.6rem;color:#FFFFFF">
-            Iceland Arctic Glacial Circle &amp; Blue Caves
-          </h3>
-
-          <p style="font-size:0.9rem;color:var(--text-frost);line-height:1.6;margin-bottom:1rem">
-            Reykjavik &rarr; Golden Circle &rarr; Reynisfjara Black Sands &rarr; Vatnajökull Sapphire Caves &rarr; Jökulsárlón Ice Lagoon &rarr; Secret Aurora Rivers.
-          </p>
-
-          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
-            <span class="inclusion-pill">&check; Super-Jeep 4x4</span>
-            <span class="inclusion-pill">&check; Glacier Crampons</span>
-            <span class="inclusion-pill">&check; Aurora Glass Dome</span>
-            <span class="inclusion-pill">&check; Blue Lagoon Retreat</span>
-          </div>
-        </div>
-
-        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
-          <div>
-            <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Expedition Quote</span>
-            <div class="tabular-nums" style="font-size:1.8rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">₹1,25,000</div>
-            <span style="font-size:0.72rem;color:var(--text-slate)">per guest &middot; includes 5% GST</span>
-          </div>
-
-          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
-            <a class="btn-glass" href="destination-detail.html?slug=iceland-glaciers" style="font-size:0.82rem;padding:0.45rem 1rem">
-              View Day Breakdown
-            </a>
-            <a class="btn-gold-glow" href="quote.html?dest=iceland-glaciers&fare=125000" style="font-size:0.82rem;padding:0.45rem 1rem">
-              Calculate Quote
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 2. Kashmir -->
+      <!-- Kashmir Alpine & Gulmarg Glaciers -->
       <article class="itin-card reveal-init" data-pace="relaxed">
         <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
-          <img src="img/domestic-tour/kashmir.jpg" alt="Kashmir Itinerary" style="width:100%;height:100%;object-fit:cover">
+          <img src="img/domestic-tour/kashmir.jpg" alt="Kashmir Alpine & Gulmarg Glaciers" style="width:100%;height:100%;object-fit:cover" loading="lazy">
           <div style="position:absolute;bottom:10px;left:10px">
-            <span class="coord-tag" style="font-size:0.72rem">34&deg;05'N 74&deg;47'E</span>
+            <span class="coord-tag" style="font-size:0.72rem">34°05'N 74°47'E</span>
           </div>
         </div>
 
         <div>
           <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
             <span class="pace-badge pace-relaxed">Immersive &amp; Relaxed</span>
-            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">6 Days / 5 Nights</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">6 Days / 5 Nights</span>
           </div>
 
-          <h3 style="font-size:1.6rem;margin-bottom:0.6rem;color:#FFFFFF">
-            Kashmir Imperial Pines &amp; Dal Cedar Retreat
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=kashmir-alpine" style="text-decoration:none">Kashmir Alpine & Gulmarg Glaciers</a>
           </h3>
 
-          <p style="font-size:0.9rem;color:var(--text-frost);line-height:1.6;margin-bottom:1rem">
-            Srinagar Floating Flower Market &rarr; Mughal Terraced Gardens &rarr; Gulmarg Apharwat Gondola Phase 2 &rarr; Pahalgam Valley &rarr; Aru Pine Meadows.
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Whispering pine valleys, tranquil cedar houseboats, and Apharwat snow bowls.
           </p>
 
           <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
-            <span class="inclusion-pill">&check; Cedar Houseboat</span>
-            <span class="inclusion-pill">&check; Private Shikara</span>
-            <span class="inclusion-pill">&check; Gondola Phase II</span>
-            <span class="inclusion-pill">&check; Wazwan Feast</span>
+            <span class="inclusion-pill">&check; Private sunrise shikara cruise t...</span><span class="inclusion-pill">&check; Gondola Phase II ascent to 3,980...</span><span class="inclusion-pill">&check; Betaab Valley and Aru Valley pri...</span><span class="inclusion-pill">&check; Heritage stay at a handcrafted h...</span>
           </div>
         </div>
 
         <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
           <div>
-            <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Expedition Quote</span>
-            <div class="tabular-nums" style="font-size:1.8rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">₹28,500</div>
-            <span style="font-size:0.72rem;color:var(--text-slate)">per guest &middot; includes 5% GST</span>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹28,500</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
           </div>
 
           <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
@@ -269,42 +217,315 @@
         </div>
       </article>
 
-      <!-- 3. Swiss Alps -->
-      <article class="itin-card reveal-init" data-pace="balanced">
+      <!-- Royal Rajasthan Heritage Circuit -->
+      <article class="itin-card reveal-init" data-pace="relaxed">
         <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
-          <img src="img/international/canada.jpg" alt="Swiss Alps" style="width:100%;height:100%;object-fit:cover">
+          <img src="img/tours/jaisalmer.jpg" alt="Royal Rajasthan Heritage Circuit" style="width:100%;height:100%;object-fit:cover" loading="lazy">
           <div style="position:absolute;bottom:10px;left:10px">
-            <span class="coord-tag" style="font-size:0.72rem">46&deg;35'N 8&deg;02'E</span>
+            <span class="coord-tag" style="font-size:0.72rem">24°35'N 73°41'E</span>
           </div>
         </div>
 
         <div>
           <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
-            <span class="pace-badge pace-balanced">Balanced Explorer</span>
-            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">8 Days / 7 Nights</span>
+            <span class="pace-badge pace-relaxed">Heritage &amp; Royal</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">5 Days / 4 Nights</span>
           </div>
 
-          <h3 style="font-size:1.6rem;margin-bottom:0.6rem;color:#FFFFFF">
-            Swiss Grand Top of Europe Scenic Panoramic Rail
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=rajasthan-heritage" style="text-decoration:none">Royal Rajasthan Heritage Circuit</a>
           </h3>
 
-          <p style="font-size:0.9rem;color:var(--text-frost);line-height:1.6;margin-bottom:1rem">
-            Zurich &rarr; Lucerne Steamer &rarr; Mount Pilatus Cogwheel &rarr; Interlaken &rarr; Jungfraujoch Sphinx &rarr; Zermatt Matterhorn &rarr; Montreux Riviera.
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Shimmering lake palaces, gilded desert forts, and starlit dune encampments.
           </p>
 
           <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
-            <span class="inclusion-pill">&check; 1st Class Swiss Pass</span>
-            <span class="inclusion-pill">&check; Jungfraujoch Eiger Express</span>
-            <span class="inclusion-pill">&check; Matterhorn Chalet</span>
-            <span class="inclusion-pill">&check; Confiseur Workshop</span>
+            <span class="inclusion-pill">&check; Private solar-powered boat cruis...</span><span class="inclusion-pill">&check; VIP guided architectural tour of...</span><span class="inclusion-pill">&check; Exclusive private dining overloo...</span><span class="inclusion-pill">&check; Sunset camel caravan and gypsy f...</span>
           </div>
         </div>
 
         <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
           <div>
-            <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Expedition Quote</span>
-            <div class="tabular-nums" style="font-size:1.8rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">₹1,65,000</div>
-            <span style="font-size:0.72rem;color:var(--text-slate)">per guest &middot; includes 5% GST</span>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹24,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=rajasthan-heritage" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=rajasthan-heritage&fare=24000" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Kerala Backwaters & Munnar Mist -->
+      <article class="itin-card reveal-init" data-pace="relaxed">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/tours/kerala.jpg" alt="Kerala Backwaters & Munnar Mist" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">9°30'N 76°20'E</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-relaxed">Ayurvedic &amp; Relaxed</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">5 Days / 4 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=kerala-backwaters" style="text-decoration:none">Kerala Backwaters & Munnar Mist</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Rolling emerald tea plantations, spice-scented winds, and private kettuvallam cruises.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; Private air-conditioned traditio...</span><span class="inclusion-pill">&check; Sunset boat safari on Lake Periy...</span><span class="inclusion-pill">&check; Walking tea tasting session in c...</span><span class="inclusion-pill">&check; Traditional Kathakali classical ...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹22,500</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=kerala-backwaters" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=kerala-backwaters&fare=22500" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Himachal & Spiti High Passes -->
+      <article class="itin-card reveal-init" data-pace="expedition">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/tours/manali.jpg" alt="Himachal & Spiti High Passes" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">32°14'N 77°11'E</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-expedition">High-Altitude Expedition</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">6 Days / 5 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=himachal-spiti" style="text-decoration:none">Himachal & Spiti High Passes</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Atal Tunnel engineering wonders, ancient deodar groves, and glacial river valleys.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; Atal Tunnel crossing at 10,040 f...</span><span class="inclusion-pill">&check; Solang Valley adventure sports: ...</span><span class="inclusion-pill">&check; Parvati Valley riverside explora...</span><span class="inclusion-pill">&check; Ancient Hadimba wooden pagoda te...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹21,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=himachal-spiti" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=himachal-spiti&fare=21000" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Andaman Emerald Islands & Havelock -->
+      <article class="itin-card reveal-init" data-pace="balanced">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/domestic-tour/goa.jpg" alt="Andaman Emerald Islands & Havelock" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">11°40'N 92°45'E</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-balanced">Coastal &amp; Marine Explorer</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">5 Days / 4 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=andaman-islands" style="text-decoration:none">Andaman Emerald Islands & Havelock</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Radhanagar white powder beaches, neon coral reefs, and private catamaran voyages.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; Radhanagar Beach Beach No. 7 sun...</span><span class="inclusion-pill">&check; Luxury high-speed catamaran crui...</span><span class="inclusion-pill">&check; Guided snorkeling / sea-walk exc...</span><span class="inclusion-pill">&check; Sound & Light historical show at...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹32,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=andaman-islands" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=andaman-islands&fare=32000" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- North East Meghalaya & Kaziranga -->
+      <article class="itin-card reveal-init" data-pace="balanced">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/domestic-tour/meghalay.jpg" alt="North East Meghalaya & Kaziranga" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">25°34'N 91°53'E</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-balanced">Living Bridges &amp; Wildlife</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">6 Days / 5 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=meghalaya-northeast" style="text-decoration:none">North East Meghalaya & Kaziranga</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Bio-engineered living root bridges, crystal Umngot waters, and rhino safaris.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; Trek to the iconic Living Root B...</span><span class="inclusion-pill">&check; Crystal-clear country boat ride ...</span><span class="inclusion-pill">&check; Viewing the roaring plunge of No...</span><span class="inclusion-pill">&check; Open-top 4x4 jeep safari in Kazi...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹29,500</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=meghalaya-northeast" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=meghalaya-northeast&fare=29500" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Iceland Glaciers & Northern Lights -->
+      <article class="itin-card reveal-init" data-pace="expedition">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/banner-1.jpg" alt="Iceland Glaciers & Northern Lights" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">64°08'N 21°56'W</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-expedition">Arctic Glacial Expedition</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">7 Days / 6 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=iceland-glaciers" style="text-decoration:none">Iceland Glaciers & Northern Lights</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Black basalt volcanic beaches, blue ice caverns, and celestial aurora ribbons.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; Private night expedition into Va...</span><span class="inclusion-pill">&check; Super-Jeep traversal across Land...</span><span class="inclusion-pill">&check; Zodiac boat navigation among flo...</span><span class="inclusion-pill">&check; Boutique glass-domed lodge stay ...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹1,25,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=iceland-glaciers" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=iceland-glaciers&fare=125000" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Swiss Alps & Glacial Fjord Lakes -->
+      <article class="itin-card reveal-init" data-pace="balanced">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/international/canada.jpg" alt="Swiss Alps & Glacial Fjord Lakes" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">46°35'N 8°02'E</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-balanced">Scenic Alpine Explorer</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">8 Days / 7 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=swiss-alps" style="text-decoration:none">Swiss Alps & Glacial Fjord Lakes</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Cogwheel mountain railways, Top of Europe ice palaces, and crystal fjord-like lakes.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; Jungfraujoch Top of Europe cogwh...</span><span class="inclusion-pill">&check; First-Class Swiss Travel Pass wi...</span><span class="inclusion-pill">&check; Private chocolate workshop with ...</span><span class="inclusion-pill">&check; Zermatt car-free village stay wi...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹1,65,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
           </div>
 
           <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
@@ -318,147 +539,184 @@
         </div>
       </article>
 
-      <!-- 4. Ladakh -->
-      <article class="itin-card reveal-init" data-pace="expedition">
-        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
-          <img src="img/domestic-tour/leh-ladakh.jpg" alt="Ladakh Expedition" style="width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;bottom:10px;left:10px">
-            <span class="coord-tag" style="font-size:0.72rem">34&deg;09'N 77&deg;34'E</span>
-          </div>
-        </div>
-
-        <div>
-          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
-            <span class="pace-badge pace-expedition">High-Altitude Expedition</span>
-            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">7 Days / 6 Nights</span>
-          </div>
-
-          <h3 style="font-size:1.6rem;margin-bottom:0.6rem;color:#FFFFFF">
-            Trans-Himalayan Khardung La &amp; Pangong Tso
-          </h3>
-
-          <p style="font-size:0.9rem;color:var(--text-frost);line-height:1.6;margin-bottom:1rem">
-            Leh Acclimatization &rarr; Shanti Stupa &amp; Thiksey Gompa &rarr; Khardung La 17,582ft &rarr; Nubra Hunder Dunes &rarr; Pangong Tso Geodesic Domes.
-          </p>
-
-          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
-            <span class="inclusion-pill">&check; Heated Glamping Domes</span>
-            <span class="inclusion-pill">&check; Inner Line Permits</span>
-            <span class="inclusion-pill">&check; Oxygen Cylinder Backup</span>
-            <span class="inclusion-pill">&check; 4x4 Expedition Vehicle</span>
-          </div>
-        </div>
-
-        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
-          <div>
-            <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Expedition Quote</span>
-            <div class="tabular-nums" style="font-size:1.8rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">₹38,000</div>
-            <span style="font-size:0.72rem;color:var(--text-slate)">per guest &middot; includes 5% GST</span>
-          </div>
-
-          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
-            <a class="btn-glass" href="destination-detail.html?slug=leh-ladakh" style="font-size:0.82rem;padding:0.45rem 1rem">
-              View Day Breakdown
-            </a>
-            <a class="btn-gold-glow" href="quote.html?dest=leh-ladakh&fare=38000" style="font-size:0.82rem;padding:0.45rem 1rem">
-              Calculate Quote
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 5. Bali -->
+      <!-- Baku Flame Towers & Caspian Riviera -->
       <article class="itin-card reveal-init" data-pace="balanced">
         <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
-          <img src="img/international/indonesia.jpg" alt="Bali Itinerary" style="width:100%;height:100%;object-fit:cover">
+          <img src="img/international/azerbaijan.jpg" alt="Baku Flame Towers & Caspian Riviera" style="width:100%;height:100%;object-fit:cover" loading="lazy">
           <div style="position:absolute;bottom:10px;left:10px">
-            <span class="coord-tag" style="font-size:0.72rem">8&deg;20'S 115&deg;13'E</span>
+            <span class="coord-tag" style="font-size:0.72rem">40°24'N 49°53'E</span>
           </div>
         </div>
 
         <div>
           <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
-            <span class="pace-badge pace-balanced">Balanced Explorer</span>
-            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">7 Days / 6 Nights</span>
+            <span class="pace-badge pace-balanced">Silk Road &amp; Caspian Sea</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">5 Days / 4 Nights</span>
           </div>
 
-          <h3 style="font-size:1.6rem;margin-bottom:0.6rem;color:#FFFFFF">
-            Bali Volcanic Ridge &amp; Nusa Penida Sanctuary
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=baku-caspian" style="text-decoration:none">Baku Flame Towers & Caspian Riviera</a>
           </h3>
 
-          <p style="font-size:0.9rem;color:var(--text-frost);line-height:1.6;margin-bottom:1rem">
-            Ubud Rainforest Villa &rarr; Tegallalang Water Temple &rarr; Mount Batur Sunrise Jeep &rarr; Uluwatu Clifftop &rarr; Private Speedboat to Nusa Penida.
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Futuristic Zaha Hadid curves, medieval Silk Road caravanserais, and Caspian breezes.
           </p>
 
           <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
-            <span class="inclusion-pill">&check; Private Plunge Villa</span>
-            <span class="inclusion-pill">&check; 4x4 Lava Jeep</span>
-            <span class="inclusion-pill">&check; Nusa Penida Speedboat</span>
-            <span class="inclusion-pill">&check; Floating Breakfast</span>
+            <span class="inclusion-pill">&check; Heydar Aliyev Cultural Centre VI...</span><span class="inclusion-pill">&check; Gobustan National Park mud volca...</span><span class="inclusion-pill">&check; Private evening yacht cruise alo...</span><span class="inclusion-pill">&check; Ateshgah Fire Temple and Yanar D...</span>
           </div>
         </div>
 
         <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
           <div>
-            <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Expedition Quote</span>
-            <div class="tabular-nums" style="font-size:1.8rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">₹42,000</div>
-            <span style="font-size:0.72rem;color:var(--text-slate)">per guest &middot; includes 5% GST</span>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹48,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
           </div>
 
           <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
-            <a class="btn-glass" href="destination-detail.html?slug=bali-volcanic" style="font-size:0.82rem;padding:0.45rem 1rem">
+            <a class="btn-glass" href="destination-detail.html?slug=baku-caspian" style="font-size:0.82rem;padding:0.45rem 1rem">
               View Day Breakdown
             </a>
-            <a class="btn-gold-glow" href="quote.html?dest=bali-volcanic&fare=42000" style="font-size:0.82rem;padding:0.45rem 1rem">
+            <a class="btn-gold-glow" href="quote.html?dest=baku-caspian&fare=48000" style="font-size:0.82rem;padding:0.45rem 1rem">
               Calculate Quote
             </a>
           </div>
         </div>
       </article>
 
-      <!-- 6. Dubai -->
+      <!-- Thailand Island Luxe & Bangkok Horizons -->
       <article class="itin-card reveal-init" data-pace="relaxed">
         <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
-          <img src="img/tours/dubai.jpg" alt="Dubai Itinerary" style="width:100%;height:100%;object-fit:cover">
+          <img src="img/international/thailand.jpg" alt="Thailand Island Luxe & Bangkok Horizons" style="width:100%;height:100%;object-fit:cover" loading="lazy">
           <div style="position:absolute;bottom:10px;left:10px">
-            <span class="coord-tag" style="font-size:0.72rem">25&deg;12'N 55&deg;16'E</span>
+            <span class="coord-tag" style="font-size:0.72rem">7°53'N 98°23'E</span>
           </div>
         </div>
 
         <div>
           <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
-            <span class="pace-badge pace-relaxed">Immersive &amp; Relaxed</span>
-            <span class="tabular-nums" style="font-size:0.82rem;color:var(--text-slate)">6 Days / 5 Nights</span>
+            <span class="pace-badge pace-relaxed">Island Sanctuary &amp; Serenity</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">6 Days / 5 Nights</span>
           </div>
 
-          <h3 style="font-size:1.6rem;margin-bottom:0.6rem;color:#FFFFFF">
-            Dubai Marina Skyline &amp; Royal Desert Conservation
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=thailand-island" style="text-decoration:none">Thailand Island Luxe & Bangkok Horizons</a>
           </h3>
 
-          <p style="font-size:0.9rem;color:var(--text-frost);line-height:1.6;margin-bottom:1rem">
-            Private 52ft Yacht Sunset Sail &rarr; Museum of the Future &rarr; Burj Khalifa Level 148 Sky &rarr; Vintage Land Rover Safari &rarr; Sheikh Zayed Mosque.
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            Private limestone island speedboats, golden royal wats, and clifftop dining.
           </p>
 
           <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
-            <span class="inclusion-pill">&check; 52ft Luxury Yacht</span>
-            <span class="inclusion-pill">&check; Burj Khalifa Level 148</span>
-            <span class="inclusion-pill">&check; Platinum Heritage Safari</span>
-            <span class="inclusion-pill">&check; Chauffeur Limousine</span>
+            <span class="inclusion-pill">&check; Private luxury catamaran charter...</span><span class="inclusion-pill">&check; Private longtail boat glide thro...</span><span class="inclusion-pill">&check; Grand Palace and Emerald Buddha ...</span><span class="inclusion-pill">&check; Rooftop sunset cocktail dinner a...</span>
           </div>
         </div>
 
         <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
           <div>
-            <span style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase;display:block">Expedition Quote</span>
-            <div class="tabular-nums" style="font-size:1.8rem;font-weight:700;color:var(--ice-cyan);line-height:1.1">₹48,000</div>
-            <span style="font-size:0.72rem;color:var(--text-slate)">per guest &middot; includes 5% GST</span>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹38,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
           </div>
 
           <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
-            <a class="btn-glass" href="destination-detail.html?slug=dubai-skylines" style="font-size:0.82rem;padding:0.45rem 1rem">
+            <a class="btn-glass" href="destination-detail.html?slug=thailand-island" style="font-size:0.82rem;padding:0.45rem 1rem">
               View Day Breakdown
             </a>
-            <a class="btn-gold-glow" href="quote.html?dest=dubai-skylines&fare=48000" style="font-size:0.82rem;padding:0.45rem 1rem">
+            <a class="btn-gold-glow" href="quote.html?dest=thailand-island&fare=38000" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Goa Coastal Corporate Leadership Retreat -->
+      <article class="itin-card reveal-init" data-pace="balanced">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/services/mice.jpg" alt="Goa Coastal Corporate Leadership Retreat" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">15°29'N 73°49'E</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-balanced">Corporate MICE &amp; Offsite</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">4 Days / 3 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=goa-corporate-mice" style="text-decoration:none">Goa Coastal Corporate Leadership Retreat</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            5-star beachfront lawn conference, sunset yacht charters, and gala dinners.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; 5-star luxury beachfront resort ...</span><span class="inclusion-pill">&check; Exclusive sunset catamaran cockt...</span><span class="inclusion-pill">&check; Beach Olympics team building pro...</span><span class="inclusion-pill">&check; Gala award dinner with LED backd...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹18,500</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=goa-corporate-mice" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=goa-corporate-mice&fare=18500" style="font-size:0.82rem;padding:0.45rem 1rem">
+              Calculate Quote
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dubai Corporate Summit & Desert Gala -->
+      <article class="itin-card reveal-init" data-pace="relaxed">
+        <div style="position:relative;height:220px;border-radius:var(--radius-md);overflow:hidden">
+          <img src="img/tours/dubai.jpg" alt="Dubai Corporate Summit & Desert Gala" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:10px;left:10px">
+            <span class="coord-tag" style="font-size:0.72rem">25°12'N 55°16'E</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <span class="pace-badge pace-relaxed">Executive Summit &amp; Gala</span>
+            <span class="tabular-nums" style="font-size:0.82rem;color:var(--ink-secondary);font-weight:600">5 Days / 4 Nights</span>
+          </div>
+
+          <h3 class="card-title" style="font-size:1.55rem;margin-bottom:0.6rem">
+            <a href="destination-detail.html?slug=dubai-corporate-summit" style="text-decoration:none">Dubai Corporate Summit & Desert Gala</a>
+          </h3>
+
+          <p style="font-size:0.9rem;color:var(--ink-secondary);line-height:1.6;margin-bottom:1rem">
+            World-class convention arenas, private mega-yacht sails, and dune banquets.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+            <span class="inclusion-pill">&check; Private 80-ft luxury mega-yacht ...</span><span class="inclusion-pill">&check; Exclusive private desert camp bu...</span><span class="inclusion-pill">&check; VIP fast-track Burj Khalifa obse...</span><span class="inclusion-pill">&check; State-of-the-art ballroom confer...</span>
+          </div>
+        </div>
+
+        <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:0.85rem">
+          <div>
+            <span style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase;display:block;font-weight:600">Expedition Quote</span>
+            <div class="tabular-nums" style="font-size:1.8rem;font-weight:800;color:var(--accent-primary);line-height:1.1">₹42,000</div>
+            <span style="font-size:0.75rem;color:var(--ink-secondary)">per guest &middot; includes 5% GST</span>
+          </div>
+
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-glass" href="destination-detail.html?slug=dubai-corporate-summit" style="font-size:0.82rem;padding:0.45rem 1rem">
+              View Day Breakdown
+            </a>
+            <a class="btn-gold-glow" href="quote.html?dest=dubai-corporate-summit&fare=42000" style="font-size:0.82rem;padding:0.45rem 1rem">
               Calculate Quote
             </a>
           </div>

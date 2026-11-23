@@ -187,14 +187,85 @@ a {
   margin-inline: auto;
 }
 
-/* Headings with Editorial Flare */
-h1, h2, h3, h4 {
+/* Headings with Editorial Flare & High Contrast Protection */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   color: var(--text-pure);
   font-weight: 600;
   line-height: 1.12;
   margin: 0 0 0.5em;
   letter-spacing: -0.015em;
+}
+
+[data-theme="light"] h1:not(.text-on-scrim),
+[data-theme="light"] h2:not(.text-on-scrim),
+[data-theme="light"] h3:not(.text-on-scrim),
+[data-theme="light"] h4:not(.text-on-scrim),
+[data-theme="light"] h5:not(.text-on-scrim),
+[data-theme="light"] h6:not(.text-on-scrim),
+[data-theme="light"] h1:not(.text-on-scrim) a,
+[data-theme="light"] h2:not(.text-on-scrim) a,
+[data-theme="light"] h3:not(.text-on-scrim) a,
+[data-theme="light"] h4:not(.text-on-scrim) a,
+[data-theme="light"] .section-title,
+[data-theme="light"] .card-title,
+[data-theme="light"] .dest-card-title a,
+[data-theme="light"] .expedition-card h3 a,
+[data-theme="light"] .itin-card h3 a,
+[data-theme="light"] .story-card h3 a,
+[data-theme="light"] .fare-card h4,
+[data-theme="light"] .flight-result-card h4,
+[data-theme="light"] .telemetry-card h4,
+[data-theme="light"] .telemetry-item h4 {
+  color: var(--ink-primary) !important;
+}
+
+[data-theme="light"] .expedition-card h3 a:hover,
+[data-theme="light"] .itin-card h3 a:hover,
+[data-theme="light"] .story-card h3 a:hover,
+[data-theme="light"] h1 a:hover,
+[data-theme="light"] h2 a:hover,
+[data-theme="light"] h3 a:hover,
+[data-theme="light"] h4 a:hover {
+  color: var(--accent-primary) !important;
+}
+
+[data-theme="light"] .expedition-card p,
+[data-theme="light"] .itin-card p,
+[data-theme="light"] .story-card p,
+[data-theme="light"] .flight-result-card p,
+[data-theme="light"] section:not(.dest-header-banner):not(.hero-scenic-viewport) p {
+  color: var(--ink-secondary);
+}
+
+[data-theme="light"] .dest-search-input {
+  background: #FFFFFF !important;
+  color: var(--ink-primary) !important;
+  border-color: rgba(11, 29, 51, 0.18) !important;
+}
+
+[data-theme="light"] .dest-search-input::placeholder {
+  color: var(--ink-muted) !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] .dest-card-title a {
+  color: #FFFFFF;
+}
+
+/* Scrim protection for text directly over scenic photography */
+.hero-scenic-viewport h1,
+.hero-scenic-viewport h2,
+.hero-scenic-viewport h3,
+.hero-scenic-viewport p,
+.dest-header-banner h1,
+.dest-header-banner p,
+.text-on-scrim {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.65);
 }
 
 h1 { font-size: clamp(2.8rem, 6.2vw, 4.8rem); font-weight: 700; }

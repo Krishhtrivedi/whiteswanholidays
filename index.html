@@ -166,59 +166,39 @@
 <!-- ==========================================================================
      FEATURED SCENIC SPOTLIGHTS (GRID OF CINEMATIC CARDS)
      ========================================================================== -->
-<section style="padding:100px 0;background:var(--ice-bg)" aria-labelledby="featuredTitle">
+<section style="padding:100px 0;background:var(--bg-page)" aria-labelledby="featuredTitle">
   <div class="wrap">
     
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:3.2rem">
       <div>
-        <div class="coord-tag" style="margin-bottom:0.7rem">CURATED REGIONS</div>
-        <h2 id="featuredTitle" style="color:#FFFFFF;margin:0">Cinematic Destination Expeditions</h2>
+        <div class="coord-tag" style="margin-bottom:0.7rem">CURATED REGIONS &bull; INDIA &amp; BEYOND</div>
+        <h2 id="featuredTitle" style="margin:0">Cinematic Destination Expeditions</h2>
       </div>
       <a class="btn-glass" href="destinations.html">
         Explore All Expeditions &rarr;
       </a>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:2rem">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));gap:2rem">
       
-      <!-- Card 1: Iceland -->
+      <!-- Card 1: Kashmir Alpine & Gulmarg (Domestic India) -->
       <article class="dest-glass-card reveal-init stagger-1">
-        <div class="dest-card-photo">
-          <img src="img/banner-1.jpg" alt="Iceland Glaciers" loading="lazy" width="600" height="375">
-          <span class="dest-telemetry-badge">64&deg;08'N 21&deg;56'W</span>
-          <span class="dest-climate-badge">&bull; -3&deg;C Glacier</span>
-        </div>
-        <div class="dest-card-body">
-          <div style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice-cyan);font-weight:700;margin-bottom:0.35rem">NORDIC ARCTIC</div>
-          <h3 class="dest-card-title"><a href="destination-detail.html?slug=iceland-glaciers">Iceland Glaciers &amp; Aurora</a></h3>
-          <p class="dest-card-desc">Black basalt volcanic beaches, private crystal blue ice cave explorations, and dark-sky celestial aurora ribbons.</p>
-          <div class="dest-card-footer">
-            <div>
-              <div style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase">7 Days / 6 Nights</div>
-              <div class="price-display" style="font-size:1.25rem;font-weight:800;color:var(--ice-gold)">₹1,25,000 <small style="font-size:0.74rem;font-weight:400;color:var(--text-slate)">/pax</small></div>
-            </div>
-            <a class="btn-circle-flight" href="destination-detail.html?slug=iceland-glaciers" aria-label="Explore Iceland" style="width:48px;height:48px">
-              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 2: Kashmir -->
-      <article class="dest-glass-card reveal-init stagger-2">
         <div class="dest-card-photo">
           <img src="img/domestic-tour/kashmir.jpg" alt="Kashmir Alpine" loading="lazy" width="600" height="375">
           <span class="dest-telemetry-badge">34&deg;05'N 74&deg;47'E</span>
           <span class="dest-climate-badge">&bull; 14&deg;C Montane</span>
         </div>
         <div class="dest-card-body">
-          <div style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice-cyan);font-weight:700;margin-bottom:0.35rem">WESTERN HIMALAYAS</div>
-          <h3 class="dest-card-title"><a href="destination-detail.html?slug=kashmir-alpine">Kashmir Alpine &amp; High Glaciers</a></h3>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+            <span style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-warm);font-weight:700">DOMESTIC INDIA</span>
+            <span style="font-size:0.75rem;color:var(--ink-muted)">6D / 5N</span>
+          </div>
+          <h3 class="dest-card-title"><a href="destination-detail.html?slug=kashmir-alpine">Kashmir Alpine &amp; Gulmarg Glaciers</a></h3>
           <p class="dest-card-desc">Whispering pine valleys, tranquil cedar houseboats, Apharwat 4,000m gondola snow bowl, and saffron meadows.</p>
           <div class="dest-card-footer">
             <div>
-              <div style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase">6 Days / 5 Nights</div>
-              <div class="price-display" style="font-size:1.25rem;font-weight:800;color:var(--ice-gold)">₹28,500 <small style="font-size:0.74rem;font-weight:400;color:var(--text-slate)">/pax</small></div>
+              <div style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase">From SXR Airport</div>
+              <div class="price-display tabular-nums" style="font-size:1.25rem;font-weight:800;color:var(--accent-primary)">₹28,500 <small style="font-size:0.74rem;font-weight:400;color:var(--ink-muted)">/pax</small></div>
             </div>
             <a class="btn-circle-flight" href="destination-detail.html?slug=kashmir-alpine" aria-label="Explore Kashmir" style="width:48px;height:48px">
               <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -227,7 +207,111 @@
         </div>
       </article>
 
-      <!-- Card 3: Swiss Alps -->
+      <!-- Card 2: Royal Rajasthan Heritage (Domestic India) -->
+      <article class="dest-glass-card reveal-init stagger-2">
+        <div class="dest-card-photo">
+          <img src="img/tours/jaisalmer.jpg" alt="Royal Rajasthan" loading="lazy" width="600" height="375">
+          <span class="dest-telemetry-badge">24&deg;35'N 73&deg;41'E</span>
+          <span class="dest-climate-badge">&bull; 24&deg;C Regal</span>
+        </div>
+        <div class="dest-card-body">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+            <span style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-warm);font-weight:700">DOMESTIC INDIA</span>
+            <span style="font-size:0.75rem;color:var(--ink-muted)">5D / 4N</span>
+          </div>
+          <h3 class="dest-card-title"><a href="destination-detail.html?slug=rajasthan-heritage">Royal Rajasthan Heritage Circuit</a></h3>
+          <p class="dest-card-desc">Lake Pichola sunset boat sails, Mehrangarh cliffside ramparts, and luxury desert glamping under Thar stars.</p>
+          <div class="dest-card-footer">
+            <div>
+              <div style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase">From UDR Airport</div>
+              <div class="price-display tabular-nums" style="font-size:1.25rem;font-weight:800;color:var(--accent-primary)">₹24,000 <small style="font-size:0.74rem;font-weight:400;color:var(--ink-muted)">/pax</small></div>
+            </div>
+            <a class="btn-circle-flight" href="destination-detail.html?slug=rajasthan-heritage" aria-label="Explore Rajasthan" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Kerala Backwaters & Munnar (Domestic India) -->
+      <article class="dest-glass-card reveal-init stagger-3">
+        <div class="dest-card-photo">
+          <img src="img/tours/kerala.jpg" alt="Kerala Backwaters" loading="lazy" width="600" height="375">
+          <span class="dest-telemetry-badge">9&deg;30'N 76&deg;20'E</span>
+          <span class="dest-climate-badge">&bull; 22&deg;C Tropical</span>
+        </div>
+        <div class="dest-card-body">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+            <span style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-warm);font-weight:700">DOMESTIC INDIA</span>
+            <span style="font-size:0.75rem;color:var(--ink-muted)">5D / 4N</span>
+          </div>
+          <h3 class="dest-card-title"><a href="destination-detail.html?slug=kerala-backwaters">Kerala Backwaters &amp; Munnar Mist</a></h3>
+          <p class="dest-card-desc">Rolling green tea estate bungalows in Munnar, spice forest walks, and private air-conditioned kettuvallam cruises.</p>
+          <div class="dest-card-footer">
+            <div>
+              <div style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase">From COK Airport</div>
+              <div class="price-display tabular-nums" style="font-size:1.25rem;font-weight:800;color:var(--accent-primary)">₹22,500 <small style="font-size:0.74rem;font-weight:400;color:var(--ink-muted)">/pax</small></div>
+            </div>
+            <a class="btn-circle-flight" href="destination-detail.html?slug=kerala-backwaters" aria-label="Explore Kerala" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: Himachal & Spiti High Passes (Domestic India) -->
+      <article class="dest-glass-card reveal-init stagger-1">
+        <div class="dest-card-photo">
+          <img src="img/tours/manali.jpg" alt="Himachal High Passes" loading="lazy" width="600" height="375">
+          <span class="dest-telemetry-badge">32&deg;14'N 77&deg;11'E</span>
+          <span class="dest-climate-badge">&bull; 8&deg;C Alpine</span>
+        </div>
+        <div class="dest-card-body">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+            <span style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-warm);font-weight:700">DOMESTIC INDIA</span>
+            <span style="font-size:0.75rem;color:var(--ink-muted)">6D / 5N</span>
+          </div>
+          <h3 class="dest-card-title"><a href="destination-detail.html?slug=himachal-spiti">Himachal &amp; Spiti High Passes</a></h3>
+          <p class="dest-card-desc">Atal Tunnel engineering marvels, Solang adventure bowls, riverside cedar walks in Kasol, and sacred hot springs.</p>
+          <div class="dest-card-footer">
+            <div>
+              <div style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase">From KUU / IXC</div>
+              <div class="price-display tabular-nums" style="font-size:1.25rem;font-weight:800;color:var(--accent-primary)">₹21,000 <small style="font-size:0.74rem;font-weight:400;color:var(--ink-muted)">/pax</small></div>
+            </div>
+            <a class="btn-circle-flight" href="destination-detail.html?slug=himachal-spiti" aria-label="Explore Himachal" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: Iceland Glaciers & Aurora (International) -->
+      <article class="dest-glass-card reveal-init stagger-2">
+        <div class="dest-card-photo">
+          <img src="img/banner-1.jpg" alt="Iceland Glaciers" loading="lazy" width="600" height="375">
+          <span class="dest-telemetry-badge">64&deg;08'N 21&deg;56'W</span>
+          <span class="dest-climate-badge">&bull; -3&deg;C Glacier</span>
+        </div>
+        <div class="dest-card-body">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+            <span style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-teal);font-weight:700">INTERNATIONAL</span>
+            <span style="font-size:0.75rem;color:var(--ink-muted)">7D / 6N</span>
+          </div>
+          <h3 class="dest-card-title"><a href="destination-detail.html?slug=iceland-glaciers">Iceland Glaciers &amp; Aurora</a></h3>
+          <p class="dest-card-desc">Black basalt volcanic beaches, private crystal blue ice cave explorations, and dark-sky celestial aurora ribbons.</p>
+          <div class="dest-card-footer">
+            <div>
+              <div style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase">From KEF Airport</div>
+              <div class="price-display tabular-nums" style="font-size:1.25rem;font-weight:800;color:var(--accent-primary)">₹1,25,000 <small style="font-size:0.74rem;font-weight:400;color:var(--ink-muted)">/pax</small></div>
+            </div>
+            <a class="btn-circle-flight" href="destination-detail.html?slug=iceland-glaciers" aria-label="Explore Iceland" style="width:48px;height:48px">
+              <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: Swiss Alps & Fjord Lakes (International) -->
       <article class="dest-glass-card reveal-init stagger-3">
         <div class="dest-card-photo">
           <img src="img/international/canada.jpg" alt="Swiss Alps" loading="lazy" width="600" height="375">
@@ -235,13 +319,16 @@
           <span class="dest-climate-badge">&bull; 12&deg;C Alpine</span>
         </div>
         <div class="dest-card-body">
-          <div style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice-cyan);font-weight:700;margin-bottom:0.35rem">CENTRAL EUROPE</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+            <span style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-teal);font-weight:700">INTERNATIONAL</span>
+            <span style="font-size:0.75rem;color:var(--ink-muted)">8D / 7N</span>
+          </div>
           <h3 class="dest-card-title"><a href="destination-detail.html?slug=swiss-alps">Swiss Alps &amp; Glacial Fjord Lakes</a></h3>
           <p class="dest-card-desc">Cogwheel mountain railways, Top of Europe ice palaces, Zermatt Matterhorn chalets, and Belle &Eacute;poque lake steamers.</p>
           <div class="dest-card-footer">
             <div>
-              <div style="font-size:0.72rem;color:var(--text-slate);text-transform:uppercase">8 Days / 7 Nights</div>
-              <div class="price-display" style="font-size:1.25rem;font-weight:800;color:var(--ice-gold)">₹1,65,000 <small style="font-size:0.74rem;font-weight:400;color:var(--text-slate)">/pax</small></div>
+              <div style="font-size:0.72rem;color:var(--ink-muted);text-transform:uppercase">From ZRH Airport</div>
+              <div class="price-display tabular-nums" style="font-size:1.25rem;font-weight:800;color:var(--accent-primary)">₹1,65,000 <small style="font-size:0.74rem;font-weight:400;color:var(--ink-muted)">/pax</small></div>
             </div>
             <a class="btn-circle-flight" href="destination-detail.html?slug=swiss-alps" aria-label="Explore Swiss Alps" style="width:48px;height:48px">
               <svg class="flight-plane-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -258,24 +345,24 @@
 <!-- ==========================================================================
      DEDICATED ROUTE & FLIGHT BOOKING TEASER SECTION
      ========================================================================== -->
-<section style="padding:90px 0;background:linear-gradient(180deg, #050B14 0%, #091322 100%)">
+<section style="padding:90px 0;background:var(--bg-band-alt)">
   <div class="wrap">
     
     <div class="glass-panel reveal-init" style="padding:clamp(2rem, 4vw, 3.5rem);position:relative;overflow:hidden">
       <div style="max-width:680px;margin-bottom:2.4rem">
         <div class="coord-tag" style="margin-bottom:0.7rem">FLIGHTS &amp; ROUTES DESK</div>
-        <h2 style="color:#FFFFFF;margin-bottom:0.5rem">Chartered &amp; Commercial Flight Routes</h2>
-        <p style="color:var(--text-frost);font-size:1.05rem;line-height:1.6">
+        <h2 style="margin-bottom:0.5rem">Chartered &amp; Commercial Flight Routes</h2>
+        <p style="color:var(--ink-secondary);font-size:1.05rem;line-height:1.6">
           Search origin and destination airports with circular glass route swap, live fare telemetry, and dedicated cabin tiers.
         </p>
       </div>
 
       <!-- Quick Flight Search Glass Widget -->
-      <form action="flights.html" method="GET" style="display:grid;grid-template-columns:1fr auto 1fr 1fr auto;gap:0.9rem;align-items:center;background:rgba(5, 11, 20, 0.6);padding:1.4rem;border-radius:var(--radius-lg);border:var(--border-hairline)">
+      <form action="flights.html" method="GET" style="display:grid;grid-template-columns:1fr auto 1fr 1fr auto;gap:0.9rem;align-items:center;background:var(--surface-card);padding:1.4rem;border-radius:var(--radius-lg);border:var(--border-hairline)">
         
         <div>
-          <label style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block;margin-bottom:0.35rem">Departure City (Origin)</label>
-          <input type="text" name="origin" value="Ahmedabad (AMD)" style="width:100%;background:rgba(255,255,255,0.08);border:var(--border-hairline-subtle);border-radius:var(--radius-sm);padding:0.65rem 0.9rem;color:#FFFFFF;font-family:inherit;font-size:0.94rem" required>
+          <label style="font-size:0.72rem;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:0.35rem">Departure City (Origin)</label>
+          <input type="text" name="origin" value="Ahmedabad (AMD)" style="width:100%;border-radius:var(--radius-sm);padding:0.65rem 0.9rem;font-family:inherit;font-size:0.94rem" required>
         </div>
 
         <div>
@@ -285,26 +372,26 @@
         </div>
 
         <div>
-          <label style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block;margin-bottom:0.35rem">Arrival City (Destination)</label>
-          <input type="text" name="dest" value="Reykjavik (KEF)" style="width:100%;background:rgba(255,255,255,0.08);border:var(--border-hairline-subtle);border-radius:var(--radius-sm);padding:0.65rem 0.9rem;color:#FFFFFF;font-family:inherit;font-size:0.94rem" required>
+          <label style="font-size:0.72rem;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:0.35rem">Arrival City (Destination)</label>
+          <input type="text" name="dest" value="Srinagar (SXR)" style="width:100%;border-radius:var(--radius-sm);padding:0.65rem 0.9rem;font-family:inherit;font-size:0.94rem" required>
         </div>
 
         <div>
-          <label style="font-size:0.72rem;text-transform:uppercase;color:var(--text-slate);display:block;margin-bottom:0.35rem">Travel Window</label>
-          <input type="month" name="month" style="width:100%;background:rgba(255,255,255,0.08);border:var(--border-hairline-subtle);border-radius:var(--radius-sm);padding:0.65rem 0.9rem;color:#FFFFFF;font-family:inherit;font-size:0.94rem">
+          <label style="font-size:0.72rem;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:0.35rem">Travel Window</label>
+          <input type="month" name="month" style="width:100%;border-radius:var(--radius-sm);padding:0.65rem 0.9rem;font-family:inherit;font-size:0.94rem">
         </div>
 
         <div>
-          <button type="submit" class="btn-glass btn-glass-gold" style="min-height:50px">
+          <button type="submit" class="btn-glass" style="min-height:50px;background:var(--accent-primary);color:#FFFFFF !important;border:none">
             Search Flights &rarr;
           </button>
         </div>
 
       </form>
 
-      <div style="display:flex;gap:2rem;margin-top:1.4rem;flex-wrap:wrap;font-size:0.84rem;color:var(--text-slate)">
-        <span>&bull; Verified Airline Fares</span>
-        <span>&bull; Private Jet Charters Available</span>
+      <div style="display:flex;gap:2rem;margin-top:1.4rem;flex-wrap:wrap;font-size:0.84rem;color:var(--ink-muted)">
+        <span>&bull; Domestic &amp; International Fares</span>
+        <span>&bull; Island &amp; Alpine Route Presets</span>
         <span>&bull; Flexible Date Holds</span>
         <span>&bull; IATA Partner Booking</span>
       </div>
@@ -317,13 +404,13 @@
 <!-- ==========================================================================
      MULTI-PAGE DEDICATED SECTIONS HUB
      ========================================================================== -->
-<section style="padding:100px 0;background:var(--ice-surface)">
+<section style="padding:100px 0;background:var(--bg-page)">
   <div class="wrap">
     
     <div style="text-align:center;max-width:720px;margin:0 auto 3.6rem">
       <div class="coord-tag" style="margin-bottom:0.8rem">SEPARATE ROUTE ARCHITECTURE</div>
-      <h2 style="color:#FFFFFF">Explore Each Dedicated Section</h2>
-      <p style="color:var(--text-frost);font-size:1.05rem">
+      <h2>Explore Each Dedicated Section</h2>
+      <p style="color:var(--ink-secondary);font-size:1.05rem">
         Every major domain has its own dedicated page with live interactive functionality, deep editorial guides, and pricing engines.
       </p>
     </div>
@@ -333,49 +420,49 @@
       <!-- Hub 1: Destinations -->
       <a class="glass-panel reveal-init stagger-1" href="destinations.html" style="padding:2rem;display:flex;flex-direction:column;transition:transform 0.3s ease">
         <div style="font-size:2rem;margin-bottom:0.8rem">🌍</div>
-        <h3 style="font-size:1.35rem;color:#FFFFFF;margin-bottom:0.4rem">Destinations Catalog</h3>
-        <p style="color:var(--text-slate);font-size:0.88rem;flex:1;line-height:1.55">Filterable Arctic, Himalayan, and tropical destinations with altitude telemetry and season advice.</p>
-        <span style="color:var(--ice-cyan);font-weight:700;font-size:0.85rem;margin-top:1rem">Open Destinations &rarr;</span>
+        <h3 style="font-size:1.35rem;margin-bottom:0.4rem">Destinations Catalog</h3>
+        <p style="color:var(--ink-muted);font-size:0.88rem;flex:1;line-height:1.55">Filter Domestic India, International expeditions, and MICE retreats with seasonal guides.</p>
+        <span style="color:var(--accent-primary);font-weight:700;font-size:0.85rem;margin-top:1rem">Open Destinations &rarr;</span>
       </a>
 
       <!-- Hub 2: Flights -->
       <a class="glass-panel reveal-init stagger-2" href="flights.html" style="padding:2rem;display:flex;flex-direction:column;transition:transform 0.3s ease">
         <div style="font-size:2rem;margin-bottom:0.8rem">✈️</div>
-        <h3 style="font-size:1.35rem;color:#FFFFFF;margin-bottom:0.4rem">Flight Booking Desk</h3>
-        <p style="color:var(--text-slate);font-size:0.88rem;flex:1;line-height:1.55">Circular glass route controls, cabin classes, airline comparisons, and multi-city routing.</p>
-        <span style="color:var(--ice-cyan);font-weight:700;font-size:0.85rem;margin-top:1rem">Book Flights &rarr;</span>
+        <h3 style="font-size:1.35rem;margin-bottom:0.4rem">Flight Booking Desk</h3>
+        <p style="color:var(--ink-muted);font-size:0.88rem;flex:1;line-height:1.55">Circular glass route controls, cabin classes, airline comparisons, and multi-city routing.</p>
+        <span style="color:var(--accent-primary);font-weight:700;font-size:0.85rem;margin-top:1rem">Book Flights &rarr;</span>
       </a>
 
       <!-- Hub 3: Itineraries -->
       <a class="glass-panel reveal-init stagger-3" href="itineraries.html" style="padding:2rem;display:flex;flex-direction:column;transition:transform 0.3s ease">
         <div style="font-size:2rem;margin-bottom:0.8rem">🗺️</div>
-        <h3 style="font-size:1.35rem;color:#FFFFFF;margin-bottom:0.4rem">Curated Itineraries</h3>
-        <p style="color:var(--text-slate);font-size:0.88rem;flex:1;line-height:1.55">Day-by-day expedition timelines with pace filters, inclusions, map coordinates, and lodgings.</p>
-        <span style="color:var(--ice-cyan);font-weight:700;font-size:0.85rem;margin-top:1rem">View Itineraries &rarr;</span>
+        <h3 style="font-size:1.35rem;margin-bottom:0.4rem">Curated Itineraries</h3>
+        <p style="color:var(--ink-muted);font-size:0.88rem;flex:1;line-height:1.55">Day-by-day expedition timelines with pace filters, inclusions, map coordinates, and lodgings.</p>
+        <span style="color:var(--accent-primary);font-weight:700;font-size:0.85rem;margin-top:1rem">View Itineraries &rarr;</span>
       </a>
 
       <!-- Hub 4: Quote Estimator -->
       <a class="glass-panel reveal-init stagger-4" href="quote.html" style="padding:2rem;display:flex;flex-direction:column;transition:transform 0.3s ease">
         <div style="font-size:2rem;margin-bottom:0.8rem">🧮</div>
-        <h3 style="font-size:1.35rem;color:#FFFFFF;margin-bottom:0.4rem">Quote Estimator</h3>
-        <p style="color:var(--text-slate);font-size:0.88rem;flex:1;line-height:1.55">Interactive pricing engine combining flights, hotel star ranges, and transparent itemized invoices.</p>
-        <span style="color:var(--ice-cyan);font-weight:700;font-size:0.85rem;margin-top:1rem">Calculate Quote &rarr;</span>
+        <h3 style="font-size:1.35rem;margin-bottom:0.4rem">Quote Estimator</h3>
+        <p style="color:var(--ink-muted);font-size:0.88rem;flex:1;line-height:1.55">Interactive pricing engine combining flights, hotel star ranges, and transparent itemized invoices.</p>
+        <span style="color:var(--accent-primary);font-weight:700;font-size:0.85rem;margin-top:1rem">Calculate Quote &rarr;</span>
       </a>
 
       <!-- Hub 5: Journal -->
       <a class="glass-panel reveal-init stagger-1" href="journal.html" style="padding:2rem;display:flex;flex-direction:column;transition:transform 0.3s ease">
         <div style="font-size:2rem;margin-bottom:0.8rem">📖</div>
-        <h3 style="font-size:1.35rem;color:#FFFFFF;margin-bottom:0.4rem">Field Journal &amp; Stories</h3>
-        <p style="color:var(--text-slate);font-size:0.88rem;flex:1;line-height:1.55">Expedition field notes, glaciology observations, photography essays, and founding history.</p>
-        <span style="color:var(--ice-cyan);font-weight:700;font-size:0.85rem;margin-top:1rem">Read Journal &rarr;</span>
+        <h3 style="font-size:1.35rem;margin-bottom:0.4rem">Field Journal &amp; Stories</h3>
+        <p style="color:var(--ink-muted);font-size:0.88rem;flex:1;line-height:1.55">Expedition field notes, glaciology observations, photography essays, and founding history.</p>
+        <span style="color:var(--accent-primary);font-weight:700;font-size:0.85rem;margin-top:1rem">Read Journal &rarr;</span>
       </a>
 
       <!-- Hub 6: Corporate MICE -->
       <a class="glass-panel reveal-init stagger-2" href="mice.html" style="padding:2rem;display:flex;flex-direction:column;transition:transform 0.3s ease">
         <div style="font-size:2rem;margin-bottom:0.8rem">💼</div>
-        <h3 style="font-size:1.35rem;color:#FFFFFF;margin-bottom:0.4rem">Corporate MICE</h3>
-        <p style="color:var(--text-slate);font-size:0.88rem;flex:1;line-height:1.55">High-altitude retreats, executive summit planning, hotel buyouts, and delegate logistics.</p>
-        <span style="color:var(--ice-cyan);font-weight:700;font-size:0.85rem;margin-top:1rem">Plan MICE &rarr;</span>
+        <h3 style="font-size:1.35rem;margin-bottom:0.4rem">Corporate MICE</h3>
+        <p style="color:var(--ink-muted);font-size:0.88rem;flex:1;line-height:1.55">High-altitude retreats, executive summit planning, hotel buyouts, and delegate logistics.</p>
+        <span style="color:var(--accent-primary);font-weight:700;font-size:0.85rem;margin-top:1rem">Plan MICE &rarr;</span>
       </a>
 
     </div>
