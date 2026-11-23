@@ -1,0 +1,431 @@
+/* ==========================================================================
+   White Swan Holidays - Luxury Subpage Design System
+   Applied across all dedicated sections: Domestic, International, MICE,
+   Visa & Air Tickets, Medical Tourism, Corporate Gifting, Gallery, About.
+   ========================================================================== */
+
+/* Page Background & Typography */
+body {
+  background-color: #FBFBFA !important;
+  color: #2C3E50 !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  color: #0A192F !important;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  color: #C5A059 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.lead, .copy {
+  color: #5A6E85 !important;
+}
+
+/* Feature Strips */
+.strip {
+  background: #FFFFFF !important;
+  color: #0A192F !important;
+  border-top: 1px solid #E8ECEF !important;
+  border-bottom: 1px solid #E8ECEF !important;
+  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.03) !important;
+}
+
+.strip ul {
+  padding: 1rem 0 !important;
+}
+
+.strip li {
+  color: #0A192F !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+.strip li::before {
+  background: #C5A059 !important;
+  box-shadow: 0 0 8px rgba(197, 160, 89, 0.5) !important;
+}
+
+/* Section Backgrounds: Soft Alabaster, Warm Ivory & Crisp White */
+#destinations, .dest-section, .story-section, .gallery-section, .country-section,
+#visa-services, #what-we-offer, #introduction, #contact, .offices-section,
+.gallery-bottom-cta, #services, .svc-section, .types-section, .mv-section,
+#categories, #holiday-types, #occasions, .plan, #plan, #enquire, #enquiry,
+.how, .seasons-section, .values-section, .materials-section, .flight-section,
+.faq-section, .mice-overview, #what-is-mice, #best-time, #materials,
+section {
+  background: #FBFBFA !important;
+}
+
+section:nth-of-type(even) {
+  background: #FFFFFF !important;
+}
+
+/* Hero Sections: Deep Midnight Navy with Gold Accents */
+.hero, .hero-int, .hero-med, .hero-mice, .hero-gallery, .about-hero {
+  position: relative !important;
+  background-color: #081729 !important;
+  color: #FFFFFF !important;
+  isolation: isolate !important;
+}
+
+.hero::before, .hero-int::before, .hero-med::before, .hero-mice::before, .hero-gallery::before, .about-hero::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(
+    110deg,
+    rgba(6, 16, 32, 0.92) 0%,
+    rgba(9, 25, 47, 0.82) 50%,
+    rgba(13, 148, 136, 0.35) 85%,
+    rgba(197, 160, 89, 0.2) 100%
+  ) !important;
+  z-index: -1 !important;
+}
+
+.hero h1, .hero-int h1, .hero-med h1, .hero-mice h1, .hero-gallery h1, .about-hero h1 {
+  color: #FFFFFF !important;
+}
+
+.hero h1 em, .hero-int h1 em, .hero-med h1 em, .hero-mice h1 em, .hero-gallery h1 em, .about-hero h1 em {
+  color: #E2BC72 !important;
+  font-style: italic !important;
+}
+
+.hero .copy, .hero p {
+  color: #CBD5E1 !important;
+}
+
+.hero .eyebrow {
+  color: #F8E6C1 !important;
+  background: rgba(197, 160, 89, 0.15) !important;
+  border: 1px solid rgba(197, 160, 89, 0.45) !important;
+  padding: 0.35rem 0.95rem !important;
+  border-radius: 999px !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Card Elevate & Luxury Shadows Across All Subpages */
+.mv-card, .val-card, .cat-card, .mat-card, .mice-card, .c-card, .f-card,
+.type-card, .season-card, .faq-card, .hosp-card, .med-card, .svc, .ccard,
+.dest, .country-card, .gallery-item {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E8ECEF !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 14px rgba(10, 25, 47, 0.04), 0 1px 3px rgba(10, 25, 47, 0.02) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.mv-card:hover, .val-card:hover, .cat-card:hover, .mat-card:hover, .mice-card:hover,
+.c-card:hover, .f-card:hover, .type-card:hover, .season-card:hover, .faq-card:hover,
+.hosp-card:hover, .med-card:hover, .svc:hover, .ccard:hover, .country-card:hover {
+  border-color: #C5A059 !important;
+  transform: translateY(-6px) !important;
+  box-shadow: 0 18px 36px -8px rgba(10, 25, 47, 0.12), 0 4px 12px rgba(10, 25, 47, 0.04) !important;
+}
+
+.mv-card h3, .val-card h3, .cat-card h3, .mat-card h3, .mice-card h3,
+.c-card h3, .f-card h3, .type-card h3, .season-card h3, .faq-card h3,
+.hosp-card h3, .med-card h3, .svc h3, .ccard h3 {
+  color: #0A192F !important;
+  font-weight: 700 !important;
+}
+
+.mv-card p, .val-card p, .cat-card p, .mat-card p, .mice-card p,
+.c-card p, .f-card p, .type-card p, .season-card p, .faq-card p,
+.hosp-card p, .med-card p, .svc p, .ccard address {
+  color: #5A6E85 !important;
+}
+
+/* Subpage Destination Cards (`.dest`) */
+.dest {
+  border: 1.5px solid #E8ECEF !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+
+.dest:hover {
+  border-color: #C5A059 !important;
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 40px -10px rgba(10, 25, 47, 0.25) !important;
+}
+
+.dest-badge {
+  background: rgba(10, 25, 47, 0.82) !important;
+  color: #E2BC72 !important;
+  border: 1px solid rgba(197, 160, 89, 0.45) !important;
+  backdrop-filter: blur(8px) !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+}
+
+/* Why Section on Subpages */
+.why, #why-us {
+  background: linear-gradient(135deg, #06101E 0%, #0A192F 60%, #152C4D 100%) !important;
+  color: #FFFFFF !important;
+}
+
+.why h2, #why-us h2, .why h3, #why-us h3 {
+  color: #FFFFFF !important;
+}
+
+.why .lead, #why-us .lead {
+  color: #CBD5E1 !important;
+}
+
+.why .eyebrow, #why-us .eyebrow {
+  color: #D4AF37 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+}
+
+.why li {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  backdrop-filter: blur(12px) !important;
+  border-radius: 18px !important;
+}
+
+.why li:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: #C5A059 !important;
+  transform: translateY(-4px) !important;
+}
+
+.why li h3 {
+  color: #E2BC72 !important;
+}
+
+.why li p {
+  color: #CBD5E1 !important;
+}
+
+/* Interactive Tabs on Subpages */
+.tabs {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E8ECEF !important;
+  border-radius: 999px !important;
+  padding: 5px !important;
+  box-shadow: 0 2px 8px rgba(10, 25, 47, 0.04) !important;
+}
+
+.tabs button {
+  color: #0A192F !important;
+  font-weight: 600 !important;
+  border-radius: 999px !important;
+  transition: all 0.22s ease !important;
+}
+
+.tabs button[aria-selected="true"] {
+  background: linear-gradient(135deg, #0A192F 0%, #152C4D 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.18) !important;
+}
+
+/* Luxury Buttons Overhaul for Subpages */
+.btn-primary {
+  background: linear-gradient(135deg, #D4AF37 0%, #C5A059 100%) !important;
+  color: #0A192F !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 18px -2px rgba(197, 160, 89, 0.35) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #DFB76C 0%, #C5A059 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px -2px rgba(197, 160, 89, 0.45) !important;
+  color: #0A192F !important;
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #0A192F 0%, #152C4D 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 6px 18px rgba(10, 25, 47, 0.2) !important;
+}
+
+.btn-dark:hover {
+  background: linear-gradient(135deg, #05101E 0%, #0A192F 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 26px rgba(10, 25, 47, 0.3) !important;
+  color: #FFFFFF !important;
+}
+
+.btn-line {
+  border: 1.5px solid #C5A059 !important;
+  color: #0A192F !important;
+  background: #FFFFFF !important;
+}
+
+.btn-line:hover {
+  background: #FBF7EE !important;
+  border-color: #B38E46 !important;
+  transform: translateY(-2px) !important;
+  color: #0A192F !important;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #C5A059 100%) !important;
+  color: #0A192F !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.35) !important;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #DFB76C 0%, #C5A059 100%) !important;
+  transform: translateY(-2px) !important;
+  color: #0A192F !important;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  backdrop-filter: blur(8px) !important;
+  color: #FFFFFF !important;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.28) !important;
+  border-color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  color: #FFFFFF !important;
+}
+
+/* Steps on How We Plan */
+.steps li {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E8ECEF !important;
+  box-shadow: 0 6px 20px rgba(10, 25, 47, 0.04) !important;
+}
+
+.steps li:hover {
+  border-color: #C5A059 !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 32px rgba(10, 25, 47, 0.1) !important;
+}
+
+.steps li::before {
+  color: #C5A059 !important;
+}
+
+/* Service links inside cards */
+.svc .links a, .ccard a {
+  color: #C5A059 !important;
+  font-weight: 700 !important;
+}
+
+.svc .links a:hover, .ccard a:hover {
+  color: #B38E46 !important;
+}
+
+/* Topbar & Site Header on Subpages */
+.topbar {
+  background: #060E1A !important;
+  color: #CBD5E1 !important;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25) !important;
+}
+
+.topbar a {
+  color: #CBD5E1 !important;
+}
+
+.topbar a:hover {
+  color: #DFB76C !important;
+}
+
+header.site {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid #E8ECEF !important;
+  box-shadow: 0 2px 10px rgba(10, 25, 47, 0.04) !important;
+}
+
+.menu > li > a {
+  color: #0A192F !important;
+  font-weight: 500 !important;
+}
+
+.menu > li > a:hover,
+.menu > li > a.active {
+  color: #B38E46 !important;
+  background: #FBF7EE !important;
+}
+
+.sub {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E8ECEF !important;
+  box-shadow: 0 16px 36px rgba(10, 25, 47, 0.12) !important;
+  border-radius: 14px !important;
+}
+
+.sub a {
+  color: #0A192F !important;
+}
+
+.sub a:hover {
+  background: #FBF7EE !important;
+  color: #B38E46 !important;
+}
+
+/* Plan Box & Forms */
+.plan .box {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E8ECEF !important;
+  box-shadow: 0 20px 48px rgba(10, 25, 47, 0.1) !important;
+  border-radius: 24px !important;
+}
+
+.plan .side {
+  background: linear-gradient(135deg, #0A192F 0%, #152C4D 100%) !important;
+}
+
+.dots span.on {
+  background: #C5A059 !important;
+  box-shadow: 0 0 10px rgba(197, 160, 89, 0.6) !important;
+}
+
+/* Footer on Subpages */
+footer {
+  background: #06101E !important;
+  color: #CBD5E1 !important;
+  border-top: 3px solid #C5A059 !important;
+}
+
+footer h4 {
+  color: #FFFFFF !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+}
+
+footer a {
+  color: #94A3B8 !important;
+}
+
+footer a:hover {
+  color: #DFB76C !important;
+}
+
+footer .base {
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #64748B !important;
+}
+
+/* Floating WhatsApp Button */
+.wa {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45) !important;
+}
+
+.wa:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 14px 34px rgba(37, 211, 102, 0.6) !important;
+}
