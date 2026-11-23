@@ -19,6 +19,41 @@ public class QuoteCalculator {
     public static final double MIN_PROFIT_PER_PERSON = 500.0;
     public static final double MAX_PROFIT_PER_PERSON = 1500.0;
 
+    /**
+     * Hotel Star Category:
+     * 3-Star: INR 3,000 – 4,000 (default 3,500)
+     * 4-Star: INR 6,000 – 7,000 (default 6,500)
+     * 5-Star: INR 9,000 – 10,000 (default 9,500)
+     */
+    public enum StarCategory {
+        THREE_STAR("3-Star Hotel", 3000.0, 4000.0, 3500.0),
+        FOUR_STAR("4-Star Hotel", 6000.0, 7000.0, 6500.0),
+        FIVE_STAR("5-Star Luxury Resort", 9000.0, 10000.0, 9500.0);
+
+        private final String displayName;
+        private final double minRate;
+        private final double maxRate;
+        private final double defaultRate;
+
+        StarCategory(String displayName, double minRate, double maxRate, double defaultRate) {
+            this.displayName = displayName;
+            this.minRate = minRate;
+            this.maxRate = maxRate;
+            this.defaultRate = defaultRate;
+        }
+
+        public String getDisplayName() { return displayName; }
+        public double getMinRate() { return minRate; }
+        public double getMaxRate() { return maxRate; }
+        public double getDefaultRate() { return defaultRate; }
+
+        public double clampRate(double requestedRate) {
+            if (requestedRate <= 0) return defaultRate;
+            return Math.max(minRate, Math.min(maxRate, requestedRate));
+        }
+    }
+
+    // Alias for backward compatibility
     public enum HotelCategory {
         THREE_STAR("3-Star Hotel", 3000.0, 4000.0, 3500.0),
         FOUR_STAR("4-Star Hotel", 6000.0, 7000.0, 6500.0),
@@ -45,8 +80,39 @@ public class QuoteCalculator {
             if (requestedRate <= 0) return defaultRate;
             return Math.max(minRate, Math.min(maxRate, requestedRate));
         }
+
+        public StarCategory toStarCategory() {
+            return StarCategory.valueOf(this.name());
+        }
     }
 
+    /**
+     * Itinerary Style / Tier:
+     * Basic: INR 1,200 / person
+     * Curated: INR 2,500 / person
+     * Premium/MICE: INR 4,500 / person
+     */
+    public enum ItineraryStyle {
+        BASIC("Basic Sightseeing & Transfers", 1200.0, 50.0),
+        CURATED("Curated Leisure Itinerary", 2500.0, 150.0),
+        PREMIUM_MICE("Premium / Corporate MICE Itinerary", 4500.0, 300.0);
+
+        private final String displayName;
+        private final double ratePerPerson;
+        private final double marginModifier;
+
+        ItineraryStyle(String displayName, double ratePerPerson, double marginModifier) {
+            this.displayName = displayName;
+            this.ratePerPerson = ratePerPerson;
+            this.marginModifier = marginModifier;
+        }
+
+        public String getDisplayName() { return displayName; }
+        public double getRatePerPerson() { return ratePerPerson; }
+        public double getMarginModifier() { return marginModifier; }
+    }
+
+    // Alias for backward compatibility
     public enum ItineraryTier {
         BASIC("Basic Sightseeing & Transfers", 1200.0, 50.0),
         CURATED("Curated Leisure Itinerary", 2500.0, 150.0),
@@ -65,8 +131,36 @@ public class QuoteCalculator {
         public String getDisplayName() { return displayName; }
         public double getRatePerPerson() { return ratePerPerson; }
         public double getMarginModifier() { return marginModifier; }
+
+        public ItineraryStyle toItineraryStyle() {
+            return ItineraryStyle.valueOf(this.name());
+        }
     }
 
+    /**
+     * Client Tier / Profile:
+     * Repeat: base INR 550
+     * Standard: base INR 800
+     * Corporate VIP: base INR 1,100
+     */
+    public enum ClientTier {
+        REPEAT_REFERRAL("Repeat / Referral Client", 550.0),
+        STANDARD("Standard Client", 800.0),
+        CORPORATE_VIP("Corporate / VIP Client", 1100.0);
+
+        private final String displayName;
+        private final double baseMargin;
+
+        ClientTier(String displayName, double baseMargin) {
+            this.displayName = displayName;
+            this.baseMargin = baseMargin;
+        }
+
+        public String getDisplayName() { return displayName; }
+        public double getBaseMargin() { return baseMargin; }
+    }
+
+    // Alias for backward compatibility
     public enum ClientProfile {
         REPEAT_REFERRAL("Repeat / Referral Client", 550.0),
         STANDARD("Standard Client", 800.0),
@@ -82,6 +176,10 @@ public class QuoteCalculator {
 
         public String getDisplayName() { return displayName; }
         public double getBaseMargin() { return baseMargin; }
+
+        public ClientTier toClientTier() {
+            return ClientTier.valueOf(this.name());
+        }
     }
 
     /**
@@ -108,9 +206,21 @@ public class QuoteCalculator {
         public QuoteRequest rooms(int rooms) { this.rooms = rooms; return this; }
         public QuoteRequest flightFarePerPerson(double fare) { this.flightFarePerPerson = fare; return this; }
         public QuoteRequest hotelCategory(HotelCategory cat) { this.hotelCategory = cat; return this; }
+        public QuoteRequest starCategory(StarCategory cat) {
+            if (cat != null) this.hotelCategory = HotelCategory.valueOf(cat.name());
+            return this;
+        }
         public QuoteRequest customRoomRate(double rate) { this.customRoomRate = rate; return this; }
         public QuoteRequest itineraryTier(ItineraryTier tier) { this.itineraryTier = tier; return this; }
+        public QuoteRequest itineraryStyle(ItineraryStyle style) {
+            if (style != null) this.itineraryTier = ItineraryTier.valueOf(style.name());
+            return this;
+        }
         public QuoteRequest clientProfile(ClientProfile profile) { this.clientProfile = profile; return this; }
+        public QuoteRequest clientTier(ClientTier tier) {
+            if (tier != null) this.clientProfile = ClientProfile.valueOf(tier.name());
+            return this;
+        }
 
         public void validate() {
             if (guests < 1) throw new IllegalArgumentException("Guests must be at least 1");
@@ -341,5 +451,50 @@ public class QuoteCalculator {
 
     private static double round(double val) {
         return BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP).doubleValue();
+    }
+
+    /**
+     * Sample test execution in main for backend verification and direct execution.
+     */
+    public static void main(String[] args) {
+        System.out.println("=============================================================");
+        System.out.println("    WHITE SWAN HOLIDAYS - JAVA PRICING BACKEND ENGINE        ");
+        System.out.println("=============================================================");
+
+        // Test 1: Standard Kashmir 5-Night Curated Package (2 Travelers)
+        QuoteRequest standardReq = new QuoteRequest()
+                .destination("Kashmir Alpine & High Mountain Passes")
+                .travelDates("15 Oct - 20 Oct")
+                .guests(2)
+                .nights(5)
+                .rooms(1)
+                .flightFarePerPerson(7500.0)
+                .starCategory(StarCategory.FOUR_STAR)
+                .itineraryStyle(ItineraryStyle.CURATED)
+                .clientTier(ClientTier.STANDARD);
+
+        QuoteResult standardRes = calculate(standardReq);
+        System.out.println(standardRes.toCustomerSummary());
+        System.out.println();
+        System.out.println(standardRes.toInternalAdminSummary());
+
+        // Test 2: Extended Luxury Arctic Glacial Expedition (Clamping [500, 1500])
+        QuoteRequest arcticReq = new QuoteRequest()
+                .destination("Iceland Glaciers & Northern Lights")
+                .travelDates("01 Dec - 10 Dec")
+                .guests(4)
+                .nights(9)
+                .rooms(2)
+                .flightFarePerPerson(45000.0)
+                .starCategory(StarCategory.FIVE_STAR)
+                .itineraryStyle(ItineraryStyle.PREMIUM_MICE)
+                .clientTier(ClientTier.CORPORATE_VIP);
+
+        QuoteResult arcticRes = calculate(arcticReq);
+        System.out.printf("\nArctic Expedition Profit Margin Per Person: INR %.2f (Clamped <= 1500)\n",
+                arcticRes.getProfitPerPerson());
+        System.out.printf("Grand Total: INR %.2f | Per-Person: INR %.2f\n",
+                arcticRes.getGrandTotal(), arcticRes.getPerPersonTotal());
+        System.out.println("=============================================================");
     }
 }

@@ -180,7 +180,8 @@
     el.hotelMinLbl = document.getElementById('hotelMinLbl');
     el.hotelMaxLbl = document.getElementById('hotelMaxLbl');
 
-    // Confidential Staff Margin Panel Elements
+    // Admin Margin View Switch
+    el.adminMarginSwitch = document.getElementById('adminMarginSwitch');
     el.staffMarginPanel = document.getElementById('staffMarginPanel');
     el.staffFormulaText = document.getElementById('adminFormulaText');
     el.staffPerPersonVal = document.getElementById('adminPerPersonVal');
@@ -292,6 +293,13 @@
     }
 
     // Confidential Staff Margin Panel (Visible ONLY if authenticated)
+    if (el.adminMarginSwitch) {
+      el.adminMarginSwitch.checked = state.staffAuthenticated;
+    }
+    if (el.receiptAgencyRow) {
+      el.receiptAgencyRow.style.display = state.staffAuthenticated ? 'flex' : 'none';
+    }
+
     if (el.staffMarginPanel) {
       if (state.staffAuthenticated) {
         el.staffMarginPanel.style.display = 'block';
@@ -417,6 +425,7 @@
     try {
       sessionStorage.removeItem('wsh_staff_auth');
     } catch (e) {}
+    if (el.adminMarginSwitch) el.adminMarginSwitch.checked = false;
     updateUI();
     showToast('🔒 Staff mode locked. Margin view is hidden.');
   }
@@ -652,6 +661,22 @@
         window.open(waUrl, '_blank', 'noopener');
         closeBookingModal();
         showToast('✓ Quote sent! Opening WhatsApp to chat with our travel concierge...');
+      });
+    }
+
+    // Admin Margin View Switch Event
+    if (el.adminMarginSwitch) {
+      el.adminMarginSwitch.addEventListener('change', () => {
+        if (el.adminMarginSwitch.checked) {
+          if (!state.staffAuthenticated) {
+            el.adminMarginSwitch.checked = false;
+            openStaffAuthModal();
+          } else {
+            updateUI();
+          }
+        } else {
+          lockStaffMode();
+        }
       });
     }
 

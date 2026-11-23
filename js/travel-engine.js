@@ -268,6 +268,118 @@
     return '₹' + Math.round(val).toLocaleString('en-IN');
   }
 
+  // Theme System (Dark / Light with System Preference Detection & Persistence)
+  const THEME_STORAGE_KEY = 'wsh_theme';
+
+  function getPreferredTheme() {
+    try {
+      const stored = localStorage.getItem(THEME_STORAGE_KEY);
+      if (stored === 'dark' || stored === 'light') return stored;
+    } catch (e) {}
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light';
+    }
+    return 'dark';
+  }
+
+  function updateThemeToggleButtons(theme) {
+    const btns = document.querySelectorAll('.btn-theme-toggle');
+    const isDark = theme === 'dark';
+    btns.forEach(btn => {
+      btn.setAttribute('aria-label', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+      btn.title = isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme';
+      btn.innerHTML = isDark
+        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`
+        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+    });
+  }
+
+  function setTheme(theme) {
+    const validTheme = (theme === 'light') ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', validTheme);
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, validTheme);
+    } catch (e) {}
+    updateThemeToggleButtons(validTheme);
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  }
+
+  function initThemeSystem() {
+    const initial = getPreferredTheme();
+    setTheme(initial);
+
+    // Bind all theme toggles
+    document.addEventListener('click', e => {
+      const toggleBtn = e.target.closest('.btn-theme-toggle');
+      if (toggleBtn) {
+        e.preventDefault();
+        toggleTheme();
+      }
+    });
+
+    // Listen for OS theme change if user hasn't explicitly set preference
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        try {
+          if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+            setTheme(e.matches ? 'dark' : 'light');
+          }
+        } catch (err) {}
+      });
+    }
+  }
+
+  // Mobile Slide-Up Glass Drawer Handler
+  function initMobileDrawer() {
+    const drawer = document.getElementById('mobileSlideDrawer');
+    if (!drawer) return;
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Toggle triggers
+    document.addEventListener('click', e => {
+      const openBtn = e.target.closest('#mobileNavToggle, .js-drawer-open');
+      if (openBtn) {
+        e.preventDefault();
+        openDrawer();
+        return;
+      }
+
+      const closeBtn = e.target.closest('#drawerCloseBtn, .js-drawer-close');
+      if (closeBtn) {
+        e.preventDefault();
+        closeDrawer();
+        return;
+      }
+
+      // Backdrop click closes
+      if (e.target.matches('.mobile-drawer-backdrop')) {
+        closeDrawer();
+      }
+    });
+
+    // Escape key closes drawer
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+  }
+
   // Scroll Reveal Observer
   function initScrollReveal() {
     const reveals = document.querySelectorAll('.reveal-init');
@@ -302,17 +414,6 @@
         island.classList.toggle('nav-island-scrolled', window.scrollY > 30);
       }
     });
-
-    // Mobile drawer toggle
-    const toggle = document.getElementById('mobileNavToggle');
-    const menu = document.getElementById('mobileNavMenu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => {
-        const open = menu.style.display === 'flex';
-        menu.style.display = open ? 'none' : 'flex';
-        toggle.setAttribute('aria-expanded', String(!open));
-      });
-    }
   }
 
   // Route Swap Micro-Animation in Flight Booking
@@ -343,12 +444,21 @@
   window.WhiteSwanTravelData = {
     destinations: DESTINATIONS,
     getDestinationBySlug: slug => DESTINATIONS.find(d => d.slug === slug) || DESTINATIONS[0],
-    formatINR
+    formatINR,
+    theme: {
+      get: () => document.documentElement.getAttribute('data-theme') || 'dark',
+      set: setTheme,
+      toggle: toggleTheme
+    }
   };
+
+  // Run Theme Immediately
+  initThemeSystem();
 
   document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initNavIsland();
     initRouteSwap();
+    initMobileDrawer();
   });
 })();
