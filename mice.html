@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/luxury-subpages.css">
+<link rel="stylesheet" href="css/iceland-aesthetic.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -390,49 +391,42 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.15;margin:0 0 .5
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="topbar">
+<!-- Floating Frosted Island Navigation Bar -->
+<header class="iceland-nav-bar" id="icelandNav">
   <div class="wrap">
-    <div class="grp">
-      <a href="tel:+919099041625">+91 90990 41625</a>
-      <a href="mailto:info@whiteswanholidays.com">info@whiteswanholidays.com</a>
-    </div>
-    <span>Offices in Ahmedabad and Gurugram</span>
-  </div>
-</div>
+    <nav class="nav-island">
+      
+      <a class="nav-brand-mark" href="index.html" aria-label="White Swan Holidays">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+      </a>
 
-<header class="site">
-  <div class="wrap nav">
-    <a class="logo" href="index.html" aria-label="White Swan Holidays home"><img src="img/white_swan_logo.png" alt="White Swan Holidays" width="180" height="54"></a>
-    <button class="toggle" id="navToggle" aria-expanded="false" aria-controls="menuWrap" aria-label="Open menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path id="navIcon" d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-    </button>
-    <nav class="menu-wrap" id="menuWrap" aria-label="Main">
-      <ul class="menu">
+      <ul class="nav-routes">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About us</a></li>
-        <li class="has-sub">
-          <a href="international.html" aria-haspopup="true">Holidays <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" fill="none" stroke-width="1.5"/></svg></a>
-          <ul class="sub">
-            <li><a href="international.html">International holidays</a></li>
-            <li><a href="domestic.html">Holidays in India</a></li>
-            <li><a href="index.html#quote-calculator">Instant Quote Calculator</a></li>
-            <li><a href="index.html#plan">Customised holidays</a></li>
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="visa-air-ticket.html" style="color:#FF1E27;font-weight:700;background:#FFF0F2;border-radius:999px" aria-haspopup="true">Services <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" fill="none" stroke-width="1.5"/></svg></a>
-          <ul class="sub">
-            <li><a href="visa-air-ticket.html">Visa and air tickets</a></li>
-            <li><a href="mice.html" class="active" aria-current="page" style="color:#FF1E27;font-weight:700;background:#FFF0F2;border-radius:999px">MICE and corporate groups</a></li>
-            <li><a href="medical-tourism.html">Medical tourism</a></li>
-            <li><a href="corporate-gifting.html">Corporate gifting</a></li>
-            <li><a href="index.html#services">All services</a></li>
-          </ul>
-        </li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="flights.html">Flights &amp; Routes</a></li>
+        <li><a href="itineraries.html">Itineraries</a></li>
+        <li><a href="quote.html">Quote Estimator</a></li>
+        <li><a href="journal.html">Journal</a></li>
+        <li><a href="mice.html" class="active">Corporate MICE</a></li>
       </ul>
-      <div class="nav-cta"><a class="btn btn-primary btn-sm" href="index.html#quote-calculator">Instant Quote</a></div>
+
+      <!-- Action Cluster: Theme Toggle + Circular Glass Flight Button + Mobile Menu Trigger -->
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <button type="button" class="btn-theme-toggle" aria-label="Toggle Dark and Light theme" title="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line></svg>
+        </button>
+
+        <a class="btn-circle-flight" href="flights.html" aria-label="Book Flights" title="Search Flights &amp; Routes" style="width:52px;height:52px">
+          <svg class="flight-plane-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </a>
+        
+        <button type="button" id="mobileNavToggle" class="btn-circle-swap" aria-label="Toggle mobile menu" title="Open Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+
     </nav>
   </div>
 </header>
@@ -1127,68 +1121,139 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.15;margin:0 0 .5
 
 </main>
 
-<footer>
+<!-- ==========================================================================
+     MOBILE-FIRST SLIDE-UP DRAWER (< 992px)
+     ========================================================================== -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<div class="mobile-slide-drawer" id="mobileSlideDrawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+  <div class="drawer-handle-bar"></div>
+  <div class="drawer-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+      <div class="nav-brand-mark" style="padding:0">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="140" height="36">
+      </div>
+      <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="drawer-nav-list">
+      <a href="index.html" class="drawer-nav-item"><span>Home Scenic Showcase</span><span>&rarr;</span></a>
+      <a href="destinations.html" class="drawer-nav-item"><span>Destinations</span><span>&rarr;</span></a>
+      <a href="flights.html" class="drawer-nav-item"><span>Flights &amp; Routes</span><span>&rarr;</span></a>
+      <a href="itineraries.html" class="drawer-nav-item"><span>Curated Itineraries</span><span>&rarr;</span></a>
+      <a href="quote.html" class="drawer-nav-item"><span>Quote Estimator</span><span>&rarr;</span></a>
+      <a href="journal.html" class="drawer-nav-item"><span>Expedition Journal</span><span>&rarr;</span></a>
+      <a href="mice.html" class="drawer-nav-item active"><span>Corporate MICE Retreats</span><span>&rarr;</span></a>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:1rem">
+      <a class="btn-gold-glow" href="quote.html" style="width:100%;text-align:center;justify-content:center">
+        Launch Quote Estimator
+      </a>
+      <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="width:100%;text-align:center;justify-content:center;color:var(--ice-aurora)">
+        WhatsApp Concierge (+91 99258 11770)
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     MOBILE-FIRST FLOATING BOTTOM GLASS DOCK (< 768px)
+     ========================================================================== -->
+<nav class="mobile-bottom-dock" aria-label="Mobile Quick Dock">
+  <a href="index.html" class="dock-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span>Home</span>
+  </a>
+  <a href="destinations.html" class="dock-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+    <span>Explore</span>
+  </a>
+  <!-- Center Elevated Flight Button -->
+  <a href="flights.html" class="btn-circle-flight-dock" aria-label="Flights &amp; Routes" title="Flights &amp; Routes">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+    </svg>
+  </a>
+  <a href="itineraries.html" class="dock-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+    <span>Plans</span>
+  </a>
+  <a href="quote.html" class="dock-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+    <span>Quote</span>
+  </a>
+</nav>
+
+<!-- Obsidian Nordic Footer with Route Matrix -->
+<footer style="background:#03070E;color:var(--text-slate);border-top:1px solid rgba(255,255,255,0.12);padding:75px 0 35px">
   <div class="wrap">
-    <div class="cols">
+    
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:3rem;margin-bottom:3.5rem">
       <div>
-        <a class="logo-f" href="index.html"><img src="img/white_swan_logo.png" alt="White Swan Holidays" width="150" height="46" loading="lazy"></a>
-        <p style="margin:0">White Swan Holidays Pvt Ltd. Holidays, visas, air tickets and corporate MICE travel from Ahmedabad and Gurugram since 2017.</p>
+        <div style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:var(--radius-sm);padding:0.6rem 1rem;display:inline-block;margin-bottom:1.2rem;border:var(--border-hairline-subtle)">
+          <img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42">
+        </div>
+        <p style="font-size:0.9rem;line-height:1.65;max-width:360px;color:var(--text-frost)">
+          White Swan Holidays Pvt Ltd &mdash; Tailor-made luxury travel, glacial expeditions, private flights, and bespoke corporate travel from Ahmedabad and Gurugram since 2017.
+        </p>
       </div>
+
       <div>
-        <h4>Holidays</h4>
-        <ul>
-          <li><a href="international.html">International holidays</a></li>
-          <li><a href="domestic.html">Holidays in India</a></li>
-          <li><a href="index.html#plan">Customised itineraries</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Dedicated Routes</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="destinations.html" style="color:var(--text-slate)">Destinations</a></li>
+          <li><a href="flights.html" style="color:var(--text-slate)">Flights &amp; Routes</a></li>
+          <li><a href="itineraries.html" style="color:var(--text-slate)">Itineraries</a></li>
+          <li><a href="quote.html" style="color:var(--text-slate)">Quote Estimator</a></li>
+          <li><a href="journal.html" style="color:var(--text-slate)">Field Journal</a></li>
+          <li><a href="mice.html" style="color:var(--ice-cyan);font-weight:600">Corporate MICE</a></li>
         </ul>
       </div>
+
       <div>
-        <h4>Services</h4>
-        <ul>
-          <li><a href="visa-air-ticket.html">Visa and air tickets</a></li>
-          <li><a href="mice.html">MICE</a></li>
-          <li><a href="medical-tourism.html">Medical tourism</a></li>
-          <li><a href="corporate-gifting.html">Corporate gifting</a></li>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Specialist Desks</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;font-size:0.88rem">
+          <li><a href="visa-air-ticket.html" style="color:var(--text-slate)">Visa &amp; Flight Desk</a></li>
+          <li><a href="mice.html" style="color:var(--ice-cyan);font-weight:600">Corporate MICE</a></li>
+          <li><a href="medical-tourism.html" style="color:var(--text-slate)">Medical Facilitation</a></li>
+          <li><a href="corporate-gifting.html" style="color:var(--text-slate)">Corporate Gifting</a></li>
+          <li><a href="gallery.html" style="color:var(--text-slate)">Photo Gallery</a></li>
         </ul>
       </div>
+
       <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+919099041625">+91 90990 41625</a></li>
-          <li><a href="https://wa.me/919925811770" target="_blank" rel="noopener">WhatsApp +91 99258 11770</a></li>
-          <li><a href="mailto:info@whiteswanholidays.com">info@whiteswanholidays.com</a></li>
-          <li><a href="about.html">About us</a></li>
-        </ul>
+        <h4 style="color:#FFFFFF;font-size:1.15rem;margin-bottom:1.1rem">Concierge Desk</h4>
+        <p style="font-size:0.88rem;line-height:1.6;color:var(--text-frost)">
+          Ahmedabad: 501, Sun Square, Off CG Road<br>
+          Gurugram: South City II, Sector 49<br>
+          Direct: <a href="tel:+919099041625" style="color:var(--ice-cyan)">+91 90990 41625</a>
+        </p>
+        <div style="margin-top:1.1rem">
+          <a class="btn-glass" href="https://wa.me/919925811770" target="_blank" rel="noopener" style="font-size:0.82rem;padding:0.4rem 1.2rem;min-height:38px">
+            WhatsApp Concierge
+          </a>
+        </div>
       </div>
     </div>
-    <div class="base">
-      <span>© <span id="yr">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
-      <span>Corporate group packages and hotel quotes subject to confirmation at time of reservation.</span>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.82rem;color:#64748B">
+      <span>&copy; <span id="yr">2026</span> White Swan Holidays Pvt Ltd. All rights reserved.</span>
+      <span>Coordinates: 23&deg;01'N 72&deg;33'E (AMD HQ) &middot; 28&deg;24'N 77&deg;03'E (GGN)</span>
+      <a href="quote.html#staffAuthModal" style="color:#64748B;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Staff Portal</span>
+      </a>
     </div>
+
   </div>
 </footer>
 
-<!-- Floating WhatsApp Button -->
-<a class="wa" id="waFloat" href="https://wa.me/919925811770?text=Hello%20White%20Swan%20Holidays%2C%20I%20would%20like%20to%20discuss%20a%20corporate%20group%20event%20%2F%20MICE%20travel." target="_blank" rel="noopener" aria-label="Chat with White Swan Holidays on WhatsApp">
-  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.47-.73-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-3.34-2.92c-.25-.43.25-.4.72-1.34.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.48a.92.92 0 0 0-.66.31 2.78 2.78 0 0 0-.87 2.07 4.83 4.83 0 0 0 1.01 2.57 11.05 11.05 0 0 0 4.23 3.74c1.57.68 2.19.74 2.98.62.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.23-.17-.48-.29z"/></svg>
-  <span class="lbl">WhatsApp</span>
-</a>
-
+<script src="js/travel-engine.js"></script>
 <script>
 (function(){
 const WA='919925811770';
 const waLink=t=>'https://wa.me/'+WA+'?text='+encodeURIComponent(t);
 const $=id=>document.getElementById(id);
-
-// Mobile Nav Toggle
-const tg=$('navToggle'),mw=$('menuWrap'),icon=$('navIcon');
-function setMenu(open){
- tg.setAttribute('aria-expanded',String(open));tg.setAttribute('aria-label',open?'Close menu':'Open menu');
- mw.classList.toggle('open',open);document.body.classList.toggle('lock',open);
- icon.setAttribute('d',open?'M6 6l12 12M18 6L6 18':'M3 6h18M3 12h18M3 18h18');
-}
-tg.addEventListener('click',()=>setMenu(tg.getAttribute('aria-expanded')!=='true'));
 mw.addEventListener('click',e=>{if(e.target.closest('a')&&tg.offsetParent!==null)setMenu(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mw.classList.contains('open')){setMenu(false);tg.focus()}});
 addEventListener('resize',()=>{if(innerWidth>=1080&&mw.classList.contains('open'))setMenu(false)});

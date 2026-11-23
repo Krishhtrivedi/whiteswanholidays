@@ -267,10 +267,10 @@
         <div class="route-presets-wrap">
           <div class="route-presets-lbl" style="color:var(--text-slate)">Quick Itinerary Presets</div>
           <div class="route-presets-grid">
-            <button type="button" class="route-pill active" data-preset="1">Metro / Long Domestic (Kashmir, Kerala) ~&dollar;7.5k air</button>
-            <button type="button" class="route-pill" data-preset="0">Short Domestic (Goa, Udaipur) ~&dollar;4.5k air</button>
-            <button type="button" class="route-pill" data-preset="2">International / MICE (Dubai, Bali) ~&dollar;18k air</button>
-            <button type="button" class="route-pill" data-preset="3">Luxury Long-Haul (Europe, Iceland) ~&dollar;45k air</button>
+            <button type="button" class="route-pill active" data-preset="1">Metro / Long Domestic (Kashmir, Kerala) ~₹7.5k air</button>
+            <button type="button" class="route-pill" data-preset="0">Short Domestic (Goa, Udaipur) ~₹4.5k air</button>
+            <button type="button" class="route-pill" data-preset="2">International / MICE (Dubai, Bali) ~₹18k air</button>
+            <button type="button" class="route-pill" data-preset="3">Luxury Long-Haul (Europe, Iceland) ~₹45k air</button>
           </div>
         </div>
 
@@ -330,12 +330,12 @@
           </div>
           <div style="display:flex;gap:0.75rem;align-items:center">
             <div style="position:relative;flex:1">
-              <span style="position:absolute;left:12px;top:11px;font-weight:600;color:var(--text-slate)">&dollar;</span>
+              <span style="position:absolute;left:12px;top:11px;font-weight:600;color:var(--text-slate)">₹</span>
               <input type="number" id="calcFlightFare" class="input-lux-field tabular-nums" style="padding-left:26px" min="0" step="500" value="7500">
             </div>
-            <button type="button" class="dest-pill-btn" id="flightPresetShort" style="font-size:0.78rem">&dollar;4.5k Short</button>
-            <button type="button" class="dest-pill-btn" id="flightPresetMetro" style="font-size:0.78rem">&dollar;7.5k Metro</button>
-            <button type="button" class="dest-pill-btn" id="flightPresetInt" style="font-size:0.78rem">&dollar;18k Int'l</button>
+            <button type="button" class="dest-pill-btn" id="flightPresetShort" style="font-size:0.78rem">₹4.5k Short</button>
+            <button type="button" class="dest-pill-btn" id="flightPresetMetro" style="font-size:0.78rem">₹7.5k Metro</button>
+            <button type="button" class="dest-pill-btn" id="flightPresetInt" style="font-size:0.78rem">₹18k Int'l</button>
           </div>
         </div>
 
@@ -348,21 +348,21 @@
               <div class="hotel-card-stars">&#9733;&#9733;&#9733;</div>
               <div class="hotel-card-title">3-Star Boutique</div>
               <div class="hotel-card-desc">Comfortable rooms, verified hospitality, daily breakfast.</div>
-              <div class="hotel-card-range tabular-nums">&dollar;3,000 &ndash; &dollar;4,000</div>
+              <div class="hotel-card-range tabular-nums">₹3,000 &ndash; ₹4,000</div>
             </div>
 
             <div class="hotel-card selected" data-star="4">
               <div class="hotel-card-stars">&#9733;&#9733;&#9733;&#9733;</div>
               <div class="hotel-card-title">4-Star Premium</div>
               <div class="hotel-card-desc">Upscale comfort, premier views, pools &amp; curated amenities.</div>
-              <div class="hotel-card-range tabular-nums">&dollar;6,000 &ndash; &dollar;7,000</div>
+              <div class="hotel-card-range tabular-nums">₹6,000 &ndash; ₹7,000</div>
             </div>
 
             <div class="hotel-card" data-star="5">
               <div class="hotel-card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
               <div class="hotel-card-title">5-Star Luxury</div>
               <div class="hotel-card-desc">Bespoke 5-star suites, private plunge pools, butler service.</div>
-              <div class="hotel-card-range tabular-nums">&dollar;9,000 &ndash; &dollar;10,000</div>
+              <div class="hotel-card-range tabular-nums">₹9,000 &ndash; ₹10,000</div>
             </div>
 
           </div>
@@ -371,13 +371,13 @@
           <div class="slider-lux-wrap" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
             <div class="slider-lux-head">
               <span style="font-size:0.82rem;font-weight:600;color:var(--text-frost)">Adjust Room Rate within Selected Star Range</span>
-              <span id="hotelSliderVal" class="slider-lux-val tabular-nums">&dollar;6,500 /night</span>
+              <span id="hotelSliderVal" class="slider-lux-val tabular-nums">₹6,500 /night</span>
             </div>
             <input type="range" id="hotelRateSlider" min="6000" max="7000" step="100" value="6500" class="slider-lux-range">
             <div class="slider-lux-labels">
-              <span id="hotelMinLbl" class="tabular-nums">&dollar;6,000</span>
+              <span id="hotelMinLbl" class="tabular-nums">₹6,000</span>
               <span style="font-size:0.75rem;color:var(--text-slate)">Slider bounds automatically update by Star category</span>
-              <span id="hotelMaxLbl" class="tabular-nums">&dollar;7,000</span>
+              <span id="hotelMaxLbl" class="tabular-nums">₹7,000</span>
             </div>
           </div>
         </div>
@@ -390,19 +390,19 @@
             <div class="itinerary-card" data-tier="basic">
               <div class="itinerary-tier-name">Basic Sightseeing &amp; Transfers</div>
               <div class="itinerary-tier-desc">Private airport transfers, city orientation &amp; key landmark drives.</div>
-              <div class="itinerary-tier-price tabular-nums">&dollar;1,200 / person</div>
+              <div class="itinerary-tier-price tabular-nums">₹1,200 / person</div>
             </div>
 
             <div class="itinerary-card selected" data-tier="curated">
               <div class="itinerary-tier-name">Curated Leisure</div>
               <div class="itinerary-tier-desc">Private guides, curated local experiences, entry monuments &amp; day trips.</div>
-              <div class="itinerary-tier-price tabular-nums">&dollar;2,500 / person</div>
+              <div class="itinerary-tier-price tabular-nums">₹2,500 / person</div>
             </div>
 
             <div class="itinerary-card" data-tier="premium">
               <div class="itinerary-tier-name">Premium / Corporate MICE</div>
               <div class="itinerary-tier-desc">VIP fast-track access, gala banquets, conference logistics &amp; dedicated escort.</div>
-              <div class="itinerary-tier-price tabular-nums">&dollar;4,500 / person</div>
+              <div class="itinerary-tier-price tabular-nums">₹4,500 / person</div>
             </div>
 
           </div>
@@ -424,6 +424,11 @@
               <span>Corporate / VIP Client</span>
               <small style="display:block;font-size:0.72rem;font-weight:400;color:var(--text-slate)">Priority concierge tier</small>
             </button>
+          <div style="display:flex;align-items:center;gap:0.6rem">
+            <button type="button" id="staffPortalBtn" style="background:none;border:none;color:var(--text-slate);font-size:0.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:0.35rem;opacity:0.65;padding:0.25rem 0.5rem;border-radius:var(--radius-full);border:1px solid rgba(255,255,255,0.08)" title="White Swan Internal Operations">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span id="staffPortalBtnText">Advisor Access</span>
+            </button>
           </div>
         </div>
 
@@ -441,10 +446,11 @@
             </span>
           </div>
 
-          <!-- Admin Margin View Toggle -->
-          <div style="display:inline-flex;align-items:center;gap:0.55rem;background:rgba(255,255,255,0.06);padding:0.35rem 0.85rem;border-radius:var(--radius-full);border:var(--border-hairline-subtle)">
-            <label for="adminMarginSwitch" style="font-size:0.72rem;font-weight:600;color:var(--text-slate);cursor:pointer;margin:0;user-select:none">Admin Margin View</label>
-            <input type="checkbox" id="adminMarginSwitch" style="cursor:pointer;width:15px;height:15px;accent-color:var(--ice-cyan);margin:0" aria-label="Toggle internal admin margin view">
+          <!-- Staff Mode Active Indicator (Hidden from clients; visible ONLY when authorized staff logs in) -->
+          <div id="staffActiveTag" style="display:none;align-items:center;gap:0.45rem;background:rgba(223,183,108,0.18);border:1px solid var(--ice-gold);padding:0.25rem 0.75rem;border-radius:var(--radius-full);font-size:0.74rem;font-weight:700;color:var(--ice-gold)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Staff Mode Active</span>
+            <button type="button" id="btnExitStaffMode" style="background:#991B1B;color:#FFFFFF;border:none;border-radius:999px;font-size:0.68rem;font-weight:700;padding:0.15rem 0.55rem;cursor:pointer;margin-left:0.25rem" title="Lock &amp; Exit Staff Mode">Lock</button>
           </div>
         </div>
 
@@ -461,7 +467,7 @@
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem">
             <span style="font-size:0.78rem;color:#475569">Net Profit Per Person:</span>
-            <span id="adminPerPersonVal" class="tabular-nums" style="font-weight:800;color:#0A192F;font-size:0.95rem">&dollar;1,100 / person</span>
+            <span id="adminPerPersonVal" class="tabular-nums" style="font-weight:800;color:#0A192F;font-size:0.95rem">₹1,100 / person</span>
           </div>
           <div id="adminFormulaText" style="font-size:0.75rem;color:#1E293B;line-height:1.45;background:#FFFFFF;border-radius:6px;padding:0.5rem;border:1px solid #E2E8F0">
             Formula breakdown...
@@ -474,34 +480,34 @@
           <li class="receipt-line">
             <div class="receipt-line-left">
               <span class="receipt-line-title">1. Airfare / Flight Travel</span>
-              <span class="receipt-line-sub" id="receiptFlightsSub">&dollar;7,500 &times; 2 travelers</span>
+              <span class="receipt-line-sub" id="receiptFlightsSub">₹7,500 &times; 2 travelers</span>
             </div>
-            <span class="receipt-line-val tabular-nums" id="receiptFlights">&dollar;15,000</span>
+            <span class="receipt-line-val tabular-nums" id="receiptFlights">₹15,000</span>
           </li>
 
           <li class="receipt-line">
             <div class="receipt-line-left">
               <span class="receipt-line-title">2. Hotel Accommodation</span>
-              <span class="receipt-line-sub" id="receiptHotelSub">&dollar;6,500 &times; 1 room &times; 5 nights</span>
+              <span class="receipt-line-sub" id="receiptHotelSub">₹6,500 &times; 1 room &times; 5 nights</span>
             </div>
-            <span class="receipt-line-val tabular-nums" id="receiptHotel">&dollar;32,500</span>
+            <span class="receipt-line-val tabular-nums" id="receiptHotel">₹32,500</span>
           </li>
 
           <li class="receipt-line">
             <div class="receipt-line-left">
               <span class="receipt-line-title">3. Curated Itinerary &amp; Sightseeing</span>
-              <span class="receipt-line-sub" id="receiptItinerarySub">&dollar;2,500 &times; 2 travelers</span>
+              <span class="receipt-line-sub" id="receiptItinerarySub">₹2,500 &times; 2 travelers</span>
             </div>
-            <span class="receipt-line-val tabular-nums" id="receiptItinerary">&dollar;5,000</span>
+            <span class="receipt-line-val tabular-nums" id="receiptItinerary">₹5,000</span>
           </li>
 
           <!-- Agency Margin Row (Visible ONLY when Staff Auth is active) -->
           <li class="receipt-line" id="receiptAgencyRow" style="display:none;background:rgba(223,183,108,0.1);padding:0.4rem 0.6rem;border-radius:6px;border:1px dashed var(--ice-gold)">
             <div class="receipt-line-left">
               <span class="receipt-line-title" style="color:var(--ice-gold)">4. Agency Package Fee (Staff Only)</span>
-              <span class="receipt-line-sub" id="receiptAgencySub" style="color:var(--ice-gold)">&dollar;1,100 &times; 2 travelers</span>
+              <span class="receipt-line-sub" id="receiptAgencySub" style="color:var(--ice-gold)">₹1,100 &times; 2 travelers</span>
             </div>
-            <span class="receipt-line-val tabular-nums" id="receiptAgency" style="color:var(--ice-gold)">&dollar;2,200</span>
+            <span class="receipt-line-val tabular-nums" id="receiptAgency" style="color:var(--ice-gold)">₹2,200</span>
           </li>
 
           <li class="receipt-line" style="border-top:1px solid rgba(255,255,255,0.12);padding-top:0.75rem;margin-top:0.5rem">
@@ -509,7 +515,7 @@
               <span class="receipt-line-title">Package Net Subtotal</span>
               <span class="receipt-line-sub">Before statutory tax</span>
             </div>
-            <span class="receipt-line-val tabular-nums" id="receiptSubtotal" style="font-weight:700">&dollar;54,700</span>
+            <span class="receipt-line-val tabular-nums" id="receiptSubtotal" style="font-weight:700">₹54,700</span>
           </li>
 
           <li class="receipt-line">
@@ -517,7 +523,7 @@
               <span class="receipt-line-title">Govt. Travel Package GST</span>
               <span class="receipt-line-sub">Mandatory 5% GST</span>
             </div>
-            <span class="receipt-line-val tabular-nums" id="receiptGst">&dollar;2,735</span>
+            <span class="receipt-line-val tabular-nums" id="receiptGst">₹2,735</span>
           </li>
 
         </ul>
@@ -529,8 +535,8 @@
             <span style="display:block;font-size:0.75rem;color:var(--text-slate)">All taxes, hotel, flights &amp; transfers</span>
           </div>
           <div style="text-align:right">
-            <div class="receipt-total-val tabular-nums" id="receiptGrandTotal">&dollar;57,435</div>
-            <div class="receipt-per-person tabular-nums" id="receiptPerPerson">&dollar;28,718 / person</div>
+            <div class="receipt-total-val tabular-nums" id="receiptGrandTotal">₹57,435</div>
+            <div class="receipt-per-person tabular-nums" id="receiptPerPerson">₹28,718 / person</div>
           </div>
         </div>
 

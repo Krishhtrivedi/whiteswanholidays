@@ -6,10 +6,20 @@
    ========================================================================== */
 
 :root, [data-theme="dark"] {
-  /* Dark Glass Theme: Deep obsidian / midnight surfaces */
-  --ice-bg: #080F1A;
-  --ice-surface: #0F1726;
-  --ice-surface-card: rgba(15, 23, 38, 0.72);
+  /* Unified Design Tokens (Dark Glass Luxury Theme) */
+  --bg-primary: #080F1A;
+  --bg-elevated: #0F1726;
+  --glass-bg: rgba(15, 23, 38, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --text-primary: #FFFFFF;
+  --text-secondary: #CBD5E1;
+  --accent-primary: #38BDF8;
+  --accent-secondary: #DFB76C;
+
+  /* Aliased Iceland Theme Tokens */
+  --ice-bg: var(--bg-primary);
+  --ice-surface: var(--bg-elevated);
+  --ice-surface-card: var(--glass-bg);
   --ice-canvas-light: #F7F9FC;
   --ice-glass-dark: rgba(8, 15, 26, 0.78);
   --ice-glass-card: rgba(15, 23, 38, 0.65);
@@ -18,7 +28,7 @@
   --ice-glass-dock: rgba(8, 15, 26, 0.88);
 
   /* Translucent Borders */
-  --border-hairline: 1px solid rgba(255, 255, 255, 0.18);
+  --border-hairline: 1px solid var(--glass-border);
   --border-hairline-subtle: 1px solid rgba(255, 255, 255, 0.1);
   --border-hairline-gold: 1px solid rgba(223, 183, 108, 0.45);
   --border-dark-subtle: 1px solid rgba(13, 27, 47, 0.1);
@@ -28,16 +38,16 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Accent Colors (Luminous cyan & gold in dark) */
-  --ice-cyan: #38BDF8;
+  --ice-cyan: var(--accent-primary);
   --ice-aurora: #34D399;
-  --ice-gold: #DFB76C;
+  --ice-gold: var(--accent-secondary);
   --ice-gold-glow: rgba(223, 183, 108, 0.35);
   --ice-volcanic: #FB7185;
 
   /* Text Tones */
-  --text-pure: #FFFFFF;
+  --text-pure: var(--text-primary);
   --text-snow: #F1F5F9;
-  --text-frost: #CBD5E1;
+  --text-frost: var(--text-secondary);
   --text-slate: #94A3B8;
   --text-dark-body: #1E293B;
 
@@ -55,10 +65,20 @@
 }
 
 [data-theme="light"] {
-  /* Light Frosted Theme: Clean warm-alabaster / porcelain surfaces */
-  --ice-bg: #F7F9FC;
-  --ice-surface: #FFFFFF;
-  --ice-surface-card: rgba(255, 255, 255, 0.92);
+  /* Unified Design Tokens (Light Frosted Luxury Theme) */
+  --bg-primary: #F7F9FC;
+  --bg-elevated: #FFFFFF;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(15, 23, 42, 0.12);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --accent-primary: #0284C7;
+  --accent-secondary: #B45309;
+
+  /* Aliased Iceland Theme Tokens */
+  --ice-bg: var(--bg-primary);
+  --ice-surface: var(--bg-elevated);
+  --ice-surface-card: var(--glass-bg);
   --ice-canvas-light: #FFFFFF;
   --ice-glass-dark: rgba(255, 255, 255, 0.88);
   --ice-glass-card: rgba(255, 255, 255, 0.82);
@@ -67,7 +87,7 @@
   --ice-glass-dock: rgba(255, 255, 255, 0.92);
 
   /* Translucent Borders */
-  --border-hairline: 1px solid rgba(15, 23, 42, 0.12);
+  --border-hairline: 1px solid var(--glass-border);
   --border-hairline-subtle: 1px solid rgba(15, 23, 42, 0.08);
   --border-hairline-gold: 1px solid rgba(180, 83, 9, 0.45);
   --border-dark-subtle: 1px solid rgba(15, 23, 42, 0.08);
@@ -77,16 +97,16 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Accent Colors (Rich ocean-teal & warm-amber in light) */
-  --ice-cyan: #0284C7;
+  --ice-cyan: var(--accent-primary);
   --ice-aurora: #059669;
-  --ice-gold: #B45309;
+  --ice-gold: var(--accent-secondary);
   --ice-gold-glow: rgba(180, 83, 9, 0.25);
   --ice-volcanic: #E11D48;
 
   /* Text Tones (Deep slate & charcoal in light) */
-  --text-pure: #0F172A;
+  --text-pure: var(--text-primary);
   --text-snow: #1E293B;
-  --text-frost: #334155;
+  --text-frost: var(--text-secondary);
   --text-slate: #64748B;
   --text-dark-body: #0F172A;
 
@@ -940,6 +960,22 @@ header.iceland-nav-bar {
   background: rgba(255, 255, 255, 0.88);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .nav-brand-mark {
+  background: rgba(8, 15, 26, 0.88);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+}
+
+[data-theme="light"] .drawer-content .nav-brand-mark {
+  background: rgba(8, 15, 26, 0.92);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
 }
 
 [data-theme="light"] .nav-routes a {

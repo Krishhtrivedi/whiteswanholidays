@@ -180,8 +180,10 @@
     el.hotelMinLbl = document.getElementById('hotelMinLbl');
     el.hotelMaxLbl = document.getElementById('hotelMaxLbl');
 
-    // Admin Margin View Switch
+    // Admin / Staff Margin View
     el.adminMarginSwitch = document.getElementById('adminMarginSwitch');
+    el.staffActiveTag = document.getElementById('staffActiveTag');
+    el.btnExitStaffMode = document.getElementById('btnExitStaffMode');
     el.staffMarginPanel = document.getElementById('staffMarginPanel');
     el.staffFormulaText = document.getElementById('adminFormulaText');
     el.staffPerPersonVal = document.getElementById('adminPerPersonVal');
@@ -295,6 +297,9 @@
     // Confidential Staff Margin Panel (Visible ONLY if authenticated)
     if (el.adminMarginSwitch) {
       el.adminMarginSwitch.checked = state.staffAuthenticated;
+    }
+    if (el.staffActiveTag) {
+      el.staffActiveTag.style.display = state.staffAuthenticated ? 'inline-flex' : 'none';
     }
     if (el.receiptAgencyRow) {
       el.receiptAgencyRow.style.display = state.staffAuthenticated ? 'flex' : 'none';
@@ -699,6 +704,10 @@
       el.btnLockStaffMode.addEventListener('click', lockStaffMode);
     }
 
+    if (el.btnExitStaffMode) {
+      el.btnExitStaffMode.addEventListener('click', lockStaffMode);
+    }
+
     if (el.staffModalClose) {
       el.staffModalClose.addEventListener('click', closeStaffAuthModal);
     }
@@ -799,6 +808,13 @@
     initElements();
     bindEvents();
     updateUI();
+
+    // Check URL hash for direct staff entry (e.g. quote.html#staff or quote.html#staffAuthModal)
+    if (window.location.hash === '#staff' || window.location.hash === '#staffAuthModal' || window.location.hash === '#admin') {
+      setTimeout(() => {
+        if (!state.staffAuthenticated) openStaffAuthModal();
+      }, 150);
+    }
   });
 
   // Expose API for staff or unit inspection
