@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dynamic Trip &amp; Package Quote Calculator | White Swan Holidays</title>
 <meta name="description" content="Instant luxury trip and holiday package quote calculator. Dynamic hotel tiers, flight fare inputs, curated itinerary tiers, 5% GST, and instant WhatsApp booking.">
 <link rel="canonical" href="https://whiteswanholidays.com/quote.html">
@@ -482,14 +482,16 @@
             <label for="calcFlightFare">Flight Fare per Person (INR)</label>
             <span style="font-size:0.8rem;color:var(--text-slate)">Enter 0 if booking own flights</span>
           </div>
-          <div style="display:flex;gap:0.75rem;align-items:center">
-            <div style="position:relative;flex:1">
+          <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap">
+            <div style="position:relative;flex:1 1 180px;min-width:160px">
               <span style="position:absolute;left:12px;top:11px;font-weight:600;color:var(--text-slate)">₹</span>
               <input type="number" id="calcFlightFare" class="input-lux-field tabular-nums" style="padding-left:26px" min="0" step="500" value="7500">
             </div>
-            <button type="button" class="dest-pill-btn" id="flightPresetShort" style="font-size:0.78rem">₹4.5k Short</button>
-            <button type="button" class="dest-pill-btn" id="flightPresetMetro" style="font-size:0.78rem">₹7.5k Metro</button>
-            <button type="button" class="dest-pill-btn" id="flightPresetInt" style="font-size:0.78rem">₹18k Int'l</button>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+              <button type="button" class="dest-pill-btn" id="flightPresetShort" style="font-size:0.78rem">₹4.5k Short</button>
+              <button type="button" class="dest-pill-btn" id="flightPresetMetro" style="font-size:0.78rem">₹7.5k Metro</button>
+              <button type="button" class="dest-pill-btn" id="flightPresetInt" style="font-size:0.78rem">₹18k Int'l</button>
+            </div>
           </div>
         </div>
 
@@ -910,7 +912,7 @@
 <footer style="background:#03070E;color:var(--text-slate);border-top:1px solid rgba(255,255,255,0.12);padding:75px 0 35px">
   <div class="wrap">
     
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:3rem;margin-bottom:3.5rem">
+    <div class="footer-nav-grid">
       <div>
         <div class="wsh-logo-chip" style="margin-bottom:1.2rem"><img src="img/white_swan_logo.png" alt="White Swan Holidays" width="160" height="42"></div>
         <p style="font-size:0.9rem;line-height:1.65;max-width:360px;color:var(--text-frost)">
