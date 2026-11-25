@@ -40,6 +40,7 @@
       { href: 'index.html', label: 'Home' },
       { href: 'domestic.html', label: 'Domestic India' },
       { href: 'international.html', label: 'International' },
+      { href: 'events.html', label: 'Trips & Events' },
       { href: 'ai-planner.html', label: 'AI Planner' },
       { href: 'services.html', label: 'Services' },
       { href: 'contact.html', label: 'Contact' }
@@ -160,6 +161,7 @@
                 <ul>
                   <li><a href="domestic.html">Domestic India Tours</a></li>
                   <li><a href="international.html">International Holidays</a></li>
+                  <li><a href="events.html">Trips &amp; Events Gallery</a></li>
                   <li><a href="ai-planner.html">AI Trip Planner</a></li>
                   <li><a href="inquiry.html">Custom Quote &amp; Inquiry</a></li>
                 </ul>
@@ -389,10 +391,187 @@
     }
   });
 
+  function getEmbedVideoUrl(url) {
+    if (!url) return null;
+    const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{6,})/);
+    if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`;
+    const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+    if (vimeoMatch) return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`;
+    return null;
+  }
+
+  let isLightboxOpen = false;
+
+  function openEventLightbox(ev) {
+    if (!ev) return;
+    isLightboxOpen = true;
+    let lb = document.getElementById('wshEventLightbox');
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.id = 'wshEventLightbox';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.style.cssText = 'position:fixed;inset:0;z-index:2100;background:rgba(9,13,22,0.88);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:1rem;';
+      lb.innerHTML = `
+        <div class="wsh-card" style="width:min(880px, 100%);max-height:92vh;overflow-y:auto;padding:0;box-shadow:var(--shadow-lg)">
+          <div id="wshLbMedia" style="position:relative;background:#000;aspect-ratio:16/9;max-height:60vh;display:flex;align-items:center;justify-content:center;overflow:hidden"></div>
+          <div style="padding:1.4rem 1.6rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem">
+              <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap">
+                <span id="wshLbBadge" class="wsh-badge badge-amber"></span>
+                <span id="wshLbLoc" style="font-size:0.82rem;font-weight:600;color:var(--ink-muted)"></span>
+              </div>
+              <button type="button" id="wshLbCloseBtn" class="btn btn-outline btn-sm">&times; Close</button>
+            </div>
+            <h3 id="wshLbTitle" style="margin-bottom:0.4rem"></h3>
+            <p id="wshLbCaption" style="font-size:0.94rem;margin-bottom:1.15rem"></p>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+              <a id="wshLbPlanBtn" href="inquiry.html" class="btn btn-marigold">Plan a Similar Trip / Event &rarr;</a>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(lb);
+
+      const closeLb = () => {
+        lb.style.display = 'none';
+        lb.querySelector('#wshLbMedia').innerHTML = '';
+        isLightboxOpen = false;
+      };
+      lb.querySelector('#wshLbCloseBtn').addEventListener('click', closeLb);
+      lb.addEventListener('click', e => {
+        if (e.target === lb) closeLb();
+      });
+      window.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && lb.style.display === 'flex') closeLb();
+      });
+    }
+
+    const mediaBox = lb.querySelector('#wshLbMedia');
+    if (ev.mediaFormat === 'Video') {
+      const embed = getEmbedVideoUrl(ev.mediaUrl);
+      if (embed) {
+        mediaBox.innerHTML = `<iframe src="${embed}" style="width:100%;height:100%;border:0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+      } else {
+        mediaBox.innerHTML = `<video src="${ev.mediaUrl}" poster="${ev.posterUrl || ''}" controls autoplay playsinline style="width:100%;height:100%;object-fit:contain"></video>`;
+      }
+    } else {
+      mediaBox.innerHTML = `<img src="${ev.mediaUrl}" alt="${ev.title}" style="width:100%;height:100%;object-fit:contain">`;
+    }
+
+    const isEvent = ev.entryType === 'Organized Event';
+    const badge = lb.querySelector('#wshLbBadge');
+    badge.className = `wsh-badge ${isEvent ? 'badge-sky' : 'badge-amber'}`;
+    badge.textContent = isEvent ? 'Organized Event' : 'Trip Memory';
+    lb.querySelector('#wshLbLoc').textContent = ev.locationDate || '';
+    lb.querySelector('#wshLbTitle').textContent = ev.title;
+    lb.querySelector('#wshLbCaption').textContent = ev.caption || '';
+
+    const inqType = isEvent ? 'Corporate Event / MICE' : 'Both / Custom';
+    lb.querySelector('#wshLbPlanBtn').href = `inquiry.html?type=${encodeURIComponent(inqType)}&package=${encodeURIComponent(ev.title)}&notes=${encodeURIComponent('Inspired by: ' + ev.title + ' (' + (ev.locationDate || '') + ')')}`;
+
+    lb.style.display = 'flex';
+  }
+
+  function initEventAutoSlider(containerId, items) {
+    const root = document.getElementById(containerId);
+    if (!root) return;
+    if (!items || !items.length) {
+      root.innerHTML = `<div class="wsh-card" style="padding:2.5rem;text-align:center"><p style="margin:0">No trip or event highlights added yet.</p></div>`;
+      return;
+    }
+
+    let currentIdx = 0;
+    let isHovered = false;
+    let progress = 0;
+    const INTERVAL_MS = 4000;
+    const TICK_MS = 50;
+
+    root.innerHTML = `
+      <div class="wsh-slider-shell" id="${containerId}_shell">
+        ${items.map((ev, idx) => {
+          const thumb = ev.mediaFormat === 'Video' ? (ev.posterUrl || 'img/tours/dubai.jpg') : ev.mediaUrl;
+          const isEvent = ev.entryType === 'Organized Event';
+          return `
+            <div class="wsh-slide-item ${idx === 0 ? 'active' : ''}" data-idx="${idx}">
+              <img src="${thumb}" alt="${ev.title}">
+              <div class="wsh-slide-scrim"></div>
+              ${ev.mediaFormat === 'Video' ? `
+                <div class="wsh-video-play-badge" title="Play Video Highlight">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+                </div>
+              ` : ''}
+              <div class="wsh-slide-caption">
+                <div style="display:flex;gap:0.45rem;flex-wrap:wrap;align-items:center">
+                  <span class="wsh-badge ${isEvent ? 'badge-sky' : 'badge-amber'}">${isEvent ? 'Organized Event' : 'Trip Memory'}</span>
+                  <span class="wsh-badge badge-slate" style="background:rgba(255,255,255,0.18);color:#FFFFFF;border:none">${ev.mediaFormat.toUpperCase()}</span>
+                  <span style="font-size:0.8rem;color:#CBD5E1;font-weight:600">${ev.locationDate || ''}</span>
+                </div>
+                <h3>${ev.title}</h3>
+                <p>${ev.caption || ''}</p>
+              </div>
+            </div>
+          `;
+        }).join('')}
+
+        <button type="button" class="wsh-slider-arrow wsh-slider-prev" aria-label="Previous slide">&lsaquo;</button>
+        <button type="button" class="wsh-slider-arrow wsh-slider-next" aria-label="Next slide">&rsaquo;</button>
+        <div class="wsh-slider-dots">
+          ${items.map((_, i) => `<button type="button" class="wsh-slider-dot ${i === 0 ? 'active' : ''}" data-dot="${i}" aria-label="Slide ${i + 1}"></button>`).join('')}
+        </div>
+        <div class="wsh-slider-progress" id="${containerId}_progress"></div>
+      </div>
+    `;
+
+    const shell = root.querySelector('.wsh-slider-shell');
+    const slides = root.querySelectorAll('.wsh-slide-item');
+    const dots = root.querySelectorAll('.wsh-slider-dot');
+    const bar = root.querySelector(`#${containerId}_progress`);
+
+    function goTo(idx) {
+      currentIdx = (idx + items.length) % items.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === currentIdx));
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentIdx));
+      progress = 0;
+      if (bar) bar.style.width = '0%';
+    }
+
+    root.querySelector('.wsh-slider-prev').addEventListener('click', e => { e.stopPropagation(); goTo(currentIdx - 1); });
+    root.querySelector('.wsh-slider-next').addEventListener('click', e => { e.stopPropagation(); goTo(currentIdx + 1); });
+    dots.forEach(d => d.addEventListener('click', e => { e.stopPropagation(); goTo(Number(d.dataset.dot)); }));
+    slides.forEach(s => s.addEventListener('click', () => openEventLightbox(items[Number(s.dataset.idx)])));
+
+    shell.addEventListener('mouseenter', () => { isHovered = true; });
+    shell.addEventListener('mouseleave', () => { isHovered = false; });
+
+    // Mobile Swipe Support
+    let touchStartX = 0;
+    shell.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    shell.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        goTo(diff > 0 ? currentIdx + 1 : currentIdx - 1);
+      }
+    }, { passive: true });
+
+    if (root._wshTimer) clearInterval(root._wshTimer);
+    root._wshTimer = setInterval(() => {
+      if (isHovered || isLightboxOpen || items.length <= 1) return;
+      progress += (TICK_MS / INTERVAL_MS) * 100;
+      if (progress >= 100) {
+        goTo(currentIdx + 1);
+      } else if (bar) {
+        bar.style.width = `${progress}%`;
+      }
+    }, TICK_MS);
+  }
+
   window.WSHShell = {
     renderPackageCard,
     showToast,
     syncThemeButtons,
-    openWhatsAppChooser
+    openWhatsAppChooser,
+    initEventAutoSlider,
+    openEventLightbox
   };
 })();

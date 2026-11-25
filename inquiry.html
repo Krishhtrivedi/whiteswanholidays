@@ -41,13 +41,14 @@
           </a>
         </div>
 
-        <!-- 1. Tour Category Toggle -->
+        <!-- 1. Tour / Event Category Toggle -->
         <div style="margin-bottom:1.4rem">
-          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.5rem">1. Tour Category</label>
-          <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:0.55rem">
+          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.5rem">1. Tour / Event Category</label>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 140px), 1fr));gap:0.55rem">
             <button type="button" class="btn btn-marigold btn-sm inq-cat-btn active" data-cat="Domestic">Domestic (India)</button>
             <button type="button" class="btn btn-outline btn-sm inq-cat-btn" data-cat="International">International</button>
-            <button type="button" class="btn btn-outline btn-sm inq-cat-btn" data-cat="Both / Multi-Destination">Both / Multi</button>
+            <button type="button" class="btn btn-outline btn-sm inq-cat-btn" data-cat="Corporate Event / MICE">Corporate Event / MICE</button>
+            <button type="button" class="btn btn-outline btn-sm inq-cat-btn" data-cat="Both / Custom">Both / Custom</button>
           </div>
         </div>
 
@@ -198,13 +199,13 @@
 
     function populatePackages() {
       const all = window.WSHStore.getPackages({ onlyActive: true });
-      const filtered = selectedCat === 'Both / Multi-Destination'
+      const filtered = (selectedCat === 'Both / Custom' || selectedCat === 'Corporate Event / MICE')
         ? all
         : all.filter(p => p.category.toLowerCase() === selectedCat.toLowerCase());
 
       pkgSelect.innerHTML = filtered.map(p =>
         `<option value="${p.refCode}" data-title="${p.title}">${p.title} (${p.refCode}) — ${window.WSHStore.formatINR(p.price)}</option>`
-      ).join('') + `<option value="CUSTOM" data-title="Custom Tailor-Made Holiday">Custom Tailor-Made Holiday</option>`;
+      ).join('') + `<option value="CUSTOM" data-title="${selectedCat === 'Corporate Event / MICE' ? 'Custom Corporate MICE / Event' : 'Custom Tailor-Made Holiday'}">${selectedCat === 'Corporate Event / MICE' ? 'Custom Corporate MICE / Event' : 'Custom Tailor-Made Holiday'}</option>`;
 
       const paramRef = params.get('ref');
       if (paramRef) {

@@ -223,6 +223,7 @@
       <nav style="flex:1">
         <button type="button" class="admin-nav-btn active" data-view="overview">&#128202; Dashboard Overview</button>
         <button type="button" class="admin-nav-btn" data-view="packages">&#127757; Package Manager</button>
+        <button type="button" class="admin-nav-btn" data-view="events">&#127909; Trips &amp; Events Media</button>
         <button type="button" class="admin-nav-btn" data-view="referrals">&#127915; Referral Codes</button>
         <button type="button" class="admin-nav-btn" data-view="inquiries">&#128172; Inquiries &amp; CRM</button>
       </nav>
@@ -294,6 +295,25 @@
             <tbody id="adminPackagesBody"></tbody>
           </table>
         </div>
+      </section>
+
+      <!-- 2B. TRIPS & EVENTS MEDIA MANAGER -->
+      <section id="view-events" class="admin-section" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem">
+          <div>
+            <h1 style="font-size:1.9rem;margin:0">Trips &amp; Events Media Manager</h1>
+            <p style="margin:0;font-size:0.9rem">Add or delete photos &amp; videos. Items sync immediately to Home &amp; /events auto-sliders.</p>
+          </div>
+          <button type="button" id="addEvtBtn" class="btn btn-marigold">+ Add Photo / Video</button>
+        </div>
+
+        <div style="display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap">
+          <button type="button" class="btn btn-marigold btn-sm evt-admin-tab active" data-type="all">All Media</button>
+          <button type="button" class="btn btn-outline btn-sm evt-admin-tab" data-type="Trip Memory">Trips Made by Us</button>
+          <button type="button" class="btn btn-outline btn-sm evt-admin-tab" data-type="Organized Event">Events Done by Us</button>
+        </div>
+
+        <div class="wsh-pkg-grid" id="adminEventsGrid"></div>
       </section>
 
       <!-- 3. REFERRAL CODE MANAGER -->
@@ -483,6 +503,72 @@
   </div>
 </div>
 
+<!-- TRIPS & EVENTS MEDIA MODAL -->
+<div class="admin-modal" id="evtModal">
+  <div class="admin-modal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <h3 style="margin:0">Add / Edit Trip or Event Media</h3>
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('evtModal')">&times;</button>
+    </div>
+    <form id="evtForm" style="display:grid;gap:0.85rem">
+      <input type="hidden" id="editEvtId">
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Entry Type</label>
+          <select id="editEvtType">
+            <option value="Trip Memory">Trip Memory (Tour Conducted)</option>
+            <option value="Organized Event">Organized Event (MICE / Wedding / Corporate)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Media Format</label>
+          <select id="editEvtFormat">
+            <option value="Photo">Photo</option>
+            <option value="Video">Video (MP4 / YouTube / Upload)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Title</label>
+          <input type="text" id="editEvtTitle" required placeholder="45-Member Gujarat Group Tour to Kashmir">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Location &amp; Date</label>
+          <input type="text" id="editEvtLoc" required placeholder="Gulmarg, Kashmir • Oct 2026">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Photo / Video URL (Image path, MP4 URL, or YouTube link)</label>
+        <input type="text" id="editEvtUrl" required placeholder="img/domestic-tour/kashmir.jpg or https://youtu.be/...">
+      </div>
+
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Or Upload Photo / Video File (Preview)</label>
+          <input type="file" id="editEvtFile" accept="image/*,video/*" style="padding:0.4rem">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Video Poster / Thumbnail URL (Optional)</label>
+          <input type="text" id="editEvtPoster" placeholder="img/tours/dubai.jpg">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Description / Caption</label>
+        <textarea id="editEvtCaption" rows="3" placeholder="Short story about the trip or organized event..."></textarea>
+      </div>
+
+      <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.86rem;font-weight:600">
+        <input type="checkbox" id="editEvtSlider" checked style="width:auto;min-height:auto"> Show in Home &amp; Events Auto-Slider
+      </label>
+      <button type="submit" class="btn btn-marigold">Save Media Highlight</button>
+    </form>
+  </div>
+</div>
+
 <script src="js/wsh-store.js"></script>
 <script src="js/wsh-shell.js"></script>
 <script>
@@ -495,6 +581,7 @@
     const dashView = document.getElementById('adminDashboardView');
     const sidebar = document.getElementById('adminSidebar');
     let pkgCatFilter = 'Domestic';
+    let evtTypeFilter = 'all';
 
     function checkAuth() {
       const authed = window.WSHStore.isAdminLoggedIn();
@@ -552,6 +639,7 @@
       const pkgs = window.WSHStore.getPackages();
       const refs = window.WSHStore.getReferrals();
       const inqs = window.WSHStore.getInquiries();
+      const evts = window.WSHStore.getEvents();
       const domCount = inqs.filter(i => i.category === 'Domestic').length;
       const intCount = inqs.filter(i => i.category === 'International').length;
       const topRef = [...refs].sort((a, b) => (b.usedCount || 0) - (a.usedCount || 0))[0];
@@ -567,15 +655,15 @@
           <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${pkgs.filter(p => p.active !== false).length}</div>
           <div style="font-size:0.78rem;color:var(--ink-slate)">${pkgs.length} Total Catalog</div>
         </div>
-        <div class="wsh-card" style="padding:1.25rem;background:var(--tint-lavender)">
-          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-lavender-text)">ACTIVE REFERRAL CODES</div>
-          <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${refs.filter(r => r.active !== false).length}</div>
-          <div style="font-size:0.78rem;color:var(--ink-slate)">Partner &amp; Friend Network</div>
-        </div>
         <div class="wsh-card" style="padding:1.25rem;background:var(--tint-emerald)">
-          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-emerald-text)">TOP REFERRAL CODE</div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-emerald-text)">TRIP &amp; EVENT MEDIA</div>
+          <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${evts.length}</div>
+          <div style="font-size:0.78rem;color:var(--ink-slate)">${evts.filter(e => e.mediaFormat === 'Photo').length} Photos &bull; ${evts.filter(e => e.mediaFormat === 'Video').length} Videos</div>
+        </div>
+        <div class="wsh-card" style="padding:1.25rem;background:var(--tint-lavender)">
+          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-lavender-text)">TOP REFERRAL CODE</div>
           <div style="font-size:1.4rem;font-weight:800;margin-top:0.2rem">${topRef ? topRef.code : '—'}</div>
-          <div style="font-size:0.78rem;color:var(--ink-slate)">${topRef ? `${topRef.usedCount || 0} uses` : 'No uses yet'}</div>
+          <div style="font-size:0.78rem;color:var(--ink-slate)">${refs.filter(r => r.active !== false).length} Active Codes &bull; ${topRef ? `${topRef.usedCount || 0} uses` : '0 uses'}</div>
         </div>
       `;
 
@@ -663,12 +751,140 @@
       `).join('');
     }
 
+    function renderEvents() {
+      const evts = window.WSHStore.getEvents({ entryType: evtTypeFilter });
+      const grid = document.getElementById('adminEventsGrid');
+      if (!evts.length) {
+        grid.innerHTML = `<div class="wsh-card" style="grid-column:1/-1;padding:2rem;text-align:center"><p style="margin:0">No media items in this category. Click "+ Add Photo / Video" to upload.</p></div>`;
+        return;
+      }
+      grid.innerHTML = evts.map(ev => {
+        const thumb = ev.mediaFormat === 'Video' ? (ev.posterUrl || 'img/tours/dubai.jpg') : ev.mediaUrl;
+        const isEvent = ev.entryType === 'Organized Event';
+        return `
+          <article class="wsh-card pkg-card">
+            <div class="pkg-card-media" style="height:180px">
+              <img src="${thumb}" alt="${ev.title}">
+              <div style="position:absolute;top:10px;left:10px">
+                <span class="wsh-badge ${isEvent ? 'badge-sky' : 'badge-amber'}">${ev.entryType}</span>
+              </div>
+              <div style="position:absolute;top:10px;right:10px">
+                <span class="wsh-badge badge-slate" style="background:rgba(15,23,42,0.8);color:#FFFFFF;border:none">${ev.mediaFormat.toUpperCase()}</span>
+              </div>
+            </div>
+            <div class="pkg-card-body">
+              <div style="font-size:0.76rem;font-weight:700;color:var(--accent-sky-text);margin-bottom:0.25rem">${ev.locationDate || ''}</div>
+              <h4 style="margin-bottom:0.35rem">${ev.title}</h4>
+              <p style="font-size:0.82rem;margin:0 0 0.85rem;flex:1">${ev.caption || ''}</p>
+              <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+                <button type="button" class="btn btn-sm ${ev.showInSlider !== false ? 'btn-sky' : 'btn-outline'}" onclick="toggleEvtSlider('${ev.id}')">
+                  ${ev.showInSlider !== false ? 'In Slider' : 'Gallery Only'}
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="openEditEvt('${ev.id}')">Edit</button>
+                <button type="button" class="btn btn-outline btn-sm" style="color:#DC2626 !important" onclick="removeEvt('${ev.id}')">Delete</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
     function renderAll() {
       renderOverview();
       renderPackages();
+      renderEvents();
       renderReferrals();
       renderInquiries();
     }
+
+    // Events Media Tabs & CRUD Handlers
+    document.querySelectorAll('.evt-admin-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.evt-admin-tab').forEach(b => {
+          b.classList.remove('btn-marigold', 'active');
+          b.classList.add('btn-outline');
+        });
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-marigold', 'active');
+        evtTypeFilter = btn.dataset.type;
+        renderEvents();
+      });
+    });
+
+    document.getElementById('addEvtBtn').addEventListener('click', () => {
+      document.getElementById('evtForm').reset();
+      document.getElementById('editEvtId').value = '';
+      document.getElementById('editEvtSlider').checked = true;
+      document.getElementById('evtModal').classList.add('open');
+    });
+
+    document.getElementById('editEvtFile').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (file.size > 2.5 * 1024 * 1024) {
+        window.WSHShell.showToast('Large file detected — for permanent hosting, paste a URL or use files under 2.5MB.');
+      }
+      const reader = new FileReader();
+      reader.onload = ev => {
+        document.getElementById('editEvtUrl').value = ev.target.result;
+        if (file.type.startsWith('video/')) {
+          document.getElementById('editEvtFormat').value = 'Video';
+        } else {
+          document.getElementById('editEvtFormat').value = 'Photo';
+        }
+        window.WSHShell.showToast('File loaded into preview!');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById('evtForm').addEventListener('submit', e => {
+      e.preventDefault();
+      window.WSHStore.saveEvent({
+        id: document.getElementById('editEvtId').value || undefined,
+        entryType: document.getElementById('editEvtType').value,
+        mediaFormat: document.getElementById('editEvtFormat').value,
+        title: document.getElementById('editEvtTitle').value.trim(),
+        locationDate: document.getElementById('editEvtLoc').value.trim(),
+        mediaUrl: document.getElementById('editEvtUrl').value.trim(),
+        posterUrl: document.getElementById('editEvtPoster').value.trim() || 'img/tours/dubai.jpg',
+        caption: document.getElementById('editEvtCaption').value.trim(),
+        showInSlider: document.getElementById('editEvtSlider').checked
+      });
+      closeModal('evtModal');
+      renderAll();
+      window.WSHShell.showToast('Trip / Event media saved & synced!');
+    });
+
+    window.openEditEvt = function (id) {
+      const ev = window.WSHStore.getEvents().find(x => x.id === id);
+      if (!ev) return;
+      document.getElementById('editEvtId').value = ev.id;
+      document.getElementById('editEvtType').value = ev.entryType;
+      document.getElementById('editEvtFormat').value = ev.mediaFormat;
+      document.getElementById('editEvtTitle').value = ev.title;
+      document.getElementById('editEvtLoc').value = ev.locationDate || '';
+      document.getElementById('editEvtUrl').value = ev.mediaUrl || '';
+      document.getElementById('editEvtPoster').value = ev.posterUrl || '';
+      document.getElementById('editEvtCaption').value = ev.caption || '';
+      document.getElementById('editEvtSlider').checked = ev.showInSlider !== false;
+      document.getElementById('evtModal').classList.add('open');
+    };
+
+    window.toggleEvtSlider = function (id) {
+      const ev = window.WSHStore.getEvents().find(x => x.id === id);
+      if (!ev) return;
+      window.WSHStore.saveEvent({ ...ev, showInSlider: ev.showInSlider === false });
+      renderAll();
+      window.WSHShell.showToast(ev.showInSlider === false ? 'Added to Auto-Slider' : 'Removed from Auto-Slider');
+    };
+
+    window.removeEvt = function (id) {
+      if (confirm('Delete this photo/video from Trips & Events gallery?')) {
+        window.WSHStore.deleteEvent(id);
+        renderAll();
+        window.WSHShell.showToast('Media item deleted');
+      }
+    };
 
     // Package Tabs & CRUD Handlers
     document.querySelectorAll('.pkg-cat-tab').forEach(btn => {

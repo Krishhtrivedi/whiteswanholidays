@@ -118,6 +118,22 @@
     </div>
   </section>
 
+  <!-- 2B. AUTO-SLIDING TRIPS & EVENTS SHOWCASE -->
+  <section style="padding:4rem 0;background:var(--bg-ivory)">
+    <div class="wsh-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.75rem">
+        <div>
+          <span class="wsh-badge badge-emerald" style="margin-bottom:0.6rem">REAL MEMORIES &amp; ORGANIZED EVENTS</span>
+          <h2 style="margin:0">Trips &amp; Events by White Swan</h2>
+          <p style="margin:0.35rem 0 0;font-size:0.95rem">Completed group tours, MICE corporate galas, and destination weddings captured in photos &amp; video reels.</p>
+        </div>
+        <a href="events.html" class="btn btn-outline btn-sm">View Full Gallery &rarr;</a>
+      </div>
+
+      <div id="homeEventsSlider"></div>
+    </div>
+  </section>
+
   <!-- 3. SIGNATURE SERVICES BENTO GRID -->
   <section style="padding:4.5rem 0;background:var(--tint-peach)">
     <div class="wsh-wrap">
@@ -243,6 +259,10 @@
     });
 
     renderSpotlight();
+
+    // Auto-Sliding Trips & Events Showcase
+    const sliderEvents = window.WSHStore.getEvents({ sliderOnly: true });
+    window.WSHShell.initEventAutoSlider('homeEventsSlider', sliderEvents.length ? sliderEvents : window.WSHStore.getEvents());
 
     // Hero AI Search Redirect
     document.getElementById('heroAiSearchForm').addEventListener('submit', e => {

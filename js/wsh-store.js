@@ -11,6 +11,7 @@
     PACKAGES: 'wsh_packages_v2',
     REFERRALS: 'wsh_referrals_v2',
     INQUIRIES: 'wsh_inquiries_v2',
+    EVENTS: 'wsh_events_v2',
     ADMIN_AUTH: 'wsh_admin_auth_v2'
   };
 
@@ -515,6 +516,75 @@
     }
   }
 
+  const DEFAULT_EVENTS = [
+    {
+      id: 'evt-1',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: '45-Member Gujarat Group Tour to Kashmir',
+      locationDate: 'Gulmarg & Dal Lake, Kashmir • Oct 2026',
+      caption: 'Handcrafted cedar houseboat stays, Phase 2 Gondola snow ascent, and private Wazwan welcome dinner curated by our Ahmedabad team.',
+      mediaUrl: 'img/domestic-tour/kashmir.jpg',
+      posterUrl: 'img/domestic-tour/kashmir.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-2',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Annual Pharma MICE Gala — Goa',
+      locationDate: 'Candolim Beachfront Resort, Goa • Sep 2026',
+      caption: 'Full-scale 120-delegate corporate incentive retreat featuring oceanfront conference staging, AV production, and sunset yacht awards.',
+      mediaUrl: 'img/services/mice.jpg',
+      posterUrl: 'img/services/mice.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-3',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Video',
+      title: 'Dubai Marina Yacht & Desert Sunset Reel',
+      locationDate: 'Dubai, UAE • Aug 2026',
+      caption: 'Private 52ft luxury yacht sailing across Palm Jumeirah followed by golden desert dune bashing and Level 148 Burj Khalifa reception.',
+      mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      posterUrl: 'img/tours/dubai.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-4',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Royal Udaipur Destination Wedding Hospitality',
+      locationDate: 'Lake Pichola Palace, Udaipur • Nov 2026',
+      caption: 'End-to-end guest logistics, airport luxury fleet transfers, and 180-room palace block management.',
+      mediaUrl: 'img/services/destination-wedding.jpg',
+      posterUrl: 'img/services/destination-wedding.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-5',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Japan Cherry Blossom Executive Family Tour',
+      locationDate: 'Tokyo & Kyoto, Japan • Apr 2026',
+      caption: 'Shinkansen bullet train journey, Mt. Fuji 5th Station excursion, and traditional Kyoto ryokan dining.',
+      mediaUrl: 'img/international/japan.jpg',
+      posterUrl: 'img/international/japan.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-6',
+      entryType: 'Organized Event',
+      mediaFormat: 'Video',
+      title: 'Corporate Leadership Summit Highlight',
+      locationDate: 'Downtown Dubai • Oct 2026',
+      caption: 'Executive boardroom summit and gala awards night coordinated seamlessly from Ahmedabad.',
+      mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      posterUrl: 'img/services/corporate-wedding.jpg',
+      showInSlider: false
+    }
+  ];
+
   function ensureSeeded() {
     if (!localStorage.getItem(STORAGE_KEYS.PACKAGES)) {
       writeJSON(STORAGE_KEYS.PACKAGES, DEFAULT_PACKAGES);
@@ -524,6 +594,9 @@
     }
     if (!localStorage.getItem(STORAGE_KEYS.INQUIRIES)) {
       writeJSON(STORAGE_KEYS.INQUIRIES, DEFAULT_INQUIRIES);
+    }
+    if (!localStorage.getItem(STORAGE_KEYS.EVENTS)) {
+      writeJSON(STORAGE_KEYS.EVENTS, DEFAULT_EVENTS);
     }
   }
 
@@ -742,6 +815,33 @@
     return setTheme(next);
   }
 
+  function getEvents(opts = {}) {
+    let list = readJSON(STORAGE_KEYS.EVENTS, DEFAULT_EVENTS);
+    if (opts.sliderOnly) list = list.filter(e => e.showInSlider !== false);
+    if (opts.entryType && opts.entryType !== 'all') {
+      list = list.filter(e => e.entryType === opts.entryType);
+    }
+    return list;
+  }
+
+  function saveEvent(ev) {
+    const list = getEvents();
+    if (!ev.id) ev.id = 'evt-' + Date.now();
+    const idx = list.findIndex(x => x.id === ev.id);
+    if (idx >= 0) {
+      list[idx] = { ...list[idx], ...ev };
+    } else {
+      list.unshift(ev);
+    }
+    writeJSON(STORAGE_KEYS.EVENTS, list);
+    return ev;
+  }
+
+  function deleteEvent(id) {
+    const list = getEvents().filter(e => e.id !== id);
+    writeJSON(STORAGE_KEYS.EVENTS, list);
+  }
+
   // Apply immediately to prevent flash of wrong theme
   setTheme(getTheme());
 
@@ -762,6 +862,9 @@
     getInquiries,
     addInquiry,
     updateInquiryStatus,
+    getEvents,
+    saveEvent,
+    deleteEvent,
     buildWhatsAppInquiryURL,
     buildPackageWhatsAppURL,
     buildFollowUpWhatsAppURL,

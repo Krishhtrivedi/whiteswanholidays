@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Trips &amp; Events Showcase | White Swan Holidays Ahmedabad</title>
+  <meta name="description" content="Explore completed group trips, luxury family tours, corporate MICE conferences, and destination weddings organized by White Swan Holidays.">
+  <link rel="icon" href="img/white_swan_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/wsh-sunlit.css">
+</head>
+<body>
+
+<div id="wsh-header-mount"></div>
+
+<main>
+  <!-- Page Header -->
+  <section style="padding:3rem 0 2rem;background:linear-gradient(180deg, var(--tint-peach) 0%, var(--bg-ivory) 100%)">
+    <div class="wsh-wrap">
+      <span class="wsh-badge badge-amber" style="margin-bottom:0.7rem">REAL MEMORIES &amp; LIVE PRODUCTIONS</span>
+      <h1>Trips &amp; Events by White Swan</h1>
+      <p style="max-width:680px">
+        From 45-member Kashmir group expeditions to 120-delegate Goa MICE galas and Udaipur palace weddings — explore our real photos and video highlights.
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Auto-Playing Hero Carousel -->
+  <section style="padding:0.5rem 0 3rem">
+    <div class="wsh-wrap">
+      <div id="eventsHeroSlider"></div>
+    </div>
+  </section>
+
+  <!-- Filterable Photo & Video Grid -->
+  <section style="padding:1rem 0 4rem">
+    <div class="wsh-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.75rem">
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap" id="eventFilterTabs">
+          <button type="button" class="btn btn-marigold btn-sm evt-tab active" data-type="all">All Highlights</button>
+          <button type="button" class="btn btn-outline btn-sm evt-tab" data-type="Trip Memory">Trips Made by Us</button>
+          <button type="button" class="btn btn-outline btn-sm evt-tab" data-type="Organized Event">Events Done by Us</button>
+        </div>
+        <div id="evtCountLbl" style="font-size:0.86rem;font-weight:600;color:var(--ink-muted)"></div>
+      </div>
+
+      <div class="wsh-pkg-grid" id="eventsMediaGrid"></div>
+    </div>
+  </section>
+</main>
+
+<div id="wsh-footer-mount"></div>
+
+<script src="js/wsh-store.js"></script>
+<script src="js/wsh-shell.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('eventsMediaGrid');
+    const countLbl = document.getElementById('evtCountLbl');
+    let activeType = 'all';
+
+    // Initialize Auto-Slider with slider-enabled highlights
+    const sliderItems = window.WSHStore.getEvents({ sliderOnly: true });
+    window.WSHShell.initEventAutoSlider('eventsHeroSlider', sliderItems.length ? sliderItems : window.WSHStore.getEvents());
+
+    function renderGrid() {
+      const items = window.WSHStore.getEvents({ entryType: activeType });
+      countLbl.textContent = `Showing ${items.length} Photo & Video Highlight${items.length === 1 ? '' : 's'}`;
+
+      if (!items.length) {
+        grid.innerHTML = `<div class="wsh-card" style="grid-column:1/-1;padding:2.5rem;text-align:center"><h3>No highlights in this category yet</h3><p>Check back soon or upload new photos/videos in the Admin Panel.</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = items.map(ev => {
+        const thumb = ev.mediaFormat === 'Video' ? (ev.posterUrl || 'img/tours/dubai.jpg') : ev.mediaUrl;
+        const isEvent = ev.entryType === 'Organized Event';
+        return `
+          <article class="wsh-card pkg-card evt-grid-card" data-id="${ev.id}" style="cursor:pointer">
+            <div class="pkg-card-media">
+              <img src="${thumb}" alt="${ev.title}" loading="lazy">
+              <div style="position:absolute;top:12px;left:12px;display:flex;gap:0.4rem">
+                <span class="wsh-badge ${isEvent ? 'badge-sky' : 'badge-amber'}">${isEvent ? 'Organized Event' : 'Trip Memory'}</span>
+              </div>
+              <div style="position:absolute;top:12px;right:12px">
+                <span class="wsh-badge badge-slate" style="background:rgba(15,23,42,0.75);color:#FFFFFF;border:none">${ev.mediaFormat.toUpperCase()}</span>
+              </div>
+              ${ev.mediaFormat === 'Video' ? `
+                <div class="wsh-video-play-badge" style="width:52px;height:52px">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+                </div>
+              ` : ''}
+            </div>
+            <div class="pkg-card-body">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--accent-sky-text);margin-bottom:0.35rem">${ev.locationDate || ''}</div>
+              <h3 style="font-size:1.18rem;margin-bottom:0.45rem">${ev.title}</h3>
+              <p style="font-size:0.86rem;margin:0 0 1rem;flex:1">${ev.caption || ''}</p>
+              <button type="button" class="btn btn-outline btn-sm" style="width:100%">
+                ${ev.mediaFormat === 'Video' ? '&#9654; Watch Video Highlight' : 'View Full Photo &amp; Story'}
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.evt-grid-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const item = window.WSHStore.getEvents().find(x => x.id === card.dataset.id);
+          if (item) window.WSHShell.openEventLightbox(item);
+        });
+      });
+    }
+
+    document.querySelectorAll('.evt-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.evt-tab').forEach(b => {
+          b.classList.remove('btn-marigold', 'active');
+          b.classList.add('btn-outline');
+        });
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-marigold', 'active');
+        activeType = btn.dataset.type;
+        renderGrid();
+      });
+    });
+
+    renderGrid();
+  });
+</script>
+</body>
+</html>
