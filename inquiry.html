@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Inquiry &amp; Custom Quote | White Swan Holidays Ahmedabad</title>
+  <meta name="description" content="Request a personalized Domestic or International holiday quote from White Swan Holidays, CG Road, Ahmedabad. Apply referral codes and send via WhatsApp.">
+  <link rel="icon" href="img/white_swan_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/wsh-sunlit.css">
+</head>
+<body>
+
+<div id="wsh-header-mount"></div>
+
+<main>
+  <section style="padding:3rem 0 2rem;background:linear-gradient(180deg, var(--tint-peach) 0%, var(--bg-ivory) 100%)">
+    <div class="wsh-wrap">
+      <span class="wsh-badge badge-amber" style="margin-bottom:0.7rem">INSTANT TRAVEL DESK &bull; AHMEDABAD</span>
+      <h1>Plan Your Custom Holiday Quote</h1>
+      <p style="max-width:650px">Select your tour category, apply any Referral or Partner Code for exclusive perks, and submit directly to our CG Road desk or WhatsApp.</p>
+    </div>
+  </section>
+
+  <section style="padding:1rem 0 4rem">
+    <div class="wsh-wrap inquiry-split-grid">
+      <!-- LEFT: Inquiry Form -->
+      <form id="wshInquiryForm" class="wsh-card" style="padding:1.75rem">
+        <!-- Success Banner (Hidden until submission) -->
+        <div id="inqSuccessBanner" style="display:none;background:var(--tint-emerald);border:1.5px solid #22C55E;border-radius:16px;padding:1.25rem;margin-bottom:1.5rem">
+          <div style="font-weight:800;color:#15803D;font-size:1.05rem;margin-bottom:0.3rem">
+            &#10003; Inquiry Saved Successfully!
+          </div>
+          <p style="margin:0 0 0.75rem;font-size:0.9rem;color:#166534">
+            Your Inquiry Reference Number is <strong id="inqConfirmedId" class="ref-code-pill" style="background:#FFFFFF">INQ-WSH-2026-0000</strong>. Our Ahmedabad advisor will contact you shortly.
+          </p>
+          <a id="inqPostWaLink" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+            Open This Inquiry in WhatsApp &rarr;
+          </a>
+        </div>
+
+        <!-- 1. Tour Category Toggle -->
+        <div style="margin-bottom:1.4rem">
+          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.5rem">1. Tour Category</label>
+          <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:0.55rem">
+            <button type="button" class="btn btn-marigold btn-sm inq-cat-btn active" data-cat="Domestic">Domestic (India)</button>
+            <button type="button" class="btn btn-outline btn-sm inq-cat-btn" data-cat="International">International</button>
+            <button type="button" class="btn btn-outline btn-sm inq-cat-btn" data-cat="Both / Multi-Destination">Both / Multi</button>
+          </div>
+        </div>
+
+        <!-- 2. Package & Reference -->
+        <div class="form-grid-2" style="margin-bottom:1.2rem">
+          <div>
+            <label for="inqPackageSelect" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Destination / Package</label>
+            <select id="inqPackageSelect"></select>
+          </div>
+          <div>
+            <label for="inqPkgRef" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Package / Quote Reference Code</label>
+            <input type="text" id="inqPkgRef" placeholder="e.g. WSH-INT-UAE01">
+          </div>
+        </div>
+
+        <!-- 3. Reference / Referral Code Section -->
+        <div style="background:var(--tint-lavender);border:1px solid rgba(109,40,217,0.16);border-radius:16px;padding:1.1rem;margin-bottom:1.4rem">
+          <label for="inqReferralInput" style="display:block;font-size:0.84rem;font-weight:700;color:#4C1D95;margin-bottom:0.4rem">
+            Have a Reference or Referral Code? (Enter Referral Code, Friend's Name, or Consultant Name)
+          </label>
+          <div style="display:flex;gap:0.55rem;flex-wrap:wrap">
+            <input type="text" id="inqReferralInput" placeholder="Try SWAN10, FRIEND-AMD, CORP-VIP or Friend's Name" style="flex:1 1 220px">
+            <button type="button" id="verifyRefBtn" class="btn btn-sky btn-sm">Verify Code</button>
+          </div>
+          <div id="refVerificationMsg" style="margin-top:0.55rem;font-size:0.84rem"></div>
+        </div>
+
+        <!-- 4. Traveler Details -->
+        <h3 style="margin-bottom:0.9rem;font-size:1.15rem">Traveler Details</h3>
+        <div class="form-grid-2" style="margin-bottom:1rem">
+          <div>
+            <label for="inqName" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Full Name *</label>
+            <input type="text" id="inqName" required placeholder="e.g. Aarav Patel">
+          </div>
+          <div>
+            <label for="inqPhone" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Phone / WhatsApp Number *</label>
+            <input type="tel" id="inqPhone" required value="+91 " placeholder="+91 98250 00000">
+          </div>
+        </div>
+
+        <div class="form-grid-2" style="margin-bottom:1rem">
+          <div>
+            <label for="inqEmail" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Email Address</label>
+            <input type="email" id="inqEmail" placeholder="name@example.com">
+          </div>
+          <div>
+            <label for="inqCity" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Departure City</label>
+            <input type="text" id="inqCity" value="Ahmedabad">
+          </div>
+        </div>
+
+        <div class="form-grid-2" style="margin-bottom:1rem">
+          <div>
+            <label for="inqDates" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Preferred Travel Dates</label>
+            <input type="text" id="inqDates" placeholder="e.g. 20 Dec – 26 Dec 2026">
+          </div>
+          <div>
+            <label for="inqHotel" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Hotel Category</label>
+            <select id="inqHotel">
+              <option value="3-Star">3-Star Boutique</option>
+              <option value="4-Star" selected>4-Star Premium</option>
+              <option value="5-Star Luxury">5-Star Luxury</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid-2" style="margin-bottom:1rem">
+          <div>
+            <label for="inqAdults" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Adults</label>
+            <input type="number" id="inqAdults" min="1" max="200" value="2">
+          </div>
+          <div>
+            <label for="inqChildren" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Children</label>
+            <input type="number" id="inqChildren" min="0" max="100" value="0">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.4rem">
+          <label for="inqNotes" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Special Notes (Jain Food, Honeymoon Setup, Wheelchair, Visa)</label>
+          <textarea id="inqNotes" rows="3" placeholder="Any special requests or flight preferences..."></textarea>
+        </div>
+
+        <!-- Dual Submission Actions -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem" class="form-grid-2">
+          <button type="submit" class="btn btn-marigold" style="width:100%">
+            Submit Inquiry
+          </button>
+          <button type="button" id="submitAndWhatsappBtn" class="btn btn-whatsapp" style="width:100%">
+            Submit &amp; Send via WhatsApp
+          </button>
+        </div>
+      </form>
+
+      <!-- RIGHT: Live Package & Referral Summary Card -->
+      <aside class="wsh-card" style="padding:1.6rem;position:sticky;top:96px">
+        <span class="wsh-badge badge-sky" style="margin-bottom:0.8rem">LIVE QUOTE SUMMARY</span>
+        <h3 style="margin-bottom:0.35rem" id="sumPkgTitle">Custom Holiday Inquiry</h3>
+        <div style="margin-bottom:1rem">
+          <span class="ref-code-pill" id="sumPkgRef">CUSTOM</span>
+        </div>
+
+        <div style="display:grid;gap:0.65rem;font-size:0.88rem;border-top:var(--border-subtle);border-bottom:var(--border-subtle);padding:1rem 0;margin-bottom:1rem">
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--ink-muted)">Category:</span>
+            <strong id="sumCategory">Domestic</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--ink-muted)">Departure:</span>
+            <strong id="sumCity">Ahmedabad</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--ink-muted)">Travelers:</span>
+            <strong id="sumPax">2 Adults, 0 Kids</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--ink-muted)">Hotel Tier:</span>
+            <strong id="sumHotel">4-Star</strong>
+          </div>
+        </div>
+
+        <div id="sumRefBox" style="display:none;background:var(--tint-emerald);border:1px solid #86EFAC;border-radius:12px;padding:0.85rem;margin-bottom:1rem;font-size:0.84rem;color:#15803D"></div>
+
+        <div style="background:var(--tint-peach);border-radius:12px;padding:0.9rem;font-size:0.82rem;color:var(--ink-slate)">
+          <strong>Ahmedabad Direct Desk:</strong><br>
+          501, Sun Square Building, Off CG Road<br>
+          Response time: <strong>Under 15 minutes</strong>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div id="wsh-footer-mount"></div>
+
+<script src="js/wsh-store.js"></script>
+<script src="js/wsh-shell.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    let selectedCat = params.get('type') || 'Domestic';
+    const pkgSelect = document.getElementById('inqPackageSelect');
+    const pkgRefInput = document.getElementById('inqPkgRef');
+    const refInput = document.getElementById('inqReferralInput');
+    const refMsg = document.getElementById('refVerificationMsg');
+    const sumRefBox = document.getElementById('sumRefBox');
+
+    let verifiedReferral = null;
+
+    function populatePackages() {
+      const all = window.WSHStore.getPackages({ onlyActive: true });
+      const filtered = selectedCat === 'Both / Multi-Destination'
+        ? all
+        : all.filter(p => p.category.toLowerCase() === selectedCat.toLowerCase());
+
+      pkgSelect.innerHTML = filtered.map(p =>
+        `<option value="${p.refCode}" data-title="${p.title}">${p.title} (${p.refCode}) — ${window.WSHStore.formatINR(p.price)}</option>`
+      ).join('') + `<option value="CUSTOM" data-title="Custom Tailor-Made Holiday">Custom Tailor-Made Holiday</option>`;
+
+      const paramRef = params.get('ref');
+      if (paramRef) {
+        const matchOpt = Array.from(pkgSelect.options).find(o => o.value === paramRef);
+        if (matchOpt) pkgSelect.value = paramRef;
+        pkgRefInput.value = paramRef;
+      } else if (filtered[0]) {
+        pkgRefInput.value = filtered[0].refCode;
+      }
+      updateSummary();
+    }
+
+    function setCategoryButton(cat) {
+      selectedCat = cat;
+      document.querySelectorAll('.inq-cat-btn').forEach(btn => {
+        const isMe = btn.dataset.cat === cat;
+        btn.classList.toggle('btn-marigold', isMe);
+        btn.classList.toggle('active', isMe);
+        btn.classList.toggle('btn-outline', !isMe);
+      });
+      populatePackages();
+    }
+
+    function checkReferralLive() {
+      const raw = refInput.value.trim();
+      if (!raw) {
+        verifiedReferral = null;
+        refMsg.innerHTML = '';
+        sumRefBox.style.display = 'none';
+        return;
+      }
+
+      const found = window.WSHStore.verifyReferralCode(raw);
+      if (found && !found.expiredOrFull) {
+        verifiedReferral = found;
+        refMsg.innerHTML = `<span class="wsh-badge badge-emerald">&#10003; Verified Reference: ${found.partnerName} — ${found.perk}</span>`;
+        sumRefBox.style.display = 'block';
+        sumRefBox.innerHTML = `<strong>&#10003; Perk Applied (${found.code}):</strong><br>${found.perk}`;
+      } else if (found && found.expiredOrFull) {
+        verifiedReferral = null;
+        refMsg.innerHTML = `<span class="wsh-badge badge-amber">Code ${found.code} has expired or reached its usage limit.</span>`;
+        sumRefBox.style.display = 'none';
+      } else {
+        verifiedReferral = null;
+        refMsg.innerHTML = `<span style="color:#4C1D95;font-weight:600">&#10003; Noted as Friend / Consultant Reference: "${raw}"</span>`;
+        sumRefBox.style.display = 'block';
+        sumRefBox.innerHTML = `<strong>Referred By:</strong> ${raw}`;
+      }
+    }
+
+    function updateSummary() {
+      const opt = pkgSelect.options[pkgSelect.selectedIndex];
+      document.getElementById('sumPkgTitle').textContent = opt ? opt.dataset.title : 'Custom Package';
+      document.getElementById('sumPkgRef').textContent = pkgRefInput.value || 'CUSTOM';
+      document.getElementById('sumCategory').textContent = selectedCat;
+      document.getElementById('sumCity').textContent = document.getElementById('inqCity').value || 'Ahmedabad';
+      document.getElementById('sumPax').textContent = `${document.getElementById('inqAdults').value || 2} Adults, ${document.getElementById('inqChildren').value || 0} Kids`;
+      document.getElementById('sumHotel').textContent = document.getElementById('inqHotel').value;
+    }
+
+    function collectAndSave() {
+      const name = document.getElementById('inqName').value.trim();
+      const phone = document.getElementById('inqPhone').value.trim();
+      if (!name || phone.replace(/[^0-9]/g, '').length < 8) {
+        window.WSHShell.showToast('Please enter your Full Name and valid Phone / WhatsApp number.');
+        return null;
+      }
+
+      const opt = pkgSelect.options[pkgSelect.selectedIndex];
+      const refRaw = refInput.value.trim();
+      const record = window.WSHStore.addInquiry({
+        category: selectedCat,
+        packageTitle: opt ? opt.dataset.title : 'Custom Package',
+        packageRef: pkgRefInput.value.trim() || 'CUSTOM',
+        referralCode: verifiedReferral ? verifiedReferral.code : '',
+        referredBy: verifiedReferral ? verifiedReferral.partnerName : refRaw,
+        travelerName: name,
+        phone,
+        email: document.getElementById('inqEmail').value.trim(),
+        city: document.getElementById('inqCity').value.trim() || 'Ahmedabad',
+        travelDates: document.getElementById('inqDates').value.trim() || 'Flexible',
+        adults: document.getElementById('inqAdults').value,
+        children: document.getElementById('inqChildren').value,
+        hotelTier: document.getElementById('inqHotel').value,
+        notes: document.getElementById('inqNotes').value.trim()
+      });
+
+      const waUrl = window.WSHStore.buildWhatsAppInquiryURL(record);
+      document.getElementById('inqConfirmedId').textContent = record.id;
+      document.getElementById('inqPostWaLink').href = waUrl;
+      document.getElementById('inqSuccessBanner').style.display = 'block';
+      document.getElementById('inqSuccessBanner').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.WSHShell.showToast(`Inquiry ${record.id} submitted!`);
+      return { record, waUrl };
+    }
+
+    document.querySelectorAll('.inq-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => setCategoryButton(btn.dataset.cat));
+    });
+
+    pkgSelect.addEventListener('change', () => {
+      pkgRefInput.value = pkgSelect.value;
+      updateSummary();
+    });
+
+    ['inqPkgRef', 'inqCity', 'inqAdults', 'inqChildren', 'inqHotel'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateSummary);
+    });
+
+    document.getElementById('verifyRefBtn').addEventListener('click', checkReferralLive);
+    refInput.addEventListener('input', checkReferralLive);
+
+    document.getElementById('wshInquiryForm').addEventListener('submit', e => {
+      e.preventDefault();
+      collectAndSave();
+    });
+
+    document.getElementById('submitAndWhatsappBtn').addEventListener('click', () => {
+      const res = collectAndSave();
+      if (res && res.waUrl) {
+        window.open(res.waUrl, '_blank', 'noopener');
+      }
+    });
+
+    // Hydrate from URL params
+    if (params.get('notes')) document.getElementById('inqNotes').value = params.get('notes');
+    if (params.get('refCode')) {
+      refInput.value = params.get('refCode');
+      checkReferralLive();
+    }
+    setCategoryButton(selectedCat);
+  });
+</script>
+</body>
+</html>

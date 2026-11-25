@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AI Trip Planner | White Swan Holidays Ahmedabad</title>
+  <meta name="description" content="Interactive AI Trip Planner by White Swan Holidays. Generate day-by-day Domestic & International itineraries with smart INR cost breakdowns.">
+  <link rel="icon" href="img/white_swan_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/wsh-sunlit.css">
+</head>
+<body>
+
+<div id="wsh-header-mount"></div>
+
+<main>
+  <section style="padding:3rem 0 2rem;background:linear-gradient(180deg, var(--tint-lavender) 0%, var(--bg-ivory) 100%)">
+    <div class="wsh-wrap">
+      <span class="wsh-badge badge-lavender" style="margin-bottom:0.7rem">&#10024; WHITE SWAN AI CONCIERGE</span>
+      <h1>Interactive AI Trip Planner</h1>
+      <p style="max-width:650px">Select your destination, duration (3–14 days), traveler profile, and hotel budget to generate a tailored day-by-day plan with live INR estimate.</p>
+    </div>
+  </section>
+
+  <section style="padding:1rem 0 4rem">
+    <div class="wsh-wrap inquiry-split-grid">
+      <!-- Planner Controls -->
+      <div class="wsh-card" style="padding:1.75rem">
+        <h3 style="margin-bottom:1.25rem">1. Configure Your Preferences</h3>
+
+        <div style="margin-bottom:1.25rem">
+          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.45rem">Tour Category</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem">
+            <button type="button" class="btn btn-marigold ai-cat-btn active" data-cat="Domestic">Domestic India</button>
+            <button type="button" class="btn btn-outline ai-cat-btn" data-cat="International">International</button>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.25rem">
+          <label for="aiDestSelect" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.4rem">Select Destination</label>
+          <select id="aiDestSelect"></select>
+        </div>
+
+        <div style="margin-bottom:1.25rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">
+            <label for="aiDaysSlider" style="font-size:0.82rem;font-weight:700;color:var(--ink-muted)">Duration</label>
+            <span id="aiDaysVal" class="wsh-badge badge-sky tabular-nums">6 Days / 5 Nights</span>
+          </div>
+          <input type="range" id="aiDaysSlider" min="3" max="14" value="6" style="padding:0;min-height:44px;accent-color:#F97316">
+          <div style="display:flex;justify-content:space-between;font-size:0.76rem;color:var(--ink-muted)">
+            <span>3 Days</span><span>14 Days</span>
+          </div>
+        </div>
+
+        <div class="form-grid-2" style="margin-bottom:1.25rem">
+          <div>
+            <label for="aiTravelerType" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.4rem">Traveler Type</label>
+            <select id="aiTravelerType">
+              <option value="Family">Family Holiday</option>
+              <option value="Honeymoon">Honeymoon Couple</option>
+              <option value="Corporate">Corporate / MICE</option>
+              <option value="Friends">Friends &amp; Adventure</option>
+            </select>
+          </div>
+          <div>
+            <label for="aiBudgetTier" style="display:block;font-size:0.82rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.4rem">Budget &amp; Hotel Tier</label>
+            <select id="aiBudgetTier">
+              <option value="3-Star">Value (3-Star Boutique)</option>
+              <option value="4-Star" selected>Premium (4-Star Resorts)</option>
+              <option value="5-Star Luxury">Ultra-Luxury (5-Star)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" id="generateAiPlanBtn" class="btn btn-marigold" style="width:100%">
+          &#10024; Generate Smart AI Itinerary
+        </button>
+      </div>
+
+      <!-- AI Generated Output -->
+      <div class="wsh-card" style="padding:1.75rem;background:var(--bg-white)" id="aiOutputCard">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem">
+          <span class="wsh-badge badge-emerald">AI ROUTE MATCH: 98%</span>
+          <span id="aiOutRef" class="ref-code-pill">WSH-AI</span>
+        </div>
+
+        <h2 id="aiOutTitle" style="font-size:1.5rem;margin-bottom:0.35rem">Kashmir Paradise AI Plan</h2>
+        <p id="aiOutMeta" style="font-size:0.88rem;color:var(--ink-muted);margin-bottom:1.25rem"></p>
+
+        <!-- INR Cost Breakdown -->
+        <div style="background:var(--tint-mint);border-radius:16px;padding:1.1rem;margin-bottom:1.25rem">
+          <div style="font-size:0.75rem;font-weight:700;color:#0369A1;text-transform:uppercase;margin-bottom:0.5rem">Smart INR Cost Breakdown (Per Person)</div>
+          <div style="display:grid;gap:0.4rem;font-size:0.88rem" id="aiCostLines"></div>
+          <div style="border-top:1px dashed rgba(2,132,199,0.3);margin-top:0.65rem;padding-top:0.65rem;display:flex;justify-content:space-between;align-items:baseline">
+            <strong style="color:var(--ink-navy)">Estimated Total / Pax</strong>
+            <strong id="aiOutTotal" class="tabular-nums" style="font-size:1.35rem;color:#0284C7">₹0</strong>
+          </div>
+        </div>
+
+        <!-- Day by Day Preview -->
+        <div style="margin-bottom:1.4rem">
+          <h4 style="margin-bottom:0.65rem">Smart Day-by-Day Flow</h4>
+          <div id="aiDayList" style="display:grid;gap:0.55rem;max-height:300px;overflow-y:auto;padding-right:4px"></div>
+        </div>
+
+        <div style="display:grid;gap:0.65rem">
+          <a id="aiSendInquiryBtn" href="inquiry.html" class="btn btn-marigold" style="width:100%">
+            Send AI Plan to Inquiry &rarr;
+          </a>
+          <a id="aiWhatsappBtn" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%">
+            Discuss Plan on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="wsh-footer-mount"></div>
+
+<script src="js/wsh-store.js"></script>
+<script src="js/wsh-shell.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let activeCat = 'Domestic';
+    const destSelect = document.getElementById('aiDestSelect');
+    const daysSlider = document.getElementById('aiDaysSlider');
+    const daysVal = document.getElementById('aiDaysVal');
+    const typeSelect = document.getElementById('aiTravelerType');
+    const budgetSelect = document.getElementById('aiBudgetTier');
+
+    function populateDestOptions() {
+      const pkgs = window.WSHStore.getPackages({ onlyActive: true, category: activeCat });
+      destSelect.innerHTML = pkgs.map(p => `<option value="${p.refCode}">${p.title} (${p.destination})</option>`).join('');
+      if (pkgs[0]) {
+        daysSlider.value = (pkgs[0].nights || 5) + 1;
+        updateDaysLabel();
+      }
+    }
+
+    function updateDaysLabel() {
+      const d = Number(daysSlider.value);
+      daysVal.textContent = `${d} Days / ${d - 1} Nights`;
+    }
+
+    function generatePlan() {
+      const refCode = destSelect.value;
+      const pkg = window.WSHStore.getPackageBySlugOrRef(refCode) || window.WSHStore.getPackages()[0];
+      const days = Number(daysSlider.value);
+      const nights = days - 1;
+      const tType = typeSelect.value;
+      const tier = budgetSelect.value;
+
+      const tierMult = tier === '3-Star' ? 0.85 : tier === '5-Star Luxury' ? 1.45 : 1.0;
+      const basePerNight = Math.round((pkg.price / (pkg.nights || 5)) * tierMult);
+      const staysCost = basePerNight * nights;
+      const transitCost = pkg.category === 'Domestic' ? 8500 : (pkg.price > 100000 ? 55000 : 22000);
+      const activitiesCost = Math.round(nights * 1800 * (tType === 'Honeymoon' ? 1.15 : 1));
+      const gst = Math.round((staysCost + transitCost + activitiesCost) * 0.05);
+      const total = staysCost + transitCost + activitiesCost + gst;
+
+      document.getElementById('aiOutRef').textContent = pkg.refCode;
+      document.getElementById('aiOutTitle').textContent = `${pkg.title} — ${days}D/${nights}N AI Plan`;
+      document.getElementById('aiOutMeta').textContent = `${tType} • ${tier} • Departing from Ahmedabad (AMD)`;
+
+      document.getElementById('aiCostLines').innerHTML = `
+        <div style="display:flex;justify-content:space-between"><span>Flights / Transit (from AMD)</span><strong class="tabular-nums">${window.WSHStore.formatINR(transitCost)}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>${tier} Stays (${nights} Nights)</span><strong class="tabular-nums">${window.WSHStore.formatINR(staysCost)}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>${tType} Sightseeing &amp; Transfers</span><strong class="tabular-nums">${window.WSHStore.formatINR(activitiesCost)}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Package GST (5%)</span><strong class="tabular-nums">${window.WSHStore.formatINR(gst)}</strong></div>
+      `;
+      document.getElementById('aiOutTotal').textContent = window.WSHStore.formatINR(total);
+
+      // Build day list dynamically for chosen length
+      const baseDays = pkg.itinerary || [];
+      const dayItems = [];
+      for (let i = 1; i <= days; i++) {
+        if (i <= baseDays.length) {
+          dayItems.push({ day: i, title: baseDays[i - 1].title, desc: baseDays[i - 1].desc });
+        } else if (i === days) {
+          dayItems.push({ day: i, title: 'Departure & Return to Ahmedabad', desc: 'Breakfast, airport transfer, and flight back home.' });
+        } else {
+          dayItems.push({ day: i, title: `Curated ${tType} Exploration Day ${i}`, desc: `Leisure morning at ${tier} resort followed by signature local culinary & sightseeing experiences.` });
+        }
+      }
+
+      document.getElementById('aiDayList').innerHTML = dayItems.map(d => `
+        <div style="background:var(--bg-ivory);border:var(--border-subtle);border-radius:12px;padding:0.75rem 0.9rem">
+          <div style="font-weight:700;font-size:0.86rem;color:var(--ink-navy)">Day ${d.day}: ${d.title}</div>
+          <div style="font-size:0.8rem;color:var(--ink-slate)">${d.desc}</div>
+        </div>
+      `).join('');
+
+      const noteStr = `AI Planner Plan: ${days}D/${nights}N, ${tType}, ${tier}, Est. ${window.WSHStore.formatINR(total)}/pax`;
+      document.getElementById('aiSendInquiryBtn').href = `inquiry.html?ref=${encodeURIComponent(pkg.refCode)}&type=${encodeURIComponent(pkg.category)}&package=${encodeURIComponent(pkg.title)}&notes=${encodeURIComponent(noteStr)}`;
+      document.getElementById('aiWhatsappBtn').href = window.WSHStore.buildWhatsAppInquiryURL({
+        category: pkg.category,
+        packageTitle: pkg.title,
+        packageRef: pkg.refCode,
+        hotelTier: tier,
+        notes: noteStr
+      });
+    }
+
+    document.querySelectorAll('.ai-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ai-cat-btn').forEach(b => {
+          b.classList.remove('btn-marigold', 'active');
+          b.classList.add('btn-outline');
+        });
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-marigold', 'active');
+        activeCat = btn.dataset.cat;
+        populateDestOptions();
+        generatePlan();
+      });
+    });
+
+    daysSlider.addEventListener('input', () => { updateDaysLabel(); generatePlan(); });
+    [destSelect, typeSelect, budgetSelect].forEach(el => el.addEventListener('change', generatePlan));
+    document.getElementById('generateAiPlanBtn').addEventListener('click', () => {
+      generatePlan();
+      window.WSHShell.showToast('AI Itinerary updated!');
+    });
+
+    populateDestOptions();
+    generatePlan();
+  });
+</script>
+</body>
+</html>

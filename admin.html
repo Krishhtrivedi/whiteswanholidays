@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Admin Management Panel | White Swan Holidays</title>
+  <link rel="icon" href="img/white_swan_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/wsh-sunlit.css">
+  <style>
+    .admin-shell {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+    .admin-sidebar {
+      background: var(--bg-white);
+      border-right: var(--border-subtle);
+      padding: 1.5rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .admin-nav-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.75rem 1rem;
+      border-radius: 14px;
+      background: transparent;
+      color: var(--ink-slate);
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-align: left;
+      margin-bottom: 0.35rem;
+    }
+    .admin-nav-btn:hover, .admin-nav-btn.active {
+      background: var(--tint-peach);
+      color: #C2410C;
+    }
+    .admin-main {
+      padding: 1.75rem clamp(1rem, 3vw, 2.5rem) 4rem;
+      background: var(--bg-ivory);
+      min-width: 0;
+    }
+    .admin-topbar-mobile {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      background: var(--bg-white);
+      border-bottom: var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 800;
+    }
+    @media (max-width: 1023px) {
+      .admin-shell {
+        grid-template-columns: 1fr;
+      }
+      .admin-topbar-mobile {
+        display: flex;
+      }
+      .admin-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1100;
+        width: 270px;
+        transform: translateX(-100%);
+        transition: transform 0.28s ease;
+        box-shadow: var(--shadow-lg);
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    /* Responsive Table to Mobile Cards */
+    .wsh-table-wrap {
+      background: var(--bg-white);
+      border: var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow-x: auto;
+      box-shadow: var(--shadow-xs);
+    }
+    .wsh-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .wsh-table th {
+      text-align: left;
+      padding: 0.9rem 1rem;
+      background: #F8FAFC;
+      color: var(--ink-muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: var(--border-subtle);
+    }
+    .wsh-table td {
+      padding: 0.95rem 1rem;
+      border-bottom: var(--border-subtle);
+      vertical-align: middle;
+    }
+    @media (max-width: 767px) {
+      .wsh-table thead { display: none; }
+      .wsh-table, .wsh-table tbody, .wsh-table tr, .wsh-table td { display: block; width: 100%; }
+      .wsh-table tr {
+        padding: 1rem;
+        border-bottom: 6px solid var(--bg-ivory);
+      }
+      .wsh-table td {
+        padding: 0.35rem 0;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+        text-align: right;
+      }
+      .wsh-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.76rem;
+        color: var(--ink-muted);
+        text-align: left;
+        flex-shrink: 0;
+      }
+    }
+    .admin-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1400;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .admin-modal.open {
+      display: flex;
+    }
+    .admin-modal-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-xl);
+      width: min(680px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.6rem;
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ADMIN LOGIN VIEW -->
+<section id="adminLoginView" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:radial-gradient(circle at 80% 20%, rgba(245,158,11,0.16), transparent 45%), var(--bg-ivory)">
+  <div class="wsh-card" style="width:min(440px, 100%);padding:2rem">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <img src="img/white_swan_logo.png" alt="White Swan Holidays" style="height:48px;width:auto;margin:0 auto 0.75rem">
+      <span class="wsh-badge badge-amber">ADMIN OPERATIONS PORTAL</span>
+      <h2 style="margin-top:0.6rem;font-size:1.6rem">Sign In to White Swan CRM</h2>
+      <p style="font-size:0.88rem;margin:0">Manage Domestic &amp; International packages, referral codes, and WhatsApp inquiries.</p>
+    </div>
+
+    <form id="adminLoginForm" style="display:grid;gap:1rem">
+      <div>
+        <label for="loginEmail" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.3rem">Admin Email</label>
+        <input type="email" id="loginEmail" value="admin@whiteswanholidays.com" required>
+      </div>
+      <div>
+        <label for="loginPass" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.3rem">Password</label>
+        <input type="password" id="loginPass" value="whiteswan2026" required>
+      </div>
+      <button type="submit" class="btn btn-marigold" style="width:100%">Sign In to Dashboard</button>
+      <button type="button" id="demoLoginBtn" class="btn btn-sky" style="width:100%">Demo Admin Login (1-Click)</button>
+      <a href="index.html" class="btn btn-outline" style="width:100%">&larr; Back to Public Website</a>
+    </form>
+  </div>
+</section>
+
+<!-- ADMIN DASHBOARD SHELL -->
+<div id="adminDashboardView" style="display:none">
+  <div class="admin-topbar-mobile">
+    <button type="button" id="adminSidebarToggle" class="btn btn-outline btn-sm" aria-label="Toggle Menu">&#9776; Menu</button>
+    <strong style="font-family:var(--font-display)">White Swan Admin</strong>
+    <a href="index.html" class="btn btn-outline btn-sm">Site</a>
+  </div>
+
+  <div class="admin-shell">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+        <a href="index.html"><img src="img/white_swan_logo.png" alt="White Swan" style="height:38px;width:auto"></a>
+        <button type="button" id="adminSidebarClose" class="btn btn-outline btn-sm" style="display:none;min-width:44px">&times;</button>
+      </div>
+
+      <nav style="flex:1">
+        <button type="button" class="admin-nav-btn active" data-view="overview">&#128202; Dashboard Overview</button>
+        <button type="button" class="admin-nav-btn" data-view="packages">&#127757; Package Manager</button>
+        <button type="button" class="admin-nav-btn" data-view="referrals">&#127915; Referral Codes</button>
+        <button type="button" class="admin-nav-btn" data-view="inquiries">&#128172; Inquiries &amp; CRM</button>
+      </nav>
+
+      <div style="border-top:var(--border-subtle);padding-top:1rem;display:grid;gap:0.5rem">
+        <a href="index.html" class="btn btn-outline btn-sm" style="width:100%">View Live Website</a>
+        <button type="button" id="adminLogoutBtn" class="btn btn-outline btn-sm" style="width:100%;color:#DC2626 !important">Sign Out</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <!-- 1. OVERVIEW -->
+      <section id="view-overview" class="admin-section">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
+          <div>
+            <h1 style="font-size:1.9rem;margin:0">Admin Overview</h1>
+            <p style="margin:0;font-size:0.9rem">Live metrics across CG Road inquiries, packages, and partner referrals.</p>
+          </div>
+          <a href="inquiry.html" target="_blank" class="btn btn-marigold btn-sm">+ Test Public Inquiry</a>
+        </div>
+
+        <div class="kpi-grid" id="overviewKpis"></div>
+
+        <h3 style="margin-bottom:0.85rem">Recent Inquiries</h3>
+        <div class="wsh-table-wrap">
+          <table class="wsh-table">
+            <thead>
+              <tr>
+                <th>Inquiry ID</th>
+                <th>Traveler</th>
+                <th>Package &amp; Ref</th>
+                <th>Referral</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="recentInquiriesBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 2. PACKAGE MANAGER -->
+      <section id="view-packages" class="admin-section" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem">
+          <div>
+            <h1 style="font-size:1.9rem;margin:0">Package Manager</h1>
+            <p style="margin:0;font-size:0.9rem">Changes sync immediately to /domestic, /international, and /package details.</p>
+          </div>
+          <button type="button" id="addPkgBtn" class="btn btn-marigold">+ Add New Package</button>
+        </div>
+
+        <div style="display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap">
+          <button type="button" class="btn btn-marigold btn-sm pkg-cat-tab active" data-cat="Domestic">Domestic Packages</button>
+          <button type="button" class="btn btn-outline btn-sm pkg-cat-tab" data-cat="International">International Packages</button>
+        </div>
+
+        <div class="wsh-table-wrap">
+          <table class="wsh-table">
+            <thead>
+              <tr>
+                <th>Ref Code</th>
+                <th>Package Title</th>
+                <th>Duration</th>
+                <th>Price (₹)</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminPackagesBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. REFERRAL CODE MANAGER -->
+      <section id="view-referrals" class="admin-section" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem">
+          <div>
+            <h1 style="font-size:1.9rem;margin:0">Referral Code &amp; Reference Manager</h1>
+            <p style="margin:0;font-size:0.9rem">Create trackable partner &amp; friend referral codes validated live in /inquiry.</p>
+          </div>
+          <button type="button" id="addRefBtn" class="btn btn-marigold">+ Create Referral Code</button>
+        </div>
+
+        <div class="wsh-table-wrap">
+          <table class="wsh-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Partner / Referrer</th>
+                <th>Type</th>
+                <th>Customer Perk</th>
+                <th>Uses</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminReferralsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4. INQUIRIES CRM -->
+      <section id="view-inquiries" class="admin-section" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem">
+          <div>
+            <h1 style="font-size:1.9rem;margin:0">Inquiries &amp; Leads CRM</h1>
+            <p style="margin:0;font-size:0.9rem">Update lead status and follow up on WhatsApp with 1 click.</p>
+          </div>
+          <select id="inqFilterType" style="width:auto;min-width:190px">
+            <option value="all">All Categories</option>
+            <option value="Domestic">Domestic</option>
+            <option value="International">International</option>
+          </select>
+        </div>
+
+        <div class="wsh-table-wrap">
+          <table class="wsh-table">
+            <thead>
+              <tr>
+                <th>Inquiry ID</th>
+                <th>Traveler &amp; Phone</th>
+                <th>Tour &amp; Package Ref</th>
+                <th>Referral / Ref By</th>
+                <th>Dates</th>
+                <th>Status</th>
+                <th>WhatsApp</th>
+              </tr>
+            </thead>
+            <tbody id="adminInquiriesBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- PACKAGE CRUD MODAL -->
+<div class="admin-modal" id="pkgModal">
+  <div class="admin-modal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <h3 id="pkgModalTitle" style="margin:0">Add / Edit Package</h3>
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('pkgModal')">&times;</button>
+    </div>
+    <form id="pkgForm" style="display:grid;gap:0.85rem">
+      <input type="hidden" id="editPkgId">
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Category</label>
+          <select id="editPkgCat">
+            <option value="Domestic">Domestic</option>
+            <option value="International">International</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Package Ref Code</label>
+          <input type="text" id="editPkgRef" required placeholder="WSH-INT-EUR06">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Package Title</label>
+          <input type="text" id="editPkgTitle" required placeholder="Swiss Alps Explorer">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Destination / Cities</label>
+          <input type="text" id="editPkgDest" required placeholder="Zurich, Lucerne, Interlaken">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Duration</label>
+          <input type="text" id="editPkgDur" required placeholder="6 Nights / 7 Days">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Starting Price (₹)</label>
+          <input type="number" id="editPkgPrice" required min="1000" placeholder="45000">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Visa Type</label>
+          <input type="text" id="editPkgVisa" placeholder="E-Visa / Sticker Visa / No Visa">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Image URL</label>
+          <input type="text" id="editPkgImg" value="img/tours/dubai.jpg">
+        </div>
+      </div>
+      <div>
+        <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Highlights (comma separated)</label>
+        <input type="text" id="editPkgHighlights" placeholder="4-Star Hotel, Airport Transfers, Guided Tour">
+      </div>
+      <div>
+        <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Day-by-Day Itinerary (one day per line: Title | Description)</label>
+        <textarea id="editPkgItinerary" rows="4" placeholder="Arrival & Check-in | Airport pickup and evening leisure.&#10;City Tour | Full day guided sightseeing."></textarea>
+      </div>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.86rem;font-weight:600">
+          <input type="checkbox" id="editPkgActive" checked style="width:auto;min-height:auto"> Active on Public Site
+        </label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.86rem;font-weight:600">
+          <input type="checkbox" id="editPkgFeatured" style="width:auto;min-height:auto"> Featured
+        </label>
+      </div>
+      <button type="submit" class="btn btn-marigold">Save Package</button>
+    </form>
+  </div>
+</div>
+
+<!-- REFERRAL CRUD MODAL -->
+<div class="admin-modal" id="refModal">
+  <div class="admin-modal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <h3 style="margin:0">Create / Edit Referral Code</h3>
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('refModal')">&times;</button>
+    </div>
+    <form id="refForm" style="display:grid;gap:0.85rem">
+      <input type="hidden" id="editRefId">
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Referral Code</label>
+          <input type="text" id="editRefCode" required placeholder="AHMEDABAD5" style="text-transform:uppercase">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Referrer / Partner Name</label>
+          <input type="text" id="editRefPartner" required placeholder="Partner or Friend Name">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Reference Type</label>
+          <select id="editRefType">
+            <option value="Friend / Alumni">Friend / Alumni</option>
+            <option value="B2B Travel Agent">B2B Travel Agent</option>
+            <option value="Corporate Client">Corporate Client</option>
+            <option value="Social / Influencer">Social / Influencer</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Expiry Date</label>
+          <input type="date" id="editRefExpiry" value="2027-12-31">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Customer Perk / Offer Note</label>
+          <input type="text" id="editRefPerk" required placeholder="₹2,500 Off on International Packages">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Usage Limit</label>
+          <input type="number" id="editRefLimit" value="100" min="1">
+        </div>
+      </div>
+      <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.86rem;font-weight:600">
+        <input type="checkbox" id="editRefActive" checked style="width:auto;min-height:auto"> Active
+      </label>
+      <button type="submit" class="btn btn-marigold">Save Referral Code</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/wsh-store.js"></script>
+<script src="js/wsh-shell.js"></script>
+<script>
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const loginView = document.getElementById('adminLoginView');
+    const dashView = document.getElementById('adminDashboardView');
+    const sidebar = document.getElementById('adminSidebar');
+    let pkgCatFilter = 'Domestic';
+
+    function checkAuth() {
+      const authed = window.WSHStore.isAdminLoggedIn();
+      loginView.style.display = authed ? 'none' : 'flex';
+      dashView.style.display = authed ? 'block' : 'none';
+      if (authed) renderAll();
+    }
+
+    document.getElementById('adminLoginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      window.WSHStore.setAdminLoggedIn(true);
+      checkAuth();
+    });
+    document.getElementById('demoLoginBtn').addEventListener('click', () => {
+      window.WSHStore.setAdminLoggedIn(true);
+      checkAuth();
+    });
+    document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+      window.WSHStore.setAdminLoggedIn(false);
+      checkAuth();
+    });
+
+    // Mobile Sidebar Toggle
+    document.getElementById('adminSidebarToggle').addEventListener('click', () => {
+      sidebar.classList.add('open');
+      document.getElementById('adminSidebarClose').style.display = 'inline-flex';
+    });
+    document.getElementById('adminSidebarClose').addEventListener('click', () => {
+      sidebar.classList.remove('open');
+    });
+
+    // Navigation Views
+    document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.view;
+        document.querySelectorAll('.admin-section').forEach(sec => {
+          sec.style.display = sec.id === `view-${target}` ? 'block' : 'none';
+        });
+        sidebar.classList.remove('open');
+        renderAll();
+      });
+    });
+
+    function renderOverview() {
+      const pkgs = window.WSHStore.getPackages();
+      const refs = window.WSHStore.getReferrals();
+      const inqs = window.WSHStore.getInquiries();
+      const domCount = inqs.filter(i => i.category === 'Domestic').length;
+      const intCount = inqs.filter(i => i.category === 'International').length;
+      const topRef = [...refs].sort((a, b) => (b.usedCount || 0) - (a.usedCount || 0))[0];
+
+      document.getElementById('overviewKpis').innerHTML = `
+        <div class="wsh-card" style="padding:1.25rem;background:var(--tint-peach)">
+          <div style="font-size:0.75rem;font-weight:700;color:#B45309">TOTAL INQUIRIES</div>
+          <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${inqs.length}</div>
+          <div style="font-size:0.78rem;color:var(--ink-slate)">${domCount} Domestic &bull; ${intCount} Int'l</div>
+        </div>
+        <div class="wsh-card" style="padding:1.25rem;background:var(--tint-mint)">
+          <div style="font-size:0.75rem;font-weight:700;color:#0369A1">ACTIVE PACKAGES</div>
+          <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${pkgs.filter(p => p.active !== false).length}</div>
+          <div style="font-size:0.78rem;color:var(--ink-slate)">${pkgs.length} Total Catalog</div>
+        </div>
+        <div class="wsh-card" style="padding:1.25rem;background:var(--tint-lavender)">
+          <div style="font-size:0.75rem;font-weight:700;color:#6D28D9">ACTIVE REFERRAL CODES</div>
+          <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${refs.filter(r => r.active !== false).length}</div>
+          <div style="font-size:0.78rem;color:var(--ink-slate)">Partner &amp; Friend Network</div>
+        </div>
+        <div class="wsh-card" style="padding:1.25rem;background:var(--tint-emerald)">
+          <div style="font-size:0.75rem;font-weight:700;color:#15803D">TOP REFERRAL CODE</div>
+          <div style="font-size:1.4rem;font-weight:800;margin-top:0.2rem">${topRef ? topRef.code : '—'}</div>
+          <div style="font-size:0.78rem;color:var(--ink-slate)">${topRef ? `${topRef.usedCount || 0} uses` : 'No uses yet'}</div>
+        </div>
+      `;
+
+      document.getElementById('recentInquiriesBody').innerHTML = inqs.slice(0, 5).map(i => `
+        <tr>
+          <td data-label="Inquiry ID"><span class="ref-code-pill">${i.id}</span></td>
+          <td data-label="Traveler"><strong>${i.travelerName}</strong><br><small style="color:var(--ink-muted)">${i.phone}</small></td>
+          <td data-label="Package">${i.packageTitle}<br><small class="ref-code-pill">${i.packageRef}</small></td>
+          <td data-label="Referral">${i.referralCode || i.referredBy || 'Direct'}</td>
+          <td data-label="Status"><span class="wsh-badge badge-sky">${i.status}</span></td>
+          <td data-label="Action"><a href="${window.WSHStore.buildFollowUpWhatsAppURL(i)}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">WhatsApp</a></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderPackages() {
+      const pkgs = window.WSHStore.getPackages({ category: pkgCatFilter });
+      document.getElementById('adminPackagesBody').innerHTML = pkgs.map(p => `
+        <tr>
+          <td data-label="Ref Code"><span class="ref-code-pill">${p.refCode}</span></td>
+          <td data-label="Title"><strong>${p.title}</strong><br><small style="color:var(--ink-muted)">${p.destination}</small></td>
+          <td data-label="Duration">${p.duration}</td>
+          <td data-label="Price" class="tabular-nums"><strong>${window.WSHStore.formatINR(p.price)}</strong></td>
+          <td data-label="Status">
+            <button type="button" class="btn btn-sm ${p.active !== false ? 'btn-outline' : 'btn-marigold'}" onclick="togglePkgActive('${p.id}')">
+              ${p.active !== false ? 'Active' : 'Hidden'}
+            </button>
+          </td>
+          <td data-label="Actions">
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end">
+              <button type="button" class="btn btn-outline btn-sm" onclick="openEditPkg('${p.id}')">Edit</button>
+              <button type="button" class="btn btn-outline btn-sm" style="color:#DC2626 !important" onclick="removePkg('${p.id}')">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderReferrals() {
+      const refs = window.WSHStore.getReferrals();
+      document.getElementById('adminReferralsBody').innerHTML = refs.map(r => {
+        const shareUrl = `${window.location.origin}/inquiry.html?refCode=${encodeURIComponent(r.code)}`;
+        return `
+          <tr>
+            <td data-label="Code"><span class="ref-code-pill" style="background:var(--tint-lavender);color:#4C1D95">${r.code}</span></td>
+            <td data-label="Partner"><strong>${r.partnerName}</strong></td>
+            <td data-label="Type"><span class="wsh-badge badge-slate">${r.type}</span></td>
+            <td data-label="Perk" style="font-size:0.84rem">${r.perk}</td>
+            <td data-label="Uses" class="tabular-nums"><strong>${r.usedCount || 0}</strong> / ${r.usageLimit || '∞'}</td>
+            <td data-label="Actions">
+              <div style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end">
+                <button type="button" class="btn btn-sky btn-sm" onclick="copyRefLink('${r.code}')">Copy Link</button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="toggleRefActive('${r.id}')">${r.active !== false ? 'Pause' : 'Activate'}</button>
+                <button type="button" class="btn btn-outline btn-sm" style="color:#DC2626 !important" onclick="removeRef('${r.id}')">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderInquiries() {
+      const filter = document.getElementById('inqFilterType').value;
+      const inqs = window.WSHStore.getInquiries().filter(i => filter === 'all' || i.category === filter);
+      const statuses = ['New', 'In Progress', 'Quote Sent', 'Booked'];
+
+      document.getElementById('adminInquiriesBody').innerHTML = inqs.map(i => `
+        <tr>
+          <td data-label="Inquiry ID"><span class="ref-code-pill">${i.id}</span></td>
+          <td data-label="Traveler"><strong>${i.travelerName}</strong><br><small style="color:var(--ink-muted)">${i.phone} &bull; ${i.city}</small></td>
+          <td data-label="Package">${i.category}: <strong>${i.packageTitle}</strong><br><span class="ref-code-pill">${i.packageRef}</span></td>
+          <td data-label="Referral">${i.referralCode ? `<span class="wsh-badge badge-lavender">${i.referralCode}</span>` : ''} <small>${i.referredBy || 'Direct'}</small></td>
+          <td data-label="Dates">${i.travelDates}<br><small>${i.adults}A / ${i.children}C (${i.hotelTier})</small></td>
+          <td data-label="Status">
+            <select onchange="changeInqStatus('${i.id}', this.value)" style="min-width:130px;padding:0.4rem">
+              ${statuses.map(s => `<option value="${s}" ${i.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </td>
+          <td data-label="Follow Up">
+            <a href="${window.WSHStore.buildFollowUpWhatsAppURL(i)}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+              Follow Up on WhatsApp
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderAll() {
+      renderOverview();
+      renderPackages();
+      renderReferrals();
+      renderInquiries();
+    }
+
+    // Package Tabs & CRUD Handlers
+    document.querySelectorAll('.pkg-cat-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pkg-cat-tab').forEach(b => {
+          b.classList.remove('btn-marigold', 'active');
+          b.classList.add('btn-outline');
+        });
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-marigold', 'active');
+        pkgCatFilter = btn.dataset.cat;
+        renderPackages();
+      });
+    });
+
+    document.getElementById('addPkgBtn').addEventListener('click', () => {
+      document.getElementById('pkgForm').reset();
+      document.getElementById('editPkgId').value = '';
+      document.getElementById('editPkgCat').value = pkgCatFilter;
+      document.getElementById('editPkgRef').value = pkgCatFilter === 'Domestic' ? 'WSH-DOM-NEW' : 'WSH-INT-NEW';
+      document.getElementById('pkgModal').classList.add('open');
+    });
+
+    document.getElementById('pkgForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const itinLines = document.getElementById('editPkgItinerary').value.split('\n').filter(Boolean).map((line, i) => {
+        const parts = line.split('|');
+        return { day: i + 1, title: (parts[0] || `Day ${i + 1}`).trim(), desc: (parts[1] || parts[0] || '').trim() };
+      });
+      const pkg = {
+        id: document.getElementById('editPkgId').value || undefined,
+        category: document.getElementById('editPkgCat').value,
+        refCode: document.getElementById('editPkgRef').value.trim().toUpperCase(),
+        title: document.getElementById('editPkgTitle').value.trim(),
+        destination: document.getElementById('editPkgDest').value.trim(),
+        duration: document.getElementById('editPkgDur').value.trim(),
+        nights: parseInt(document.getElementById('editPkgDur').value, 10) || 5,
+        price: Number(document.getElementById('editPkgPrice').value),
+        visaType: document.getElementById('editPkgVisa').value.trim() || 'Assisted Visa',
+        image: document.getElementById('editPkgImg').value.trim() || 'img/tours/dubai.jpg',
+        highlights: document.getElementById('editPkgHighlights').value.split(',').map(s => s.trim()).filter(Boolean),
+        itinerary: itinLines.length ? itinLines : [{ day: 1, title: 'Arrival & Sightseeing', desc: 'Private transfer and leisure.' }],
+        active: document.getElementById('editPkgActive').checked,
+        featured: document.getElementById('editPkgFeatured').checked
+      };
+      window.WSHStore.savePackage(pkg);
+      closeModal('pkgModal');
+      renderAll();
+      window.WSHShell.showToast('Package saved and synced to public site!');
+    });
+
+    // Referral CRUD Handlers
+    document.getElementById('addRefBtn').addEventListener('click', () => {
+      document.getElementById('refForm').reset();
+      document.getElementById('editRefId').value = '';
+      document.getElementById('refModal').classList.add('open');
+    });
+
+    document.getElementById('refForm').addEventListener('submit', e => {
+      e.preventDefault();
+      window.WSHStore.saveReferral({
+        id: document.getElementById('editRefId').value || undefined,
+        code: document.getElementById('editRefCode').value.trim().toUpperCase(),
+        partnerName: document.getElementById('editRefPartner').value.trim(),
+        type: document.getElementById('editRefType').value,
+        perk: document.getElementById('editRefPerk').value.trim(),
+        usageLimit: Number(document.getElementById('editRefLimit').value) || 100,
+        expiry: document.getElementById('editRefExpiry').value,
+        active: document.getElementById('editRefActive').checked
+      });
+      closeModal('refModal');
+      renderAll();
+      window.WSHShell.showToast('Referral code saved!');
+    });
+
+    document.getElementById('inqFilterType').addEventListener('change', renderInquiries);
+
+    // Global Row Actions
+    window.openEditPkg = function (id) {
+      const p = window.WSHStore.getPackageBySlugOrRef(id);
+      if (!p) return;
+      document.getElementById('editPkgId').value = p.id;
+      document.getElementById('editPkgCat').value = p.category;
+      document.getElementById('editPkgRef').value = p.refCode;
+      document.getElementById('editPkgTitle').value = p.title;
+      document.getElementById('editPkgDest').value = p.destination;
+      document.getElementById('editPkgDur').value = p.duration;
+      document.getElementById('editPkgPrice').value = p.price;
+      document.getElementById('editPkgVisa').value = p.visaType || '';
+      document.getElementById('editPkgImg').value = p.image || '';
+      document.getElementById('editPkgHighlights').value = (p.highlights || []).join(', ');
+      document.getElementById('editPkgItinerary').value = (p.itinerary || []).map(d => `${d.title} | ${d.desc}`).join('\n');
+      document.getElementById('editPkgActive').checked = p.active !== false;
+      document.getElementById('editPkgFeatured').checked = !!p.featured;
+      document.getElementById('pkgModal').classList.add('open');
+    };
+
+    window.togglePkgActive = function (id) {
+      const p = window.WSHStore.getPackageBySlugOrRef(id);
+      if (!p) return;
+      window.WSHStore.savePackage({ ...p, active: p.active === false });
+      renderAll();
+    };
+
+    window.removePkg = function (id) {
+      if (confirm('Delete this package from catalog?')) {
+        window.WSHStore.deletePackage(id);
+        renderAll();
+      }
+    };
+
+    window.copyRefLink = function (code) {
+      const url = `${window.location.origin}/inquiry.html?refCode=${encodeURIComponent(code)}`;
+      if (navigator.clipboard) navigator.clipboard.writeText(url);
+      window.WSHShell.showToast(`Copied referral link for ${code}!`);
+    };
+
+    window.toggleRefActive = function (id) {
+      const r = window.WSHStore.getReferrals().find(x => x.id === id);
+      if (!r) return;
+      window.WSHStore.saveReferral({ ...r, active: r.active === false });
+      renderAll();
+    };
+
+    window.removeRef = function (id) {
+      if (confirm('Delete this referral code?')) {
+        window.WSHStore.deleteReferral(id);
+        renderAll();
+      }
+    };
+
+    window.changeInqStatus = function (id, status) {
+      window.WSHStore.updateInquiryStatus(id, status);
+      renderOverview();
+      window.WSHShell.showToast(`Updated ${id} to ${status}`);
+    };
+
+    checkAuth();
+  });
+</script>
+</body>
+</html>
