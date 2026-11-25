@@ -166,14 +166,15 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.5em;
 }
 
-h1 { font-size: clamp(2.1rem, 4.6vw, 3.75rem); }
-h2 { font-size: clamp(1.65rem, 3.2vw, 2.65rem); }
-h3 { font-size: clamp(1.2rem, 2vw, 1.55rem); }
-h4 { font-size: clamp(1.05rem, 1.4vw, 1.2rem); }
+h1 { font-size: clamp(1.85rem, 4.8vw, 3.65rem); }
+h2 { font-size: clamp(1.4rem, 3.2vw, 2.55rem); }
+h3 { font-size: clamp(1.18rem, 2vw, 1.5rem); }
+h4 { font-size: clamp(1.02rem, 1.4vw, 1.2rem); }
 
 p {
   margin: 0 0 1em;
   color: var(--ink-slate);
+  line-height: 1.55;
 }
 
 /* Touch Controls (44px+ min, 16px input font to prevent iOS zoom) */
@@ -1106,4 +1107,145 @@ body,
 .wsh-slide-item:hover .wsh-video-play-badge,
 .wsh-card:hover .wsh-video-play-badge {
   transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ==========================================================================
+   MOBILE-FIRST UI/UX POLISH (360px - 430px NATIVE APP FEEL)
+   ========================================================================== */
+.hero-telemetry-mobile-grid {
+  display: none;
+}
+
+.pill-scroll-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pill-choice-btn {
+  min-height: 44px;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-ivory);
+  border: var(--border-strong);
+  color: var(--ink-navy);
+  font-size: 0.84rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill-choice-btn.active {
+  background: var(--marigold-grad);
+  border-color: transparent;
+  color: #FFFFFF !important;
+  box-shadow: var(--shadow-xs);
+}
+
+.mobile-sticky-cta-bar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .wsh-wrap {
+    padding-inline: 16px;
+  }
+
+  /* Compact 60px Sticky Header */
+  .wsh-nav-inner {
+    min-height: 60px;
+  }
+  .wsh-logo-link img {
+    height: 34px;
+  }
+
+  /* Tighter mobile section padding (20-24px rhythm) */
+  .sunlit-hero {
+    padding: 1.5rem 0 1.75rem;
+  }
+
+  /* Hide floating overlays on hero photo; show clean 2-col telemetry below */
+  .hero-telemetry-desktop {
+    display: none !important;
+  }
+  .hero-telemetry-mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+  }
+  .hero-showcase-img {
+    height: 240px !important;
+  }
+
+  /* 16:10 Package Card Cover & Clean CTA Layout */
+  .pkg-card-media {
+    height: auto !important;
+    aspect-ratio: 16 / 10;
+  }
+  .pkg-card-actions {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .pkg-card-actions .btn-wa-top {
+    grid-column: 1 / -1;
+  }
+
+  /* Horizontal Scrollable Pill Chips on Mobile */
+  .pill-scroll-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .pill-scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile Sticky Bottom CTA Bar & Floating WhatsApp Collision Prevention */
+  .mobile-sticky-cta-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 940;
+    background: var(--glass-white);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: var(--border-subtle);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.12);
+  }
+
+  body.has-sticky-cta {
+    padding-bottom: calc(140px + env(safe-area-inset-bottom));
+  }
+
+  body.has-sticky-cta .wsh-floating-wa {
+    bottom: calc(84px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Bottom-Sheet Modals */
+  #wshWaChooserModal,
+  #wshEventLightbox,
+  .admin-modal {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  #wshWaChooserModal > .wsh-card,
+  #wshEventLightbox > .wsh-card,
+  .admin-modal-card {
+    width: 100% !important;
+    max-height: 88dvh !important;
+    border-radius: 24px 24px 0 0 !important;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom)) !important;
+  }
 }

@@ -49,7 +49,7 @@
     }
   </style>
 </head>
-<body>
+<body class="has-sticky-cta">
 
 <div id="wsh-header-mount"></div>
 
@@ -156,6 +156,12 @@
   </section>
 </main>
 
+<!-- Mobile Sticky Bottom CTA Bar -->
+<div class="mobile-sticky-cta-bar">
+  <a id="mobStickyWa" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">WhatsApp Quote</a>
+  <a id="mobStickyCust" href="customize.html" class="btn btn-marigold btn-sm">Customize Trip</a>
+</div>
+
 <div id="wsh-footer-mount"></div>
 
 <script src="js/wsh-store.js"></script>
@@ -240,6 +246,8 @@
     document.getElementById('ctaInquireBtn').href = `inquiry.html?ref=${encodeURIComponent(pkg.refCode)}&type=${encodeURIComponent(pkg.category)}&package=${encodeURIComponent(pkg.title)}`;
     document.getElementById('ctaCustomizeBtn').href = `customize.html?pkg=${encodeURIComponent(pkg.refCode)}`;
     document.getElementById('ctaWhatsappBtn').href = window.WSHStore.buildPackageWhatsAppURL(pkg);
+    document.getElementById('mobStickyCust').href = `customize.html?pkg=${encodeURIComponent(pkg.refCode)}`;
+    document.getElementById('mobStickyWa').href = window.WSHStore.buildPackageWhatsAppURL(pkg);
     document.getElementById('ctaEmailBtn').href = window.WSHStore.buildPackageEmailURL(pkg);
     document.getElementById('copyEmailBtn').addEventListener('click', () => {
       if (navigator.clipboard) navigator.clipboard.writeText('info@whiteswanholidays.in');

@@ -15,8 +15,28 @@
       background: var(--bg-ivory);
       border: var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 1.1rem;
-      margin-bottom: 0.85rem;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    .day-editor-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1rem;
+      background: transparent;
+      text-align: left;
+      color: var(--ink-navy);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .day-editor-body {
+      padding: 0 1rem 1rem;
+      display: none;
+    }
+    .day-editor-card.open .day-editor-body {
+      display: block;
     }
     .addon-chip {
       display: flex;
@@ -37,7 +57,7 @@
     }
   </style>
 </head>
-<body>
+<body class="has-sticky-cta">
 
 <div id="wsh-header-mount"></div>
 
@@ -121,34 +141,36 @@
             </div>
           </div>
 
-          <div class="form-grid-2" style="margin-bottom:1rem">
-            <div>
-              <label for="custHotel" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Hotel Tier</label>
-              <select id="custHotel">
-                <option value="3-Star Comfort">3-Star Comfort</option>
-                <option value="4-Star Premium" selected>4-Star Premium</option>
-                <option value="5-Star Luxury">5-Star Luxury</option>
-                <option value="Villa / Resort">Villa / Resort</option>
-              </select>
-            </div>
-            <div>
-              <label for="custMeals" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Meal Plan</label>
-              <select id="custMeals">
-                <option value="Room Only">Room Only</option>
-                <option value="CP - Breakfast Included" selected>CP - Breakfast Included</option>
-                <option value="MAP - Breakfast & Dinner">MAP - Breakfast &amp; Dinner</option>
-                <option value="AP - All Meals">AP - All Meals</option>
-              </select>
+          <div style="margin-bottom:1.1rem">
+            <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.45rem">Hotel Tier</label>
+            <input type="hidden" id="custHotel" value="4-Star Premium">
+            <div class="pill-scroll-row" data-target="custHotel">
+              <button type="button" class="pill-choice-btn" data-val="3-Star Comfort">3-Star Comfort</button>
+              <button type="button" class="pill-choice-btn active" data-val="4-Star Premium">4-Star Premium</button>
+              <button type="button" class="pill-choice-btn" data-val="5-Star Luxury">5-Star Luxury</button>
+              <button type="button" class="pill-choice-btn" data-val="Villa / Resort">Villa / Resort</button>
             </div>
           </div>
 
-          <div style="margin-bottom:1rem">
-            <label for="custTransfers" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Transfers</label>
-            <select id="custTransfers">
-              <option value="Private AC Vehicle" selected>Private AC Vehicle</option>
-              <option value="Luxury SUV">Luxury SUV</option>
-              <option value="SIC / Shared Transfers">SIC / Shared Transfers</option>
-            </select>
+          <div style="margin-bottom:1.1rem">
+            <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.45rem">Meal Plan</label>
+            <input type="hidden" id="custMeals" value="CP - Breakfast Included">
+            <div class="pill-scroll-row" data-target="custMeals">
+              <button type="button" class="pill-choice-btn" data-val="Room Only">Room Only</button>
+              <button type="button" class="pill-choice-btn active" data-val="CP - Breakfast Included">CP - Breakfast Included</button>
+              <button type="button" class="pill-choice-btn" data-val="MAP - Breakfast & Dinner">MAP - Breakfast &amp; Dinner</button>
+              <button type="button" class="pill-choice-btn" data-val="AP - All Meals">AP - All Meals</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1.1rem">
+            <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.45rem">Transfers</label>
+            <input type="hidden" id="custTransfers" value="Private AC Vehicle">
+            <div class="pill-scroll-row" data-target="custTransfers">
+              <button type="button" class="pill-choice-btn active" data-val="Private AC Vehicle">Private AC Vehicle</button>
+              <button type="button" class="pill-choice-btn" data-val="Luxury SUV">Luxury SUV</button>
+              <button type="button" class="pill-choice-btn" data-val="SIC / Shared Transfers">SIC / Shared Transfers</button>
+            </div>
           </div>
 
           <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.45rem">Optional Add-Ons</label>
@@ -221,6 +243,12 @@
   </section>
 </main>
 
+<!-- Mobile Sticky Bottom CTA Bar -->
+<div class="mobile-sticky-cta-bar">
+  <button type="button" id="mobCustWaBtn" class="btn btn-whatsapp btn-sm">WhatsApp Quote</button>
+  <button type="button" id="mobCustEmailBtn" class="btn btn-sky btn-sm">Email Quote</button>
+</div>
+
 <div id="wsh-footer-mount"></div>
 
 <script src="js/wsh-store.js"></script>
@@ -278,20 +306,34 @@
       updateSummary();
     }
 
-    function renderDays() {
+    function renderDays(openIdx = 0) {
       daysContainer.innerHTML = customDays.map((d, idx) => `
-        <div class="day-editor-card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.65rem">
-            <span class="wsh-badge badge-amber">Day ${idx + 1}</span>
-            ${customDays.length > 1 ? `<button type="button" class="btn btn-outline btn-sm del-day-btn" data-idx="${idx}" style="min-height:36px;padding:0.3rem 0.7rem;color:#DC2626 !important">Remove</button>` : ''}
+        <div class="day-editor-card ${idx === openIdx ? 'open' : ''}">
+          <button type="button" class="day-editor-header" data-idx="${idx}">
+            <span style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+              <span class="wsh-badge badge-amber">Day ${idx + 1}</span>
+              <span>${d.city || 'Stop'} &mdash; ${d.title || 'Itinerary'}</span>
+            </span>
+            <span>${idx === openIdx ? '−' : '+'}</span>
+          </button>
+          <div class="day-editor-body">
+            <div class="form-grid-2" style="margin-bottom:0.65rem">
+              <input type="text" class="day-city-in" data-idx="${idx}" value="${d.city.replace(/"/g, '&quot;')}" placeholder="City / Destination">
+              <input type="text" class="day-title-in" data-idx="${idx}" value="${d.title.replace(/"/g, '&quot;')}" placeholder="Day Title">
+            </div>
+            <textarea class="day-notes-in" data-idx="${idx}" rows="2" placeholder="Activities, sightseeing, or special notes..." style="margin-bottom:0.55rem">${d.notes}</textarea>
+            ${customDays.length > 1 ? `<button type="button" class="btn btn-outline btn-sm del-day-btn" data-idx="${idx}" style="width:100%;color:#DC2626 !important">Delete Day ${idx + 1}</button>` : ''}
           </div>
-          <div class="form-grid-2" style="margin-bottom:0.65rem">
-            <input type="text" class="day-city-in" data-idx="${idx}" value="${d.city.replace(/"/g, '&quot;')}" placeholder="City / Destination">
-            <input type="text" class="day-title-in" data-idx="${idx}" value="${d.title.replace(/"/g, '&quot;')}" placeholder="Day Title">
-          </div>
-          <textarea class="day-notes-in" data-idx="${idx}" rows="2" placeholder="Activities, sightseeing, or special notes...">${d.notes}</textarea>
         </div>
       `).join('');
+
+      daysContainer.querySelectorAll('.day-editor-header').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.day-editor-card');
+          card.classList.toggle('open');
+          btn.querySelector('span:last-child').textContent = card.classList.contains('open') ? '−' : '+';
+        });
+      });
 
       daysContainer.querySelectorAll('.day-city-in').forEach(el => {
         el.addEventListener('input', e => { customDays[Number(e.target.dataset.idx)].city = e.target.value; updateSummary(); });
@@ -305,7 +347,7 @@
       daysContainer.querySelectorAll('.del-day-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           customDays.splice(Number(btn.dataset.idx), 1);
-          renderDays();
+          renderDays(0);
           updateSummary();
         });
       });
@@ -370,15 +412,30 @@
 
     document.getElementById('addDayBtn').addEventListener('click', () => {
       customDays.push({ city: 'New Stop', title: `Custom Day ${customDays.length + 1}`, notes: 'Sightseeing & leisure.' });
-      renderDays();
+      renderDays(customDays.length - 1);
       updateSummary();
     });
 
+    // Horizontal Scrollable Pill Chips
+    document.querySelectorAll('.pill-scroll-row').forEach(row => {
+      const targetId = row.dataset.target;
+      const hiddenInput = document.getElementById(targetId);
+      row.querySelectorAll('.pill-choice-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          row.querySelectorAll('.pill-choice-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          if (hiddenInput) hiddenInput.value = btn.dataset.val;
+          updateSummary();
+        });
+      });
+    });
+
+    document.getElementById('mobCustWaBtn').addEventListener('click', () => document.getElementById('custWaBtn').click());
+    document.getElementById('mobCustEmailBtn').addEventListener('click', () => document.getElementById('custEmailBtn').click());
+
     loadPkgSel.addEventListener('change', e => loadPackageData(e.target.value));
     [catSel, titleInput, document.getElementById('custCity'), document.getElementById('custDates'),
-     document.getElementById('custAdults'), document.getElementById('custChildren'),
-     document.getElementById('custHotel'), document.getElementById('custMeals'),
-     document.getElementById('custTransfers')].forEach(el => el.addEventListener('input', updateSummary));
+     document.getElementById('custAdults'), document.getElementById('custChildren')].forEach(el => el.addEventListener('input', updateSummary));
     document.querySelectorAll('.cust-addon').forEach(el => el.addEventListener('change', updateSummary));
     document.getElementById('custVerifyRefBtn').addEventListener('click', verifyRef);
     document.getElementById('custReferral').addEventListener('input', verifyRef);

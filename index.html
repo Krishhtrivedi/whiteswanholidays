@@ -57,37 +57,57 @@
 
       <!-- Destination Showcase with Floating Glassmorphic AI Telemetry Cards -->
       <div style="position:relative">
-        <div class="wsh-card" style="border-radius:28px;position:relative;box-shadow:var(--shadow-lg)">
-          <img src="img/tours/dubai.jpg" alt="Sunlit Luxury Travel Showcase" style="width:100%;height:420px;object-fit:cover">
-          <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,23,42,0.05) 35%, rgba(15,23,42,0.72) 100%)"></div>
+        <div class="wsh-card" style="border-radius:24px;position:relative;box-shadow:var(--shadow-lg)">
+          <img class="hero-showcase-img" src="img/tours/dubai.jpg" alt="Sunlit Luxury Travel Showcase" style="width:100%;height:420px;object-fit:cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,23,42,0.05) 35%, rgba(15,23,42,0.68) 100%)"></div>
 
-          <!-- Top Left Telemetry: 98% AI Route Match -->
-          <div class="glass-telemetry-card" style="position:absolute;top:16px;left:16px;max-width:210px">
-            <div style="display:flex;align-items:center;gap:0.45rem;font-size:0.74rem;font-weight:700;color:var(--accent-sky-text)">
-              <span style="width:8px;height:8px;border-radius:50%;background:#06B6D4"></span>
-              98% AI ROUTE MATCH
+          <!-- Desktop Floating Telemetry Overlays -->
+          <div class="hero-telemetry-desktop">
+            <div class="glass-telemetry-card" style="position:absolute;top:16px;left:16px;max-width:210px">
+              <div style="display:flex;align-items:center;gap:0.45rem;font-size:0.74rem;font-weight:700;color:var(--accent-sky-text)">
+                <span style="width:8px;height:8px;border-radius:50%;background:#06B6D4"></span>
+                98% AI ROUTE MATCH
+              </div>
+              <div style="font-size:0.86rem;font-weight:800;color:var(--ink-navy);margin-top:0.15rem">
+                AMD &rarr; DXB Non-Stop
+              </div>
             </div>
-            <div style="font-size:0.86rem;font-weight:800;color:var(--ink-navy);margin-top:0.15rem">
-              AMD &rarr; DXB Non-Stop
+
+            <div class="glass-telemetry-card" style="position:absolute;top:16px;right:16px">
+              <div style="font-size:0.72rem;font-weight:700;color:var(--accent-emerald-text)">VISA READINESS</div>
+              <div style="font-size:0.86rem;font-weight:800;color:var(--ink-navy)">Fast-Track E-Visa</div>
+            </div>
+
+            <div style="position:absolute;bottom:16px;left:16px;right:16px;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+              <div class="glass-telemetry-card">
+                <div style="font-size:0.7rem;font-weight:700;color:var(--accent-amber-text)">LIVE WEATHER &amp; SEASON</div>
+                <div style="font-size:0.86rem;font-weight:800;color:var(--ink-navy)">24&deg;C &bull; Peak Oct–Apr</div>
+              </div>
+              <div class="glass-telemetry-card">
+                <div style="font-size:0.7rem;font-weight:700;color:var(--ink-muted)">TAILORED QUOTES</div>
+                <div style="font-size:0.86rem;font-weight:800;color:var(--accent-sky-text)">WhatsApp &amp; Email Quotes</div>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Top Right Telemetry: Visa Readiness -->
-          <div class="glass-telemetry-card" style="position:absolute;top:16px;right:16px">
-            <div style="font-size:0.72rem;font-weight:700;color:var(--accent-emerald-text)">VISA READINESS</div>
-            <div style="font-size:0.86rem;font-weight:800;color:var(--ink-navy)">Fast-Track E-Visa</div>
+        <!-- Mobile Clean 2-Column Telemetry Grid Beneath Hero Image -->
+        <div class="hero-telemetry-mobile-grid">
+          <div class="wsh-card" style="padding:0.75rem 0.85rem">
+            <div style="font-size:0.68rem;font-weight:700;color:var(--accent-sky-text)">98% ROUTE MATCH</div>
+            <div style="font-size:0.82rem;font-weight:800;color:var(--ink-navy)">AMD &rarr; Global Hubs</div>
           </div>
-
-          <!-- Bottom Telemetry Cluster -->
-          <div style="position:absolute;bottom:16px;left:16px;right:16px;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
-            <div class="glass-telemetry-card">
-              <div style="font-size:0.7rem;font-weight:700;color:var(--accent-amber-text)">LIVE WEATHER &amp; SEASON</div>
-              <div style="font-size:0.86rem;font-weight:800;color:var(--ink-navy)">24&deg;C &bull; Peak Oct–Apr</div>
-            </div>
-            <div class="glass-telemetry-card">
-              <div style="font-size:0.7rem;font-weight:700;color:var(--ink-muted)">TAILORED QUOTES</div>
-              <div style="font-size:0.86rem;font-weight:800;color:var(--accent-sky-text)">WhatsApp &amp; Email Quotes</div>
-            </div>
+          <div class="wsh-card" style="padding:0.75rem 0.85rem">
+            <div style="font-size:0.68rem;font-weight:700;color:var(--accent-emerald-text)">VISA READINESS</div>
+            <div style="font-size:0.82rem;font-weight:800;color:var(--ink-navy)">Fast-Track E-Visa</div>
+          </div>
+          <div class="wsh-card" style="padding:0.75rem 0.85rem">
+            <div style="font-size:0.68rem;font-weight:700;color:var(--accent-amber-text)">BEST SEASON</div>
+            <div style="font-size:0.82rem;font-weight:800;color:var(--ink-navy)">Peak Oct–Apr</div>
+          </div>
+          <div class="wsh-card" style="padding:0.75rem 0.85rem">
+            <div style="font-size:0.68rem;font-weight:700;color:var(--accent-lavender-text)">TAILORED QUOTES</div>
+            <div style="font-size:0.82rem;font-weight:800;color:var(--ink-navy)">WhatsApp &amp; Email</div>
           </div>
         </div>
       </div>

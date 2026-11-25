@@ -291,13 +291,17 @@
           </div>
 
           <div class="pkg-card-actions">
-            <a href="${detailURL}" class="btn btn-outline btn-sm">View Details</a>
-            <a href="${customizeURL}" class="btn btn-marigold btn-sm">Customize Package</a>
-            <a href="${waURL}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+            <a href="${waURL}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm btn-wa-top">
               Get Quote on WhatsApp
             </a>
             <a href="${emailURL}" class="btn btn-sky btn-sm" title="Email info@whiteswanholidays.in">
               Email Quote
+            </a>
+            <a href="${customizeURL}" class="btn btn-marigold btn-sm">
+              Customize
+            </a>
+            <a href="${detailURL}" class="btn btn-outline btn-sm btn-wa-top">
+              View Details &rarr;
             </a>
           </div>
         </div>
