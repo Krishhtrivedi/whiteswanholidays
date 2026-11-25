@@ -89,14 +89,13 @@
         <h2 id="aiOutTitle" style="font-size:1.5rem;margin-bottom:0.35rem">Kashmir Paradise AI Plan</h2>
         <p id="aiOutMeta" style="font-size:0.88rem;color:var(--ink-muted);margin-bottom:1.25rem"></p>
 
-        <!-- INR Cost Breakdown -->
+        <!-- Smart Inclusions & Quote Summary -->
         <div style="background:var(--tint-mint);border-radius:16px;padding:1.1rem;margin-bottom:1.25rem">
-          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-sky-text);text-transform:uppercase;margin-bottom:0.5rem">Smart INR Cost Breakdown (Per Person)</div>
-          <div style="display:grid;gap:0.4rem;font-size:0.88rem" id="aiCostLines"></div>
-          <div style="border-top:1px dashed rgba(2,132,199,0.3);margin-top:0.65rem;padding-top:0.65rem;display:flex;justify-content:space-between;align-items:baseline">
-            <strong style="color:var(--ink-navy)">Estimated Total / Pax</strong>
-            <strong id="aiOutTotal" class="tabular-nums" style="font-size:1.35rem;color:var(--accent-sky-text)">₹0</strong>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.55rem">
+            <span style="font-size:0.75rem;font-weight:700;color:var(--accent-sky-text);text-transform:uppercase">Smart Logistics &amp; Inclusions</span>
+            <span class="wsh-badge badge-emerald">Tailored Quote Available</span>
           </div>
+          <div style="display:grid;gap:0.4rem;font-size:0.88rem" id="aiCostLines"></div>
         </div>
 
         <!-- Day by Day Preview -->
@@ -106,11 +105,17 @@
         </div>
 
         <div style="display:grid;gap:0.65rem">
-          <a id="aiSendInquiryBtn" href="inquiry.html" class="btn btn-marigold" style="width:100%">
-            Send AI Plan to Inquiry &rarr;
-          </a>
           <a id="aiWhatsappBtn" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%">
-            Discuss Plan on WhatsApp
+            Get Quote on WhatsApp
+          </a>
+          <a id="aiEmailBtn" href="mailto:info@whiteswanholidays.in" class="btn btn-sky" style="width:100%">
+            Email Quote (info@whiteswanholidays.in)
+          </a>
+          <a id="aiCustomizeBtn" href="customize.html" class="btn btn-marigold" style="width:100%">
+            Edit Day-by-Day in Customizer &rarr;
+          </a>
+          <a id="aiSendInquiryBtn" href="inquiry.html" class="btn btn-outline" style="width:100%">
+            Send AI Plan to Inquiry Desk
           </a>
         </div>
       </div>
@@ -153,25 +158,16 @@
       const tType = typeSelect.value;
       const tier = budgetSelect.value;
 
-      const tierMult = tier === '3-Star' ? 0.85 : tier === '5-Star Luxury' ? 1.45 : 1.0;
-      const basePerNight = Math.round((pkg.price / (pkg.nights || 5)) * tierMult);
-      const staysCost = basePerNight * nights;
-      const transitCost = pkg.category === 'Domestic' ? 8500 : (pkg.price > 100000 ? 55000 : 22000);
-      const activitiesCost = Math.round(nights * 1800 * (tType === 'Honeymoon' ? 1.15 : 1));
-      const gst = Math.round((staysCost + transitCost + activitiesCost) * 0.05);
-      const total = staysCost + transitCost + activitiesCost + gst;
-
       document.getElementById('aiOutRef').textContent = pkg.refCode;
       document.getElementById('aiOutTitle').textContent = `${pkg.title} — ${days}D/${nights}N AI Plan`;
       document.getElementById('aiOutMeta').textContent = `${tType} • ${tier} • Departing from Ahmedabad (AMD)`;
 
       document.getElementById('aiCostLines').innerHTML = `
-        <div style="display:flex;justify-content:space-between"><span>Flights / Transit (from AMD)</span><strong class="tabular-nums">${window.WSHStore.formatINR(transitCost)}</strong></div>
-        <div style="display:flex;justify-content:space-between"><span>${tier} Stays (${nights} Nights)</span><strong class="tabular-nums">${window.WSHStore.formatINR(staysCost)}</strong></div>
-        <div style="display:flex;justify-content:space-between"><span>${tType} Sightseeing &amp; Transfers</span><strong class="tabular-nums">${window.WSHStore.formatINR(activitiesCost)}</strong></div>
-        <div style="display:flex;justify-content:space-between"><span>Package GST (5%)</span><strong class="tabular-nums">${window.WSHStore.formatINR(gst)}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Flights / Transit (from AMD)</span><strong>Included on Request</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>${tier} Accommodation</span><strong>${nights} Nights</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>${tType} Sightseeing &amp; Transfers</span><strong>Private AC Vehicle</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Visa &amp; 24&times;7 Concierge</span><strong>${pkg.visaType || 'Included'}</strong></div>
       `;
-      document.getElementById('aiOutTotal').textContent = window.WSHStore.formatINR(total);
 
       // Build day list dynamically for chosen length
       const baseDays = pkg.itinerary || [];
@@ -193,7 +189,8 @@
         </div>
       `).join('');
 
-      const noteStr = `AI Planner Plan: ${days}D/${nights}N, ${tType}, ${tier}, Est. ${window.WSHStore.formatINR(total)}/pax`;
+      const noteStr = `AI Planner Plan: ${days}D/${nights}N, ${tType}, ${tier}`;
+      document.getElementById('aiCustomizeBtn').href = `customize.html?pkg=${encodeURIComponent(pkg.refCode)}`;
       document.getElementById('aiSendInquiryBtn').href = `inquiry.html?ref=${encodeURIComponent(pkg.refCode)}&type=${encodeURIComponent(pkg.category)}&package=${encodeURIComponent(pkg.title)}&notes=${encodeURIComponent(noteStr)}`;
       document.getElementById('aiWhatsappBtn').href = window.WSHStore.buildWhatsAppInquiryURL({
         category: pkg.category,
@@ -202,6 +199,9 @@
         hotelTier: tier,
         notes: noteStr
       });
+      const emailSubject = `AI Trip Plan Quote: ${pkg.title} [${pkg.refCode}] (${days}D/${nights}N)`;
+      const emailBody = `Namaste White Swan Holidays,\n\nPlease share a tailored quote for this AI Trip Plan:\nPackage: ${pkg.title} (${pkg.refCode})\nDuration: ${days} Days / ${nights} Nights\nTraveler Type: ${tType}\nHotel Tier: ${tier}\nDeparture City: Ahmedabad\n\nThank you!`;
+      document.getElementById('aiEmailBtn').href = `mailto:info@whiteswanholidays.in?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     }
 
     document.querySelectorAll('.ai-cat-btn').forEach(btn => {

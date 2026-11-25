@@ -287,7 +287,6 @@
                 <th>Ref Code</th>
                 <th>Package Title</th>
                 <th>Duration</th>
-                <th>Price (₹)</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -417,8 +416,8 @@
           <input type="text" id="editPkgDur" required placeholder="6 Nights / 7 Days">
         </div>
         <div>
-          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Starting Price (₹)</label>
-          <input type="number" id="editPkgPrice" required min="1000" placeholder="45000">
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Travel Style</label>
+          <input type="text" id="editPkgStyle" placeholder="Family &amp; Honeymoon">
         </div>
       </div>
       <div class="form-grid-2">
@@ -693,7 +692,6 @@
           <td data-label="Ref Code"><span class="ref-code-pill">${p.refCode}</span></td>
           <td data-label="Title"><strong>${p.title}</strong><br><small style="color:var(--ink-muted)">${p.destination}</small></td>
           <td data-label="Duration">${p.duration}</td>
-          <td data-label="Price" class="tabular-nums"><strong>${window.WSHStore.formatINR(p.price)}</strong></td>
           <td data-label="Status">
             <button type="button" class="btn btn-sm ${p.active !== false ? 'btn-outline' : 'btn-marigold'}" onclick="togglePkgActive('${p.id}')">
               ${p.active !== false ? 'Active' : 'Hidden'}
@@ -931,7 +929,7 @@
         destination: document.getElementById('editPkgDest').value.trim(),
         duration: document.getElementById('editPkgDur').value.trim(),
         nights: parseInt(document.getElementById('editPkgDur').value, 10) || 5,
-        price: Number(document.getElementById('editPkgPrice').value),
+        style: document.getElementById('editPkgStyle').value.trim() || 'Family & Curated',
         visaType: document.getElementById('editPkgVisa').value.trim() || 'Assisted Visa',
         image: document.getElementById('editPkgImg').value.trim() || 'img/tours/dubai.jpg',
         highlights: document.getElementById('editPkgHighlights').value.split(',').map(s => s.trim()).filter(Boolean),
@@ -981,7 +979,7 @@
       document.getElementById('editPkgTitle').value = p.title;
       document.getElementById('editPkgDest').value = p.destination;
       document.getElementById('editPkgDur').value = p.duration;
-      document.getElementById('editPkgPrice').value = p.price;
+      document.getElementById('editPkgStyle').value = p.style || '';
       document.getElementById('editPkgVisa').value = p.visaType || '';
       document.getElementById('editPkgImg').value = p.image || '';
       document.getElementById('editPkgHighlights').value = (p.highlights || []).join(', ');

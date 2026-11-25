@@ -30,7 +30,7 @@
   <!-- Filter Bar & Packages Grid -->
   <section style="padding:1rem 0 4rem">
     <div class="wsh-wrap">
-      <div class="wsh-filter-bar">
+      <div class="wsh-filter-bar" style="grid-template-columns:repeat(auto-fit, minmax(min(100%, 190px), 1fr))">
         <div>
           <label for="intSearch" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.3rem">Country / Region / Ref ID</label>
           <input type="text" id="intSearch" placeholder="Search Dubai, Japan, Bali, WSH-INT...">
@@ -55,16 +55,6 @@
           </select>
         </div>
 
-        <div>
-          <label for="intBudget" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.3rem">Max Budget (₹)</label>
-          <select id="intBudget">
-            <option value="all">All Budgets</option>
-            <option value="50000">Up to ₹50,000</option>
-            <option value="150000">Up to ₹1,50,000</option>
-            <option value="250000">Up to ₹2,50,000</option>
-          </select>
-        </div>
-
         <button type="button" id="intResetBtn" class="btn btn-outline btn-sm" style="height:46px">Reset</button>
       </div>
 
@@ -86,7 +76,6 @@
     const searchEl = document.getElementById('intSearch');
     const visaEl = document.getElementById('intVisa');
     const durationEl = document.getElementById('intDuration');
-    const budgetEl = document.getElementById('intBudget');
 
     const params = new URLSearchParams(window.location.search);
     if (params.get('q')) searchEl.value = params.get('q');
@@ -95,30 +84,27 @@
       const q = searchEl.value.trim().toLowerCase();
       const visa = visaEl.value.toLowerCase();
       const dur = durationEl.value;
-      const maxBudget = budgetEl.value === 'all' ? Infinity : Number(budgetEl.value);
 
       const pkgs = window.WSHStore.getPackages({ onlyActive: true, category: 'International' }).filter(p => {
         const textMatch = !q || `${p.title} ${p.destination} ${p.refCode} ${p.region}`.toLowerCase().includes(q);
         const visaMatch = visa === 'all' || (p.visaType || '').toLowerCase().includes(visa);
         const durMatch = dur === 'all' || (dur === 'short' ? (p.nights || 5) <= 5 : (p.nights || 5) >= 6);
-        const budgetMatch = Number(p.price) <= maxBudget;
-        return textMatch && visaMatch && durMatch && budgetMatch;
+        return textMatch && visaMatch && durMatch;
       });
 
       countBar.textContent = `Showing ${pkgs.length} International Package${pkgs.length === 1 ? '' : 's'}`;
       if (!pkgs.length) {
-        grid.innerHTML = `<div class="wsh-card" style="grid-column:1/-1;padding:2.5rem;text-align:center"><h3>No matching international packages</h3><p>Try clearing filters or ask our AMD desk for a custom global quote.</p><a href="inquiry.html?type=International" class="btn btn-sky">Request Custom International Quote</a></div>`;
+        grid.innerHTML = `<div class="wsh-card" style="grid-column:1/-1;padding:2.5rem;text-align:center"><h3>No matching international packages</h3><p>Try clearing filters or design your own global itinerary.</p><a href="customize.html" class="btn btn-sky">Design Custom Global Tour</a></div>`;
         return;
       }
       grid.innerHTML = pkgs.map(window.WSHShell.renderPackageCard).join('');
     }
 
-    [searchEl, visaEl, durationEl, budgetEl].forEach(el => el.addEventListener('input', render));
+    [searchEl, visaEl, durationEl].forEach(el => el.addEventListener('input', render));
     document.getElementById('intResetBtn').addEventListener('click', () => {
       searchEl.value = '';
       visaEl.value = 'all';
       durationEl.value = 'all';
-      budgetEl.value = 'all';
       render();
     });
 

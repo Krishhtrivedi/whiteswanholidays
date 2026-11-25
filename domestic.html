@@ -30,7 +30,7 @@
   <!-- Filter Bar & Packages Grid -->
   <section style="padding:1rem 0 4rem">
     <div class="wsh-wrap">
-      <div class="wsh-filter-bar">
+      <div class="wsh-filter-bar" style="grid-template-columns:repeat(auto-fit, minmax(min(100%, 190px), 1fr))">
         <div>
           <label for="domSearch" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.3rem">Destination / Ref Code</label>
           <input type="text" id="domSearch" placeholder="Search Kashmir, Kerala, WSH-DOM...">
@@ -42,16 +42,6 @@
             <option value="all">Any Duration</option>
             <option value="short">Up to 4 Nights</option>
             <option value="medium">5+ Nights</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="domBudget" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.3rem">Max Budget (₹)</label>
-          <select id="domBudget">
-            <option value="all">All Budgets</option>
-            <option value="23000">Up to ₹23,000</option>
-            <option value="27000">Up to ₹27,000</option>
-            <option value="35000">Up to ₹35,000</option>
           </select>
         </div>
 
@@ -86,7 +76,6 @@
     const countBar = document.getElementById('domCountBar');
     const searchEl = document.getElementById('domSearch');
     const durationEl = document.getElementById('domDuration');
-    const budgetEl = document.getElementById('domBudget');
     const styleEl = document.getElementById('domStyle');
 
     const params = new URLSearchParams(window.location.search);
@@ -95,30 +84,27 @@
     function render() {
       const q = searchEl.value.trim().toLowerCase();
       const dur = durationEl.value;
-      const maxBudget = budgetEl.value === 'all' ? Infinity : Number(budgetEl.value);
       const style = styleEl.value.toLowerCase();
 
       const pkgs = window.WSHStore.getPackages({ onlyActive: true, category: 'Domestic' }).filter(p => {
         const textMatch = !q || `${p.title} ${p.destination} ${p.refCode} ${p.region}`.toLowerCase().includes(q);
         const durMatch = dur === 'all' || (dur === 'short' ? (p.nights || 5) <= 4 : (p.nights || 5) >= 5);
-        const budgetMatch = Number(p.price) <= maxBudget;
         const styleMatch = style === 'all' || (p.style || '').toLowerCase().includes(style);
-        return textMatch && durMatch && budgetMatch && styleMatch;
+        return textMatch && durMatch && styleMatch;
       });
 
       countBar.textContent = `Showing ${pkgs.length} Domestic India Package${pkgs.length === 1 ? '' : 's'}`;
       if (!pkgs.length) {
-        grid.innerHTML = `<div class="wsh-card" style="grid-column:1/-1;padding:2.5rem;text-align:center"><h3>No matching domestic tours</h3><p>Try resetting filters or request a custom itinerary from our Ahmedabad desk.</p><a href="inquiry.html?type=Domestic" class="btn btn-marigold">Request Custom India Tour</a></div>`;
+        grid.innerHTML = `<div class="wsh-card" style="grid-column:1/-1;padding:2.5rem;text-align:center"><h3>No matching domestic tours</h3><p>Try resetting filters or design your own custom itinerary.</p><a href="customize.html" class="btn btn-marigold">Design Custom India Tour</a></div>`;
         return;
       }
       grid.innerHTML = pkgs.map(window.WSHShell.renderPackageCard).join('');
     }
 
-    [searchEl, durationEl, budgetEl, styleEl].forEach(el => el.addEventListener('input', render));
+    [searchEl, durationEl, styleEl].forEach(el => el.addEventListener('input', render));
     document.getElementById('domResetBtn').addEventListener('click', () => {
       searchEl.value = '';
       durationEl.value = 'all';
-      budgetEl.value = 'all';
       styleEl.value = 'all';
       render();
     });

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Customize Your Package &amp; Itinerary | White Swan Holidays</title>
+  <meta name="description" content="Design your own custom Domestic India or International holiday package. Edit day-by-day itineraries, choose hotel tiers, meal plans, and request a tailored quote.">
+  <link rel="icon" href="img/white_swan_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/wsh-sunlit.css">
+  <style>
+    .day-editor-card {
+      background: var(--bg-ivory);
+      border: var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem;
+      margin-bottom: 0.85rem;
+    }
+    .addon-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 0.9rem;
+      background: var(--bg-ivory);
+      border: var(--border-subtle);
+      border-radius: 12px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .addon-chip input {
+      width: auto;
+      min-height: auto;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="wsh-header-mount"></div>
+
+<main>
+  <section style="padding:3rem 0 2rem;background:linear-gradient(180deg, var(--tint-lavender) 0%, var(--bg-ivory) 100%)">
+    <div class="wsh-wrap">
+      <span class="wsh-badge badge-lavender" style="margin-bottom:0.7rem">DESIGN YOUR OWN PACKAGE</span>
+      <h1>Interactive Itinerary &amp; Package Customizer</h1>
+      <p style="max-width:680px">Load an existing circuit or build a blank trip from scratch — customize every day, hotel tier, meal plan, and transfer, then get a tailored quote via WhatsApp or Email.</p>
+    </div>
+  </section>
+
+  <section style="padding:1rem 0 4rem">
+    <div class="wsh-wrap inquiry-split-grid">
+      <!-- LEFT: Interactive Customizer Form -->
+      <div style="display:grid;gap:1.5rem">
+        <!-- 1. Base Selection -->
+        <div class="wsh-card" style="padding:1.6rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem">
+            <h3 style="margin:0">1. Base Package or Blank Trip</h3>
+            <span class="ref-code-pill" id="customRefBadge">WSH-CUSTOM-XXXX</span>
+          </div>
+
+          <div class="form-grid-2" style="margin-bottom:1rem">
+            <div>
+              <label for="custLoadPkg" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Load Existing Package (or Blank)</label>
+              <select id="custLoadPkg"></select>
+            </div>
+            <div>
+              <label for="custCategory" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Trip Scope</label>
+              <select id="custCategory">
+                <option value="Domestic India">Domestic India</option>
+                <option value="International">International</option>
+                <option value="Multi-Country">Multi-Country</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="custTripTitle" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Custom Trip Name / Destination</label>
+            <input type="text" id="custTripTitle" value="Custom Luxury Holiday" placeholder="e.g. Custom Swiss & Paris Family Tour">
+          </div>
+        </div>
+
+        <!-- 2. Day-by-Day Itinerary Editor -->
+        <div class="wsh-card" style="padding:1.6rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.1rem">
+            <div>
+              <h3 style="margin:0">2. Day-by-Day Itinerary Editor</h3>
+              <p style="margin:0.2rem 0 0;font-size:0.84rem">Add days, delete days, or edit daily cities &amp; sightseeing activities.</p>
+            </div>
+            <button type="button" id="addDayBtn" class="btn btn-marigold btn-sm">+ Add Day</button>
+          </div>
+
+          <div id="daysEditorContainer"></div>
+        </div>
+
+        <!-- 3. Package Preferences -->
+        <div class="wsh-card" style="padding:1.6rem">
+          <h3 style="margin-bottom:1rem">3. Stays, Meals, Transfers &amp; Add-Ons</h3>
+
+          <div class="form-grid-2" style="margin-bottom:1rem">
+            <div>
+              <label for="custCity" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Departure City</label>
+              <input type="text" id="custCity" value="Ahmedabad">
+            </div>
+            <div>
+              <label for="custDates" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Travel Month / Dates</label>
+              <input type="text" id="custDates" placeholder="e.g. December 2026 / 15–22 Jan">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-bottom:1rem">
+            <div>
+              <label for="custAdults" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Adults</label>
+              <input type="number" id="custAdults" min="1" max="200" value="2">
+            </div>
+            <div>
+              <label for="custChildren" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Children</label>
+              <input type="number" id="custChildren" min="0" max="100" value="0">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-bottom:1rem">
+            <div>
+              <label for="custHotel" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Hotel Tier</label>
+              <select id="custHotel">
+                <option value="3-Star Comfort">3-Star Comfort</option>
+                <option value="4-Star Premium" selected>4-Star Premium</option>
+                <option value="5-Star Luxury">5-Star Luxury</option>
+                <option value="Villa / Resort">Villa / Resort</option>
+              </select>
+            </div>
+            <div>
+              <label for="custMeals" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Meal Plan</label>
+              <select id="custMeals">
+                <option value="Room Only">Room Only</option>
+                <option value="CP - Breakfast Included" selected>CP - Breakfast Included</option>
+                <option value="MAP - Breakfast & Dinner">MAP - Breakfast &amp; Dinner</option>
+                <option value="AP - All Meals">AP - All Meals</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1rem">
+            <label for="custTransfers" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Transfers</label>
+            <select id="custTransfers">
+              <option value="Private AC Vehicle" selected>Private AC Vehicle</option>
+              <option value="Luxury SUV">Luxury SUV</option>
+              <option value="SIC / Shared Transfers">SIC / Shared Transfers</option>
+            </select>
+          </div>
+
+          <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.45rem">Optional Add-Ons</label>
+          <div class="form-grid-2">
+            <label class="addon-chip"><input type="checkbox" class="cust-addon" value="Flight Tickets" checked> Flight Tickets</label>
+            <label class="addon-chip"><input type="checkbox" class="cust-addon" value="Visa Assistance"> Visa Assistance</label>
+            <label class="addon-chip"><input type="checkbox" class="cust-addon" value="Travel Insurance"> Travel Insurance</label>
+            <label class="addon-chip"><input type="checkbox" class="cust-addon" value="Honeymoon / Celebration Setup"> Honeymoon / Celebration Setup</label>
+          </div>
+        </div>
+
+        <!-- 4. Traveler & Referral Details -->
+        <div class="wsh-card" style="padding:1.6rem">
+          <h3 style="margin-bottom:1rem">4. Your Details &amp; Reference Code</h3>
+
+          <div style="background:var(--tint-lavender);border-radius:14px;padding:1rem;margin-bottom:1rem">
+            <label for="custReferral" style="display:block;font-size:0.82rem;font-weight:700;color:var(--accent-lavender-text);margin-bottom:0.35rem">
+              Have a Reference or Referral Code? (Optional)
+            </label>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+              <input type="text" id="custReferral" placeholder="Enter SWAN10, FRIEND-AMD or Friend's Name" style="flex:1 1 200px">
+              <button type="button" id="custVerifyRefBtn" class="btn btn-sky btn-sm">Verify</button>
+            </div>
+            <div id="custRefMsg" style="margin-top:0.45rem;font-size:0.82rem"></div>
+          </div>
+
+          <div class="form-grid-2" style="margin-bottom:1rem">
+            <div>
+              <label for="custName" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Full Name *</label>
+              <input type="text" id="custName" placeholder="e.g. Aarav Patel">
+            </div>
+            <div>
+              <label for="custPhone" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Phone / WhatsApp *</label>
+              <input type="tel" id="custPhone" value="+91 " placeholder="+91 98250 00000">
+            </div>
+          </div>
+
+          <div>
+            <label for="custEmail" style="display:block;font-size:0.8rem;font-weight:700;color:var(--ink-muted);margin-bottom:0.35rem">Email Address</label>
+            <input type="email" id="custEmail" placeholder="name@example.com">
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Sticky Custom Summary & Quote Actions -->
+      <aside class="wsh-card" style="padding:1.6rem;position:sticky;top:96px">
+        <span class="wsh-badge badge-emerald" style="margin-bottom:0.65rem">Tailored Quote Available</span>
+        <h3 id="sumCustTitle" style="margin-bottom:0.35rem">Custom Luxury Holiday</h3>
+        <div style="margin-bottom:1rem">
+          <span class="ref-code-pill" id="sumCustRef">WSH-CUSTOM-XXXX</span>
+        </div>
+
+        <div id="custSuccessBox" style="display:none;background:var(--tint-emerald);border:1px solid #22C55E;border-radius:12px;padding:0.9rem;margin-bottom:1rem;font-size:0.84rem;color:var(--accent-emerald-text)"></div>
+
+        <div style="display:grid;gap:0.55rem;font-size:0.86rem;border-top:var(--border-subtle);border-bottom:var(--border-subtle);padding:0.9rem 0;margin-bottom:1.15rem" id="sumCustSpecs"></div>
+
+        <div style="display:grid;gap:0.65rem">
+          <button type="button" id="custWaBtn" class="btn btn-whatsapp" style="width:100%">
+            Get Custom Quote on WhatsApp
+          </button>
+          <button type="button" id="custEmailBtn" class="btn btn-sky" style="width:100%">
+            Send via Email (info@whiteswanholidays.in)
+          </button>
+          <button type="button" id="custSaveInqBtn" class="btn btn-marigold" style="width:100%">
+            Submit to Inquiry Desk
+          </button>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div id="wsh-footer-mount"></div>
+
+<script src="js/wsh-store.js"></script>
+<script src="js/wsh-shell.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const customRef = `WSH-CUSTOM-${Math.floor(1000 + Math.random() * 9000)}`;
+    document.getElementById('customRefBadge').textContent = customRef;
+    document.getElementById('sumCustRef').textContent = customRef;
+
+    const loadPkgSel = document.getElementById('custLoadPkg');
+    const catSel = document.getElementById('custCategory');
+    const titleInput = document.getElementById('custTripTitle');
+    const daysContainer = document.getElementById('daysEditorContainer');
+
+    let customDays = [
+      { city: 'Arrival City', title: 'Arrival & Hotel Check-In', notes: 'Airport pickup, check-in, and evening leisure walk.' },
+      { city: 'Main Destination', title: 'Guided City & Cultural Highlights', notes: 'Full-day private sightseeing tour.' },
+      { city: 'Departure City', title: 'Departure & Return to Ahmedabad', notes: 'Breakfast and private airport transfer.' }
+    ];
+    let verifiedRef = null;
+
+    function populateBasePackages() {
+      const pkgs = window.WSHStore.getPackages({ onlyActive: true });
+      loadPkgSel.innerHTML = `<option value="BLANK">Start Blank Custom Trip</option>` + pkgs.map(p =>
+        `<option value="${p.refCode}">Load: ${p.title} (${p.refCode})</option>`
+      ).join('');
+    }
+
+    function loadPackageData(refCode) {
+      if (!refCode || refCode === 'BLANK') {
+        titleInput.value = 'Custom Tailor-Made Holiday';
+        customDays = [
+          { city: 'Arrival Hub', title: 'Arrival & Resort Check-In', notes: 'Private pickup & evening relaxation.' },
+          { city: 'Highlight Destination', title: 'Signature Sightseeing Tour', notes: 'Private guided excursion.' },
+          { city: 'Departure Hub', title: 'Return Flight to Ahmedabad', notes: 'Breakfast & airport drop.' }
+        ];
+        renderDays();
+        updateSummary();
+        return;
+      }
+      const pkg = window.WSHStore.getPackageBySlugOrRef(refCode);
+      if (!pkg) return;
+      catSel.value = pkg.category === 'Domestic' ? 'Domestic India' : 'International';
+      titleInput.value = `Custom ${pkg.title}`;
+      customDays = (pkg.itinerary || []).map(d => ({
+        city: pkg.destination.split(',')[0].trim(),
+        title: d.title,
+        notes: d.desc
+      }));
+      if (!customDays.length) {
+        customDays.push({ city: pkg.destination, title: 'Arrival & Sightseeing', notes: 'Private tour.' });
+      }
+      renderDays();
+      updateSummary();
+    }
+
+    function renderDays() {
+      daysContainer.innerHTML = customDays.map((d, idx) => `
+        <div class="day-editor-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.65rem">
+            <span class="wsh-badge badge-amber">Day ${idx + 1}</span>
+            ${customDays.length > 1 ? `<button type="button" class="btn btn-outline btn-sm del-day-btn" data-idx="${idx}" style="min-height:36px;padding:0.3rem 0.7rem;color:#DC2626 !important">Remove</button>` : ''}
+          </div>
+          <div class="form-grid-2" style="margin-bottom:0.65rem">
+            <input type="text" class="day-city-in" data-idx="${idx}" value="${d.city.replace(/"/g, '&quot;')}" placeholder="City / Destination">
+            <input type="text" class="day-title-in" data-idx="${idx}" value="${d.title.replace(/"/g, '&quot;')}" placeholder="Day Title">
+          </div>
+          <textarea class="day-notes-in" data-idx="${idx}" rows="2" placeholder="Activities, sightseeing, or special notes...">${d.notes}</textarea>
+        </div>
+      `).join('');
+
+      daysContainer.querySelectorAll('.day-city-in').forEach(el => {
+        el.addEventListener('input', e => { customDays[Number(e.target.dataset.idx)].city = e.target.value; updateSummary(); });
+      });
+      daysContainer.querySelectorAll('.day-title-in').forEach(el => {
+        el.addEventListener('input', e => { customDays[Number(e.target.dataset.idx)].title = e.target.value; });
+      });
+      daysContainer.querySelectorAll('.day-notes-in').forEach(el => {
+        el.addEventListener('input', e => { customDays[Number(e.target.dataset.idx)].notes = e.target.value; });
+      });
+      daysContainer.querySelectorAll('.del-day-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          customDays.splice(Number(btn.dataset.idx), 1);
+          renderDays();
+          updateSummary();
+        });
+      });
+    }
+
+    function getAddons() {
+      return Array.from(document.querySelectorAll('.cust-addon:checked')).map(c => c.value);
+    }
+
+    function updateSummary() {
+      document.getElementById('sumCustTitle').textContent = titleInput.value.trim() || 'Custom Holiday Package';
+      const addons = getAddons();
+      document.getElementById('sumCustSpecs').innerHTML = `
+        <div style="display:flex;justify-content:space-between"><span>Scope:</span><strong>${catSel.value}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Duration:</span><strong>${customDays.length} Days / ${Math.max(0, customDays.length - 1)} Nights</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Departure:</span><strong>${document.getElementById('custCity').value || 'Ahmedabad'}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Pax:</span><strong>${document.getElementById('custAdults').value} Adults, ${document.getElementById('custChildren').value} Kids</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Hotel Tier:</span><strong>${document.getElementById('custHotel').value}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Meal Plan:</span><strong>${document.getElementById('custMeals').value}</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Transfers:</span><strong>${document.getElementById('custTransfers').value}</strong></div>
+        <div><span>Add-ons:</span> <strong>${addons.length ? addons.join(', ') : 'None'}</strong></div>
+      `;
+    }
+
+    function verifyRef() {
+      const raw = document.getElementById('custReferral').value.trim();
+      const msg = document.getElementById('custRefMsg');
+      if (!raw) { verifiedRef = null; msg.innerHTML = ''; return; }
+      const found = window.WSHStore.verifyReferralCode(raw);
+      if (found && !found.expiredOrFull) {
+        verifiedRef = found;
+        msg.innerHTML = `<span class="wsh-badge badge-emerald">&#10003; Verified: ${found.partnerName} — ${found.perk}</span>`;
+      } else {
+        verifiedRef = null;
+        msg.innerHTML = `<span style="color:var(--accent-lavender-text);font-weight:600">&#10003; Noted reference: "${raw}"</span>`;
+      }
+    }
+
+    function buildPayload() {
+      const addons = getAddons();
+      const daySummary = customDays.map((d, i) => `Day ${i + 1} [${d.city}]: ${d.title} — ${d.notes}`).join('\n');
+      return {
+        customRef,
+        category: catSel.value,
+        title: titleInput.value.trim() || 'Custom Holiday Package',
+        city: document.getElementById('custCity').value.trim() || 'Ahmedabad',
+        dates: document.getElementById('custDates').value.trim() || 'Flexible',
+        adults: document.getElementById('custAdults').value || 2,
+        children: document.getElementById('custChildren').value || 0,
+        hotel: document.getElementById('custHotel').value,
+        meals: document.getElementById('custMeals').value,
+        transfers: document.getElementById('custTransfers').value,
+        addons: addons.length ? addons.join(', ') : 'None',
+        referralCode: verifiedRef ? verifiedRef.code : '',
+        referredBy: verifiedRef ? verifiedRef.partnerName : document.getElementById('custReferral').value.trim(),
+        name: document.getElementById('custName').value.trim() || 'Prospective Traveler',
+        phone: document.getElementById('custPhone').value.trim(),
+        email: document.getElementById('custEmail').value.trim(),
+        daySummary
+      };
+    }
+
+    document.getElementById('addDayBtn').addEventListener('click', () => {
+      customDays.push({ city: 'New Stop', title: `Custom Day ${customDays.length + 1}`, notes: 'Sightseeing & leisure.' });
+      renderDays();
+      updateSummary();
+    });
+
+    loadPkgSel.addEventListener('change', e => loadPackageData(e.target.value));
+    [catSel, titleInput, document.getElementById('custCity'), document.getElementById('custDates'),
+     document.getElementById('custAdults'), document.getElementById('custChildren'),
+     document.getElementById('custHotel'), document.getElementById('custMeals'),
+     document.getElementById('custTransfers')].forEach(el => el.addEventListener('input', updateSummary));
+    document.querySelectorAll('.cust-addon').forEach(el => el.addEventListener('change', updateSummary));
+    document.getElementById('custVerifyRefBtn').addEventListener('click', verifyRef);
+    document.getElementById('custReferral').addEventListener('input', verifyRef);
+
+    document.getElementById('custWaBtn').addEventListener('click', () => {
+      const p = buildPayload();
+      const lines = [
+        '*Custom Itinerary Quote Request — White Swan Holidays*',
+        '',
+        `🔖 *Custom Ref:* ${p.customRef}`,
+        `🌍 *Trip:* ${p.title} (${p.category})`,
+        `⏱️ *Duration:* ${customDays.length} Days / ${Math.max(0, customDays.length - 1)} Nights`,
+        `🛫 *Departure:* ${p.city} | 📅 *Dates:* ${p.dates}`,
+        `👥 *Pax:* ${p.adults} Adults, ${p.children} Kids`,
+        `🏨 *Hotel:* ${p.hotel} | 🍽️ *Meals:* ${p.meals}`,
+        `🚗 *Transfers:* ${p.transfers}`,
+        `✨ *Add-ons:* ${p.addons}`,
+        p.referralCode || p.referredBy ? `🎟️ *Referral:* ${p.referralCode || p.referredBy}` : '',
+        '',
+        '*Day-by-Day Plan:*',
+        p.daySummary
+      ].filter(Boolean);
+      const url = `https://wa.me/${window.WSHStore.WHATSAPP_DESK_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+      window.WSHShell.openWhatsAppChooser(url);
+    });
+
+    document.getElementById('custEmailBtn').addEventListener('click', () => {
+      const p = buildPayload();
+      const subject = `Custom Package Quote: ${p.title} [${p.customRef}]`;
+      const body = `Namaste White Swan Holidays,\n\nPlease quote my custom itinerary:\nCustom Ref: ${p.customRef}\nTrip: ${p.title} (${p.category})\nDuration: ${customDays.length} Days\nDeparture: ${p.city} | Dates: ${p.dates}\nPax: ${p.adults} Adults, ${p.children} Kids\nHotel: ${p.hotel}\nMeals: ${p.meals}\nTransfers: ${p.transfers}\nAdd-ons: ${p.addons}\nReferral: ${p.referralCode || p.referredBy || 'None'}\n\nItinerary:\n${p.daySummary}\n\nName: ${p.name}\nPhone: ${p.phone}\nEmail: ${p.email}`;
+      window.location.href = `mailto:info@whiteswanholidays.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+
+    document.getElementById('custSaveInqBtn').addEventListener('click', () => {
+      const p = buildPayload();
+      if (!document.getElementById('custName').value.trim() || p.phone.replace(/[^0-9]/g, '').length < 8) {
+        window.WSHShell.showToast('Please enter your Full Name and valid Phone / WhatsApp number first.');
+        document.getElementById('custName').focus();
+        return;
+      }
+      const record = window.WSHStore.addInquiry({
+        category: p.category.includes('Domestic') ? 'Domestic' : 'International',
+        packageTitle: p.title,
+        packageRef: p.customRef,
+        referralCode: p.referralCode,
+        referredBy: p.referredBy,
+        travelerName: p.name,
+        phone: p.phone,
+        email: p.email,
+        city: p.city,
+        travelDates: p.dates,
+        adults: p.adults,
+        children: p.children,
+        hotelTier: p.hotel,
+        notes: `Meals: ${p.meals} | Transfers: ${p.transfers} | Add-ons: ${p.addons} | Days:\n${p.daySummary}`
+      });
+      const box = document.getElementById('custSuccessBox');
+      box.style.display = 'block';
+      box.innerHTML = `<strong>&#10003; Saved to Inquiry Desk!</strong><br>Inquiry ID: <strong>${record.id}</strong> (${p.customRef})`;
+      window.WSHShell.showToast(`Custom itinerary ${record.id} submitted!`);
+    });
+
+    populateBasePackages();
+    const params = new URLSearchParams(window.location.search);
+    const initPkg = params.get('pkg');
+    if (initPkg) {
+      loadPkgSel.value = initPkg;
+      loadPackageData(initPkg);
+    } else {
+      renderDays();
+      updateSummary();
+    }
+  });
+</script>
+</body>
+</html>

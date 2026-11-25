@@ -789,12 +789,31 @@
       `🔖 *Package Ref ID:* ${pkg.refCode}`,
       `🌍 *Category:* ${pkg.category}`,
       `⏱️ *Duration:* ${pkg.duration}`,
-      `💰 *Starting Price:* ${formatINR(pkg.price)} per person`,
       `🛫 *Departure City:* Ahmedabad`,
       '',
-      'Please share the detailed quotation and available departure dates.'
+      'Please share the latest tailored quotation and available departure dates.'
     ];
     return `https://wa.me/${WHATSAPP_DESK_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+  }
+
+  function buildPackageEmailURL(pkg) {
+    const subject = `Quote Inquiry: ${pkg.title} [${pkg.refCode}]`;
+    const body = [
+      'Namaste White Swan Holidays Team,',
+      '',
+      'I would like to request a tailored quote for the following package:',
+      `Package Name: ${pkg.title}`,
+      `Package Reference ID: ${pkg.refCode}`,
+      `Category: ${pkg.category}`,
+      `Duration: ${pkg.duration}`,
+      `Destinations: ${pkg.destination || ''}`,
+      'Departure City: Ahmedabad',
+      '',
+      'Please share the best available pricing and itinerary options.',
+      '',
+      'Thank you!'
+    ].join('\n');
+    return `mailto:info@whiteswanholidays.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   function buildFollowUpWhatsAppURL(inq) {
@@ -888,6 +907,7 @@
     deleteEvent,
     buildWhatsAppInquiryURL,
     buildPackageWhatsAppURL,
+    buildPackageEmailURL,
     buildFollowUpWhatsAppURL,
     isAdminLoggedIn: () => localStorage.getItem(STORAGE_KEYS.ADMIN_AUTH) === 'true',
     setAdminLoggedIn: (val) => localStorage.setItem(STORAGE_KEYS.ADMIN_AUTH, val ? 'true' : 'false')

@@ -77,8 +77,8 @@
         <div id="factDuration" style="font-weight:800;color:var(--ink-navy)">—</div>
       </div>
       <div>
-        <div style="font-size:0.72rem;text-transform:uppercase;color:var(--ink-muted);font-weight:700">Starting Price</div>
-        <div id="factPrice" class="tabular-nums" style="font-weight:800;color:var(--accent-sky-text);font-size:1.15rem">—</div>
+        <div style="font-size:0.72rem;text-transform:uppercase;color:var(--ink-muted);font-weight:700">Quote Mode</div>
+        <div style="font-weight:800;color:var(--accent-sky-text);font-size:1rem">Tailored Quote Available</div>
       </div>
       <div>
         <div style="font-size:0.72rem;text-transform:uppercase;color:var(--ink-muted);font-weight:700">Best Season</div>
@@ -124,27 +124,32 @@
 
       <!-- Sticky CTA Card -->
       <aside class="wsh-card" style="padding:1.6rem;position:sticky;top:96px;background:var(--bg-white)">
-        <span class="wsh-badge badge-emerald" style="margin-bottom:0.75rem">&#10003; Customizable Itinerary</span>
-        <div style="font-size:0.78rem;color:var(--ink-muted);font-weight:700;text-transform:uppercase">Starting Package Rate</div>
-        <div id="ctaPrice" class="tabular-nums" style="font-size:2rem;font-weight:800;color:var(--ink-navy);line-height:1.15;margin-bottom:0.25rem">₹0</div>
-        <div style="font-size:0.82rem;color:var(--ink-muted);margin-bottom:1.25rem">Per person on twin-sharing basis</div>
+        <span class="wsh-badge badge-emerald" style="margin-bottom:0.6rem">&#10003; Tailored Quote Available</span>
+        <h3 style="margin-bottom:0.25rem;font-size:1.35rem">Request Your Custom Quote</h3>
+        <div style="font-size:0.84rem;color:var(--ink-muted);margin-bottom:1.1rem">100% customizable itinerary &amp; hotel tier</div>
 
         <div id="ctaFlightBox" style="background:var(--tint-mint);padding:0.75rem 0.9rem;border-radius:12px;font-size:0.84rem;color:var(--accent-sky-text);font-weight:600;margin-bottom:1.25rem"></div>
 
-        <div style="display:grid;gap:0.7rem">
-          <a id="ctaInquireBtn" href="inquiry.html" class="btn btn-marigold" style="width:100%">
-            Inquire &amp; Customize Quote
-          </a>
+        <div style="display:grid;gap:0.65rem">
           <a id="ctaWhatsappBtn" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%">
-            WhatsApp Quote Instantly
+            Get Quote on WhatsApp
           </a>
-          <a href="ai-planner.html" class="btn btn-outline" style="width:100%">
-            Customize in AI Planner
+          <a id="ctaEmailBtn" href="mailto:info@whiteswanholidays.in" class="btn btn-sky" style="width:100%">
+            Email Quote (info@whiteswanholidays.in)
           </a>
+          <a id="ctaCustomizeBtn" href="customize.html" class="btn btn-marigold" style="width:100%">
+            Customize Package
+          </a>
+          <a id="ctaInquireBtn" href="inquiry.html" class="btn btn-outline" style="width:100%">
+            Open Full Inquiry Form
+          </a>
+          <button type="button" id="copyEmailBtn" class="btn btn-outline btn-sm" style="width:100%">
+            Copy Email: info@whiteswanholidays.in
+          </button>
         </div>
 
         <p style="font-size:0.78rem;color:var(--ink-muted);text-align:center;margin:1rem 0 0">
-          Have a Referral Code like <strong>SWAN10</strong>? Apply it on the Inquiry page!
+          Have a Referral Code like <strong>SWAN10</strong>? Apply it on the Inquiry or Customizer page!
         </p>
       </aside>
     </div>
@@ -172,7 +177,6 @@
     document.getElementById('pkgDest').textContent = `${pkg.destination} • ${pkg.region}`;
 
     document.getElementById('factDuration').textContent = pkg.duration;
-    document.getElementById('factPrice').textContent = `${window.WSHStore.formatINR(pkg.price)} / pax`;
     document.getElementById('factSeason').textContent = pkg.bestSeason || 'All Season';
     document.getElementById('factRef').textContent = pkg.refCode;
 
@@ -232,10 +236,15 @@
     });
 
     // Sticky CTA Card
-    document.getElementById('ctaPrice').textContent = window.WSHStore.formatINR(pkg.price);
     document.getElementById('ctaFlightBox').textContent = `✈ ${pkg.flightInfo || 'Departures from Ahmedabad (AMD)'}`;
     document.getElementById('ctaInquireBtn').href = `inquiry.html?ref=${encodeURIComponent(pkg.refCode)}&type=${encodeURIComponent(pkg.category)}&package=${encodeURIComponent(pkg.title)}`;
+    document.getElementById('ctaCustomizeBtn').href = `customize.html?pkg=${encodeURIComponent(pkg.refCode)}`;
     document.getElementById('ctaWhatsappBtn').href = window.WSHStore.buildPackageWhatsAppURL(pkg);
+    document.getElementById('ctaEmailBtn').href = window.WSHStore.buildPackageEmailURL(pkg);
+    document.getElementById('copyEmailBtn').addEventListener('click', () => {
+      if (navigator.clipboard) navigator.clipboard.writeText('info@whiteswanholidays.in');
+      window.WSHShell.showToast('Copied info@whiteswanholidays.in!');
+    });
   });
 </script>
 </body>

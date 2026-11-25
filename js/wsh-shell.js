@@ -40,6 +40,7 @@
       { href: 'index.html', label: 'Home' },
       { href: 'domestic.html', label: 'Domestic India' },
       { href: 'international.html', label: 'International' },
+      { href: 'customize.html', label: 'Custom Itinerary' },
       { href: 'events.html', label: 'Trips & Events' },
       { href: 'ai-planner.html', label: 'AI Planner' },
       { href: 'services.html', label: 'Services' },
@@ -169,6 +170,7 @@
                 <ul>
                   <li><a href="domestic.html">Domestic India Tours</a></li>
                   <li><a href="international.html">International Holidays</a></li>
+                  <li><a href="customize.html">Custom Itinerary Builder</a></li>
                   <li><a href="events.html">Trips &amp; Events Gallery</a></li>
                   <li><a href="ai-planner.html">AI Trip Planner</a></li>
                   <li><a href="inquiry.html">Custom Quote &amp; Inquiry</a></li>
@@ -243,9 +245,10 @@
 
   function renderPackageCard(pkg) {
     const store = window.WSHStore;
-    const inquiryURL = `inquiry.html?ref=${encodeURIComponent(pkg.refCode)}&type=${encodeURIComponent(pkg.category)}&package=${encodeURIComponent(pkg.title)}`;
     const detailURL = `package.html?slug=${encodeURIComponent(pkg.slug)}`;
+    const customizeURL = `customize.html?pkg=${encodeURIComponent(pkg.refCode)}`;
     const waURL = store.buildPackageWhatsAppURL(pkg);
+    const emailURL = store.buildPackageEmailURL(pkg);
     const catBadge = pkg.category === 'Domestic'
       ? `<span class="wsh-badge badge-amber">Domestic India</span>`
       : `<span class="wsh-badge badge-sky">${pkg.visaType || 'International'}</span>`;
@@ -282,20 +285,19 @@
             </div>
           ` : ''}
 
-          <div style="display:flex;align-items:baseline;justify-content:space-between;border-top:var(--border-subtle);padding-top:0.85rem">
-            <div>
-              <span style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-muted);display:block;font-weight:700">Starting From</span>
-              <span class="tabular-nums" style="font-size:1.35rem;font-weight:800;color:var(--ink-navy)">${store.formatINR(pkg.price)}</span>
-              <span style="font-size:0.76rem;color:var(--ink-muted)">/ person</span>
-            </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;border-top:var(--border-subtle);padding-top:0.85rem">
+            <span class="wsh-badge badge-emerald">Tailored Quote Available</span>
             <span class="ref-code-pill">${pkg.refCode}</span>
           </div>
 
           <div class="pkg-card-actions">
             <a href="${detailURL}" class="btn btn-outline btn-sm">View Details</a>
-            <a href="${inquiryURL}" class="btn btn-marigold btn-sm">Inquire Now</a>
-            <a href="${waURL}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm btn-wa-full">
-              WhatsApp Quote
+            <a href="${customizeURL}" class="btn btn-marigold btn-sm">Customize Package</a>
+            <a href="${waURL}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+              Get Quote on WhatsApp
+            </a>
+            <a href="${emailURL}" class="btn btn-sky btn-sm" title="Email info@whiteswanholidays.in">
+              Email Quote
             </a>
           </div>
         </div>
