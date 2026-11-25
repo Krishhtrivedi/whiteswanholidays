@@ -106,7 +106,7 @@
           </nav>
           <div style="margin-top:auto;display:grid;gap:0.65rem">
             <a href="inquiry.html" class="btn btn-marigold" style="width:100%">Get Custom Quote</a>
-            <a href="https://wa.me/919876543210?text=${encodeURIComponent('Namaste White Swan Holidays! I would like to plan a holiday from Ahmedabad.')}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%">
+            <a href="https://wa.me/919925811770?text=${encodeURIComponent('Namaste White Swan Holidays! I would like to plan a holiday from Ahmedabad.')}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%">
               WhatsApp Ahmedabad Desk
             </a>
           </div>
@@ -182,7 +182,8 @@
                   501, Sun Square Building,<br>
                   Off CG Road, Ahmedabad - 380009<br>
                   Gujarat, India<br>
-                  <a href="tel:+919876543210" style="color:#F59E0B;font-weight:700">+91 98765 43210</a>
+                  <a href="tel:+919925811770" style="color:#F59E0B;font-weight:700">+91 99258 11770</a><br>
+                  <a href="tel:+919099041625" style="color:#F59E0B;font-weight:700">+91 90990 41625</a>
                 </p>
                 <a href="contact.html" class="btn btn-outline btn-sm" style="margin-top:0.5rem;background:rgba(255,255,255,0.08);color:#FFFFFF !important;border-color:rgba(255,255,255,0.2)">
                   Office &amp; Map
@@ -203,7 +204,7 @@
     if (!document.querySelector('.wsh-floating-wa')) {
       const wa = document.createElement('a');
       wa.className = 'wsh-floating-wa';
-      wa.href = `https://wa.me/919876543210?text=${encodeURIComponent('Namaste White Swan Holidays! I would like to chat with the Ahmedabad Travel Desk.')}`;
+      wa.href = `https://wa.me/919925811770?text=${encodeURIComponent('Namaste White Swan Holidays! I would like to chat with the Ahmedabad Travel Desk.')}`;
       wa.target = '_blank';
       wa.rel = 'noopener';
       wa.setAttribute('aria-label', 'Chat with Ahmedabad Desk on WhatsApp');

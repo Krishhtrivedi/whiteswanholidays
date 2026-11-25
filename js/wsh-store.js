@@ -14,7 +14,7 @@
     ADMIN_AUTH: 'wsh_admin_auth_v2'
   };
 
-  const WHATSAPP_DESK_NUMBER = '919876543210';
+  const WHATSAPP_DESK_NUMBER = '919925811770';
 
   const DEFAULT_PACKAGES = [
     // ================= DOMESTIC INDIA =================
