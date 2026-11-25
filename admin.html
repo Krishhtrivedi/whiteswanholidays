@@ -311,6 +311,7 @@
           <button type="button" class="btn btn-marigold btn-sm evt-admin-tab active" data-type="all">All Media</button>
           <button type="button" class="btn btn-outline btn-sm evt-admin-tab" data-type="Trip Memory">Trips Made by Us</button>
           <button type="button" class="btn btn-outline btn-sm evt-admin-tab" data-type="Organized Event">Events Done by Us</button>
+          <button type="button" class="btn btn-outline btn-sm evt-admin-tab" data-type="Instagram">Instagram</button>
         </div>
 
         <div class="wsh-pkg-grid" id="adminEventsGrid"></div>
@@ -521,10 +522,11 @@
           </select>
         </div>
         <div>
-          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Media Format</label>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Source &amp; Media Format</label>
           <select id="editEvtFormat">
-            <option value="Photo">Photo</option>
-            <option value="Video">Video (MP4 / YouTube / Upload)</option>
+            <option value="Photo">Upload Photo / Direct Image URL</option>
+            <option value="Video">Upload Video / MP4 / YouTube URL</option>
+            <option value="Instagram">Import from Instagram Post / Reel</option>
           </select>
         </div>
       </div>
@@ -554,6 +556,11 @@
           <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Video Poster / Thumbnail URL (Optional)</label>
           <input type="text" id="editEvtPoster" placeholder="img/tours/dubai.jpg">
         </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Instagram Post / Reel Link (Optional — defaults to @whiteswanholidays)</label>
+        <input type="url" id="editEvtInstaUrl" placeholder="https://www.instagram.com/whiteswanholidays/?hl=en">
       </div>
 
       <div>
@@ -847,6 +854,7 @@
         locationDate: document.getElementById('editEvtLoc').value.trim(),
         mediaUrl: document.getElementById('editEvtUrl').value.trim(),
         posterUrl: document.getElementById('editEvtPoster').value.trim() || 'img/tours/dubai.jpg',
+        instagramUrl: document.getElementById('editEvtInstaUrl').value.trim() || window.WSHStore.INSTAGRAM_URL,
         caption: document.getElementById('editEvtCaption').value.trim(),
         showInSlider: document.getElementById('editEvtSlider').checked
       });
@@ -865,6 +873,7 @@
       document.getElementById('editEvtLoc').value = ev.locationDate || '';
       document.getElementById('editEvtUrl').value = ev.mediaUrl || '';
       document.getElementById('editEvtPoster').value = ev.posterUrl || '';
+      document.getElementById('editEvtInstaUrl').value = ev.instagramUrl || '';
       document.getElementById('editEvtCaption').value = ev.caption || '';
       document.getElementById('editEvtSlider').checked = ev.showInSlider !== false;
       document.getElementById('evtModal').classList.add('open');

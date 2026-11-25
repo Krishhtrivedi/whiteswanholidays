@@ -16,6 +16,8 @@
   };
 
   const WHATSAPP_DESK_NUMBER = '919925811770';
+  const INSTAGRAM_URL = 'https://www.instagram.com/whiteswanholidays/?hl=en';
+  const FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=61579766578124';
 
   const DEFAULT_PACKAGES = [
     // ================= DOMESTIC INDIA =================
@@ -581,7 +583,20 @@
       caption: 'Executive boardroom summit and gala awards night coordinated seamlessly from Ahmedabad.',
       mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
       posterUrl: 'img/services/corporate-wedding.jpg',
+      instagramUrl: 'https://www.instagram.com/whiteswanholidays/?hl=en',
       showInSlider: false
+    },
+    {
+      id: 'evt-7',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Instagram',
+      title: 'Featured @whiteswanholidays Travel Reel',
+      locationDate: 'Bali & Thailand • Sep 2026',
+      caption: 'Live group tour stories, private pool villa sunsets, and honeymoon surprises straight from our official Instagram feed.',
+      mediaUrl: 'img/instagram/post-1.jpg',
+      posterUrl: 'img/instagram/post-1.jpg',
+      instagramUrl: 'https://www.instagram.com/whiteswanholidays/?hl=en',
+      showInSlider: true
     }
   ];
 
@@ -819,7 +834,11 @@
     let list = readJSON(STORAGE_KEYS.EVENTS, DEFAULT_EVENTS);
     if (opts.sliderOnly) list = list.filter(e => e.showInSlider !== false);
     if (opts.entryType && opts.entryType !== 'all') {
-      list = list.filter(e => e.entryType === opts.entryType);
+      if (opts.entryType === 'Instagram') {
+        list = list.filter(e => e.mediaFormat === 'Instagram' || e.entryType === 'Instagram Highlight' || Boolean(e.instagramUrl && e.instagramUrl.includes('/p/') || e.instagramUrl && e.instagramUrl.includes('/reel/')));
+      } else {
+        list = list.filter(e => e.entryType === opts.entryType);
+      }
     }
     return list;
   }
@@ -847,6 +866,8 @@
 
   window.WSHStore = {
     WHATSAPP_DESK_NUMBER,
+    INSTAGRAM_URL,
+    FACEBOOK_URL,
     formatINR,
     getTheme,
     setTheme,

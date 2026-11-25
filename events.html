@@ -42,6 +42,7 @@
           <button type="button" class="btn btn-marigold btn-sm evt-tab active" data-type="all">All Highlights</button>
           <button type="button" class="btn btn-outline btn-sm evt-tab" data-type="Trip Memory">Trips Made by Us</button>
           <button type="button" class="btn btn-outline btn-sm evt-tab" data-type="Organized Event">Events Done by Us</button>
+          <button type="button" class="btn btn-outline btn-sm evt-tab" data-type="Instagram">Instagram Highlights</button>
         </div>
         <div id="evtCountLbl" style="font-size:0.86rem;font-weight:600;color:var(--ink-muted)"></div>
       </div>
@@ -75,19 +76,22 @@
       }
 
       grid.innerHTML = items.map(ev => {
-        const thumb = ev.mediaFormat === 'Video' ? (ev.posterUrl || 'img/tours/dubai.jpg') : ev.mediaUrl;
+        const thumb = (ev.mediaFormat === 'Video' || ev.mediaFormat === 'Instagram') ? (ev.posterUrl || ev.mediaUrl || 'img/tours/dubai.jpg') : ev.mediaUrl;
         const isEvent = ev.entryType === 'Organized Event';
+        const isInsta = ev.mediaFormat === 'Instagram';
+        const isVideoOrReel = ev.mediaFormat === 'Video' || isInsta;
+        const instaHref = ev.instagramUrl || window.WSHStore.INSTAGRAM_URL;
         return `
           <article class="wsh-card pkg-card evt-grid-card" data-id="${ev.id}" style="cursor:pointer">
             <div class="pkg-card-media">
               <img src="${thumb}" alt="${ev.title}" loading="lazy">
               <div style="position:absolute;top:12px;left:12px;display:flex;gap:0.4rem">
-                <span class="wsh-badge ${isEvent ? 'badge-sky' : 'badge-amber'}">${isEvent ? 'Organized Event' : 'Trip Memory'}</span>
+                <span class="wsh-badge ${isInsta ? 'badge-lavender' : isEvent ? 'badge-sky' : 'badge-amber'}">${isInsta ? 'Instagram Highlight' : isEvent ? 'Organized Event' : 'Trip Memory'}</span>
               </div>
               <div style="position:absolute;top:12px;right:12px">
-                <span class="wsh-badge badge-slate" style="background:rgba(15,23,42,0.75);color:#FFFFFF;border:none">${ev.mediaFormat.toUpperCase()}</span>
+                <span class="wsh-badge badge-slate" style="background:rgba(15,23,42,0.75);color:#FFFFFF;border:none">${ev.mediaFormat === 'Video' ? 'VIDEO / REEL' : ev.mediaFormat.toUpperCase()}</span>
               </div>
-              ${ev.mediaFormat === 'Video' ? `
+              ${isVideoOrReel ? `
                 <div class="wsh-video-play-badge" style="width:52px;height:52px">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
                 </div>
@@ -97,9 +101,14 @@
               <div style="font-size:0.78rem;font-weight:700;color:var(--accent-sky-text);margin-bottom:0.35rem">${ev.locationDate || ''}</div>
               <h3 style="font-size:1.18rem;margin-bottom:0.45rem">${ev.title}</h3>
               <p style="font-size:0.86rem;margin:0 0 1rem;flex:1">${ev.caption || ''}</p>
-              <button type="button" class="btn btn-outline btn-sm" style="width:100%">
-                ${ev.mediaFormat === 'Video' ? '&#9654; Watch Video Highlight' : 'View Full Photo &amp; Story'}
-              </button>
+              <div style="display:grid;gap:0.45rem">
+                <button type="button" class="btn btn-outline btn-sm" style="width:100%">
+                  ${isInsta ? 'View Instagram Highlight' : ev.mediaFormat === 'Video' ? '&#9654; Watch Video Highlight' : 'View Full Photo &amp; Story'}
+                </button>
+                <a href="${instaHref}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:0.78rem;font-weight:700;color:var(--accent-lavender-text);text-align:center;padding:0.25rem">
+                  View Original on Instagram (@whiteswanholidays) &#8599;
+                </a>
+              </div>
             </div>
           </article>
         `;

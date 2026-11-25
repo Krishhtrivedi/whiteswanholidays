@@ -106,6 +106,10 @@
             ${drawerLinksHtml}
           </nav>
           <div style="margin-top:auto;display:grid;gap:0.65rem">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+              <a href="https://www.instagram.com/whiteswanholidays/?hl=en" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="width:100%">Instagram</a>
+              <a href="https://www.facebook.com/profile.php?id=61579766578124" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="width:100%">Facebook</a>
+            </div>
             <a href="inquiry.html" class="btn btn-marigold" style="width:100%">Get Custom Quote</a>
             <a href="https://wa.me/919925811770?text=${encodeURIComponent('Namaste White Swan Holidays! I would like to plan a holiday from Ahmedabad.')}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%">
               WhatsApp Ahmedabad Desk
@@ -154,6 +158,10 @@
                 <p style="color:#94A3B8;font-size:0.9rem;max-width:340px;line-height:1.65">
                   White Swan Holidays Pvt Ltd — Premier bespoke travel &amp; holiday agency off CG Road, Ahmedabad. Crafting Domestic India &amp; International journeys since 2017.
                 </p>
+                <div style="display:flex;gap:0.55rem;flex-wrap:wrap;margin-top:0.75rem">
+                  <a href="https://www.instagram.com/whiteswanholidays/?hl=en" target="_blank" rel="noopener" class="wsh-badge badge-lavender" style="text-decoration:none">Instagram @whiteswanholidays</a>
+                  <a href="https://www.facebook.com/profile.php?id=61579766578124" target="_blank" rel="noopener" class="wsh-badge badge-sky" style="text-decoration:none">Facebook Page</a>
+                </div>
               </div>
 
               <div>
@@ -379,7 +387,7 @@
     if (btn && window.WSHStore) {
       const next = window.WSHStore.toggleTheme();
       syncThemeButtons();
-      showToast(next === 'dark' ? 'Midnight Dark Mode enabled' : 'Sunlit Light Mode enabled');
+      showToast(next === 'dark' ? 'Royal Purple Dark Mode enabled' : 'Milky White Light Mode enabled');
       return;
     }
 
@@ -400,6 +408,13 @@
     return null;
   }
 
+  function getInstagramEmbedUrl(url) {
+    if (!url) return null;
+    const igMatch = url.match(/instagram\.com\/(p|reel)\/([a-zA-Z0-9_-]+)/);
+    if (igMatch) return `https://www.instagram.com/${igMatch[1]}/${igMatch[2]}/embed`;
+    return null;
+  }
+
   let isLightboxOpen = false;
 
   function openEventLightbox(ev) {
@@ -411,7 +426,7 @@
       lb.id = 'wshEventLightbox';
       lb.setAttribute('role', 'dialog');
       lb.setAttribute('aria-modal', 'true');
-      lb.style.cssText = 'position:fixed;inset:0;z-index:2100;background:rgba(9,13,22,0.88);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:1rem;';
+      lb.style.cssText = 'position:fixed;inset:0;z-index:2100;background:rgba(13,7,26,0.88);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:1rem;';
       lb.innerHTML = `
         <div class="wsh-card" style="width:min(880px, 100%);max-height:92vh;overflow-y:auto;padding:0;box-shadow:var(--shadow-lg)">
           <div id="wshLbMedia" style="position:relative;background:#000;aspect-ratio:16/9;max-height:60vh;display:flex;align-items:center;justify-content:center;overflow:hidden"></div>
@@ -427,6 +442,7 @@
             <p id="wshLbCaption" style="font-size:0.94rem;margin-bottom:1.15rem"></p>
             <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
               <a id="wshLbPlanBtn" href="inquiry.html" class="btn btn-marigold">Plan a Similar Trip / Event &rarr;</a>
+              <a id="wshLbInstaBtn" href="https://www.instagram.com/whiteswanholidays/?hl=en" target="_blank" rel="noopener" class="btn btn-outline">View Original on Instagram (@whiteswanholidays)</a>
             </div>
           </div>
         </div>
@@ -448,7 +464,10 @@
     }
 
     const mediaBox = lb.querySelector('#wshLbMedia');
-    if (ev.mediaFormat === 'Video') {
+    const igEmbed = getInstagramEmbedUrl(ev.instagramUrl || ev.mediaUrl);
+    if (ev.mediaFormat === 'Instagram' && igEmbed) {
+      mediaBox.innerHTML = `<iframe src="${igEmbed}" style="width:100%;height:100%;border:0;background:#fff" allowfullscreen></iframe>`;
+    } else if (ev.mediaFormat === 'Video') {
       const embed = getEmbedVideoUrl(ev.mediaUrl);
       if (embed) {
         mediaBox.innerHTML = `<iframe src="${embed}" style="width:100%;height:100%;border:0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
@@ -456,16 +475,19 @@
         mediaBox.innerHTML = `<video src="${ev.mediaUrl}" poster="${ev.posterUrl || ''}" controls autoplay playsinline style="width:100%;height:100%;object-fit:contain"></video>`;
       }
     } else {
-      mediaBox.innerHTML = `<img src="${ev.mediaUrl}" alt="${ev.title}" style="width:100%;height:100%;object-fit:contain">`;
+      mediaBox.innerHTML = `<img src="${ev.mediaUrl || ev.posterUrl}" alt="${ev.title}" style="width:100%;height:100%;object-fit:contain">`;
     }
 
     const isEvent = ev.entryType === 'Organized Event';
     const badge = lb.querySelector('#wshLbBadge');
-    badge.className = `wsh-badge ${isEvent ? 'badge-sky' : 'badge-amber'}`;
-    badge.textContent = isEvent ? 'Organized Event' : 'Trip Memory';
+    badge.className = `wsh-badge ${ev.mediaFormat === 'Instagram' ? 'badge-lavender' : isEvent ? 'badge-sky' : 'badge-amber'}`;
+    badge.textContent = ev.mediaFormat === 'Instagram' ? 'Instagram Highlight' : isEvent ? 'Organized Event' : 'Trip Memory';
     lb.querySelector('#wshLbLoc').textContent = ev.locationDate || '';
     lb.querySelector('#wshLbTitle').textContent = ev.title;
     lb.querySelector('#wshLbCaption').textContent = ev.caption || '';
+
+    const instaHref = ev.instagramUrl || (window.WSHStore && window.WSHStore.INSTAGRAM_URL) || 'https://www.instagram.com/whiteswanholidays/?hl=en';
+    lb.querySelector('#wshLbInstaBtn').href = instaHref;
 
     const inqType = isEvent ? 'Corporate Event / MICE' : 'Both / Custom';
     lb.querySelector('#wshLbPlanBtn').href = `inquiry.html?type=${encodeURIComponent(inqType)}&package=${encodeURIComponent(ev.title)}&notes=${encodeURIComponent('Inspired by: ' + ev.title + ' (' + (ev.locationDate || '') + ')')}`;
@@ -490,22 +512,23 @@
     root.innerHTML = `
       <div class="wsh-slider-shell" id="${containerId}_shell">
         ${items.map((ev, idx) => {
-          const thumb = ev.mediaFormat === 'Video' ? (ev.posterUrl || 'img/tours/dubai.jpg') : ev.mediaUrl;
+          const thumb = (ev.mediaFormat === 'Video' || ev.mediaFormat === 'Instagram') ? (ev.posterUrl || ev.mediaUrl || 'img/tours/dubai.jpg') : ev.mediaUrl;
           const isEvent = ev.entryType === 'Organized Event';
+          const isVideoOrReel = ev.mediaFormat === 'Video' || ev.mediaFormat === 'Instagram';
           return `
             <div class="wsh-slide-item ${idx === 0 ? 'active' : ''}" data-idx="${idx}">
               <img src="${thumb}" alt="${ev.title}">
               <div class="wsh-slide-scrim"></div>
-              ${ev.mediaFormat === 'Video' ? `
-                <div class="wsh-video-play-badge" title="Play Video Highlight">
+              ${isVideoOrReel ? `
+                <div class="wsh-video-play-badge" title="Play Video / Reel">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
                 </div>
               ` : ''}
               <div class="wsh-slide-caption">
                 <div style="display:flex;gap:0.45rem;flex-wrap:wrap;align-items:center">
-                  <span class="wsh-badge ${isEvent ? 'badge-sky' : 'badge-amber'}">${isEvent ? 'Organized Event' : 'Trip Memory'}</span>
-                  <span class="wsh-badge badge-slate" style="background:rgba(255,255,255,0.18);color:#FFFFFF;border:none">${ev.mediaFormat.toUpperCase()}</span>
-                  <span style="font-size:0.8rem;color:#CBD5E1;font-weight:600">${ev.locationDate || ''}</span>
+                  <span class="wsh-badge ${ev.mediaFormat === 'Instagram' ? 'badge-lavender' : isEvent ? 'badge-sky' : 'badge-amber'}">${ev.mediaFormat === 'Instagram' ? 'Instagram Highlight' : isEvent ? 'Organized Event' : 'Trip Memory'}</span>
+                  <span class="wsh-badge badge-slate" style="background:rgba(255,255,255,0.18);color:#FFFFFF;border:none">${ev.mediaFormat === 'Video' ? 'VIDEO / REEL' : ev.mediaFormat.toUpperCase()}</span>
+                  <span style="font-size:0.8rem;color:#E9D5FF;font-weight:600">${ev.locationDate || ''}</span>
                 </div>
                 <h3>${ev.title}</h3>
                 <p>${ev.caption || ''}</p>
