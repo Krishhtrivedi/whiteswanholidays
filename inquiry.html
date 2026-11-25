@@ -325,7 +325,7 @@
     document.getElementById('submitAndWhatsappBtn').addEventListener('click', () => {
       const res = collectAndSave();
       if (res && res.waUrl) {
-        window.open(res.waUrl, '_blank', 'noopener');
+        window.WSHShell.openWhatsAppChooser(res.waUrl);
       }
     });
 

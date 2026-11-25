@@ -293,6 +293,79 @@
     `;
   }
 
+  function openWhatsAppChooser(originalUrl) {
+    let encodedText = '';
+    try {
+      const u = new URL(originalUrl);
+      const rawText = u.searchParams.get('text') || '';
+      encodedText = encodeURIComponent(rawText);
+    } catch (err) {
+      const idx = originalUrl.indexOf('text=');
+      encodedText = idx >= 0 ? originalUrl.slice(idx + 5) : '';
+    }
+
+    const url1 = `https://wa.me/919925811770${encodedText ? `?text=${encodedText}` : ''}`;
+    const url2 = `https://wa.me/919099041625${encodedText ? `?text=${encodedText}` : ''}`;
+
+    let modal = document.getElementById('wshWaChooserModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'wshWaChooserModal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-label', 'Select WhatsApp Number');
+      modal.style.cssText = 'position:fixed;inset:0;z-index:2000;background:rgba(15,23,42,0.58);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1rem;';
+      modal.innerHTML = `
+        <div class="wsh-card" style="width:min(420px, 100%);padding:1.6rem;position:relative;box-shadow:var(--shadow-lg)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">
+            <span class="wsh-badge badge-emerald">WHATSAPP CONCIERGE</span>
+            <button type="button" id="wshWaCloseBtn" aria-label="Close" style="width:40px;height:40px;border-radius:10px;background:var(--bg-ivory);border:var(--border-subtle);color:var(--ink-navy);font-size:1.35rem;display:flex;align-items:center;justify-content:center">&times;</button>
+          </div>
+          <h3 style="margin-bottom:0.35rem">Choose WhatsApp Desk</h3>
+          <p style="font-size:0.88rem;margin-bottom:1.25rem">Select which White Swan Holidays Ahmedabad number to send your message to:</p>
+          <div style="display:grid;gap:0.7rem">
+            <a id="wshWaOpt1" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%;justify-content:space-between;padding:0.8rem 1.2rem">
+              <span>Desk 1 &bull; +91 99258 11770</span>
+              <span>&rarr;</span>
+            </a>
+            <a id="wshWaOpt2" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%;justify-content:space-between;padding:0.8rem 1.2rem">
+              <span>Desk 2 &bull; +91 90990 41625</span>
+              <span>&rarr;</span>
+            </a>
+            <button type="button" id="wshWaOptBoth" class="btn btn-outline" style="width:100%">
+              Send to Both Numbers
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const closeModal = () => { modal.style.display = 'none'; };
+      modal.querySelector('#wshWaCloseBtn').addEventListener('click', closeModal);
+      modal.addEventListener('click', e => {
+        if (e.target === modal || e.target.closest('#wshWaOpt1') || e.target.closest('#wshWaOpt2')) {
+          setTimeout(closeModal, 120);
+        }
+      });
+      window.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+      });
+    }
+
+    const opt1 = modal.querySelector('#wshWaOpt1');
+    const opt2 = modal.querySelector('#wshWaOpt2');
+    const optBoth = modal.querySelector('#wshWaOptBoth');
+    opt1.href = url1;
+    opt2.href = url2;
+    optBoth.onclick = () => {
+      window.open(url1, '_blank', 'noopener');
+      setTimeout(() => window.open(url2, '_blank', 'noopener'), 350);
+      modal.style.display = 'none';
+    };
+
+    modal.style.display = 'flex';
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     injectNavbarAndDrawer();
     injectFooterAndWhatsApp();
@@ -305,12 +378,21 @@
       const next = window.WSHStore.toggleTheme();
       syncThemeButtons();
       showToast(next === 'dark' ? 'Midnight Dark Mode enabled' : 'Sunlit Light Mode enabled');
+      return;
+    }
+
+    // Intercept all desk WhatsApp links (excluding links inside the chooser modal itself)
+    const waLink = e.target.closest('a[href*="wa.me/919925811770"], a[href*="wa.me/919099041625"]');
+    if (waLink && !waLink.closest('#wshWaChooserModal')) {
+      e.preventDefault();
+      openWhatsAppChooser(waLink.href);
     }
   });
 
   window.WSHShell = {
     renderPackageCard,
     showToast,
-    syncThemeButtons
+    syncThemeButtons,
+    openWhatsAppChooser
   };
 })();
