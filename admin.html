@@ -41,7 +41,7 @@
     }
     .admin-nav-btn:hover, .admin-nav-btn.active {
       background: var(--tint-peach);
-      color: #C2410C;
+      color: var(--accent-amber-text);
     }
     .admin-main {
       padding: 1.75rem clamp(1rem, 3vw, 2.5rem) 4rem;
@@ -156,6 +156,7 @@
     }
     .admin-modal-card {
       background: var(--bg-white);
+      border: var(--border-subtle);
       border-radius: var(--radius-xl);
       width: min(680px, 100%);
       max-height: 90vh;
@@ -168,11 +169,14 @@
 <body>
 
 <!-- ADMIN LOGIN VIEW -->
-<section id="adminLoginView" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:radial-gradient(circle at 80% 20%, rgba(245,158,11,0.16), transparent 45%), var(--bg-ivory)">
+<section id="adminLoginView" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:radial-gradient(circle at 80% 20%, rgba(245,158,11,0.16), transparent 45%), var(--bg-ivory);position:relative">
+  <button type="button" class="wsh-theme-btn js-wsh-theme-toggle" style="position:absolute;top:20px;right:20px" aria-label="Toggle Light and Dark Mode"></button>
   <div class="wsh-card" style="width:min(440px, 100%);padding:2rem">
     <div style="text-align:center;margin-bottom:1.5rem">
-      <img src="img/white_swan_logo.png" alt="White Swan Holidays" style="height:48px;width:auto;margin:0 auto 0.75rem">
-      <span class="wsh-badge badge-amber">ADMIN OPERATIONS PORTAL</span>
+      <div style="display:inline-block;background:rgba(255,255,255,0.94);padding:6px 12px;border-radius:12px;margin:0 auto 0.75rem">
+        <img src="img/white_swan_logo.png" alt="White Swan Holidays" style="height:44px;width:auto">
+      </div>
+      <div><span class="wsh-badge badge-amber">ADMIN OPERATIONS PORTAL</span></div>
       <h2 style="margin-top:0.6rem;font-size:1.6rem">Sign In to White Swan CRM</h2>
       <p style="font-size:0.88rem;margin:0">Manage Domestic &amp; International packages, referral codes, and WhatsApp inquiries.</p>
     </div>
@@ -198,14 +202,20 @@
   <div class="admin-topbar-mobile">
     <button type="button" id="adminSidebarToggle" class="btn btn-outline btn-sm" aria-label="Toggle Menu">&#9776; Menu</button>
     <strong style="font-family:var(--font-display)">White Swan Admin</strong>
-    <a href="index.html" class="btn btn-outline btn-sm">Site</a>
+    <div style="display:flex;align-items:center;gap:0.45rem">
+      <button type="button" class="wsh-theme-btn js-wsh-theme-toggle" aria-label="Toggle Theme"></button>
+      <a href="index.html" class="btn btn-outline btn-sm">Site</a>
+    </div>
   </div>
 
   <div class="admin-shell">
     <aside class="admin-sidebar" id="adminSidebar">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
-        <a href="index.html"><img src="img/white_swan_logo.png" alt="White Swan" style="height:38px;width:auto"></a>
-        <button type="button" id="adminSidebarClose" class="btn btn-outline btn-sm" style="display:none;min-width:44px">&times;</button>
+        <a href="index.html" class="wsh-logo-link"><img src="img/white_swan_logo.png" alt="White Swan" style="height:36px;width:auto"></a>
+        <div style="display:flex;align-items:center;gap:0.35rem">
+          <button type="button" class="wsh-theme-btn js-wsh-theme-toggle" aria-label="Toggle Theme"></button>
+          <button type="button" id="adminSidebarClose" class="btn btn-outline btn-sm" style="display:none;min-width:44px">&times;</button>
+        </div>
       </div>
 
       <nav style="flex:1">
@@ -538,22 +548,22 @@
 
       document.getElementById('overviewKpis').innerHTML = `
         <div class="wsh-card" style="padding:1.25rem;background:var(--tint-peach)">
-          <div style="font-size:0.75rem;font-weight:700;color:#B45309">TOTAL INQUIRIES</div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-amber-text)">TOTAL INQUIRIES</div>
           <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${inqs.length}</div>
           <div style="font-size:0.78rem;color:var(--ink-slate)">${domCount} Domestic &bull; ${intCount} Int'l</div>
         </div>
         <div class="wsh-card" style="padding:1.25rem;background:var(--tint-mint)">
-          <div style="font-size:0.75rem;font-weight:700;color:#0369A1">ACTIVE PACKAGES</div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-sky-text)">ACTIVE PACKAGES</div>
           <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${pkgs.filter(p => p.active !== false).length}</div>
           <div style="font-size:0.78rem;color:var(--ink-slate)">${pkgs.length} Total Catalog</div>
         </div>
         <div class="wsh-card" style="padding:1.25rem;background:var(--tint-lavender)">
-          <div style="font-size:0.75rem;font-weight:700;color:#6D28D9">ACTIVE REFERRAL CODES</div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-lavender-text)">ACTIVE REFERRAL CODES</div>
           <div class="tabular-nums" style="font-size:1.9rem;font-weight:800">${refs.filter(r => r.active !== false).length}</div>
           <div style="font-size:0.78rem;color:var(--ink-slate)">Partner &amp; Friend Network</div>
         </div>
         <div class="wsh-card" style="padding:1.25rem;background:var(--tint-emerald)">
-          <div style="font-size:0.75rem;font-weight:700;color:#15803D">TOP REFERRAL CODE</div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--accent-emerald-text)">TOP REFERRAL CODE</div>
           <div style="font-size:1.4rem;font-weight:800;margin-top:0.2rem">${topRef ? topRef.code : '—'}</div>
           <div style="font-size:0.78rem;color:var(--ink-slate)">${topRef ? `${topRef.usedCount || 0} uses` : 'No uses yet'}</div>
         </div>
@@ -600,7 +610,7 @@
         const shareUrl = `${window.location.origin}/inquiry.html?refCode=${encodeURIComponent(r.code)}`;
         return `
           <tr>
-            <td data-label="Code"><span class="ref-code-pill" style="background:var(--tint-lavender);color:#4C1D95">${r.code}</span></td>
+            <td data-label="Code"><span class="ref-code-pill" style="background:var(--tint-lavender);color:var(--accent-lavender-text)">${r.code}</span></td>
             <td data-label="Partner"><strong>${r.partnerName}</strong></td>
             <td data-label="Type"><span class="wsh-badge badge-slate">${r.type}</span></td>
             <td data-label="Perk" style="font-size:0.84rem">${r.perk}</td>

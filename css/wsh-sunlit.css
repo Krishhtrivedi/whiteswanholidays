@@ -3,8 +3,8 @@
    Dribbble AI Travel Aesthetic · CG Road, Ahmedabad
    ========================================================================== */
 
-:root {
-  /* Bright & Vibrant Color Palette */
+:root, [data-theme="light"] {
+  /* Bright & Vibrant Sunlit Color Palette */
   --bg-ivory: #FFFDF9;
   --bg-white: #FFFFFF;
   --tint-peach: #FFF7ED;
@@ -23,6 +23,12 @@
   --wa-green: #25D366;
   --wa-grad: linear-gradient(135deg, #25D366 0%, #16A34A 100%);
 
+  /* Semantic Accent Text */
+  --accent-sky-text: #0369A1;
+  --accent-amber-text: #B45309;
+  --accent-emerald-text: #15803D;
+  --accent-lavender-text: #6D28D9;
+
   /* Inks */
   --ink-navy: #0F172A;
   --ink-slate: #475569;
@@ -31,8 +37,8 @@
   /* Borders & Glass */
   --border-subtle: 1px solid rgba(15, 23, 42, 0.08);
   --border-strong: 1px solid rgba(15, 23, 42, 0.14);
-  --glass-white: rgba(255, 255, 255, 0.84);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.72);
+  --glass-white: rgba(255, 255, 255, 0.78);
+  --glass-border: 1px solid rgba(15, 23, 42, 0.08);
 
   /* Typography */
   --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -51,6 +57,48 @@
   --shadow-lg: 0 24px 54px -12px rgba(15, 23, 42, 0.14);
   --shadow-amber: 0 12px 28px -6px rgba(245, 158, 11, 0.38);
   --shadow-wa: 0 12px 28px -6px rgba(22, 163, 74, 0.42);
+}
+
+[data-theme="dark"] {
+  /* Sleek Obsidian & Luminous Glass Midnight Palette */
+  --bg-ivory: #090D16;
+  --bg-white: #111827;
+  --tint-peach: #161E2E;
+  --tint-mint: #0D1B2A;
+  --tint-lavender: #17152B;
+  --tint-emerald: #0B2219;
+
+  /* Brand Accents */
+  --amber: #FBBF24;
+  --orange: #F97316;
+  --marigold-grad: linear-gradient(135deg, #FBBF24 0%, #F97316 100%);
+  --turquoise: #22D3EE;
+  --sky: #38BDF8;
+  --sky-grad: linear-gradient(135deg, #22D3EE 0%, #38BDF8 100%);
+
+  /* Semantic Accent Text */
+  --accent-sky-text: #38BDF8;
+  --accent-amber-text: #FBBF24;
+  --accent-emerald-text: #4ADE80;
+  --accent-lavender-text: #C4B5FD;
+
+  /* Inks */
+  --ink-navy: #F8FAFC;
+  --ink-slate: #94A3B8;
+  --ink-muted: #94A3B8;
+
+  /* Borders & Glass */
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.10);
+  --border-strong: 1px solid rgba(255, 255, 255, 0.18);
+  --glass-white: rgba(17, 24, 39, 0.75);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.10);
+
+  --shadow-xs: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 16px 40px -6px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 24px 56px -12px rgba(0, 0, 0, 0.72);
+  --shadow-amber: 0 12px 30px -6px rgba(251, 191, 36, 0.28);
+  --shadow-wa: 0 12px 30px -6px rgba(22, 163, 74, 0.45);
 }
 
 /* Base Reset & Zero Horizontal Overflow */
@@ -747,4 +795,153 @@ button, .btn {
 
 .wsh-toast.show {
   transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   THEME TOGGLE BUTTON & MIDNIGHT DARK MODE OVERRIDES
+   ========================================================================== */
+.wsh-theme-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--bg-white);
+  border: var(--border-strong);
+  color: var(--ink-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.wsh-theme-btn:hover {
+  transform: rotate(15deg) scale(1.05);
+  border-color: var(--amber);
+}
+
+body,
+.wsh-navbar,
+.wsh-card,
+.wsh-drawer-panel,
+.wsh-filter-bar,
+.ai-search-box,
+.admin-sidebar,
+.admin-main,
+.wsh-table-wrap {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+[data-theme="dark"] .wsh-navbar {
+  background: rgba(9, 13, 22, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .wsh-logo-link {
+  background: rgba(255, 255, 255, 0.94);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+[data-theme="dark"] .wsh-nav-links a:hover,
+[data-theme="dark"] .wsh-nav-links a.active {
+  background: rgba(251, 191, 36, 0.14);
+  color: #FBBF24;
+}
+
+[data-theme="dark"] .wsh-drawer-links a.active {
+  background: rgba(251, 191, 36, 0.14);
+  border-color: rgba(251, 191, 36, 0.35);
+  color: #FBBF24;
+}
+
+[data-theme="dark"] .sunlit-hero {
+  background:
+    radial-gradient(circle at 85% 15%, rgba(251, 191, 36, 0.13), transparent 44%),
+    radial-gradient(circle at 12% 85%, rgba(34, 211, 238, 0.11), transparent 44%),
+    var(--bg-ivory);
+}
+
+[data-theme="dark"] .badge-amber {
+  background: rgba(251, 191, 36, 0.16);
+  color: #FBBF24;
+  border: 1px solid rgba(251, 191, 36, 0.28);
+}
+
+[data-theme="dark"] .badge-sky {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+}
+
+[data-theme="dark"] .badge-emerald {
+  background: rgba(34, 197, 94, 0.16);
+  color: #4ADE80;
+  border: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+[data-theme="dark"] .badge-lavender {
+  background: rgba(167, 139, 250, 0.16);
+  color: #C4B5FD;
+  border: 1px solid rgba(167, 139, 250, 0.28);
+}
+
+[data-theme="dark"] .badge-slate {
+  background: rgba(255, 255, 255, 0.08);
+  color: #CBD5E1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .ref-code-pill {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+[data-theme="dark"] .btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background: rgba(56, 189, 248, 0.14);
+  border-color: #38BDF8;
+  color: #38BDF8 !important;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #64748B;
+}
+
+[data-theme="dark"] .wsh-table th {
+  background: #0B101B;
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .admin-nav-btn:hover,
+[data-theme="dark"] .admin-nav-btn.active {
+  background: rgba(251, 191, 36, 0.14);
+  color: #FBBF24;
+}
+
+[data-theme="dark"] .wsh-toast {
+  background: #1E293B;
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+[data-theme="dark"] .wsh-footer {
+  background: #05080F;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }

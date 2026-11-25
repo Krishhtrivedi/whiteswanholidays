@@ -30,10 +30,10 @@
       <form id="wshInquiryForm" class="wsh-card" style="padding:1.75rem">
         <!-- Success Banner (Hidden until submission) -->
         <div id="inqSuccessBanner" style="display:none;background:var(--tint-emerald);border:1.5px solid #22C55E;border-radius:16px;padding:1.25rem;margin-bottom:1.5rem">
-          <div style="font-weight:800;color:#15803D;font-size:1.05rem;margin-bottom:0.3rem">
+          <div style="font-weight:800;color:var(--accent-emerald-text);font-size:1.05rem;margin-bottom:0.3rem">
             &#10003; Inquiry Saved Successfully!
           </div>
-          <p style="margin:0 0 0.75rem;font-size:0.9rem;color:#166534">
+          <p style="margin:0 0 0.75rem;font-size:0.9rem;color:var(--accent-emerald-text)">
             Your Inquiry Reference Number is <strong id="inqConfirmedId" class="ref-code-pill" style="background:#FFFFFF">INQ-WSH-2026-0000</strong>. Our Ahmedabad advisor will contact you shortly.
           </p>
           <a id="inqPostWaLink" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
@@ -65,7 +65,7 @@
 
         <!-- 3. Reference / Referral Code Section -->
         <div style="background:var(--tint-lavender);border:1px solid rgba(109,40,217,0.16);border-radius:16px;padding:1.1rem;margin-bottom:1.4rem">
-          <label for="inqReferralInput" style="display:block;font-size:0.84rem;font-weight:700;color:#4C1D95;margin-bottom:0.4rem">
+          <label for="inqReferralInput" style="display:block;font-size:0.84rem;font-weight:700;color:var(--accent-lavender-text);margin-bottom:0.4rem">
             Have a Reference or Referral Code? (Enter Referral Code, Friend's Name, or Consultant Name)
           </label>
           <div style="display:flex;gap:0.55rem;flex-wrap:wrap">
@@ -168,7 +168,7 @@
           </div>
         </div>
 
-        <div id="sumRefBox" style="display:none;background:var(--tint-emerald);border:1px solid #86EFAC;border-radius:12px;padding:0.85rem;margin-bottom:1rem;font-size:0.84rem;color:#15803D"></div>
+        <div id="sumRefBox" style="display:none;background:var(--tint-emerald);border:1px solid #86EFAC;border-radius:12px;padding:0.85rem;margin-bottom:1rem;font-size:0.84rem;color:var(--accent-emerald-text)"></div>
 
         <div style="background:var(--tint-peach);border-radius:12px;padding:0.9rem;font-size:0.82rem;color:var(--ink-slate)">
           <strong>Ahmedabad Direct Desk:</strong><br>
@@ -249,7 +249,7 @@
         sumRefBox.style.display = 'none';
       } else {
         verifiedReferral = null;
-        refMsg.innerHTML = `<span style="color:#4C1D95;font-weight:600">&#10003; Noted as Friend / Consultant Reference: "${raw}"</span>`;
+        refMsg.innerHTML = `<span style="color:var(--accent-lavender-text);font-weight:600">&#10003; Noted as Friend / Consultant Reference: "${raw}"</span>`;
         sumRefBox.style.display = 'block';
         sumRefBox.innerHTML = `<strong>Referred By:</strong> ${raw}`;
       }

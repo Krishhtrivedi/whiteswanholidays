@@ -716,9 +716,41 @@
     return `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
   }
 
+  // Theme Engine (Sunlit Light Mode & Midnight Dark Mode)
+  function getTheme() {
+    try {
+      const saved = localStorage.getItem('wsh_theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+    } catch (e) {}
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  }
+
+  function setTheme(theme) {
+    const clean = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', clean);
+    try {
+      localStorage.setItem('wsh_theme', clean);
+    } catch (e) {}
+    return clean;
+  }
+
+  function toggleTheme() {
+    const next = getTheme() === 'dark' ? 'light' : 'dark';
+    return setTheme(next);
+  }
+
+  // Apply immediately to prevent flash of wrong theme
+  setTheme(getTheme());
+
   window.WSHStore = {
     WHATSAPP_DESK_NUMBER,
     formatINR,
+    getTheme,
+    setTheme,
+    toggleTheme,
     getPackages,
     getPackageBySlugOrRef,
     savePackage,

@@ -11,6 +11,26 @@
     return path.toLowerCase();
   }
 
+  function getThemeIconSvg(theme) {
+    if (theme === 'dark') {
+      // Sun icon to switch to Light Mode
+      return `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>`;
+    }
+    // Moon icon to switch to Dark Mode
+    return `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>`;
+  }
+
+  function syncThemeButtons() {
+    const theme = window.WSHStore ? window.WSHStore.getTheme() : 'light';
+    const icon = getThemeIconSvg(theme);
+    const label = theme === 'dark' ? 'Switch to Sunlit Light Mode' : 'Switch to Midnight Dark Mode';
+    document.querySelectorAll('.js-wsh-theme-toggle').forEach(btn => {
+      btn.innerHTML = icon;
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    });
+  }
+
   function injectNavbarAndDrawer() {
     const mount = document.getElementById('wsh-header-mount');
     if (!mount) return;
@@ -51,6 +71,7 @@
           </ul>
 
           <div class="wsh-nav-actions">
+            <button type="button" class="wsh-theme-btn js-wsh-theme-toggle" aria-label="Toggle Light and Dark Mode" title="Toggle Theme"></button>
             <a href="admin.html" class="btn btn-outline btn-sm wsh-nav-desktop-only" title="Admin Management Panel">
               Admin
             </a>
@@ -72,10 +93,13 @@
         <div class="wsh-drawer-backdrop" id="wshDrawerBackdrop"></div>
         <div class="wsh-drawer-panel">
           <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:var(--border-subtle)">
-            <img src="img/white_swan_logo.png" alt="White Swan Holidays" style="height:38px;width:auto">
-            <button type="button" id="wshDrawerClose" aria-label="Close menu" style="width:44px;height:44px;border-radius:12px;background:var(--bg-ivory);border:var(--border-subtle);font-size:1.5rem;display:flex;align-items:center;justify-content:center;color:var(--ink-navy)">
-              &times;
-            </button>
+            <a href="index.html" class="wsh-logo-link"><img src="img/white_swan_logo.png" alt="White Swan Holidays" style="height:36px;width:auto"></a>
+            <div style="display:flex;align-items:center;gap:0.45rem">
+              <button type="button" class="wsh-theme-btn js-wsh-theme-toggle" aria-label="Toggle Theme"></button>
+              <button type="button" id="wshDrawerClose" aria-label="Close menu" style="width:44px;height:44px;border-radius:12px;background:var(--bg-ivory);border:var(--border-subtle);font-size:1.5rem;display:flex;align-items:center;justify-content:center;color:var(--ink-navy)">
+                &times;
+              </button>
+            </div>
           </div>
           <nav class="wsh-drawer-links">
             ${drawerLinksHtml}
@@ -223,7 +247,7 @@
             ${catBadge}
           </div>
           <div style="position:absolute;bottom:12px;right:12px">
-            <span class="ref-code-pill" style="background:rgba(255,255,255,0.92);backdrop-filter:blur(8px)">${pkg.refCode}</span>
+            <span class="ref-code-pill" style="background:var(--glass-white);backdrop-filter:blur(8px)">${pkg.refCode}</span>
           </div>
         </div>
 
@@ -242,7 +266,7 @@
           </p>
 
           ${pkg.category === 'International' && pkg.flightInfo ? `
-            <div style="font-size:0.78rem;color:#0369A1;background:var(--tint-mint);padding:0.45rem 0.7rem;border-radius:10px;margin-bottom:0.85rem;font-weight:600">
+            <div style="font-size:0.78rem;color:var(--accent-sky-text);background:var(--tint-mint);padding:0.45rem 0.7rem;border-radius:10px;margin-bottom:0.85rem;font-weight:600">
               ✈ ${pkg.flightInfo}
             </div>
           ` : ''}
@@ -271,10 +295,21 @@
   document.addEventListener('DOMContentLoaded', () => {
     injectNavbarAndDrawer();
     injectFooterAndWhatsApp();
+    syncThemeButtons();
+  });
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.js-wsh-theme-toggle');
+    if (btn && window.WSHStore) {
+      const next = window.WSHStore.toggleTheme();
+      syncThemeButtons();
+      showToast(next === 'dark' ? 'Midnight Dark Mode enabled' : 'Sunlit Light Mode enabled');
+    }
   });
 
   window.WSHShell = {
     renderPackageCard,
-    showToast
+    showToast,
+    syncThemeButtons
   };
 })();
