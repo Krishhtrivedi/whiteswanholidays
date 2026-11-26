@@ -8,7 +8,7 @@
   'use strict';
 
   const STORAGE_KEYS = {
-    PACKAGES: 'wsh_packages_v4',
+    PACKAGES: 'wsh_packages_v5',
     REFERRALS: 'wsh_referrals_v2',
     INQUIRIES: 'wsh_inquiries_v2',
     EVENTS: 'wsh_events_v3',
@@ -1194,7 +1194,7 @@
     "visaType": "Visa-Free Entry for Indian Passports (14 Days)",
     "flightInfo": "Direct/1-stop flights from Ahmedabad (AMD) / Delhi (DEL) to Almaty (ALA)",
     "bestSeason": "April – October & Winter Ski (Dec – Feb)",
-    "image": "img/international/kazakhstan.jpg",
+    "image": "img/packages/almaty-kazakhstan.jpg",
     "featured": true,
     "active": true,
     "highlights": [
