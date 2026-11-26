@@ -11,7 +11,7 @@
     PACKAGES: 'wsh_packages_v2',
     REFERRALS: 'wsh_referrals_v2',
     INQUIRIES: 'wsh_inquiries_v2',
-    EVENTS: 'wsh_events_v2',
+    EVENTS: 'wsh_events_v3',
     ADMIN_AUTH: 'wsh_admin_auth_v2'
   };
 
@@ -597,6 +597,182 @@
       posterUrl: 'img/instagram/post-1.jpg',
       instagramUrl: 'https://www.instagram.com/whiteswanholidays/?hl=en',
       showInSlider: true
+    },
+    {
+      id: 'evt-8',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'International Group Tour Welcome & Briefing',
+      locationDate: 'Ahmedabad & International Departures • White Swan Archive',
+      caption: 'Curated group departure welcome with White Swan Holidays tour directors ensuring seamless airport check-in and hospitality.',
+      mediaUrl: 'img/events/event-01.jpg',
+      posterUrl: 'img/events/event-01.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-9',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Signature Scenic Sightseeing Expedition',
+      locationDate: 'Curated Group Departure • White Swan Archive',
+      caption: 'Guided sightseeing highlights and milestone group portraits from our flagship holiday departures.',
+      mediaUrl: 'img/events/event-02.jpg',
+      posterUrl: 'img/events/event-02.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-10',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Family & Couple Holiday Celebration',
+      locationDate: 'Signature Leisure Escape • White Swan Archive',
+      caption: 'Handcrafted multi-generational family vacation moments with private transfers and handpicked stays.',
+      mediaUrl: 'img/events/event-03.jpg',
+      posterUrl: 'img/events/event-03.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-11',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Corporate Team Retreat & Evening Gala',
+      locationDate: 'MICE & Corporate Group • White Swan Archive',
+      caption: 'Dedicated corporate hospitality, team bonding activities, and hosted celebration dinner.',
+      mediaUrl: 'img/events/event-04.jpg',
+      posterUrl: 'img/events/event-04.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-12',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Scenic Mountain & Valley Group Excursion',
+      locationDate: 'Highland Group Tour • White Swan Archive',
+      caption: 'Panoramic mountain sightseeing and curated local experiences organized by our CG Road travel desk.',
+      mediaUrl: 'img/events/event-05.jpg',
+      posterUrl: 'img/events/event-05.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-13',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Cultural Heritage & City Discovery Tour',
+      locationDate: 'Guided Heritage Trail • White Swan Archive',
+      caption: 'Immersive city discovery and heritage landmarks explored with our experienced tour managers.',
+      mediaUrl: 'img/events/event-06.jpg',
+      posterUrl: 'img/events/event-06.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-14',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'VIP Hospitality & Group Networking Night',
+      locationDate: 'Executive Event Series • White Swan Archive',
+      caption: 'Seamless end-to-end event coordination, welcome reception, and VIP guest management.',
+      mediaUrl: 'img/events/event-07.jpg',
+      posterUrl: 'img/events/event-07.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-15',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Coastal Resort & Sunset Cruise Memories',
+      locationDate: 'Beachfront Holiday Group • White Swan Archive',
+      caption: 'Relaxed coastal stays, private cruise excursions, and memorable group dinners by the water.',
+      mediaUrl: 'img/events/event-08.jpg',
+      posterUrl: 'img/events/event-08.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-16',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Gujarat Community Special Departure',
+      locationDate: 'Customized Group Tour • White Swan Archive',
+      caption: 'Pure vegetarian / Jain-friendly dining arrangements and comfortable group logistics from start to finish.',
+      mediaUrl: 'img/events/event-09.jpg',
+      posterUrl: 'img/events/event-09.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-17',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Destination Celebration & Festive Showcase',
+      locationDate: 'Special Occasion Travel • White Swan Archive',
+      caption: 'Bespoke destination celebration featuring themed decor, entertainment, and concierge guest care.',
+      mediaUrl: 'img/events/event-10.jpg',
+      posterUrl: 'img/events/event-10.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-18',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Luxury Coach & Guided Sightseeing Day',
+      locationDate: 'Grand Tour Itinerary • White Swan Archive',
+      caption: 'Comfortable luxury coach touring with curated photo stops and priority attraction entry.',
+      mediaUrl: 'img/events/event-11.jpg',
+      posterUrl: 'img/events/event-11.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-19',
+      entryType: 'Trip Memory',
+      mediaFormat: 'Photo',
+      title: 'Farewell Gala & Group Tour Finale',
+      locationDate: 'White Swan Signature Tour • White Swan Archive',
+      caption: 'Closing celebration dinner with our happy travelers before flying back home.',
+      mediaUrl: 'img/events/event-12.jpg',
+      posterUrl: 'img/events/event-12.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-20',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Corporate Meetings & Executive Boardrooms',
+      locationDate: 'MICE Solutions • India & International',
+      caption: 'Turnkey corporate meeting venues, AV setup, hospitality desks, and executive travel logistics.',
+      mediaUrl: 'img/events/mice-meeting.jpg',
+      posterUrl: 'img/events/mice-meeting.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-21',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Corporate Incentive Tours & Dealer Meets',
+      locationDate: 'MICE Incentive Programs • Global Destinations',
+      caption: 'Reward top performers and channel partners with bespoke incentive retreats and gala awards.',
+      mediaUrl: 'img/events/mice-incentive.jpg',
+      posterUrl: 'img/events/mice-incentive.jpg',
+      showInSlider: true
+    },
+    {
+      id: 'evt-22',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Large-Scale Conferences & Conventions',
+      locationDate: 'MICE Conferences • End-to-End Management',
+      caption: 'Complete delegate registration, hotel room blocks, stage production, and airport transfers.',
+      mediaUrl: 'img/events/mice-conference.jpg',
+      posterUrl: 'img/events/mice-conference.jpg',
+      showInSlider: false
+    },
+    {
+      id: 'evt-23',
+      entryType: 'Organized Event',
+      mediaFormat: 'Photo',
+      title: 'Trade Exhibitions & Brand Showcases',
+      locationDate: 'MICE Exhibitions • Global Trade Events',
+      caption: 'Seamless exhibitor travel, accommodation blocks, and on-ground hospitality support.',
+      mediaUrl: 'img/events/mice-exhibition.jpg',
+      posterUrl: 'img/events/mice-exhibition.jpg',
+      showInSlider: false
     }
   ];
 
