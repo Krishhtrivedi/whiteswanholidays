@@ -382,17 +382,62 @@
     modal.style.display = 'flex';
   }
 
+  function initScrollReveals() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    if (!('IntersectionObserver' in window)) return;
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    function scanTargets() {
+      document.querySelectorAll('section h2, .wsh-slider-shell').forEach(el => {
+        if (!el.classList.contains('wsh-reveal') && !el.closest('.sunlit-hero')) {
+          el.classList.add('wsh-reveal');
+          io.observe(el);
+        }
+      });
+
+      document.querySelectorAll('.wsh-pkg-grid, .wsh-bento-grid, #eventsGalleryGrid').forEach(grid => {
+        Array.from(grid.children).forEach((card, idx) => {
+          if (!card.classList.contains('wsh-reveal')) {
+            card.style.setProperty('--reveal-delay', `${(idx % 3) * 80}ms`);
+            card.classList.add('wsh-reveal');
+            io.observe(card);
+          }
+        });
+      });
+    }
+
+    scanTargets();
+
+    const mo = new MutationObserver(() => scanTargets());
+    document.querySelectorAll('.wsh-pkg-grid, .wsh-bento-grid, #eventsGalleryGrid').forEach(grid => {
+      mo.observe(grid, { childList: true });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     injectNavbarAndDrawer();
     injectFooterAndWhatsApp();
     syncThemeButtons();
+    initScrollReveals();
   });
 
   document.addEventListener('click', e => {
     const btn = e.target.closest('.js-wsh-theme-toggle');
     if (btn && window.WSHStore) {
+      document.documentElement.classList.add('wsh-theme-animating');
       const next = window.WSHStore.toggleTheme();
       syncThemeButtons();
+      setTimeout(() => document.documentElement.classList.remove('wsh-theme-animating'), 320);
       showToast(next === 'dark' ? 'Velvet Obsidian Dark Mode enabled' : 'Warm Swan Beige Light Mode enabled');
       return;
     }

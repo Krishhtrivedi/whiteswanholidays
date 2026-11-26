@@ -60,9 +60,9 @@
 
   /* Radii & Shadows */
   --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
-  --radius-xl: 24px;
+  --radius-md: 14px;
+  --radius-lg: 16px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
   --shadow-xs: 0 2px 8px rgba(28, 25, 21, 0.04);
@@ -258,14 +258,31 @@ button, .btn {
 }
 
 .btn-marigold {
+  position: relative;
+  overflow: hidden;
   background: var(--accent-gold);
   color: var(--accent-gold-text) !important;
   box-shadow: var(--shadow-amber);
+}
+.btn-marigold::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.28) 50%, transparent 100%);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  opacity: 0;
 }
 .btn-marigold:hover {
   background: var(--accent-gold-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+.btn:active {
+  transform: scale(0.98) !important;
 }
 
 .btn-sky {
@@ -370,11 +387,11 @@ button, .btn {
   border-bottom: 1px solid var(--glass-border);
   padding-top: env(safe-area-inset-top);
 }
-@supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
+@supports (backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px)) {
   .wsh-navbar {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 }
 
@@ -544,11 +561,12 @@ button, .btn {
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
 }
 
 .wsh-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  border-color: var(--glass-border);
   box-shadow: var(--shadow-md);
 }
 
@@ -596,20 +614,39 @@ button, .btn {
 
 .pkg-card-media {
   position: relative;
-  height: 220px;
+  aspect-ratio: 16 / 10;
+  height: auto;
   overflow: hidden;
   background: var(--bg-secondary);
+}
+
+.pkg-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 42%, rgba(17, 15, 13, 0.62) 100%);
+  pointer-events: none;
+}
+
+.pkg-card-media > div {
+  z-index: 2;
 }
 
 .pkg-card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pkg-card:hover .pkg-card-media img {
-  transform: scale(1.06);
+  transform: scale(1.05);
+}
+
+.pkg-card-body h3,
+.wsh-slide-caption h3 {
+  font-family: var(--font-serif);
+  font-weight: 700;
 }
 
 .pkg-card-body {
@@ -648,7 +685,7 @@ button, .btn {
 /* Hero Layouts */
 .sunlit-hero {
   position: relative;
-  padding: clamp(2.5rem, 5vw, 4.25rem) 0 clamp(3rem, 5vw, 4.5rem);
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(3.25rem, 6vw, 5rem);
   background:
     radial-gradient(circle at 85% 15%, var(--gold-tint-bg), transparent 45%),
     radial-gradient(circle at 12% 85%, var(--teal-tint-bg), transparent 45%),
@@ -669,10 +706,10 @@ button, .btn {
   }
 }
 
-/* AI Search Bar */
+/* AI Search Bar (Frosted Glass Quick-Inquiry Bar) */
 .ai-search-box {
   background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
   padding: 0.65rem;
   box-shadow: var(--shadow-md);
@@ -680,6 +717,13 @@ button, .btn {
   grid-template-columns: 1.4fr 1fr auto;
   gap: 0.6rem;
   align-items: center;
+}
+@supports (backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px)) {
+  .ai-search-box {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
 }
 
 .ai-search-box input,
@@ -894,16 +938,88 @@ button, .btn {
   border-color: var(--accent-gold);
 }
 
-body,
-.wsh-navbar,
-.wsh-card,
-.wsh-drawer-panel,
-.wsh-filter-bar,
-.ai-search-box,
-.admin-sidebar,
-.admin-main,
-.wsh-table-wrap {
-  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+html.wsh-theme-animating,
+html.wsh-theme-animating * {
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, box-shadow 300ms ease !important;
+}
+
+/* ==========================================================================
+   LUXURY MOTION, KEN BURNS, SHIMMER & SCROLL REVEALS
+   ========================================================================== */
+.wsh-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes wshKenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.06); }
+  }
+
+  @keyframes wshFadeUp {
+    0% { opacity: 0; transform: translateY(22px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes wshShimmerSweep {
+    0% { left: -75%; opacity: 0; }
+    20% { opacity: 1; }
+    100% { left: 135%; opacity: 0; }
+  }
+
+  @keyframes wshPulseRing {
+    0% { transform: scale(1); opacity: 0.55; }
+    75%, 100% { transform: scale(1.22); opacity: 0; }
+  }
+
+  .hero-showcase-img {
+    animation: wshKenBurns 14s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  .sunlit-hero h1 {
+    animation: wshFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .sunlit-hero p {
+    animation: wshFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+  }
+  .sunlit-hero .ai-search-box {
+    animation: wshFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+  }
+  .sunlit-hero .hero-split-grid > div:first-child > div:last-child {
+    animation: wshFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
+  }
+
+  .btn-marigold:hover::after {
+    animation: wshShimmerSweep 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .wsh-floating-wa {
+    position: fixed;
+  }
+  .wsh-floating-wa::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    border: 2px solid rgba(37, 211, 102, 0.55);
+    pointer-events: none;
+    animation: wshPulseRing 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  .wsh-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 650ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .wsh-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 [data-theme="dark"] .wsh-logo-link {
