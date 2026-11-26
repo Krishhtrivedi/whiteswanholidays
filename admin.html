@@ -426,9 +426,14 @@
           <input type="text" id="editPkgVisa" placeholder="E-Visa / Sticker Visa / No Visa">
         </div>
         <div>
-          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Image URL</label>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Image URL (Cloudinary CDN or Local Asset)</label>
           <input type="text" id="editPkgImg" value="img/tours/dubai.jpg">
         </div>
+      </div>
+      <div>
+        <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Or Upload Package Image to Cloudinary CDN (JPG, PNG, WebP • Max 5 MB • Auto-WebP)</label>
+        <input type="file" id="editPkgFile" accept="image/jpeg,image/png,image/webp" style="padding:0.4rem">
+        <div id="editPkgUploadStatus" style="font-size:0.76rem;color:var(--ink-muted);margin-top:0.25rem"></div>
       </div>
       <div>
         <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Highlights (comma separated)</label>
@@ -548,8 +553,9 @@
 
       <div class="form-grid-2">
         <div>
-          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Or Upload Photo / Video File (Preview)</label>
-          <input type="file" id="editEvtFile" accept="image/*,video/*" style="padding:0.4rem">
+          <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Or Upload Photo to Cloudinary CDN (JPG, PNG, WebP • Max 5 MB • Auto-WebP)</label>
+          <input type="file" id="editEvtFile" accept="image/jpeg,image/png,image/webp" style="padding:0.4rem">
+          <div id="editEvtUploadStatus" style="font-size:0.76rem;color:var(--ink-muted);margin-top:0.25rem"></div>
         </div>
         <div>
           <label style="font-size:0.78rem;font-weight:700;color:var(--ink-muted)">Video Poster / Thumbnail URL (Optional)</label>
@@ -589,23 +595,50 @@
     let pkgCatFilter = 'Domestic';
     let evtTypeFilter = 'all';
 
-    function checkAuth() {
-      const authed = window.WSHStore.isAdminLoggedIn();
+    async function checkAuth() {
+      let authed = window.WSHStore.isAdminLoggedIn();
+      if (authed) {
+        try {
+          const res = await fetch('/api/admin/session', { credentials: 'same-origin' });
+          if (res.ok) {
+            const data = await res.json();
+            if (!data.authenticated) {
+              window.WSHStore.setAdminLoggedIn(false);
+              authed = false;
+            }
+          }
+        } catch {
+          // Offline / static fallback
+        }
+      }
       loginView.style.display = authed ? 'none' : 'flex';
       dashView.style.display = authed ? 'block' : 'none';
       if (authed) renderAll();
     }
 
-    document.getElementById('adminLoginForm').addEventListener('submit', e => {
+    document.getElementById('adminLoginForm').addEventListener('submit', async e => {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value.trim().toLowerCase();
       const pass = document.getElementById('loginPass').value;
       const errEl = document.getElementById('loginErrorMsg');
 
-      if (email === 'info@whiteswanholidays.in' && pass === 'White@swan') {
+      let serverAuthed = false;
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ email, password: pass })
+        });
+        serverAuthed = res.ok;
+      } catch {
+        serverAuthed = email === 'info@whiteswanholidays.in' && pass === 'White@swan';
+      }
+
+      if (serverAuthed) {
         errEl.style.display = 'none';
         window.WSHStore.setAdminLoggedIn(true);
-        checkAuth();
+        await checkAuth();
         window.WSHShell.showToast('Signed in to White Swan CRM');
       } else {
         errEl.style.display = 'block';
@@ -613,7 +646,10 @@
         document.getElementById('loginPass').focus();
       }
     });
-    document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+    document.getElementById('adminLogoutBtn').addEventListener('click', async () => {
+      try {
+        await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' });
+      } catch {}
       window.WSHStore.setAdminLoggedIn(false);
       checkAuth();
     });
@@ -823,23 +859,78 @@
       document.getElementById('evtModal').classList.add('open');
     });
 
-    document.getElementById('editEvtFile').addEventListener('change', e => {
+    const ALLOWED_UPLOAD_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+    const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
+
+    async function uploadAdminImage(file, folder, statusEl) {
+      if (!file) return null;
+      if (!ALLOWED_UPLOAD_TYPES.has(file.type)) {
+        const msg = 'Only JPG, PNG, and WebP images are allowed.';
+        if (statusEl) statusEl.textContent = msg;
+        window.WSHShell.showToast(msg);
+        return null;
+      }
+      if (file.size > MAX_UPLOAD_BYTES) {
+        const msg = 'File exceeds 5 MB limit.';
+        if (statusEl) statusEl.textContent = msg;
+        window.WSHShell.showToast(msg);
+        return null;
+      }
+
+      if (statusEl) statusEl.textContent = 'Uploading to Cloudinary CDN & optimizing to WebP...';
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', folder);
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          credentials: 'same-origin',
+          body: formData
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.status === 401) {
+          window.WSHStore.setAdminLoggedIn(false);
+          checkAuth();
+          throw new Error('Admin session expired. Please sign in again.');
+        }
+        if (!res.ok || !data.url) {
+          throw new Error(data.error || 'Upload failed.');
+        }
+        if (statusEl) statusEl.textContent = 'Uploaded to Cloudinary CDN (WebP)';
+        window.WSHShell.showToast('Image uploaded to Cloudinary CDN!');
+        return data.url;
+      } catch (err) {
+        if (statusEl) statusEl.textContent = err.message || 'Upload failed.';
+        window.WSHShell.showToast(err.message || 'Upload failed.');
+        return null;
+      }
+    }
+
+    document.getElementById('editEvtFile').addEventListener('change', async e => {
       const file = e.target.files[0];
       if (!file) return;
-      if (file.size > 2.5 * 1024 * 1024) {
-        window.WSHShell.showToast('Large file detected — for permanent hosting, paste a URL or use files under 2.5MB.');
-      }
-      const reader = new FileReader();
-      reader.onload = ev => {
-        document.getElementById('editEvtUrl').value = ev.target.result;
-        if (file.type.startsWith('video/')) {
-          document.getElementById('editEvtFormat').value = 'Video';
-        } else {
-          document.getElementById('editEvtFormat').value = 'Photo';
+      const statusEl = document.getElementById('editEvtUploadStatus');
+      const cdnUrl = await uploadAdminImage(file, 'events', statusEl);
+      if (cdnUrl) {
+        document.getElementById('editEvtUrl').value = cdnUrl;
+        if (!document.getElementById('editEvtPoster').value.trim()) {
+          document.getElementById('editEvtPoster').value = cdnUrl;
         }
-        window.WSHShell.showToast('File loaded into preview!');
-      };
-      reader.readAsDataURL(file);
+        document.getElementById('editEvtFormat').value = 'Photo';
+      }
+      e.target.value = '';
+    });
+
+    document.getElementById('editPkgFile').addEventListener('change', async e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const statusEl = document.getElementById('editPkgUploadStatus');
+      const cdnUrl = await uploadAdminImage(file, 'packages', statusEl);
+      if (cdnUrl) {
+        document.getElementById('editPkgImg').value = cdnUrl;
+      }
+      e.target.value = '';
     });
 
     document.getElementById('evtForm').addEventListener('submit', e => {
