@@ -8,7 +8,7 @@
   'use strict';
 
   const STORAGE_KEYS = {
-    PACKAGES: 'wsh_packages_v3',
+    PACKAGES: 'wsh_packages_v4',
     REFERRALS: 'wsh_referrals_v2',
     INQUIRIES: 'wsh_inquiries_v2',
     EVENTS: 'wsh_events_v3',
@@ -1877,7 +1877,7 @@
     "visaType": "South Africa Tourist E-Visa Assistance",
     "flightInfo": "Connecting flights from Ahmedabad (AMD) to Cape Town (CPT) & Johannesburg (JNB)",
     "bestSeason": "May – October (Safari) & Nov – Mar (Cape Coast)",
-    "image": "img/international/south-africa.jpg",
+    "image": "img/packages/south-africa.jpg",
     "featured": false,
     "active": true,
     "highlights": [

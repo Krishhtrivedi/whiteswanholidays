@@ -253,10 +253,6 @@
       ? `<span class="wsh-badge badge-amber">Domestic India</span>`
       : `<span class="wsh-badge badge-sky">${pkg.visaType || 'International'}</span>`;
 
-    const startingPriceHtml = pkg.price
-      ? `<span style="font-weight:800;font-size:0.94rem;color:var(--accent-gold)">From ${store.formatINR(pkg.price)}*</span>`
-      : `<span class="wsh-badge badge-emerald">Tailored Quote Available</span>`;
-
     return `
       <article class="wsh-card pkg-card">
         <div class="pkg-card-media">
@@ -290,7 +286,7 @@
           ` : ''}
 
           <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;border-top:1px solid var(--border-subtle);padding-top:0.85rem">
-            ${startingPriceHtml}
+            <span class="wsh-badge badge-emerald">Tailored Quote Available</span>
             <span class="ref-code-pill">${pkg.refCode}</span>
           </div>
 
