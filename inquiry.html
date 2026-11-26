@@ -8,7 +8,20 @@
   <link rel="icon" href="img/white_swan_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wsh_theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="css/wsh-sunlit.css">
 </head>
 <body>
@@ -150,7 +163,7 @@
           <span class="ref-code-pill" id="sumPkgRef">CUSTOM</span>
         </div>
 
-        <div style="display:grid;gap:0.65rem;font-size:0.88rem;border-top:var(--border-subtle);border-bottom:var(--border-subtle);padding:1rem 0;margin-bottom:1rem">
+        <div style="display:grid;gap:0.65rem;font-size:0.88rem;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);padding:1rem 0;margin-bottom:1rem">
           <div style="display:flex;justify-content:space-between">
             <span style="color:var(--ink-muted)">Category:</span>
             <strong id="sumCategory">Domestic</strong>

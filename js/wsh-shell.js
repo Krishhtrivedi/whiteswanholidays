@@ -23,7 +23,7 @@
   function syncThemeButtons() {
     const theme = window.WSHStore ? window.WSHStore.getTheme() : 'light';
     const icon = getThemeIconSvg(theme);
-    const label = theme === 'dark' ? 'Switch to Sunlit Light Mode' : 'Switch to Midnight Dark Mode';
+    const label = theme === 'dark' ? 'Switch to Warm Swan Light Mode' : 'Switch to Velvet Obsidian Dark Mode';
     document.querySelectorAll('.js-wsh-theme-toggle').forEach(btn => {
       btn.innerHTML = icon;
       btn.setAttribute('aria-label', label);
@@ -94,11 +94,11 @@
       <div class="wsh-mobile-drawer" id="wshMobileDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
         <div class="wsh-drawer-backdrop" id="wshDrawerBackdrop"></div>
         <div class="wsh-drawer-panel">
-          <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:var(--border-subtle)">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border-subtle)">
             <a href="index.html" class="wsh-logo-link"><img src="img/white_swan_logo.png" alt="White Swan Holidays" style="height:36px;width:auto"></a>
             <div style="display:flex;align-items:center;gap:0.45rem">
               <button type="button" class="wsh-theme-btn js-wsh-theme-toggle" aria-label="Toggle Theme"></button>
-              <button type="button" id="wshDrawerClose" aria-label="Close menu" style="width:44px;height:44px;border-radius:12px;background:var(--bg-ivory);border:var(--border-subtle);font-size:1.5rem;display:flex;align-items:center;justify-content:center;color:var(--ink-navy)">
+              <button type="button" id="wshDrawerClose" aria-label="Close menu" style="width:44px;height:44px;border-radius:12px;background:var(--bg-ivory);border:1px solid var(--border-subtle);font-size:1.5rem;display:flex;align-items:center;justify-content:center;color:var(--ink-navy)">
                 &times;
               </button>
             </div>
@@ -285,7 +285,7 @@
             </div>
           ` : ''}
 
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;border-top:var(--border-subtle);padding-top:0.85rem">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;border-top:1px solid var(--border-subtle);padding-top:0.85rem">
             <span class="wsh-badge badge-emerald">Tailored Quote Available</span>
             <span class="ref-code-pill">${pkg.refCode}</span>
           </div>
@@ -330,12 +330,12 @@
       modal.setAttribute('role', 'dialog');
       modal.setAttribute('aria-modal', 'true');
       modal.setAttribute('aria-label', 'Select WhatsApp Number');
-      modal.style.cssText = 'position:fixed;inset:0;z-index:2000;background:rgba(15,23,42,0.58);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1rem;';
+      modal.style.cssText = 'position:fixed;inset:0;z-index:2000;background:var(--backdrop-scrim);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1rem;';
       modal.innerHTML = `
-        <div class="wsh-card" style="width:min(420px, 100%);padding:1.6rem;position:relative;box-shadow:var(--shadow-lg)">
+        <div class="wsh-card" style="width:min(420px, 100%);padding:1.6rem;position:relative;box-shadow:var(--shadow-lg);background:var(--bg-elevated)">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">
             <span class="wsh-badge badge-emerald">WHATSAPP CONCIERGE</span>
-            <button type="button" id="wshWaCloseBtn" aria-label="Close" style="width:40px;height:40px;border-radius:10px;background:var(--bg-ivory);border:var(--border-subtle);color:var(--ink-navy);font-size:1.35rem;display:flex;align-items:center;justify-content:center">&times;</button>
+            <button type="button" id="wshWaCloseBtn" aria-label="Close" style="width:40px;height:40px;border-radius:10px;background:var(--bg-ivory);border:1px solid var(--border-subtle);color:var(--ink-navy);font-size:1.35rem;display:flex;align-items:center;justify-content:center">&times;</button>
           </div>
           <h3 style="margin-bottom:0.35rem">Choose WhatsApp Desk</h3>
           <p style="font-size:0.88rem;margin-bottom:1.25rem">Select which White Swan Holidays Ahmedabad number to send your message to:</p>
@@ -393,7 +393,7 @@
     if (btn && window.WSHStore) {
       const next = window.WSHStore.toggleTheme();
       syncThemeButtons();
-      showToast(next === 'dark' ? 'Royal Purple Dark Mode enabled' : 'Milky White Light Mode enabled');
+      showToast(next === 'dark' ? 'Velvet Obsidian Dark Mode enabled' : 'Warm Swan Beige Light Mode enabled');
       return;
     }
 

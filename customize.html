@@ -8,12 +8,25 @@
   <link rel="icon" href="img/white_swan_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wsh_theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="css/wsh-sunlit.css">
   <style>
     .day-editor-card {
       background: var(--bg-ivory);
-      border: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       overflow: hidden;
       margin-bottom: 0.75rem;
@@ -44,7 +57,7 @@
       gap: 0.5rem;
       padding: 0.65rem 0.9rem;
       background: var(--bg-ivory);
-      border: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
       border-radius: 12px;
       font-size: 0.86rem;
       font-weight: 600;
@@ -225,7 +238,7 @@
 
         <div id="custSuccessBox" style="display:none;background:var(--tint-emerald);border:1px solid #22C55E;border-radius:12px;padding:0.9rem;margin-bottom:1rem;font-size:0.84rem;color:var(--accent-emerald-text)"></div>
 
-        <div style="display:grid;gap:0.55rem;font-size:0.86rem;border-top:var(--border-subtle);border-bottom:var(--border-subtle);padding:0.9rem 0;margin-bottom:1.15rem" id="sumCustSpecs"></div>
+        <div style="display:grid;gap:0.55rem;font-size:0.86rem;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);padding:0.9rem 0;margin-bottom:1.15rem" id="sumCustSpecs"></div>
 
         <div style="display:grid;gap:0.65rem">
           <button type="button" id="custWaBtn" class="btn btn-whatsapp" style="width:100%">

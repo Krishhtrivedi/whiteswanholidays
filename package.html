@@ -8,12 +8,25 @@
   <link rel="icon" href="img/white_swan_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wsh_theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="css/wsh-sunlit.css">
   <style>
     .day-accordion {
       background: var(--bg-white);
-      border: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       overflow: hidden;
       margin-bottom: 0.75rem;
@@ -70,7 +83,7 @@
   </section>
 
   <!-- Quick Facts Bar -->
-  <section style="background:var(--bg-white);border-bottom:var(--border-subtle);padding:1.25rem 0">
+  <section style="background:var(--bg-white);border-bottom:1px solid var(--border-subtle);padding:1.25rem 0">
     <div class="wsh-wrap" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 180px), 1fr));gap:1rem">
       <div>
         <div style="font-size:0.72rem;text-transform:uppercase;color:var(--ink-muted);font-weight:700">Duration</div>

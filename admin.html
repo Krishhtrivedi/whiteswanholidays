@@ -7,7 +7,20 @@
   <link rel="icon" href="img/white_swan_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wsh_theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="css/wsh-sunlit.css">
   <style>
     .admin-shell {
@@ -16,8 +29,8 @@
       min-height: 100vh;
     }
     .admin-sidebar {
-      background: var(--bg-white);
-      border-right: var(--border-subtle);
+      background: var(--bg-elevated);
+      border-right: 1px solid var(--border-subtle);
       padding: 1.5rem 1.1rem;
       display: flex;
       flex-direction: column;
@@ -53,8 +66,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.85rem 1rem;
-      background: var(--bg-white);
-      border-bottom: var(--border-subtle);
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
       z-index: 800;
@@ -89,8 +102,8 @@
     }
     /* Responsive Table to Mobile Cards */
     .wsh-table-wrap {
-      background: var(--bg-white);
-      border: var(--border-subtle);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       overflow-x: auto;
       box-shadow: var(--shadow-xs);
@@ -103,16 +116,16 @@
     .wsh-table th {
       text-align: left;
       padding: 0.9rem 1rem;
-      background: #F8FAFC;
-      color: var(--ink-muted);
+      background: var(--bg-primary);
+      color: var(--text-secondary);
       font-size: 0.76rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      border-bottom: var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
     }
     .wsh-table td {
       padding: 0.95rem 1rem;
-      border-bottom: var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
       vertical-align: middle;
     }
     @media (max-width: 767px) {
@@ -144,7 +157,7 @@
       position: fixed;
       inset: 0;
       z-index: 1400;
-      background: rgba(15, 23, 42, 0.55);
+      background: var(--backdrop-scrim);
       backdrop-filter: blur(4px);
       display: none;
       align-items: center;
@@ -155,8 +168,8 @@
       display: flex;
     }
     .admin-modal-card {
-      background: var(--bg-white);
-      border: var(--border-subtle);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       width: min(680px, 100%);
       max-height: 90vh;
@@ -228,7 +241,7 @@
         <button type="button" class="admin-nav-btn" data-view="inquiries">&#128172; Inquiries &amp; CRM</button>
       </nav>
 
-      <div style="border-top:var(--border-subtle);padding-top:1rem;display:grid;gap:0.5rem">
+      <div style="border-top:1px solid var(--border-subtle);padding-top:1rem;display:grid;gap:0.5rem">
         <a href="index.html" class="btn btn-outline btn-sm" style="width:100%">View Live Website</a>
         <button type="button" id="adminLogoutBtn" class="btn btn-outline btn-sm" style="width:100%;color:#DC2626 !important">Sign Out</button>
       </div>
