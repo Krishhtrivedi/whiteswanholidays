@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>All 30 Tour Packages &amp; Itineraries | White Swan Holidays Ahmedabad</title>
+  <meta name="description" content="Explore all 30 luxury-curated Domestic India and International tour packages from White Swan Holidays, CG Road, Ahmedabad.">
+  <link rel="icon" href="img/white_swan_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('wsh_theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="css/wsh-sunlit.css">
+</head>
+<body>
+
+<div id="wsh-header-mount"></div>
+
+<main>
+  <!-- Page Header -->
+  <section style="padding:3rem 0 2.2rem;background:linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%)">
+    <div class="wsh-wrap">
+      <span class="wsh-badge badge-amber" style="margin-bottom:0.75rem">CURATED COLLECTION</span>
+      <h1>All Tour Packages &amp; Itineraries</h1>
+      <p style="max-width:680px;font-size:1.02rem">
+        Browse 30 signature Domestic India &amp; International journeys departing from Ahmedabad — complete with day-by-day itineraries, 4-Star &amp; 5-Star stays, and instant WhatsApp concierge quotes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category Tabs + Filter Bar -->
+  <section style="padding:1rem 0 4rem">
+    <div class="wsh-wrap">
+      <div class="pill-scroll-row" id="pkgCatTabs" style="margin-bottom:1.15rem">
+        <button type="button" class="pill-choice-btn active" data-cat="all" id="tabAllBtn">All (30)</button>
+        <button type="button" class="pill-choice-btn" data-cat="Domestic" id="tabDomBtn">Domestic (15)</button>
+        <button type="button" class="pill-choice-btn" data-cat="International" id="tabIntBtn">International (15)</button>
+      </div>
+
+      <div class="wsh-filter-bar" style="grid-template-columns:repeat(auto-fit, minmax(min(100%, 200px), 1fr))">
+        <div>
+          <label for="allSearch" style="display:block;font-size:0.78rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.3rem">Search Destination / Title / Ref Code</label>
+          <input type="text" id="allSearch" placeholder="e.g. Kashmir, Dubai, Japan, Kedarnath, Europe...">
+        </div>
+
+        <div>
+          <label for="allStyle" style="display:block;font-size:0.78rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.3rem">Travel Theme</label>
+          <select id="allStyle">
+            <option value="all">All Themes</option>
+            <option value="Honeymoon">Honeymoon</option>
+            <option value="Family">Family</option>
+            <option value="Luxury">Luxury</option>
+            <option value="Pilgrimage">Pilgrimage / Spiritual</option>
+            <option value="Adventure">Adventure</option>
+          </select>
+        </div>
+
+        <button type="button" id="allResetBtn" class="btn btn-outline btn-sm" style="height:46px">Reset Filters</button>
+      </div>
+
+      <div id="allCountBar" style="margin-bottom:1.25rem;font-size:0.88rem;font-weight:600;color:var(--text-secondary)"></div>
+
+      <div class="wsh-pkg-grid" id="allPackagesGrid"></div>
+    </div>
+  </section>
+</main>
+
+<div id="wsh-footer-mount"></div>
+
+<script src="js/wsh-store.js"></script>
+<script src="js/wsh-shell.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('allPackagesGrid');
+    const countBar = document.getElementById('allCountBar');
+    const searchEl = document.getElementById('allSearch');
+    const styleEl = document.getElementById('allStyle');
+    const tabAll = document.getElementById('tabAllBtn');
+    const tabDom = document.getElementById('tabDomBtn');
+    const tabInt = document.getElementById('tabIntBtn');
+
+    let activeCat = 'all';
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('q')) searchEl.value = params.get('q');
+    if (params.get('cat') === 'Domestic' || params.get('cat') === 'International') {
+      activeCat = params.get('cat');
+      document.querySelectorAll('#pkgCatTabs .pill-choice-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.cat === activeCat);
+      });
+    }
+
+    function updateTabCounts(allPkgs) {
+      const domCount = allPkgs.filter(p => p.category === 'Domestic').length;
+      const intCount = allPkgs.filter(p => p.category === 'International').length;
+      tabAll.textContent = `All (${allPkgs.length})`;
+      tabDom.textContent = `Domestic (${domCount})`;
+      tabInt.textContent = `International (${intCount})`;
+    }
+
+    function render() {
+      const allActive = window.WSHStore.getPackages({ onlyActive: true });
+      updateTabCounts(allActive);
+
+      const q = searchEl.value.trim().toLowerCase();
+      const style = styleEl.value.toLowerCase();
+
+      const filtered = allActive.filter(p => {
+        const catMatch = activeCat === 'all' || p.category === activeCat;
+        const textMatch = !q || `${p.title} ${p.destination} ${p.refCode} ${p.region} ${p.slug}`.toLowerCase().includes(q);
+        const styleMatch = style === 'all' ||
+          (p.style || '').toLowerCase().includes(style) ||
+          (style === 'pilgrimage' && (p.style || '').toLowerCase().includes('spiritual'));
+        return catMatch && textMatch && styleMatch;
+      });
+
+      countBar.textContent = `Showing ${filtered.length} of ${allActive.length} Curated Package${filtered.length === 1 ? '' : 's'}`;
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="wsh-card" style="grid-column:1/-1;padding:2.5rem;text-align:center"><h3>No matching packages found</h3><p>Try clearing your search or design a 100% custom itinerary.</p><a href="customize.html" class="btn btn-marigold">Design Custom Itinerary</a></div>`;
+        return;
+      }
+      grid.innerHTML = filtered.map(window.WSHShell.renderPackageCard).join('');
+    }
+
+    document.querySelectorAll('#pkgCatTabs .pill-choice-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#pkgCatTabs .pill-choice-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        render();
+      });
+    });
+
+    [searchEl, styleEl].forEach(el => el.addEventListener('input', render));
+    document.getElementById('allResetBtn').addEventListener('click', () => {
+      searchEl.value = '';
+      styleEl.value = 'all';
+      activeCat = 'all';
+      document.querySelectorAll('#pkgCatTabs .pill-choice-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'all'));
+      render();
+    });
+
+    render();
+  });
+</script>
+</body>
+</html>

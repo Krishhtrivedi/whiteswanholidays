@@ -38,12 +38,12 @@
 
     const navItems = [
       { href: 'index.html', label: 'Home' },
+      { href: 'packages.html', label: 'All Packages' },
       { href: 'domestic.html', label: 'Domestic India' },
       { href: 'international.html', label: 'International' },
       { href: 'customize.html', label: 'Custom Itinerary' },
       { href: 'events.html', label: 'Trips & Events' },
       { href: 'ai-planner.html', label: 'AI Planner' },
-      { href: 'services.html', label: 'Services' },
       { href: 'contact.html', label: 'Contact' }
     ];
 
@@ -253,10 +253,14 @@
       ? `<span class="wsh-badge badge-amber">Domestic India</span>`
       : `<span class="wsh-badge badge-sky">${pkg.visaType || 'International'}</span>`;
 
+    const startingPriceHtml = pkg.price
+      ? `<span style="font-weight:800;font-size:0.94rem;color:var(--accent-gold)">From ${store.formatINR(pkg.price)}*</span>`
+      : `<span class="wsh-badge badge-emerald">Tailored Quote Available</span>`;
+
     return `
       <article class="wsh-card pkg-card">
         <div class="pkg-card-media">
-          <img src="${pkg.image}" alt="${pkg.title}" loading="lazy">
+          <img src="${pkg.image}" alt="${pkg.title}" loading="lazy" onerror="this.onerror=null;this.src='img/tours/dubai.jpg';">
           <div style="position:absolute;top:12px;left:12px;display:flex;gap:0.4rem;flex-wrap:wrap">
             ${catBadge}
           </div>
@@ -266,9 +270,9 @@
         </div>
 
         <div class="pkg-card-body">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.45rem;font-size:0.8rem;font-weight:600;color:var(--ink-muted)">
-            <span>${pkg.duration}</span>
-            <span>${pkg.style || pkg.region}</span>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.5rem;flex-wrap:wrap">
+            <span class="wsh-badge badge-sky">${pkg.duration}</span>
+            <span style="font-size:0.78rem;font-weight:600;color:var(--text-secondary)">${pkg.style || pkg.region}</span>
           </div>
 
           <h3 style="margin-bottom:0.4rem;font-size:1.25rem">
@@ -286,7 +290,7 @@
           ` : ''}
 
           <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;border-top:1px solid var(--border-subtle);padding-top:0.85rem">
-            <span class="wsh-badge badge-emerald">Tailored Quote Available</span>
+            ${startingPriceHtml}
             <span class="ref-code-pill">${pkg.refCode}</span>
           </div>
 
