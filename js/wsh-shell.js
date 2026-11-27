@@ -195,7 +195,8 @@
                   Off CG Road, Ahmedabad - 380009<br>
                   Gujarat, India<br>
                   <a href="tel:+919925811770" style="color:#F59E0B;font-weight:700">+91 99258 11770</a><br>
-                  <a href="tel:+919099041625" style="color:#F59E0B;font-weight:700">+91 90990 41625</a>
+                  <a href="tel:+919099041625" style="color:#F59E0B;font-weight:700">+91 90990 41625</a><br>
+                  <a href="mailto:info@whiteswanholidays.in" style="color:#E5B970;font-weight:700">info@whiteswanholidays.in</a>
                 </p>
                 <a href="contact.html" class="btn btn-outline btn-sm" style="margin-top:0.5rem;background:rgba(255,255,255,0.08);color:#FFFFFF !important;border-color:rgba(255,255,255,0.2)">
                   Office &amp; Map

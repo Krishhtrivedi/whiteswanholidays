@@ -153,6 +153,9 @@
             Submit &amp; Send via WhatsApp
           </button>
         </div>
+        <button type="button" id="submitAndEmailBtn" class="btn btn-sky" style="width:100%;margin-top:0.75rem">
+          Send via Email (info@whiteswanholidays.in)
+        </button>
       </form>
 
       <!-- RIGHT: Live Package & Referral Summary Card -->
@@ -341,6 +344,30 @@
       if (res && res.waUrl) {
         window.WSHShell.openWhatsAppChooser(res.waUrl);
       }
+    });
+
+    document.getElementById('submitAndEmailBtn').addEventListener('click', () => {
+      const res = collectAndSave();
+      if (!res || !res.record) return;
+      const r = res.record;
+      const subject = `Holiday Inquiry [${r.id}]: ${r.packageTitle} (${r.packageRef})`;
+      const body = [
+        `Namaste White Swan Holidays Team,`,
+        ``,
+        `Inquiry ID: ${r.id}`,
+        `Package: ${r.packageTitle} (${r.packageRef})`,
+        `Category: ${r.category}`,
+        `Traveler Name: ${r.travelerName}`,
+        `Phone / WhatsApp: ${r.phone}`,
+        `Email: ${r.email || 'Not provided'}`,
+        `Departure City: ${r.departureCity}`,
+        `Travel Dates: ${r.travelDates || 'Flexible'}`,
+        `Hotel Category: ${r.hotelTier}`,
+        `Travelers: ${r.adults} Adults, ${r.children} Children`,
+        `Referral Code: ${r.referralCode || 'None'}`,
+        `Notes: ${r.notes || 'None'}`
+      ].join('\n');
+      window.location.href = `mailto:info@whiteswanholidays.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
 
     // Hydrate from URL params
