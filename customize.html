@@ -505,6 +505,11 @@
         hotelTier: p.hotel,
         notes: `Meals: ${p.meals} | Transfers: ${p.transfers} | Add-ons: ${p.addons} | Days:\n${p.daySummary}`
       });
+      fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      }).catch(() => {});
       const box = document.getElementById('custSuccessBox');
       box.style.display = 'block';
       box.innerHTML = `<strong>&#10003; Saved to Inquiry Desk!</strong><br>Inquiry ID: <strong>${record.id}</strong> (${p.customRef})`;

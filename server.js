@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const path = require('path');
 const express = require('express');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 const { v2: cloudinary } = require('cloudinary');
 
 const app = express();
@@ -20,6 +21,118 @@ const SESSION_SECRET =
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 const ALLOWED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 const ALLOWED_FOLDERS = new Set(['packages', 'events', 'gallery', 'general']);
+
+const MAIL_HOST = process.env.MAIL_HOST || 'smtp.office365.com';
+const MAIL_PORT = Number(process.env.MAIL_PORT) || 587;
+const MAIL_USERNAME = process.env.MAIL_USERNAME || 'info@whiteswanholidays.in';
+const MAIL_PASSWORD = process.env.MAIL_PASSWORD || '';
+
+function isMailConfigured() {
+  return Boolean(MAIL_HOST && MAIL_USERNAME && MAIL_PASSWORD);
+}
+
+function createMailTransporter() {
+  if (!isMailConfigured()) return null;
+  return nodemailer.createTransport({
+    host: MAIL_HOST,
+    port: MAIL_PORT,
+    secure: MAIL_PORT === 465,
+    requireTLS: MAIL_PORT === 587,
+    auth: {
+      user: MAIL_USERNAME,
+      pass: MAIL_PASSWORD
+    }
+  });
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function isValidEmail(email) {
+  return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function sendInquiryEmailsAsync(inquiry) {
+  const transporter = createMailTransporter();
+  if (!transporter) return;
+
+  setImmediate(async () => {
+    try {
+      const custName = escapeHtml(inquiry.travelerName || 'Traveler');
+      const custPhone = escapeHtml(inquiry.phone || 'Not provided');
+      const custEmail = isValidEmail(inquiry.email) ? inquiry.email.trim() : '';
+      const pkgTitle = escapeHtml(inquiry.packageTitle || 'Custom Holiday Package');
+      const pkgRef = escapeHtml(inquiry.packageRef || 'CUSTOM');
+      const category = escapeHtml(inquiry.category || 'Holiday');
+      const travelDates = escapeHtml(inquiry.travelDates || 'Flexible');
+      const depCity = escapeHtml(inquiry.departureCity || inquiry.city || 'Ahmedabad');
+      const hotelTier = escapeHtml(inquiry.hotelTier || '4-Star');
+      const groupSize = `${Number(inquiry.adults) || 2} Adults, ${Number(inquiry.children) || 0} Children`;
+      const notes = escapeHtml(inquiry.notes || 'None').replace(/\n/g, '<br>');
+      const inqId = escapeHtml(inquiry.id || `INQ-${Date.now()}`);
+
+      // 1. Notification email to info@whiteswanholidays.in
+      await transporter.sendMail({
+        from: `"White Swan Holidays Web Desk" <${MAIL_USERNAME}>`,
+        to: MAIL_USERNAME,
+        replyTo: custEmail || undefined,
+        subject: `New Inquiry [${inqId}]: ${inquiry.packageTitle || 'Custom Package'} (${inquiry.travelerName || 'Guest'})`,
+        html: `
+          <div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;border:1px solid #E2D8CA;border-radius:12px;overflow:hidden;background:#FAF7F2;color:#1C1915">
+            <div style="background:#110F0D;color:#F5F0E6;padding:18px 24px">
+              <h2 style="margin:0;color:#D8A85A;font-size:20px">White Swan Holidays — New Lead Notification</h2>
+              <p style="margin:4px 0 0;font-size:13px;color:#A89F91">Inquiry ID: ${inqId} &bull; ${category}</p>
+            </div>
+            <div style="padding:20px 24px;background:#FFFFFF">
+              <table style="width:100%;border-collapse:collapse;font-size:14px">
+                <tr><td style="padding:6px 0;color:#5E564C;width:150px"><strong>Customer Name:</strong></td><td>${custName}</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C"><strong>Phone / WhatsApp:</strong></td><td>${custPhone}</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C"><strong>Customer Email:</strong></td><td>${escapeHtml(custEmail || 'Not provided')}</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C"><strong>Package / Trip:</strong></td><td>${pkgTitle} (${pkgRef})</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C"><strong>Departure City:</strong></td><td>${depCity}</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C"><strong>Travel Dates:</strong></td><td>${travelDates}</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C"><strong>Group Size:</strong></td><td>${groupSize}</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C"><strong>Hotel Tier:</strong></td><td>${hotelTier}</td></tr>
+                <tr><td style="padding:6px 0;color:#5E564C;vertical-align:top"><strong>Notes / Itinerary:</strong></td><td>${notes}</td></tr>
+              </table>
+            </div>
+          </div>
+        `
+      });
+
+      // 2. Branded confirmation auto-reply to customer
+      if (custEmail) {
+        await transporter.sendMail({
+          from: `"White Swan Holidays" <${MAIL_USERNAME}>`,
+          to: custEmail,
+          subject: `We Received Your Travel Inquiry [${inqId}] — White Swan Holidays`,
+          html: `
+            <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #E2D8CA;border-radius:12px;overflow:hidden;background:#FAF7F2;color:#1C1915">
+              <div style="background:#110F0D;color:#F5F0E6;padding:20px 24px">
+                <h2 style="margin:0;color:#D8A85A;font-size:20px">Namaste ${custName},</h2>
+                <p style="margin:6px 0 0;font-size:13px;color:#A89F91">Thank you for choosing White Swan Holidays, Ahmedabad</p>
+              </div>
+              <div style="padding:22px 24px;background:#FFFFFF;font-size:14px;line-height:1.6">
+                <p>We have received your travel inquiry (<strong>${inqId}</strong>) for <strong>${pkgTitle}</strong>.</p>
+                <p>Our senior holiday specialists at our CG Road, Ahmedabad desk are preparing your tailored itinerary and quote for <strong>${travelDates}</strong> (${groupSize}).</p>
+                <p style="margin-top:16px">Need immediate assistance? Reply directly to this email or reach us on WhatsApp / Call at <strong>+91 99258 11770</strong> or <strong>+91 90990 41625</strong>.</p>
+                <p style="margin-top:20px;color:#5E564C;font-size:13px">Warm regards,<br><strong>White Swan Holidays Pvt Ltd</strong><br>501, Sun Square Building, Off CG Road, Ahmedabad</p>
+              </div>
+            </div>
+          `
+        });
+      }
+    } catch (mailErr) {
+      console.error('[WSH Mail Error]', mailErr && mailErr.message ? mailErr.message : mailErr);
+    }
+  });
+}
 
 function isCloudinaryConfigured() {
   return Boolean(
@@ -140,8 +253,72 @@ app.use(express.json({ limit: '1mb' }));
 app.get('/api/health', (_req, res) => {
   res.json({
     ok: true,
-    storage: isCloudinaryConfigured() ? 'cloudinary' : 'unconfigured'
+    storage: isCloudinaryConfigured() ? 'cloudinary' : 'unconfigured',
+    mail: isMailConfigured() ? 'configured' : 'unconfigured'
   });
+});
+
+app.post('/api/inquiries', (req, res) => {
+  const payload = req.body || {};
+  const travelerName = String(payload.travelerName || '').trim();
+  const phone = String(payload.phone || '').trim();
+
+  if (!travelerName || phone.replace(/[^0-9]/g, '').length < 8) {
+    return res.status(400).json({ error: 'Valid travelerName and phone are required.' });
+  }
+
+  const inquiry = {
+    id: String(payload.id || `INQ-WSH-${Date.now()}`).trim(),
+    category: String(payload.category || 'Domestic').trim(),
+    packageTitle: String(payload.packageTitle || 'Custom Holiday Package').trim(),
+    packageRef: String(payload.packageRef || 'CUSTOM').trim(),
+    travelerName,
+    phone,
+    email: String(payload.email || '').trim(),
+    departureCity: String(payload.departureCity || payload.city || 'Ahmedabad').trim(),
+    travelDates: String(payload.travelDates || 'Flexible').trim(),
+    adults: Number(payload.adults) || 2,
+    children: Number(payload.children) || 0,
+    hotelTier: String(payload.hotelTier || '4-Star').trim(),
+    notes: String(payload.notes || '').trim()
+  };
+
+  sendInquiryEmailsAsync(inquiry);
+  return res.status(201).json({
+    ok: true,
+    id: inquiry.id,
+    mailConfigured: isMailConfigured()
+  });
+});
+
+app.post('/api/admin/test-email', requireAdminSession, async (req, res) => {
+  if (!isMailConfigured()) {
+    return res.status(503).json({
+      error: 'SMTP is not configured. Set MAIL_HOST, MAIL_PORT, MAIL_USERNAME, and MAIL_PASSWORD in Render.'
+    });
+  }
+  const transporter = createMailTransporter();
+  try {
+    await transporter.verify();
+    if (req.body && req.body.sendTest) {
+      await transporter.sendMail({
+        from: `"White Swan Holidays" <${MAIL_USERNAME}>`,
+        to: MAIL_USERNAME,
+        subject: 'SMTP Verification Test — White Swan Holidays',
+        text: 'Your Render SMTP configuration for info@whiteswanholidays.in is working properly.'
+      });
+    }
+    return res.json({
+      ok: true,
+      host: MAIL_HOST,
+      port: MAIL_PORT,
+      username: MAIL_USERNAME
+    });
+  } catch (err) {
+    return res.status(502).json({
+      error: err && err.message ? err.message : 'SMTP verification failed.'
+    });
+  }
 });
 
 app.get('/api/admin/session', (req, res) => {
